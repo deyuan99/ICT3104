@@ -29,13 +29,13 @@ and open the template in the editor.
         <section id="one" class="wrapper style1">
             <div class="container 75%">
                 <div class="row 200%">
-                    <div class="6u 12u$(medium)">
+                    <div class="6u 12u(medium)">
                         <header class="major">
                             <h2>About Us</h2>
                             <p>Description of the company</p>
                         </header>
                     </div>
-                    <div class="6u$ 12u$(medium)">
+                    <div class="6u 12u(medium)">
                         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Non ea mollitia corporis id, distinctio sunt veritatis officiis dolore reprehenderit deleniti voluptatibus harum magna, doloremque alias quisquam minus, eaque. Feugiat quod, nesciunt! Iste quos ipsam, iusto sit esse.</p>
                         <p>Dolorum aspernatur maxime libero ratione quidem distinctio, placeat fugiat laborum voluptatum enim neque soluta vel sunt id ex veritatis. Labore rerum, odit sapiente, alias mollitia magnam exercitationem modi amet earum quia atque ipsum voluptas asperiores quas laboriosam.</p>
                     </div>
@@ -51,7 +51,7 @@ and open the template in the editor.
                     <p>Maecenas vitae tellus feugiat eleifend</p>
                 </header>
                 <div class="row 150%">
-                    <div class="6u 12u$(xsmall)">
+                    <div class="6u 12u(xsmall)">
                         <div class="image fit captioned">
                             <img src="images/pic02.png" alt="" />
                             <h3>
@@ -68,7 +68,7 @@ and open the template in the editor.
                             </h3>
                         </div>
                     </div>
-                    <div class="6u$ 12u$(xsmall)">
+                    <div class="6u 12u(xsmall)">
                         <div class="image fit captioned">
                             <img src="images/pic03.png" alt="" />
                             <h3>
