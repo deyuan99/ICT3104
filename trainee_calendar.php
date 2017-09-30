@@ -81,7 +81,7 @@ $events = $req->fetchAll();
        <div class="modal fade" id="ModalAdd" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
           <div class="modal-dialog" role="document">
                 <div class="modal-content">
-                <form class="form-horizontal" method="POST" action="addEvent.php">
+                    <form class="form-horizontal" method="POST" action="addCalendarEvent.php">
 
                   <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -161,8 +161,8 @@ $events = $req->fetchAll();
                 
 		$('#calendar').fullCalendar({
 			header: {
-				left: 'prev,next today',
-				center: 'title',
+				left: 'title',
+                                center: 'prev,next today',
 				right: 'month,basicWeek,basicDay'
 			},
 			//defaultDate: '2016-01-12',
