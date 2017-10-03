@@ -21,7 +21,7 @@ and open the template in the editor.
             <h2>Be Active</h2>
             <p>Sports Training Providing System <br /> Schedule your training.</p>
             <ul class="actions">
-                <li><a href="#" class="button special big">Join now</a></li>
+                <li><a href="registration.php" class="button special big">Join now</a></li>
             </ul>
         </section>
 

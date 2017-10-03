@@ -13,8 +13,10 @@
 
     <body>
         <!-- Header -->
+        <?php
+        include "header.php";
+        ?>
         
-
         <section id="main" class="wrapper">
             <div class="container">
 
@@ -85,7 +87,7 @@
                             <div class="row uniform 50%">
                                 <div class="12u 6u(small) 12u(xsmall)">
                                     <ul class="actions vertical">
-                                        <li><a href="trainee_dashboard.php" class="button special fit">Register</a></li>
+                                        <li><a href="registration_verification.php" class="button special fit">Register</a></li>
                                     </ul>
                                 </div>
                             </div>
