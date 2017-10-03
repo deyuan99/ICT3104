@@ -12,6 +12,7 @@ try
 }
 catch(Exception $e)
 {
-        die('Error : '.$e->getMessage());
+
+        die('Erreur : '.$e->getMessage());
 }
 
