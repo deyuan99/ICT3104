@@ -4,7 +4,13 @@
     <nav id="nav">
         <ul>
             <li><a href="trainee_trainerList.php">Trainer List</a></li>
-            <li><a href="trainee_dashboard.php">My Account</a></li>
+            <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="trainee_dashboard.php">My Account
+                    <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                    <li><a href="index.php">Logout</a></li>
+                </ul>
+            </li>
         </ul>
     </nav>
 </header>

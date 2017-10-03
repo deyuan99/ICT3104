@@ -13,10 +13,10 @@
 
     <body>
         <!-- Header -->
-        <?php
-        include "header.php";
-        ?>
-        
+        <header id="header" >
+            <h1><strong><a href="index.php">STPS</a></strong> by Group 4</h1>
+        </header>
+
         <section id="main" class="wrapper">
             <div class="container">
 

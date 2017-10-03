@@ -2,8 +2,15 @@
     <head>
         <meta charset="UTF-8">
         <title>STPS</title>
+        <!-- Bootstrap Core CSS -->
+        <link href="bootstrap-3.3.5-dist/css/bootstrap.min.css" rel="stylesheet">
+
+        <!-- FullCalendar -->
+        <link href='fullcalendar-3.5.1/fullcalendar.css' rel='stylesheet' />
+        <link href="assets/css/calendar.css" rel="stylesheet" type="text/css"/>
+        
+        <!-- Main CSS -->
         <link rel="stylesheet" href="assets/css/main.css" />
-        <link rel="stylesheet" href="fullcalendar-3.5.1/fullcalendar.css" />
     </head>
 
     <body>
