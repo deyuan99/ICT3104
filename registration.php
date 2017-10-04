@@ -13,8 +13,11 @@
 
     <body>
         <!-- Header -->
+        <?php
+            include "main_header.php";
+        ?>
         
-
+        <!-- Main -->
         <section id="main" class="wrapper">
             <div class="container">
 
@@ -55,7 +58,7 @@
                             <h3>Register</h3>
                             <p>New account? Join now.</p>
                         </header>
-                        <form method="post" action="#">
+                        <form method="post" action="reg.php">
                             <div class="row uniform 50%">
                                 <div class="6u 12u(xsmall)">
                                     <input type="text" name="firstName" id="name" value="" placeholder="First Name" />
@@ -64,28 +67,28 @@
                                     <input type="text" name="lastName" id="name" value="" placeholder="Last Name" />
                                 </div>
                                 <div class="12u">
-                                    <input type="email" name="email" id="email" value="" placeholder="Email" />
+                                    <input type="email" name="regemail" id="regemail" value="" placeholder="Email" />
                                 </div>
                                 <div class="12u">
                                     <div class="select-wrapper">
                                         <select name="category" id="category">
                                             <option value="">Member Type</option>
                                             <option value="1">Trainer</option>
-                                            <option value="1">Trainee</option>
+                                            <option value="2">Trainee</option>
                                         </select>
                                     </div>
                                 </div>
                                 <div class="12u">
-                                    <input type="password" name="password" id="password" value="" placeholder="Password" />
+                                    <input type="password" name="regpassword" id="regpassword" value="" placeholder="Password" />
                                 </div>
                                 <div class="12u">
-                                    <input type="password" name="confrimPassword" id="password" value="" placeholder="Confirm Password" />
+                                    <input type="password" name="regconfirmPassword" id="regcpassword" value="" placeholder="Confirm Password" />
                                 </div>
                             </div>
                             <div class="row uniform 50%">
                                 <div class="12u 6u(small) 12u(xsmall)">
                                     <ul class="actions vertical">
-                                        <li><a href="trainee_dashboard.php" class="button special fit">Register</a></li>
+                                        <li><button type="submit" class="button special fit">Register</button></li>
                                     </ul>
                                 </div>
                             </div>

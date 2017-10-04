@@ -2,6 +2,13 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/C:/xampp/htdocs/ICT3104/main_header.php</file>
+            <file>file:/C:/xampp/htdocs/ICT3104/trainee_dashboard.php</file>
+            <file>file:/C:/xampp/htdocs/ICT3104/database/dbconfig.php</file>
+            <file>file:/C:/xampp/htdocs/ICT3104/registration.php</file>
+            <file>file:/C:/xampp/htdocs/ICT3104/index.php</file>
+            <file>file:/C:/xampp/htdocs/ICT3104/reg.php</file>
+        </group>
     </open-files>
 </project-private>
