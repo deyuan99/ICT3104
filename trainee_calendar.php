@@ -155,30 +155,30 @@ $events = $req->fetchAll();
                         $('#ModalAdd').modal('show');
                     },
                     events: [
-<?php
-foreach ($events as $event):
+                        <?php
+                        foreach ($events as $event):
 
-    $start = explode(" ", $event['start']);
-    $end = explode(" ", $event['end']);
-    if ($start[1] == '00:00:00') {
-        $start = $start[0];
-    } else {
-        $start = $event['start'];
-    }
-    if ($end[1] == '00:00:00') {
-        $end = $end[0];
-    } else {
-        $end = $event['end'];
-    }
-    ?>
-                            {
-                                id: '<?php echo $event['id']; ?>',
-                                title: '<?php echo $event['title']; ?>',
-                                start: '<?php echo $start; ?>',
-                                end: '<?php echo $end; ?>',
-                                color: '<?php echo $event['color']; ?>',
-                            },
-<?php endforeach; ?>
+                            $start = explode(" ", $event['start']);
+                            $end = explode(" ", $event['end']);
+                            if ($start[1] == '00:00:00') {
+                                $start = $start[0];
+                            } else {
+                                $start = $event['start'];
+                            }
+                            if ($end[1] == '00:00:00') {
+                                $end = $end[0];
+                            } else {
+                                $end = $event['end'];
+                            }
+                        ?>
+                        {
+                            id: '<?php echo $event['id']; ?>',
+                            title: '<?php echo $event['title']; ?>',
+                            start: '<?php echo $start; ?>',
+                            end: '<?php echo $end; ?>',
+                            color: '<?php echo $event['color']; ?>',
+                        },
+                        <?php endforeach; ?>
                     ]
                 });
 

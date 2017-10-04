@@ -21,6 +21,7 @@
             <div class="container">
 
                 <div class="row">
+                    <!-- Login -->
                     <div class="6u 12u(xsmall)">
                         <header class="major special">
                             <h3>Login</h3>
@@ -52,6 +53,7 @@
                             </div>
                         </form>
                     </div>
+                    <!-- Registration -->
                     <div class="6u 12u(xsmall)">
                         <header class="major special">
                             <h3>Register</h3>
