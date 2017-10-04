@@ -15,14 +15,14 @@
      $cfmpassword = $_POST['cfmpassword']; 
      $email = $_SESSION['email'];
      
-     $sql = "SELECT * FROM user WHERE Email = '$email'";
+     $sql = "SELECT * FROM user WHERE email = '$email'";
     
       $req = $conn->prepare($sql);
       $req->execute();
       $rows = $req->fetchAll();
       
       foreach ($rows as $row):
-      $current = $row['Password'];
+      $current = $row['password'];
       endforeach;
       
       if($current!= sha1($oldpassword)) {
@@ -34,7 +34,7 @@
     } else {
         echo $email;
         echo $cfmpassword;
-        $stmt1 = "UPDATE user SET Password = sha1('$cfmpassword') WHERE Email='$email'";
+        $stmt1 = "UPDATE user SET password = sha1('$cfmpassword') WHERE email='$email'";
             $stmt = $conn->prepare($stmt1);
             $stmt->execute();
          echo $stmt->rowCount() . " records UPDATED successfully";

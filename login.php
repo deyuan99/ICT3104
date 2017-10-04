@@ -11,25 +11,26 @@
      $email = $_POST['email'];
      $password = $_POST['password']; 
      
-     $sql = "SELECT * FROM user WHERE Email = '$email' and Password = sha1('$password')";
+     $sql = "SELECT * FROM user WHERE email = '$email' and password = sha1('$password')";
     
       $req = $conn->prepare($sql);
       $req->execute();
       $rows = $req->fetchAll();
       
       foreach ($rows as $row):
-      $role = $row['Role'];
-      $name = $row['Name'];
+      $role = $row['role'];
+      $firstname = $row['firstName'];
+      $lastname = $row['lastName'];
       endforeach;
       
       if($req->rowCount()==1) {
          $_SESSION['email'] = $email;
-         $_SESSION['name'] = $name;
+         $_SESSION['name'] = $lastname.' '.$firstname;
          $_SESSION['role'] = $role;
          
-         if ($role == "te") {
+         if ($role == "trainee") {
             header("location: trainee_dashboard.php");
-         }else if($role == "tr"){
+         }else if($role == "trainer"){
              header("location: trainer_dashboard.php");
          }else{
             header("location: admin_dashboard.php");
