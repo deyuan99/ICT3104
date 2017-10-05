@@ -1,16 +1,15 @@
 <?php
 // connect to database
 require_once('database/dbconfig.php');
-echo "regemail = " . $_POST['regemail'];
-if (isset($_POST['firstname']))
-    echo "yes";
 
-//TODO
-//if (isset($_POST['firstname']) && isset($_POST['lastname']) && isset($_POST['regemail']) && isset($_POST['phone']) && isset($_POST['category']) && isset($_POST['regpass']) && isset($_POST['regconfpass'])) {
-if (isset($_POST['regemail']) && isset($_POST['phone']) && isset($_POST['category']) && isset($_POST['regpass']) && isset($_POST['regconfpass'])) {
+//echo "firstname = " . $_POST['firstname'];
+//echo " regemail = " . $_POST['regemail'];
+
+if (isset($_POST['firstname']) && isset($_POST['lastname']) && isset($_POST['regemail']) && isset($_POST['phone']) && isset($_POST['category']) && isset($_POST['regpass']) && isset($_POST['regconfpass'])) {
     
-//    $firstname = $_POST['firstname'];
-//    $lastname = $_POST['lastname'];
+//    echo "<br/>in";
+    $firstname = $_POST['firstname'];
+    $lastname = $_POST['lastname'];
     $regemail = $_POST['regemail'];
     $phone = $_POST['phone'];
     $category = $_POST['category'];
@@ -31,12 +30,12 @@ if (isset($_POST['regemail']) && isset($_POST['phone']) && isset($_POST['categor
     $checkResult = $query->fetch(PDO::FETCH_ASSOC);
     
 //    echo "\nresult = " . $result['firstName'];
-    echo " result = " . count($checkResult) . "<br/>";
+//    echo " result = " . count($checkResult) . "<br/>";
     
     // If there is no existing email in db, add user to admin approval
     if (count($checkResult) == 1) {
         $insertsql = "INSERT INTO userApproval (firstName, lastName, email, phoneNumber, profilePicture, role, password) VALUES ('$firstname', '$lastname', '$regemail', '$phone', '', '$category', '$regpass')";
-        echo "prepare ";
+//        echo "prepare ";
         $query = $conn->prepare($insertsql);
         if ($query == false) {
             print_r($conn->errorInfo());
@@ -47,7 +46,7 @@ if (isset($_POST['regemail']) && isset($_POST['phone']) && isset($_POST['categor
             print_r($query->errorInfo());
             die('Error execute');
         }
-        echo "insert done <br/>";
+//        echo "insert done <br/>";
     }
 }
 ?>

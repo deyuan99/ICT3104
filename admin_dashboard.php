@@ -18,9 +18,6 @@
 
     <body>
         <!-- Header -->
-        <header id="header" >
-            <h1><strong><a href="index.php">STPS</a></strong> by Group 4</h1>
-        </header>
         <?php
         include "admin_header.php";
         ?>
