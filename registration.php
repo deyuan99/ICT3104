@@ -103,14 +103,7 @@
                 </div>
             </div>
         </section>
-        <script>
-        function test(){
-            var x =document.getElementById("firstname").value;
-            alert(x);
-        }
         
-        
-        </script>
         <!-- Footer -->
         <?php
         include "footer.php";
