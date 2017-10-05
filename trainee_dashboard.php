@@ -2,6 +2,7 @@
 <!--Connection for database -->
 
 <?php
+session_start();
 require_once('database/dbconfig.php');
 
 $sql = "SELECT id, title, start, end, color FROM events ";
@@ -37,8 +38,10 @@ $events = $req->fetchAll();
         <section id="one" class="wrapper style1">
 
             <div class="container">
-                <header class="major">
-                    <h3>Hello User</h3>
+
+                <header class="major special">
+                    <h3>Hello <?php echo $_SESSION['name'];?> </h3>
+                  
                     <p>this is your profile</p>
                 </header>
                 <form class="form-horizontal">
