@@ -30,7 +30,7 @@
                         <form method="post" action="#">
                             <div class="row uniform 50%">
                                 <div class="8u 12u(xsmall)">
-                                    <input type="email" name="email" id="name" value="" placeholder="Email" />
+                                    <input type="email" name="email" id="email" value="" placeholder="Email" />
                                 </div>
                                 <div class="8u">
                                     <input type="password" name="password" id="password" value="" placeholder="Password" />
@@ -53,43 +53,47 @@
                             </div>
                         </form>
                     </div>
+                    
                     <!-- Registration -->
                     <div class="6u 12u(xsmall)">
                         <header class="major special">
                             <h3>Register</h3>
                             <p>New account? Join now.</p>
                         </header>
-                        <form method="post" action="#">
+                        <form method="POST" action="registration_verification.php">
                             <div class="row uniform 50%">
                                 <div class="6u 12u(xsmall)">
-                                    <input type="text" name="firstName" id="name" value="" placeholder="First Name" />
+                                    <input type="text" name="firstName" id="firstname" value="" placeholder="First Name" required/>
                                 </div>
                                 <div class="6u 12u(xsmall)">
-                                    <input type="text" name="lastName" id="name" value="" placeholder="Last Name" />
+                                    <input type="text" name="lastName" id="lastname" value="" placeholder="Last Name" required/>
                                 </div>
                                 <div class="12u">
-                                    <input type="email" name="email" id="email" value="" placeholder="Email" />
+                                    <input type="email" name="regemail" id="regemail" value="" placeholder="Email" required/>
+                                </div>
+                                <div class="12u">
+                                    <input type="text" name="phone" id="phone" value="" placeholder="Phone Number" required/>
                                 </div>
                                 <div class="12u">
                                     <div class="select-wrapper">
-                                        <select name="category" id="category">
+                                        <select name="category" id="category" required>
                                             <option value="">Member Type</option>
-                                            <option value="1">Trainer</option>
-                                            <option value="1">Trainee</option>
+                                            <option value="trainer">Trainer</option>
+                                            <option value="trainee">Trainee</option>
                                         </select>
                                     </div>
                                 </div>
                                 <div class="12u">
-                                    <input type="password" name="password" id="password" value="" placeholder="Password" />
+                                    <input type="password" name="regpass" id="regpass" value="" placeholder="Password" required/>
                                 </div>
                                 <div class="12u">
-                                    <input type="password" name="confrimPassword" id="password" value="" placeholder="Confirm Password" />
+                                    <input type="password" name="regconfpass" id="regconfpass" value="" placeholder="Confirm Password" required/>
                                 </div>
                             </div>
                             <div class="row uniform 50%">
                                 <div class="12u 6u(small) 12u(xsmall)">
                                     <ul class="actions vertical">
-                                        <li><a href="registration_verification.php" class="button special fit">Register</a></li>
+                                        <li><button type="submit" class="button special fit">Register</button></li>
                                     </ul>
                                 </div>
                             </div>
