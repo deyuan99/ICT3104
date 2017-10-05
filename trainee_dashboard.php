@@ -16,35 +16,62 @@ $events = $req->fetchAll();
     <head>
         <meta charset="UTF-8">
         <title>STPS</title>
-       
+
         <!-- Bootstrap Core CSS -->
         <link href="bootstrap-3.3.5-dist/css/bootstrap.min.css" rel="stylesheet">
 
         <!-- FullCalendar -->
         <link href='fullcalendar-3.5.1/fullcalendar.css' rel='stylesheet' />
         <link href="assets/css/calendar.css" rel="stylesheet" type="text/css"/>
-        
+
         <!-- Main CSS -->
         <link rel="stylesheet" href="assets/css/main.css" />
 
+    </head>
     <body>
         <!-- Header -->
         <?php
         include "trainee_header.php";
         ?>
 
-        <!-- Trainers list -->
-        <section id="main" class="wrapper">
+        <!-- One: Trainee's Profile -->
+        <section id="one" class="wrapper style1">
+
             <div class="container">
+
                 <header class="major special">
                     <h3>Hello <?php echo $_SESSION['name'];?> </h3>
+                  
                     <p>this is your profile</p>
                 </header>
-
-                <section>
-                    <div id="calendar" class="col-centered">
+                <form class="form-horizontal">
+                    <div class="form-group">
+                        <label class="control-label col-sm-2" for="email">Email:</label>
+                        <div class="col-sm-10">
+                            <p class="form-control-static">someone@example.com</p>
+                        </div>
+                        <label class="control-label col-sm-2" for="email">Name:</label>
+                        <div class="col-sm-10">
+                            <p class="form-control-static">someone@example.com</p>
+                        </div>
+                        <label class="control-label col-sm-2" for="email">Password:</label>
+                        <div class="col-sm-10">
+                            <p class="form-control-static">someone@example.com</p>
+                        </div>
                     </div>
-                </section>
+                </form>
+            </div>
+        </section>
+
+        <!-- Two: Trainee Calendar -->
+        <section id="two" class="wrapper style2 special">
+            <div class="container">
+                <header class="major">
+                    <h2>Your Calendar</h2>
+                    <p></p>
+                </header>
+                <div id="calendar" class="col-centered">
+                </div>
             </div>
         </section>
 
@@ -108,6 +135,19 @@ $events = $req->fetchAll();
                 </div>
             </div>
         </div>
+        
+        <p id="myP">This is a paragraph. Click the button to make me editable.</p>
+
+<button onclick="myFunction()">Try it</button>
+
+<p id="demo"></p>
+
+<script>
+function myFunction() {
+    document.getElementById("myP").contentEditable = true;
+    document.getElementById("demo").innerHTML = "The p element above is now editable. Try to change its text.";
+}
+</script>
 
         <!-- Footer -->
         <?php
@@ -130,7 +170,7 @@ $events = $req->fetchAll();
         <script src='fullcalendar-3.5.1/lib/moment.min.js'></script>
         <script src='fullcalendar-3.5.1/fullcalendar.min.js'></script>
 
-        <!--start of script-->
+        <!--Calendar script-->
         <script>
             $(document).ready(function () {
                 //var today = moment().day();
@@ -186,5 +226,6 @@ foreach ($events as $event):
 
         </script>
 
+        <!-- Profile update script -->
     </body>
 </html>
