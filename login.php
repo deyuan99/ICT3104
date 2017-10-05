@@ -27,6 +27,17 @@
          $_SESSION['email'] = $email;
          $_SESSION['name'] = $lastname.' '.$firstname;
          $_SESSION['role'] = $role;
+         if(!empty($_POST["copy"])) {
+				setcookie ("member_login",$email,time()+ (10 * 365 * 24 * 60 * 60));
+				setcookie ("member_password",$password,time()+ (10 * 365 * 24 * 60 * 60));
+			} else {
+				if(isset($_COOKIE["member_login"])) {
+					setcookie ("member_login","");
+				}
+				if(isset($_COOKIE["member_password"])) {
+					setcookie ("member_password","");
+				}
+			}
          
          if ($role == "trainee") {
             header("location: trainee_dashboard.php");

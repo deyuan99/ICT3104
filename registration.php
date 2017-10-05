@@ -29,16 +29,16 @@
                            <form name="login" method="post" action="login.php">
                             <div class="row uniform 50%">
                                 <div class="8u 12u(xsmall)">
-                                    <input type="email" name="email" id="email" value="" placeholder="Email" />
+                                    <input type="email" name="email" id="email" value="<?php if(isset($_COOKIE["member_login"])) { echo $_COOKIE["member_login"]; } ?>" placeholder="Email" />
                                 </div>
                                 <div class="8u">
-                                    <input type="password" name="password" id="password" value="" placeholder="Password" />
+                                    <input type="password" name="password" id="password" value="<?php if(isset($_COOKIE["member_password"])) { echo $_COOKIE["member_password"]; } ?>" placeholder="Password" />
                                 </div>
                             </div>
                             <div class="row uniform 50%">
                                 <div class="6u 6u(small) 12u(xsmall)">
                                     <div class="7u 12u(small)">
-                                        <input type="checkbox" id="copy" name="copy">
+                                        <input type="checkbox" id="copy" name="copy" <?php if(isset($_COOKIE["member_login"])) { ?> checked <?php } ?>>
                                         <label for="copy">Remember me</label>
                                     </div>
                                 </div>
