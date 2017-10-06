@@ -46,9 +46,9 @@ and open the template in the editor.
     height: auto;
 }
 
-.panel-archive .panel-heading {
-    background-color: #C24641;
+.panel-title {
     color: white;
+    letter-spacing: 4px;
 }
 
 /* For tablet view */

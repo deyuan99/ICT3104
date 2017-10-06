@@ -55,23 +55,27 @@ INSERT INTO `events` (`id`, `title`, `color`, `start`, `end`) VALUES
 -- Table structure for table `user`
 --
 
-CREATE TABLE `user` (
+CREATE TABLE `users` (
   `email` varchar(20) NOT NULL,
   `password` varchar(50) NOT NULL,
   `role` varchar(10) NOT NULL,
   `firstName` varchar(30) NOT NULL,
   `lastName` varchar(20) NOT NULL,
   `profilePicture` varchar(50) NOT NULL,
-  `phoneNumber` int(8) NOT NULL
+  `phoneNumber` int(8) NOT NULL,
+  `status` int(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `user`
+-- Dumping data for table `users`
 --
 
-INSERT INTO `user` (`email`, `password`, `role`, `firstName`, `lastName`, `profilePicture`, `phoneNumber`) VALUES
-('admin1@gmail.com', '6c7ca345f63f835cb353ff15bd6c5e052ec08e7a', 'admin', 'admin', 'ad1', '', 12121212),
-('trainee1@gmail.com', 'ddf170f924ba1ce072cd91b54614289524e70db2', 'trainee', 'trainee', 'te11', '', 13231323);
+INSERT INTO `users` (`email`, `password`, `role`, `firstName`, `lastName`, `profilePicture`, `phoneNumber`, `status`) VALUES
+('admin1@gmail.com', '6c7ca345f63f835cb353ff15bd6c5e052ec08e7a', 'admin', 'admin', 'ad1', '', 12121212, 1),
+('trainee1@gmail.com', 'ddf170f924ba1ce072cd91b54614289524e70db2', 'trainee', 'trainee1', 'te11', '', 13231323, 1),
+('trainee2@gmail.com', 'ddf170f924ba1ce072cd91b54614289524e70db2', 'trainee', 'trainee2', 'te11', '', 12345567, 1),
+('trainer1@gmail.com', 'ddf170f924ba1ce072cd91b54614289524e70db2', 'trainer', 'trainer1', 'te11', '', 12351231, 1),
+('trainer2@gmail.com', 'ddf170f924ba1ce072cd91b54614289524e70db2', 'trainer', 'trainer2', 'te11', '', 12351231, 1);
 
 --
 -- Indexes for dumped tables
@@ -84,9 +88,9 @@ ALTER TABLE `events`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `user`
+-- Indexes for table `users`
 --
-ALTER TABLE `user`
+ALTER TABLE `users`
   ADD PRIMARY KEY (`email`);
 
 --
