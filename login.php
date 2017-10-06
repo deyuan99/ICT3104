@@ -11,7 +11,7 @@
      $email = $_POST['email'];
      $password = $_POST['password']; 
      
-     $sql = "SELECT * FROM user WHERE email = '$email' and password = sha1('$password')";
+     $sql = "SELECT * FROM users WHERE email = '$email' and password = sha1('$password')";
     
       $req = $conn->prepare($sql);
       $req->execute();

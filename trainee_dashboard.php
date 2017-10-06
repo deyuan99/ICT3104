@@ -24,8 +24,8 @@ $events = $req->fetchAll();
         <link href='fullcalendar-3.5.1/fullcalendar.css' rel='stylesheet' />
         <link href="assets/css/calendar.css" rel="stylesheet" type="text/css"/>
 
-        <!-- Main CSS -->
-        <link rel="stylesheet" href="assets/css/main.css" />
+        <!-- Trainee CSS -->
+        <link rel="stylesheet" href="assets/css/trainee_dashboard.css" />
 
     </head>
     <body>
@@ -54,10 +54,10 @@ $events = $req->fetchAll();
                         <div class="col-sm-10">
                             <p class="form-control-static">someone@example.com</p>
                         </div>
-                        <label class="control-label col-sm-2" for="email">Password:</label>
+<!--                        <label class="control-label col-sm-2" for="email">Password:</label>
                         <div class="col-sm-10">
                             <p class="form-control-static">someone@example.com</p>
-                        </div>
+                        </div>-->
                     </div>
                 </form>
             </div>
