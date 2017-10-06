@@ -1,0 +1,56 @@
+.navbar {
+    margin: 0;
+    height: 75px;
+    border: none;
+    background-color: black;
+}
+
+#nav-toggle{
+    margin-top: 15px;
+    border-width: medium;
+    margin-bottom: 17px;
+    border-color: silver;
+}
+.navbar-nav > li > a{
+    font-family: Lato;
+    font-size: 14px;
+    color: whitesmoke;
+    letter-spacing: 1px;
+    font-weight: 500;
+    vertical-align: middle;
+}
+.navbar-nav li a:hover, .navbar-nav li a:focus{
+    font-weight: bolder;
+    background-color: black;
+    text-decoration: underline;
+    color: #FF1493;
+}
+
+#nav-toggle > span {
+    background-color: white !important;
+}
+
+.icon-space{
+    margin-right: 10px;
+}
+.navbar-brand{
+    margin-top: -10px;
+}
+@media (min-width: 768px) {
+    .navbar-nav {
+        float: right;
+    }
+    .navbar-nav > li > a {  
+        padding: 5px 12px !important;
+        border-radius: 5px;
+        margin: 19px 0px;
+    }
+}
+@media (max-width: 767px) {
+
+    .navbar-nav > li {  
+        background-color: whitesmoke;
+    }
+}
+
+
