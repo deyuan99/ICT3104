@@ -1,15 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.4
--- https://www.phpmyadmin.net/
+-- version 4.4.14
+-- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 05, 2017 at 02:35 PM
--- Server version: 10.1.26-MariaDB
--- PHP Version: 7.1.9
+-- Generation Time: Oct 11, 2017 at 06:40 AM
+-- Server version: 5.6.26
+-- PHP Version: 5.6.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
-START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -19,73 +17,101 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `Team4_STPS`
+-- Database: `team4_stps`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `events`
+-- Table structure for table `personalsession`
 --
 
-CREATE TABLE `events` (
+CREATE TABLE IF NOT EXISTS `personalsession` (
   `id` int(11) NOT NULL,
-  `title` varchar(255) NOT NULL,
-  `color` varchar(7) DEFAULT NULL,
-  `start` datetime NOT NULL,
-  `end` datetime DEFAULT NULL
+  `category` varchar(20) NOT NULL,
+  `cost` decimal(10,2) NOT NULL,
+  `startTime` time NOT NULL,
+  `endTime` time NOT NULL,
+  `date` date NOT NULL,
+  `description` varchar(255) NOT NULL,
+  `trainerEmail` varchar(255) NOT NULL,
+  `traineeEmail` varchar(255) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `personalsession`
+--
+
+INSERT INTO `personalsession` (`id`, `category`, `cost`, `startTime`, `endTime`, `date`, `description`, `trainerEmail`, `traineeEmail`) VALUES
+(1, 'Own Training', '0.00', '09:00:00', '10:00:00', '2017-10-10', 'Workout!!', '', 'trainee1@gmail.com'),
+(2, 'Personal Training', '10.50', '09:00:00', '10:00:00', '2017-10-11', '1v1 workout!!', 'trainer2@gmail.com', 'trainee2@gmail.com');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `userapproval`
+--
+
+CREATE TABLE IF NOT EXISTS `userapproval` (
+  `email` varchar(255) NOT NULL,
+  `firstName` varchar(35) NOT NULL,
+  `lastName` varchar(35) NOT NULL,
+  `phoneNumber` int(8) NOT NULL,
+  `profilePicture` varchar(255) NOT NULL,
+  `role` varchar(10) NOT NULL,
+  `password` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `events`
+-- Dumping data for table `userapproval`
 --
 
-INSERT INTO `events` (`id`, `title`, `color`, `start`, `end`) VALUES
-(1, 'frist try', '#FFD700', '2017-09-30 00:00:00', '2017-10-01 00:00:00'),
-(2, 'what to do today??', '#40E0D0', '2017-09-27 00:00:00', '2017-09-28 00:00:00'),
-(3, 'how about now', '#000', '2017-09-20 00:00:00', '2017-09-21 00:00:00'),
-(4, 'hi', '#008000', '2017-09-13 00:00:00', '2017-09-14 00:00:00'),
-(5, '', '', '2017-08-31 00:00:00', '2017-09-01 00:00:00'),
-(6, '', '', '2017-10-05 00:00:00', '2017-10-06 00:00:00'),
-(7, 'dddd', '', '2017-10-12 00:00:00', '2017-10-13 00:00:00');
+INSERT INTO `userapproval` (`email`, `firstName`, `lastName`, `phoneNumber`, `profilePicture`, `role`, `password`) VALUES
+('test@gmail.com', 'test', 'testing', 12312312, '', 'trainee', 'ddf170f924ba1ce072cd91b54614289524e70db2');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `user`
+-- Table structure for table `users`
 --
 
-CREATE TABLE `users` (
-  `email` varchar(20) NOT NULL,
-  `password` varchar(50) NOT NULL,
-  `role` varchar(10) NOT NULL,
-  `firstName` varchar(30) NOT NULL,
-  `lastName` varchar(20) NOT NULL,
-  `profilePicture` varchar(50) NOT NULL,
+CREATE TABLE IF NOT EXISTS `users` (
+  `email` varchar(255) NOT NULL,
+  `firstName` varchar(35) NOT NULL,
+  `lastName` varchar(35) NOT NULL,
   `phoneNumber` int(8) NOT NULL,
+  `profilePicture` varchar(255) NOT NULL,
+  `role` varchar(10) NOT NULL,
+  `password` varchar(50) NOT NULL,
   `status` int(1) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`email`, `password`, `role`, `firstName`, `lastName`, `profilePicture`, `phoneNumber`, `status`) VALUES
-('admin1@gmail.com', '6c7ca345f63f835cb353ff15bd6c5e052ec08e7a', 'admin', 'admin', 'ad1', '', 12121212, 1),
-('trainee1@gmail.com', 'ddf170f924ba1ce072cd91b54614289524e70db2', 'trainee', 'trainee1', 'te11', '', 13231323, 1),
-('trainee2@gmail.com', 'ddf170f924ba1ce072cd91b54614289524e70db2', 'trainee', 'trainee2', 'te11', '', 12345567, 1),
-('trainer1@gmail.com', 'ddf170f924ba1ce072cd91b54614289524e70db2', 'trainer', 'trainer1', 'te11', '', 12351231, 1),
-('trainer2@gmail.com', 'ddf170f924ba1ce072cd91b54614289524e70db2', 'trainer', 'trainer2', 'te11', '', 12351231, 1);
+INSERT INTO `users` (`email`, `firstName`, `lastName`, `phoneNumber`, `profilePicture`, `role`, `password`, `status`) VALUES
+('admin1@gmail.com', 'ad', 'min', 12121212, '', 'admin', '6c7ca345f63f835cb353ff15bd6c5e052ec08e7a', 1),
+('trainee1@gmail.com', 'trainee1', 'te1', 13131313, '', 'trainee', 'ddf170f924ba1ce072cd91b54614289524e70db2', 1),
+('trainee2@gmail.com', 'trainee2', 'te2', 13131314, '', 'trainee', 'ddf170f924ba1ce072cd91b54614289524e70db2', 1),
+('trainer1@gmail.com', 'trainer1', 'tr1', 14141414, '', 'trainer', '69a6439936f0ef293d0a713f0aaf7a04ca82d272', 1),
+('trainer2@gmail.com', 'trainer2', 'tr2', 14141415, '', 'trainer', '69a6439936f0ef293d0a713f0aaf7a04ca82d272', 1);
 
 --
 -- Indexes for dumped tables
 --
 
 --
--- Indexes for table `events`
+-- Indexes for table `personalsession`
 --
-ALTER TABLE `events`
+ALTER TABLE `personalsession`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `userapproval`
+--
+ALTER TABLE `userapproval`
+  ADD PRIMARY KEY (`email`);
 
 --
 -- Indexes for table `users`
@@ -98,12 +124,10 @@ ALTER TABLE `users`
 --
 
 --
--- AUTO_INCREMENT for table `events`
+-- AUTO_INCREMENT for table `personalsession`
 --
-ALTER TABLE `events`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
-COMMIT;
-
+ALTER TABLE `personalsession`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
