@@ -12,7 +12,7 @@ if (isset($_POST['firstname']) && isset($_POST['lastname']) && isset($_POST['reg
     $lastname = $_POST['lastname'];
     $regemail = $_POST['regemail'];
     $phone = $_POST['phone'];
-    $category = $_POST['category'];
+    $role = $_POST['category'];
     $regpass = $_POST['regpass'];
     
     $sql = "SELECT * FROM users u, userApproval ua WHERE u.email = '$regemail' OR ua.email = '$regemail'";
@@ -34,7 +34,7 @@ if (isset($_POST['firstname']) && isset($_POST['lastname']) && isset($_POST['reg
     
     // If there is no existing email in db, add user to admin approval
     if (count($checkResult) == 1) {
-        $insertsql = "INSERT INTO userApproval (firstName, lastName, email, phoneNumber, profilePicture, role, password) VALUES ('$firstname', '$lastname', '$regemail', '$phone', '', '$category', sha1('$regpass'))";
+        $insertsql = "INSERT INTO userApproval (firstName, lastName, email, phoneNumber, profilePicture, role, password) VALUES ('$firstname', '$lastname', '$regemail', '$phone', '', '$role', sha1('$regpass'))";
 //        echo "prepare ";
         $query = $conn->prepare($insertsql);
         if ($query == false) {

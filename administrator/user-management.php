@@ -12,7 +12,7 @@ and open the template in the editor.
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title></title>
+        <title>STPS</title>
         <!-- CSS import -->
         <?php include_once 'include.php'; ?>
         <?php include_once 'loadUserInfo.php'; ?>
@@ -44,7 +44,7 @@ and open the template in the editor.
     <body>
         <div class="container-fluid">
             <?php include_once 'nav-bar.php'; ?>
-            <h1 class="text-center">USER MANAGEMENT</h1>
+            <h1 class="text-center"><span class="glyphicon glyphicon-user icon-space"></span> USER MANAGEMENT</h1>
             <div class="col-md-8 col-md-offset-2 padding-0" id="usermanagement">
                 <div class="row" style="margin-bottom: 10px;">
                     <ul class="nav nav-pills col-md-10 padding-l0-r0">

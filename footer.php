@@ -4,7 +4,7 @@
         <ul class="icons">
             <li><a href="#" class="icon fa-facebook"></a></li>
             <li><a href="changepassword.php" class="icon fa-twitter"></a></li>
-            <li><a href="admin_dashboard.php" class="icon fa-instagram"></a></li>
+            <li><a href="administrator/user-management.php" class="icon fa-instagram"></a></li>
         </ul>
         <ul class="copyright">
             <li>&copy; ICT3104 Group 4 2017</li>
