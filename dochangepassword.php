@@ -15,7 +15,7 @@
      $cfmpassword = $_POST['cfmpassword']; 
      $email = $_SESSION['email'];
      
-     $sql = "SELECT * FROM user WHERE email = '$email'";
+     $sql = "SELECT * FROM users WHERE email = '$email'";
     
       $req = $conn->prepare($sql);
       $req->execute();
@@ -34,7 +34,7 @@
     } else {
         echo $email;
         echo $cfmpassword;
-        $stmt1 = "UPDATE user SET password = sha1('$cfmpassword') WHERE email='$email'";
+        $stmt1 = "UPDATE users SET password = sha1('$cfmpassword') WHERE email='$email'";
             $stmt = $conn->prepare($stmt1);
             $stmt->execute();
          echo $stmt->rowCount() . " records UPDATED successfully";

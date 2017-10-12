@@ -75,6 +75,56 @@ $events = $req->fetchAll();
             </div>
         </section>
 
+        <!--modal view-->
+        <div class="modal fade" id="ModalView" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="padding-top: 70px;">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <form class="form-horizontal" method="POST" action="#">
+
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title" id="myModalLabel">View Events</h4>
+                        </div>
+                        <div class="modal-body">
+                            
+                        <div class="form-group">
+                            <label for="title" class="col-sm-2 control-label">Title</label>
+                            <div class="col-sm-10">
+                                <input type="text" name="title" class="form-control" id="title" value="<?php echo $event['title']; ?>" readonly>
+                            </div>
+                        </div>
+                            
+                        <div class="form-group">
+                            <label for="color" class="col-sm-2 control-label">Color</label>
+                                <div class="col-sm-10">
+                                    <input type="text" name="color" class="form-control" id="color" value="<?php echo $event['color']; ?>" readonly>
+                                </div>
+                        </div>
+                            
+                        <div class="form-group">
+                            <label for="start" class="col-sm-2 control-label">Start date</label>
+                            <div class="col-sm-10">
+                                <input type="text" name="start" class="form-control" id="start" value="<?php echo $event['start']; ?>" readonly>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="end" class="col-sm-2 control-label">End date</label>
+                            <div class="col-sm-10">
+                                <input type="text" name="end" class="form-control" id="end" value="<?php echo $event['end']; ?>" readonly>
+                            </div>
+                        </div>
+                       	
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        
         <!-- Modal -->
         <div class="modal fade" id="ModalAdd" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
             <div class="modal-dialog" role="document">
@@ -219,6 +269,19 @@ foreach ($events as $event):
                             },
 <?php endforeach; ?>
                     ]
+                    ,
+                        eventRender: function(event, element,start,end) {
+                            element.bind('click', function() {
+                              $('#ModalView #id').val(event.id);
+                              $('#ModalView #title').val(event.title);
+                              $('#ModalView #color').val(event.color);
+                              $('#ModalView #start').val(event.start);
+                              $('#ModalView #end').val(event.end);
+                              //$('#ModalView #start').val(moment(start).format('YYYY-MM-DD HH:mm:ss'));
+                              //$('#Modalview #end').val(moment(end).format('YYYY-MM-DD HH:mm:ss'));
+                              $('#ModalView').modal('show');
+                              });
+                          }
                 });
 
 

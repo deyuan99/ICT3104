@@ -1,0 +1,65 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Aug 16, 2017, 3:49:02 AM
+    Author     : Lionel
+*/
+#usermanagement {
+    padding-top: 30px;
+}
+
+.icon-space {
+    margin-right: 10px;
+}
+
+.add-btn {
+    padding: 12.5px 0;              
+}
+
+.add-btn a {
+    font-size: 16px;
+}
+
+.del-user-btn {
+    margin-top:10px;
+}
+
+@media (max-width: 768px) {
+    .add-btn {
+        margin-top:10px;      
+    }
+}
+
+.table > tbody > tr > td {
+    vertical-align: middle;
+}
+
+.filters input[disabled] {
+    background-color: transparent;
+    border: none;
+    cursor: auto;
+    box-shadow: none;
+    padding: 0;
+    height: auto;
+}
+
+.panel-title {
+    color: white;
+    letter-spacing: 4px;
+}
+
+/* For tablet view */
+@media only screen 
+and (min-device-width : 768px) 
+and (max-device-width : 1025px) 
+and (orientation : landscape) {
+
+    #add-btn-div, #usermanagement ul{
+        width: 100%;
+    }
+
+    
+}

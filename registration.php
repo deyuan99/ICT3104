@@ -60,13 +60,14 @@
                             <h3>Register</h3>
                             <p>New account? Join now.</p>
                         </header>
+                        <!--TODO validate number + pass matches-->
                         <form method="POST" action="registration_verification.php">
                             <div class="row uniform 50%">
                                 <div class="6u 12u(xsmall)">
-                                    <input type="text" name="firstName" id="firstname" value="" placeholder="First Name" required/>
+                                    <input type="text" name="firstname" id="firstname" value="" placeholder="First Name"  required/>
                                 </div>
                                 <div class="6u 12u(xsmall)">
-                                    <input type="text" name="lastName" id="lastname" value="" placeholder="Last Name" required/>
+                                    <input type="text" name="lastname" id="lastname" value="" placeholder="Last Name" required/>
                                 </div>
                                 <div class="12u">
                                     <input type="email" name="regemail" id="regemail" value="" placeholder="Email" required/>
@@ -102,7 +103,7 @@
                 </div>
             </div>
         </section>
-
+        
         <!-- Footer -->
         <?php
         include "footer.php";
