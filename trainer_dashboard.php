@@ -218,10 +218,9 @@ $events = $req->fetchAll();
                 </div>
             </div>
         </div>
-        
-        <p id="myP">This is a paragraph. Click the button to make me editable.</p>
+   </div>
 
-<button onclick="myFunction()">Try it</button>
+
 
 <p id="demo"></p>
 
