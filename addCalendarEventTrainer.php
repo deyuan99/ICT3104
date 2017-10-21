@@ -38,15 +38,15 @@ if (isset($_POST['category']) && isset($_POST['starttime']) && isset($_POST['end
 	 die ('Error execute');
 	}
         
-   //   if( $query ){ 
-  //      echo "<script type='text/javascript'>alert('submitted successfully!');"
-  //      . "window.location.href='trainer_dashboard.php';"
-  //      . "</script>";
-  //    }
-//      else
- //  echo "<script type='text/javascript'>alert('failed');"
- //       . "window.location.href='trainer_dashboard.php';"
- //       . "</script>";    
-
+     if( $query ){ 
+     echo "<script type='text/javascript'>alert('submitted successfully!');"
+     . "window.location.href='trainer_dashboard.php';"
+     . "</script>";
+   }
+     else{
+ echo "<script type='text/javascript'>alert('failed');"
+     . "window.location.href='trainer_dashboard.php';"
+      . "</script>";    
+     }
 }
 	
