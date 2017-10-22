@@ -13,7 +13,7 @@ $trainermail = "trainer1@gmail.com";
 if ($Srole == "trainer"){
     $sql = "SELECT * FROM personalsession where trainerEmail= '$Semail'";
 }else{
-        $sql = "SELECT * FROM personalsession where trainerEmail= '$trainermail' AND category !='$notpersonal' ";
+        $sql = "SELECT * FROM personalsession where trainerEmail= '$trainermail' AND category !='$notpersonal' AND traineeEmail = ' ' ";
 
 }
 
@@ -71,14 +71,14 @@ $events = $req->fetchAll();
         <div class="modal fade" id="ModalView" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="padding-top: 70px;">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
-                    <form class="form-horizontal" method="POST" action="#">
+                    <form class="form-horizontal" method="POST" action="applyfor1to1.php">
 
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                             <h4 class="modal-title" id="myModalLabel">View Events</h4>
                         </div>
                         <div class="modal-body">
-                            
+                                            
                         <div class="form-group">
                             <label for="category" class="col-sm-2 control-label">Category</label>
                             <div class="col-sm-10">
@@ -120,22 +120,34 @@ $events = $req->fetchAll();
                                 <input type="text" name="cost" class="form-control" id="cost" value="<?php echo $event['cost']; ?>" readonly>
                             </div>
                         </div>
+                      <?php if($Srole == "trainer"){ ?>
+                        <div class="form-group">
+                            <label for="trainee" class="col-sm-2 control-label">Tainee Gmail</label>
+                            <div class="col-sm-10">
+                                <input type="text" name="trainee" class="form-control" id="trainee" value="<?php echo $event['traineeEmail']; ?>" readonly>
+                            </div>
                         </div>
-
+                      <?php } ?>
+                        </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button> 
+                            <input type="hidden" id="evid" name="evid" value="<?php echo $event['id']; ?>" />
+                            <button type="submit" class="btn btn-primary">Apply</button>
                         </div>
                     </form>
                 </div>
             </div>
         </div>
+  
         
+        <?php if($Srole == 'trainer'){ ?>
         <!-- Modal -->
         <div class="modal fade" id="ModalAdd" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
+                    
                     <form class="form-horizontal" method="POST" action="addCalendarEventTrainer.php">
-
+                        
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                             <h4 class="modal-title" id="myModalLabel">Add Event</h4>
@@ -211,7 +223,7 @@ $events = $req->fetchAll();
                         </div>
 
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
                             <button type="submit" class="btn btn-primary">Save changes</button>
                         </div>
                     </form>
@@ -219,6 +231,7 @@ $events = $req->fetchAll();
             </div>
         </div>
    </div>
+        <?php } ?>
 
 
 
@@ -279,13 +292,23 @@ function myFunction() {
 foreach ($events as $event):
     $start =  $event['startTime'];
     $end = $event['endTime'];
+    $cat = $event['category'];
     $eventdate = $event['date'];
+    $traineeEmail= $event['traineeEmail'];
     $combinedstart = date('Y-m-d H:i:s', strtotime("$eventdate $start"));
     $combinedend = date('Y-m-d H:i:s', strtotime("$eventdate $end"));
+   
+    if ($cat == "Personal Training"){
+        $traineeEmail = "Not Applicable";
+    }else if ($traineeEmail != NULL){
+        $color = '#378006';
+    }
+        
+    
 
     ?>
                             {
-                                id: '<?php echo $event['id']; ?>',
+                                evid: '<?php echo $event['id']; ?>',
                                 title: '<?php echo $event['category']; ?>',
                                 date: '<?php echo $event['date']; ?>',
                                 startTime: '<?php echo $event['startTime']; ?>',
@@ -294,6 +317,7 @@ foreach ($events as $event):
                                 end: '<?php echo $combinedend; ?>',
                                 description: '<?php echo $event['description']; ?>',
                                 cost: '<?php echo $event['cost']; ?>',
+                                trainee: '<?php echo $traineeEmail ?>',
                             },
 <?php endforeach;
 
@@ -302,16 +326,18 @@ foreach ($events as $event):
                     ,
                         eventRender: function(event, element) {
                             element.bind('click', function() {
-                              $('#ModalView #id').val(event.id);
+                              $('#ModalView #evid').val(event.evid);
                               $('#ModalView #category').val(event.title);
                               $('#ModalView #date').val(event.date);
                               $('#ModalView #startTime').val(event.startTime);
                              $('#ModalView #endTime').val(event.endTime);
                               $('#ModalView #description').val(event.description);
                               $('#ModalView #cost').val(event.cost);
+                              $('#ModalView #trainee').val(event.trainee);
                               $('#ModalView').modal('show');
                               });
                           }
+                          
                 });
 
 
