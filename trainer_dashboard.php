@@ -127,12 +127,14 @@ $events = $req->fetchAll();
                                 <input type="text" name="trainee" class="form-control" id="trainee" value="<?php echo $event['traineeEmail']; ?>" readonly>
                             </div>
                         </div>
-                      <?php } ?>
+                        <?php } ?>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button> 
                             <input type="hidden" id="evid" name="evid" value="<?php echo $event['id']; ?>" />
+                            <?php if ($Srole == "trainee"){ ?>
                             <button type="submit" class="btn btn-primary">Apply</button>
+                            <?php } ?>
                         </div>
                     </form>
                 </div>
@@ -224,7 +226,7 @@ $events = $req->fetchAll();
 
                         <div class="modal-footer">
                             <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary">Save changes</button>
+                            <button type="submit" class="btn btn-primary">Create Event</button>
                         </div>
                     </form>
                 </div>
@@ -300,8 +302,8 @@ foreach ($events as $event):
    
     if ($cat == "Personal Training"){
         $traineeEmail = "Not Applicable";
-    }else if ($traineeEmail != NULL){
-        $color = '#378006';
+    }else if ($traineeEmail == NULL && $cat == "1-1 Training" ){
+        $traineeEmail = "Still available";
     }
         
     
