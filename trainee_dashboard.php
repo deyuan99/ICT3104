@@ -8,13 +8,13 @@ $Semail = $_SESSION['email'];
 $Sname = $_SESSION['name'];
 $Srole = $_SESSION['role'];
 $notpersonal = "Personal Training";
+
 // for testing when trainee view
 $traineemail = "trainee1@gmail.com";
-if ($Srole == "trainee"){
+if ($Srole == "trainee") {
     $sql = "SELECT * FROM personalsession where traineeEmail= '$Semail'";
-}else{
-        $sql = "SELECT * FROM personalsession where traineeEmail= '$traineemail' AND category !='$notpersonal' AND trainerEmail = ' ' ";
-
+} else {
+    $sql = "SELECT * FROM personalsession where traineeEmail= '$traineemail' AND category !='$notpersonal' AND trainerEmail = ' ' ";
 }
 $req = $conn->prepare($sql);
 $req->execute();
@@ -36,35 +36,6 @@ $events = $req->fetchAll();
         <!-- Main CSS -->
         <link rel="stylesheet" href="assets/css/trainee_dashboard.css" />
 
-        <!-- profile image -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-        <script src="dist_files/jquery.imgareaselect.js" type="text/javascript"></script>
-        <script src="dist_files/jquery.form.js"></script>
-        <link rel="stylesheet" href="dist_files/imgareaselect.css">
-        <script src="functions.js"></script>
-
-        <!-- edit test -->
-        <style>
-            a { text-decoration: none; color: #39569d; }
-            a:hover { text-decoration: underline; }
-
-            //#core { display: block; max-width: 460px; font-family: 'lucida grande', tahoma, verdana, arial, sans-serif; margin-left: 30%; }
-
-            //.profileinfo { background: #f2f2f2; width: 100%; padding: 4px 10px; border-left: 1px solid #b3b3b3; border-right: 1px solid #b3b3b3; border-bottom: 1px solid #b3b3b3; }
-            .profileinfo h3 { position: relative; left: -250px; }
-
-            .gear { position: relative; display: block; margin-bottom: 25px; padding-bottom: 15px; border-bottom: 1px solid #d9d9d9; }
-
-            .gear a.editlink { position: absolute; right: 0; top: 13px; }
-
-            //.datainfo { margin-left: 10px; font-size: 11px; color: #333; }
-
-            label { display: inline-block; font-weight: bold; color: #696969; font-size: 12px; width: 100px; }
-        </style>
-
     </head>
     <body>
         <!-- Header -->
@@ -84,86 +55,59 @@ $events = $req->fetchAll();
                     </header>
                 </div>
                 <div class="6u 4u(xsmall)">
-                    <div>
-                        <img class="img-circle" id="profile_picture" height="128" data-src="default.jpg" data-holder-rendered="true" style="width: 140px; height: 140px;" src="default.jpg"/>
-                        <br><br>
-                        <a type="button" class="btn btn-primary" id="change-profile-pic">Change Profile Picture</a>
-                    </div>
+                    <!-- profile picture -->
+                    <?php
+                    $sqlProfile = "SELECT * FROM users";
+                    $result = $conn->prepare($sqlProfile);
+                    $result->execute();
+                    
+                    $count = $result->rowCount();
+
+                    if ($count > 0) {
+                        while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
+                            $id = $row['email'];
+                            $sqlImg = "SELECT * FROM profileimg WHERE email='$id'";
+                            $resultImg = $conn->prepare($sqlImg);
+                            $resultImg->execute();
+                            
+                            while ($rowImg = $resultImg->fetch(PDO::FETCH_ASSOC)) {
+                                echo "<div class='user-container'>";
+                                if ($rowImg['status'] == 0) {
+                                    echo "<img src='images/uploads/profile" . $id . ".jpg?'" . mt_rand() . ">";
+                                } else {
+                                    echo "<img src='images/uploads/profiledefault.jpg'>";
+                                }
+                                echo "<p>" . $row['email'] . "</p>";
+                                echo "</div>";
+                            }
+                        }
+                    } else {
+                        echo "There are no users yet!";
+                    }
+
+                    if (isset($_SESSION['email'])) {
+                        if ($_SESSION['email'] == "trainee1@gmail.com") {
+                            //echo "You are logged in as user ";
+                        }
+                        echo "<form action='uploadProfileImg.php' method='POST' enctype='multipart/form-data'>
+			<input type='file' name='file'>
+			<button type='submit' name='submit'>UPLOAD</button>
+                        </form>";
+                    } else {
+                        echo "You are not logged in!";
+                        echo "<form action='signup.php' method='POST'>
+			<input type='text' name='first' placeholder='First name'>
+			<input type='text' name='last' placeholder='Last name'>
+			<input type='text' name='uid' placeholder='Username'>
+			<input type='password' name='pwd' placeholder='Password'>
+			<button type='submit' name='submitSignup'>Signup</button>
+		</form>";
+                    }
+                    ?>
+
                 </div>
 
-                <!-- profile image upload modal -->
-                <div id="profile_pic_modal" class="modal fade">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                                <h3>Change Profile Picture</h3>
-                            </div>
-                            <div class="modal-body">
-                                <form id="cropimage" method="post" enctype="multipart/form-data" action="change_pic.php">
-                                    <strong>Upload Image:</strong> <br><br>
-                                    <input type="file" name="profile-pic" id="profile-pic" />
-                                    <input type="hidden" name="hdn-profile-id" id="hdn-profile-id" value="1" />
-                                    <input type="hidden" name="hdn-x1-axis" id="hdn-x1-axis" value="" />
-                                    <input type="hidden" name="hdn-y1-axis" id="hdn-y1-axis" value="" />
-                                    <input type="hidden" name="hdn-x2-axis" value="" id="hdn-x2-axis" />
-                                    <input type="hidden" name="hdn-y2-axis" value="" id="hdn-y2-axis" />
-                                    <input type="hidden" name="hdn-thumb-width" id="hdn-thumb-width" value="" />
-                                    <input type="hidden" name="hdn-thumb-height" id="hdn-thumb-height" value="" />
-                                    <input type="hidden" name="action" value="" id="action" />
-                                    <input type="hidden" name="image_name" value="" id="image_name" />
-                                    <div id='preview-profile-pic'></div>
-                                    <div id="thumbs" style="padding:5px; width:600p"></div>
-                                </form>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                <button type="button" id="save_crop" class="btn btn-primary">Crop & Save</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
 
-
-
-                <section id="core">
-                    <div class="profileinfo">
-                        <div class="gear">
-                            <label>Email</label>
-                            <span id="pemail" class="datainfo">myaddress@googlemail.com</span>
-                            <a href="#" class="editlink">Edit Info</a>
-                            <a class="savebtn">Save</a>
-                        </div>
-
-                        <div class="gear">
-                            <label>First Name</label>
-                            <span id="fullname" class="datainfo">Johnny Appleseed</span>
-                            <a href="#" class="editlink">Edit Info</a>
-                            <a class="savebtn">Save</a>
-                        </div>
-
-                        <div class="gear">
-                            <label>Last Name:</label>
-                            <span id="birthday" class="datainfo">August 21, 1989</span>
-                            <a href="#" class="editlink">Edit Info</a>
-                            <a class="savebtn">Save</a>
-                        </div>
-
-                        <div class="gear">
-                            <label>Phone Number:</label>
-                            <span id="citytown" class="datainfo">Los Angeles, CA</span>
-                            <a href="#" class="editlink">Edit Info</a>
-                            <a class="savebtn">Save</a>
-                        </div>
-
-                        <div class="gear">
-                            <label>Password:</label>
-                            <span id="occupation" class="datainfo">Freelance Web Developer</span>
-                            <a href="#" class="editlink">Edit Info</a>
-                            <a class="savebtn">Save</a>
-                        </div>
-                    </div>
-                </section>
             </div>
         </section>
 
@@ -219,7 +163,7 @@ $events = $req->fetchAll();
                                 </div>
                             </div>
 
-                                <div class="form-group">
+                            <div class="form-group">
                                 <label for="end" class="col-sm-2 control-label">Description</label>
                                 <div class="col-sm-10">
                                     <input type="text" name="description" class="form-control" id="description" value="<?php echo $event['description']; ?>" readonly>
@@ -258,7 +202,7 @@ $events = $req->fetchAll();
                                     </select>                                
                                 </div>
                             </div>
-                            
+
 
                             <div class="form-group">
                                 <label for="date" class="col-sm-2 control-label">Date</label>
@@ -266,7 +210,7 @@ $events = $req->fetchAll();
                                     <input type="text" name="date" class="form-control" id="date" readonly>
                                 </div>
                             </div>
-                            
+
                             <div class="form-group">
                                 <label for="start" class="col-sm-2 control-label">Start Time</label>
                                 <div class="col-sm-10">
@@ -300,7 +244,7 @@ $events = $req->fetchAll();
                                     </select>
                                 </div>
                             </div>
-                            
+
                             <div class="form-group">
                                 <label for="description" class="col-sm-2 control-label">Description</label>
                                 <div class="col-sm-10">
@@ -357,7 +301,7 @@ $events = $req->fetchAll();
                     eventLimit: true, // allow "more" link when too many events
                     selectable: true,
                     selectHelper: true,
-                    select: function(start){
+                    select: function (start) {
                         $('#ModalAdd #date').val(moment(start).format('DD-MM-YYYY '));
                         $('#ModalAdd').modal('show');
                     },
@@ -365,22 +309,21 @@ $events = $req->fetchAll();
 <?php
 foreach ($events as $event):
 
-    
+
     $start = $event['startTime'];
     $end = $event['endTime'];
     $cat = $event['category'];
     $eventdate = $event['date'];
-    $traineeEmail= $event['traineeEmail'];
+    $traineeEmail = $event['traineeEmail'];
     $combinedstart = date('Y-m-d H:i:s', strtotime("$eventdate $start"));
     $combinedend = date('Y-m-d H:i:s', strtotime("$eventdate $end"));
-    
-    if ($cat == "Personal Training"){
+
+    if ($cat == "Personal Training") {
         $traineeEmail = "Not Applicable";
         $color = '#000';
-    }else if ($traineeEmail != NULL){
+    } else if ($traineeEmail != NULL) {
         $color = '#378006';
     }
-   
     ?>
                             {
                                 id: '<?php echo $event['id']; ?>',
@@ -395,17 +338,17 @@ foreach ($events as $event):
 <?php endforeach; ?>
                     ]
                     ,
-                    eventRender: function(event, element) {
-                            element.bind('click', function() {
-                              $('#ModalView #id').val(event.evid);
-                              $('#ModalView #category').val(event.title);
-                              $('#ModalView #date').val(event.date);
-                              $('#ModalView #startTime').val(event.startTime);
-                              $('#ModalView #endTime').val(event.endTime);
-                              $('#ModalView #description').val(event.description);
-                              $('#ModalView').modal('show');
-                              });
-                          }
+                    eventRender: function (event, element) {
+                        element.bind('click', function () {
+                            $('#ModalView #id').val(event.evid);
+                            $('#ModalView #category').val(event.title);
+                            $('#ModalView #date').val(event.date);
+                            $('#ModalView #startTime').val(event.startTime);
+                            $('#ModalView #endTime').val(event.endTime);
+                            $('#ModalView #description').val(event.description);
+                            $('#ModalView').modal('show');
+                        });
+                    }
                 });
 
 
@@ -413,42 +356,7 @@ foreach ($events as $event):
 
         </script>
 
-        <!-- Profile update script -->
-        <script>
-            $(document).ready(function () {
-                $(".editlink").on("click", function (e) {
-                    e.preventDefault();
-                    var dataset = $(this).prev(".datainfo");
-                    var savebtn = $(this).next(".savebtn");
-                    var theid = dataset.attr("id");
-                    var newid = theid + "-form";
-                    var currval = dataset.text();
 
-                    dataset.empty();
-
-                    $('<input type="text" name="' + newid + '" id="' + newid + '" value="' + currval + '" class="hlite">').appendTo(dataset);
-
-                    $(this).css("display", "none");
-                    savebtn.css("display", "block");
-                });
-                $(".savebtn").on("click", function (e) {
-                    e.preventDefault();
-                    var elink = $(this).prev(".editlink");
-                    var dataset = elink.prev(".datainfo");
-                    var newid = dataset.attr("id");
-
-                    var cinput = "#" + newid + "-form";
-                    var einput = $(cinput);
-                    var newval = einput.attr("value");
-
-                    $(this).css("display", "none");
-                    einput.remove();
-                    dataset.html(newval);
-
-                    elink.css("display", "block");
-                });
-            });
-        </script>
 
     </body>
 </html>
