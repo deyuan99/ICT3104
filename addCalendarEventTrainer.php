@@ -22,7 +22,7 @@ if (isset($_POST['category']) && isset($_POST['starttime']) && isset($_POST['end
     $description = $_POST['description'];
     $cost        = $_POST['cost'];
     if ($starttime == $endtime ||$endtime < $starttime){
-       echo "<script type='text/javascript'>alert('select apportionate timing');" . "window.location.href='trainer_dashboard.php';" . "</script>";
+       echo "<script type='text/javascript'>alert('select appropriate timing');" . "window.location.href='trainer_dashboard.php';" . "</script>";
     }else{
     
     //same date same time and end date inside the range
