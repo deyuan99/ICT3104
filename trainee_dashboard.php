@@ -3,8 +3,19 @@
 session_start();
 require_once('database/dbconfig.php');
 
-$sql = "SELECT id, title, start, end, color FROM events ";
+//$sql = "SELECT id, category, startTime, endTime, description FROM peronalsession ";
+$Semail = $_SESSION['email'];
+$Sname = $_SESSION['name'];
+$Srole = $_SESSION['role'];
+$notpersonal = "Personal Training";
+// for testing when trainee view
+$traineemail = "trainee1@gmail.com";
+if ($Srole == "trainee"){
+    $sql = "SELECT * FROM personalsession where traineeEmail= '$Semail'";
+}else{
+        $sql = "SELECT * FROM personalsession where traineeEmail= '$traineemail' AND category !='$notpersonal' AND trainerEmail = ' ' ";
 
+}
 $req = $conn->prepare($sql);
 $req->execute();
 
@@ -181,32 +192,39 @@ $events = $req->fetchAll();
                         <div class="modal-body">
 
                             <div class="form-group">
-                                <label for="title" class="col-sm-2 control-label">Title</label>
+                                <label for="category" class="col-sm-2 control-label">Category</label>
                                 <div class="col-sm-10">
-                                    <input type="text" name="title" class="form-control" id="title" value="<?php echo $event['title']; ?>" readonly>
+                                    <input type="text" name="category" class="form-control" id="category" value="<?php echo $event['category']; ?>" readonly>
                                 </div>
                             </div>
 
                             <div class="form-group">
-                                <label for="color" class="col-sm-2 control-label">Color</label>
+                                <label for="color" class="col-sm-2 control-label">Date</label>
                                 <div class="col-sm-10">
-                                    <input type="text" name="color" class="form-control" id="color" value="<?php echo $event['color']; ?>" readonly>
+                                    <input type="text" name="date" class="form-control" id="date" value="<?php echo $event['date']; ?>" readonly>
                                 </div>
                             </div>
 
                             <div class="form-group">
-                                <label for="start" class="col-sm-2 control-label">Start date</label>
+                                <label for="start" class="col-sm-2 control-label">Start Time</label>
                                 <div class="col-sm-10">
-                                    <input type="text" name="start" class="form-control" id="start" value="<?php echo $event['start']; ?>" readonly>
+                                    <input type="text" name="startTime" class="form-control" id="startTime" value="<?php echo $event['startTime']; ?>" readonly>
                                 </div>
                             </div>
 
                             <div class="form-group">
-                                <label for="end" class="col-sm-2 control-label">End date</label>
+                                <label for="end" class="col-sm-2 control-label">End Time</label>
                                 <div class="col-sm-10">
-                                    <input type="text" name="end" class="form-control" id="end" value="<?php echo $event['end']; ?>" readonly>
+                                    <input type="text" name="endTime" class="form-control" id="endTime" value="<?php echo $event['endTime']; ?>" readonly>
                                 </div>
                             </div>
+
+                                <div class="form-group">
+                                <label for="end" class="col-sm-2 control-label">Description</label>
+                                <div class="col-sm-10">
+                                    <input type="text" name="description" class="form-control" id="description" value="<?php echo $event['description']; ?>" readonly>
+                                </div>
+                            </div> 
 
                         </div>
 
@@ -219,7 +237,7 @@ $events = $req->fetchAll();
         </div>
 
         <!-- Modal -->
-        <div class="modal fade" id="ModalAdd" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal fade" id="ModalAdd" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="padding-top: 70px;">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <form class="form-horizontal" method="POST" action="addCalendarEvent.php">
@@ -231,42 +249,64 @@ $events = $req->fetchAll();
                         <div class="modal-body">
 
                             <div class="form-group">
-                                <label for="title" class="col-sm-2 control-label">Title</label>
+                                <label for="category" class="col-sm-2 control-label">Category</label>
                                 <div class="col-sm-10">
-                                    <input type="text" name="title" class="form-control" id="title" placeholder="Title">
+                                    <select name="category" class="form-control" id="category" >
+                                        <option style="color:#000;" value="Personal Training">&#9724; Personal Training</option>
+                                        <option style="color:#008000;" value="Group Training">&#9724; Group Training</option>
+                                        <option value="1-1 Training">&#9724; 1-1 Training</option>
+                                    </select>                                
                                 </div>
                             </div>
+                            
 
                             <div class="form-group">
-                                <label for="color" class="col-sm-2 control-label">Color</label>
+                                <label for="date" class="col-sm-2 control-label">Date</label>
                                 <div class="col-sm-10">
-                                    <select name="color" class="form-control" id="color">
-                                        <option value="">Choose</option>
-                                        <option style="color:#0071c5;" value="#0071c5">&#9724; Dark blue</option>
-                                        <option style="color:#40E0D0;" value="#40E0D0">&#9724; Turquoise</option>
-                                        <option style="color:#008000;" value="#008000">&#9724; Green</option>						  
-                                        <option style="color:#FFD700;" value="#FFD700">&#9724; Yellow</option>
-                                        <option style="color:#FF8C00;" value="#FF8C00">&#9724; Orange</option>
-                                        <option style="color:#FF0000;" value="#FF0000">&#9724; Red</option>
-                                        <option style="color:#000;" value="#000">&#9724; Black</option>
-
+                                    <input type="text" name="date" class="form-control" id="date" readonly>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="start" class="col-sm-2 control-label">Start Time</label>
+                                <div class="col-sm-10">
+                                    <select name="starttime" class="form-control" id="starttime" >
+                                        <option value="09:00:00">9am</option>
+                                        <option value="10:00:00">10am</option>
+                                        <option value="11:00:00">11am</option>
+                                        <option value="12:00:00">12am</option>
+                                        <option value="13:00:00">1pm</option>
+                                        <option value="14:00:00">2pm</option>
+                                        <option value="15:00:00">3pm</option>
+                                        <option value="16:00:00">4pm</option>
+                                        <option value="17:00:00">5pm</option>
                                     </select>
                                 </div>
                             </div>
 
                             <div class="form-group">
-                                <label for="start" class="col-sm-2 control-label">Start date</label>
+                                <label for="end" class="col-sm-2 control-label">End Time</label>
                                 <div class="col-sm-10">
-                                    <input type="text" name="start" class="form-control" id="start" readonly>
+                                    <select name="endtime" class="form-control" id="endtime" >
+                                        <option value="10:00:00">10am</option>
+                                        <option value="11:00:00">11am</option>
+                                        <option value="12:00:00">12am</option>
+                                        <option value="13:00:00">1pm</option>
+                                        <option value="14:00:00">2pm</option>
+                                        <option value="15:00:00">3pm</option>
+                                        <option value="16:00:00">4pm</option>
+                                        <option value="17:00:00">5pm</option>
+                                        <option value="18:00:00">6pm</option>
+                                    </select>
                                 </div>
                             </div>
-
+                            
                             <div class="form-group">
-                                <label for="end" class="col-sm-2 control-label">End date</label>
+                                <label for="description" class="col-sm-2 control-label">Description</label>
                                 <div class="col-sm-10">
-                                    <input type="text" name="end" class="form-control" id="end" readonly>
+                                    <input type="text" name="description" class="form-control" id="description">
                                 </div>
-                            </div>
+                            </div> 
 
                         </div>
 
@@ -317,51 +357,55 @@ $events = $req->fetchAll();
                     eventLimit: true, // allow "more" link when too many events
                     selectable: true,
                     selectHelper: true,
-                    select: function (start, end) {
-
-                        $('#ModalAdd #start').val(moment(start).format('YYYY-MM-DD HH:mm:ss'));
-                        $('#ModalAdd #end').val(moment(end).format('YYYY-MM-DD HH:mm:ss'));
+                    select: function(start){
+                        $('#ModalAdd #date').val(moment(start).format('DD-MM-YYYY '));
                         $('#ModalAdd').modal('show');
                     },
                     events: [
 <?php
 foreach ($events as $event):
 
-    $start = explode(" ", $event['start']);
-    $end = explode(" ", $event['end']);
-    if ($start[1] == '00:00:00') {
-        $start = $start[0];
-    } else {
-        $start = $event['start'];
+    
+    $start = $event['startTime'];
+    $end = $event['endTime'];
+    $cat = $event['category'];
+    $eventdate = $event['date'];
+    $traineeEmail= $event['traineeEmail'];
+    $combinedstart = date('Y-m-d H:i:s', strtotime("$eventdate $start"));
+    $combinedend = date('Y-m-d H:i:s', strtotime("$eventdate $end"));
+    
+    if ($cat == "Personal Training"){
+        $traineeEmail = "Not Applicable";
+        $color = '#000';
+    }else if ($traineeEmail != NULL){
+        $color = '#378006';
     }
-    if ($end[1] == '00:00:00') {
-        $end = $end[0];
-    } else {
-        $end = $event['end'];
-    }
+   
     ?>
                             {
                                 id: '<?php echo $event['id']; ?>',
-                                title: '<?php echo $event['title']; ?>',
-                                start: '<?php echo $start; ?>',
-                                end: '<?php echo $end; ?>',
-                                color: '<?php echo $event['color']; ?>',
+                                title: '<?php echo $event['category']; ?>',
+                                date: '<?php echo $event['date']; ?>',
+                                startTime: '<?php echo $event['startTime']; ?>',
+                                endTime: '<?php echo $event['endTime']; ?>',
+                                start: '<?php echo $combinedstart ?>',
+                                end: '<?php echo $combinedend; ?>',
+                                description: '<?php echo $event['description']; ?>',
                             },
 <?php endforeach; ?>
                     ]
                     ,
-                    eventRender: function (event, element, start, end) {
-                        element.bind('click', function () {
-                            $('#ModalView #id').val(event.id);
-                            $('#ModalView #title').val(event.title);
-                            $('#ModalView #color').val(event.color);
-                            $('#ModalView #start').val(event.start);
-                            $('#ModalView #end').val(event.end);
-                            //$('#ModalView #start').val(moment(start).format('YYYY-MM-DD HH:mm:ss'));
-                            //$('#Modalview #end').val(moment(end).format('YYYY-MM-DD HH:mm:ss'));
-                            $('#ModalView').modal('show');
-                        });
-                    }
+                    eventRender: function(event, element) {
+                            element.bind('click', function() {
+                              $('#ModalView #id').val(event.evid);
+                              $('#ModalView #category').val(event.title);
+                              $('#ModalView #date').val(event.date);
+                              $('#ModalView #startTime').val(event.startTime);
+                              $('#ModalView #endTime').val(event.endTime);
+                              $('#ModalView #description').val(event.description);
+                              $('#ModalView').modal('show');
+                              });
+                          }
                 });
 
 
