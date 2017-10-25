@@ -127,7 +127,7 @@ $events = $req->fetchAll();
         <div class="modal fade" id="ModalView" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="padding-top: 70px;">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
-                    <form class="form-horizontal" method="POST" action="#">
+                    <form class="form-horizontal" method="POST" action="editCalendarEvent.php">
 
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -166,14 +166,25 @@ $events = $req->fetchAll();
                             <div class="form-group">
                                 <label for="end" class="col-sm-2 control-label">Description</label>
                                 <div class="col-sm-10">
-                                    <input type="text" name="description" class="form-control" id="description" value="<?php echo $event['description']; ?>" readonly>
+                                    <input type="text" name="description" class="form-control" id="description" value="<?php echo $event['description']; ?>" >
                                 </div>
                             </div> 
 
+                            <div class="form-group"> 
+                                <div class="col-sm-offset-2 col-sm-10">
+                                  <div class="checkbox">
+                                        <label class="text-danger"><input type="checkbox"  name="delete"> Delete event</label>
+                                  </div>
+                                </div>
+                            </div>
+				  
+                            <input type="hidden" name="id" class="form-control" id="id">
+				
                         </div>
 
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Save changes</button>
                         </div>
                     </form>
                 </div>
@@ -305,26 +316,48 @@ $events = $req->fetchAll();
                         $('#ModalAdd #date').val(moment(start).format('DD-MM-YYYY '));
                         $('#ModalAdd').modal('show');
                     },
+                    eventRender: function (event, element) {
+                        element.bind('click', function () {
+                            $('#ModalView #id').val(event.evid);
+                            $('#ModalView #category').val(event.title);
+                            $('#ModalView #date').val(event.date);
+                            $('#ModalView #startTime').val(event.startTime);
+                            $('#ModalView #endTime').val(event.endTime);
+                            $('#ModalView #description').val(event.description);
+                            $('#ModalView').modal('show');
+                        });
+                    },
+                    eventDrop: function(event, delta, revertFunc) { 
+
+				edit(event);
+
+                    },
+                    eventResize: function(event,dayDelta,minuteDelta,revertFunc) { 
+
+				edit(event);
+
+                    },
+                   
                     events: [
-<?php
-foreach ($events as $event):
+            <?php
+            foreach ($events as $event):
 
 
-    $start = $event['startTime'];
-    $end = $event['endTime'];
-    $cat = $event['category'];
-    $eventdate = $event['date'];
-    $traineeEmail = $event['traineeEmail'];
-    $combinedstart = date('Y-m-d H:i:s', strtotime("$eventdate $start"));
-    $combinedend = date('Y-m-d H:i:s', strtotime("$eventdate $end"));
+                $start = $event['startTime'];
+                $end = $event['endTime'];
+                $cat = $event['category'];
+                $eventdate = $event['date'];
+                $traineeEmail = $event['traineeEmail'];
+                $combinedstart = date('Y-m-d H:i:s', strtotime("$eventdate $start"));
+                $combinedend = date('Y-m-d H:i:s', strtotime("$eventdate $end"));
 
-    if ($cat == "Personal Training") {
-        $traineeEmail = "Not Applicable";
-        $color = '#000';
-    } else if ($traineeEmail != NULL) {
-        $color = '#378006';
-    }
-    ?>
+                if ($cat == "Personal Training") {
+                    $traineeEmail = "Not Applicable";
+                    $color = '#000';
+                } else if ($traineeEmail != NULL) {
+                    $color = '#378006';
+                }
+                ?>
                             {
                                 id: '<?php echo $event['id']; ?>',
                                 title: '<?php echo $event['category']; ?>',
@@ -337,21 +370,38 @@ foreach ($events as $event):
                             },
 <?php endforeach; ?>
                     ]
-                    ,
-                    eventRender: function (event, element) {
-                        element.bind('click', function () {
-                            $('#ModalView #id').val(event.evid);
-                            $('#ModalView #category').val(event.title);
-                            $('#ModalView #date').val(event.date);
-                            $('#ModalView #startTime').val(event.startTime);
-                            $('#ModalView #endTime').val(event.endTime);
-                            $('#ModalView #description').val(event.description);
-                            $('#ModalView').modal('show');
-                        });
-                    }
-                });
+                    
+                    });
 
-
+                  function edit(event){
+			startTime = event.start.format('Y-m-d H:i:s');
+			if(event.endTime){
+				endTime = event.end.format('Y-m-d H:i:s');
+			}else{
+				endTime = startTime;
+			}	
+			id =  event.evid;
+			date = event.date;
+                        
+			Event = [];
+			Event[0] = id;
+			Event[1] = startTime;
+			Event[2] = endTime;
+                        Event[3] = date;
+                        
+			$.ajax({
+			 url: 'editCalendarEventDate.php',
+			 type: "POST",
+			 data: {Event:Event},
+			 success: function(rep) {
+					if(rep === 'OK'){
+						alert('Saved');
+					}else{
+						alert('Could not be saved. try again.'); 
+					}
+				}
+			});
+		}
             });
 
         </script>
