@@ -13,7 +13,7 @@ require_once('database/dbconfig.php');
 if (isset($_POST['delete']) && isset($_POST['id'])){
 	
 
-	$id = $_POST['evid'];
+	$id = $_POST['id'];
         
 	
 	$sql = "DELETE FROM personalsession WHERE id = '$id'";
@@ -28,14 +28,16 @@ if (isset($_POST['delete']) && isset($_POST['id'])){
 	 die ('Error execute');
 	}
 	
-}elseif (isset($_POST['category']) && isset($_POST['description']) && isset($_POST['id'])){
+}elseif (isset($_POST['category']) && isset($_POST['description']) && isset($_POST['starttime']) && isset($_POST['endtime']) && isset($_POST['id'])){
 	
 	$id = $_POST['id'];
 	$category = $_POST['category'];
 	$description = $_POST['description'];
+        $startTime = $_POST['starttime'];
+        $endTime = $_POST['endtime'];
         
 	
-	$sql = "UPDATE personalsession SET category = '$category', description = '$description' WHERE id = '$id' ";
+	$sql = "UPDATE personalsession SET category = '$category', startTime = '$startTime', endTime = '$endTime', description = '$description' WHERE id = '$id' ";
 
 	
 	$query = $conn->prepare( $sql );

@@ -75,7 +75,7 @@ $events = $req->fetchAll();
 
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                            <h4 class="modal-title" id="myModalLabel">View Events</h4>
+                            <h4 class="modal-title" id="myModalLabel">View/Edit Events</h4>
                         </div>
                         <div class="modal-body">
                                             
@@ -96,30 +96,55 @@ $events = $req->fetchAll();
                         <div class="form-group">
                             <label for="start" class="col-sm-2 control-label">Start Time</label>
                             <div class="col-sm-10">
-                                <input type="text" name="startTime" class="form-control" id="startTime" value="<?php echo $event['startTime']; ?>" readonly>
+                                <!--<input type="text" name="startTime" class="form-control" id="startTime" value="<?php //echo $event['startTime']; ?>" readonly>-->
+                                <select name="starttime" class="form-control" id="starttime" >
+                                        <option value="09:00:00">9am</option>
+                                        <option value="10:00:00">10am</option>
+                                        <option value="11:00:00">11am</option>
+                                        <option value="12:00:00">12am</option>
+                                        <option value="13:00:00">1pm</option>
+                                        <option value="14:00:00">2pm</option>
+                                        <option value="15:00:00">3pm</option>
+                                        <option value="16:00:00">4pm</option>
+                                        <option value="17:00:00">5pm</option>
+                                </select>
                             </div>
                         </div>
 
                         <div class="form-group">
                             <label for="end" class="col-sm-2 control-label">End Time</label>
                             <div class="col-sm-10">
-                                <input type="text" name="endTime" class="form-control" id="endTime" value="<?php echo $event['endTime']; ?>" readonly>
+                                <!--<input type="text" name="endTime" class="form-control" id="endTime" value="<?php //echo $event['endTime']; ?>" readonly>-->
+                                <select name="endtime" class="form-control" id="endtime" >
+                                        <option value="10:00:00">10am</option>
+                                        <option value="11:00:00">11am</option>
+                                        <option value="12:00:00">12am</option>
+                                        <option value="13:00:00">1pm</option>
+                                        <option value="14:00:00">2pm</option>
+                                        <option value="15:00:00">3pm</option>
+                                        <option value="16:00:00">4pm</option>
+                                        <option value="17:00:00">5pm</option>
+                                        <option value="18:00:00">6pm</option>
+                                </select>
                             </div>
                         </div>
                             
                             <div class="form-group">
                             <label for="end" class="col-sm-2 control-label">Description</label>
                             <div class="col-sm-10">
-                                <input type="text" name="description" class="form-control" id="description" value="<?php echo $event['description']; ?>" readonly>
+                                <input type="text" name="description" class="form-control" id="description" value="<?php echo $event['description']; ?>">
                             </div>
                         </div>    
                        	
                          <div class="form-group">
                             <label for="end" class="col-sm-2 control-label">Cost $</label>
                             <div class="col-sm-10">
-                                <input type="text" name="cost" class="form-control" id="cost" value="<?php echo $event['cost']; ?>" readonly>
+                                <input type="text" name="cost" class="form-control" id="cost" value="<?php echo $event['cost']; ?>" >
                             </div>
                         </div>
+                            
+                            <input type="hidden" name="evid" class="form-control" id="evid">
+                            
                       <?php if($Srole == "trainer"){ ?>
                         <div class="form-group">
                             <label for="trainee" class="col-sm-2 control-label">Tainee Gmail</label>
@@ -130,8 +155,9 @@ $events = $req->fetchAll();
                         <?php } ?>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button> 
-                            <input type="hidden" id="evid" name="evid" value="<?php echo $event['id']; ?>" />
+                            <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Save changes</button>
+                            <!--<input type="hidden" id="evid" name="evid" value="<?php //echo $event['id']; ?>" />-->
                             <?php if ($Srole == "trainee"){ ?>
                             <button type="submit" class="btn btn-primary">Apply</button>
                             <?php } ?>
@@ -144,7 +170,7 @@ $events = $req->fetchAll();
         
         <?php if($Srole == 'trainer'){ ?>
         <!-- Modal -->
-        <div class="modal fade" id="ModalAdd" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal fade" id="ModalAdd" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="padding-top: 70px;">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     
@@ -160,9 +186,9 @@ $events = $req->fetchAll();
                                 <label for="category" class="col-sm-2 control-label">Category</label>
                                 <div class="col-sm-10">
                                     <select name="category" class="form-control" id="category" >
-                                        <option value="Personal Training">Personal Training</option>
-                                        <option value="Group Training">Group Training</option>
-                                        <option value="1-1 Training">1-1 Training</option>
+                                        <option style="color:#000;" value="Personal Training">&#9724; Personal Training</option>
+                                        <option style="color:#008000;" value="Group Training">&#9724; Group Training</option>
+                                        <option style="color:#0071c5;" value="1-1 Training">&#9724; 1-1 Training</option>
                                     </select>
                                 </div>
                             </div>
@@ -276,7 +302,7 @@ function myFunction() {
                     header: {
                         left: 'title',
                         center: 'prev,next today',
-                        right: 'month,basicWeek,basicDay'
+                        right: 'month,agendaWeek,agendaDay'
                     },
                     //defaultDate: '2016-01-12',
                     defaultDate: $('#calendar').fullCalendar('today'),
@@ -338,9 +364,49 @@ foreach ($events as $event):
                               $('#ModalView #trainee').val(event.trainee);
                               $('#ModalView').modal('show');
                               });
-                          }
+                          },
+                          eventDrop: function(event, delta, revertFunc) { 
+
+				edit(event);
+
+                    },
+                    eventResize: function(event,dayDelta,minuteDelta,revertFunc) { 
+
+				edit(event);
+
+                    }
                           
                 });
+                
+                function edit(event){
+			startTime = event.start.format('Y-m-d H:i:s');
+			if(event.endTime){
+				endTime = event.end.format('Y-m-d H:i:s');
+			}else{
+				endTime = startTime;
+			}	
+			id =  event.evid;
+			date = event.date;
+                        
+			Event = [];
+			Event[0] = id;
+			Event[1] = startTime;
+			Event[2] = endTime;
+                        Event[3] = date;
+                        
+			$.ajax({
+			 url: 'editCalendarEventDate.php',
+			 type: "POST",
+			 data: {Event:Event},
+			 success: function(rep) {
+					if(rep === 'OK'){
+						alert('Saved');
+					}else{
+						alert('Could not be saved. try again.'); 
+					}
+				}
+			});
+		}
 
 
             });

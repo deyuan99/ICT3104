@@ -38,4 +38,39 @@ require_once('database/dbconfig.php');
       . "</script>";    
      }
 
+     
+     if (isset($_POST['cost']) && isset($_POST['description']) && isset($_POST['starttime']) && isset($_POST['endtime']) && isset($_POST['evid'])){
+	
+	$id = $_POST['evid'];
+	//$category = $_POST['category'];
+	$description = $_POST['description'];
+        $startTime = $_POST['starttime'];
+        $endTime = $_POST['endtime'];
+        $cost = $_POST['cost'];
+        
+	//category = '$category'
+	$sql = "UPDATE personalsession SET cost = '$cost', startTime = '$startTime', endTime = '$endTime', description = '$description' WHERE id = '$id' ";
+
+	
+	$query = $conn->prepare( $sql );
+	if ($query == false) {
+	 print_r($conn->errorInfo());
+	 die ('Error prepare');
+	}
+	$sth = $query->execute();
+	if ($sth == false) {
+	 print_r($query->errorInfo());
+	 die ('Error execute');
+	}
+        if( $query ){ 
+             echo "<script type='text/javascript'>alert('submitted successfully!');"
+             . "window.location.href='trainee_dashboard.php';"
+             . "</script>";
+           }
+             else{
+         echo "<script type='text/javascript'>alert('failed');"
+             . "window.location.href='trainee_dashboard.php';"
+              . "</script>";    
+             }
+}
 	
