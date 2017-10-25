@@ -20,6 +20,12 @@ if ($count > 0) {
         echo "<td>" . $firstName ." " . $lastName . "</td>";
         echo "<td>some decription</td>";
         echo "<td><a href = 'trainer_dashboard.php' class = 'button small'>View</a></td>";
+        /* to be implemented
+         * echo "<form action='trainee_trainerProfile.php' method='POST' enctype=''>
+			<input type='text' name=''>
+			<button type='submit' name='$trainerID'>View</button>
+                        </form>";
+         */
         echo "</tr>";
         echo "</tbody>";
     }

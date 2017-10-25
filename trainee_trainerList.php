@@ -36,15 +36,9 @@
                                     <th>Profile</th>
                                 </tr>
                             </thead>
-                            <tbody>
                                 <?php
-                                include "listTrainers.php";
+                                include "scripts/listTrainers.php";
                                 ?>
-
-
-                               
-
-
                             <tfoot>
                                 <tr>
                                     <!- pagination -->
