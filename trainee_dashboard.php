@@ -304,7 +304,7 @@ $events = $req->fetchAll();
                     header: {
                         left: 'title',
                         center: 'prev,next today',
-                        right: 'month,basicWeek,basicDay'
+                        right: 'month,agendaWeek,agendaDay'
                     },
                     //defaultDate: '2016-01-12',
                     defaultDate: $('#calendar').fullCalendar('today'),
