@@ -4,6 +4,9 @@
         templated.co @templatedco
         Released for free under the Creative Commons Attribution 3.0 license (templated.co/license)
 -->
+<?php
+session_start();
+?>
 <html>
     <head>
         <meta charset="UTF-8">
@@ -21,6 +24,11 @@
             <div class="container">
 
                 <div class="row">
+                    <?php
+                        if (isset($_SESSION['email'])) {
+                            header("location:index.php");
+                        } else {
+                    ?>
                     <!-- Login -->
                     <div class="6u 12u(xsmall)">
                         <header class="major special">
@@ -58,7 +66,7 @@
                     <div class="6u 12u(xsmall)">
                         <header class="major special">
                             <h3>Register</h3>
-                            <p>New account? Join now.</p>
+                            <p>New account? Join now!</p>
                         </header>
                         <!--TODO validate number + pass matches-->
                         <form method="POST" action="registration_verification.php">
@@ -100,6 +108,9 @@
                             </div>
                         </form>
                     </div>
+                    <?php
+                        }
+                    ?>
                 </div>
             </div>
         </section>
