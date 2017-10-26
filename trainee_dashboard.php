@@ -221,8 +221,6 @@ $events = $req->fetchAll();
                                 <div class="col-sm-10">
                                     <select name="category" class="form-control" id="category" >
                                         <option style="color:#000;" value="Personal Training">&#9724; Personal Training</option>
-                                        <option style="color:#008000;" value="Group Training">&#9724; Group Training</option>
-                                        <option style="color:#0071c5;" value="1-1 Training">&#9724; 1-1 Training</option>
                                     </select>                                
                                 </div>
                             </div>
@@ -280,7 +278,7 @@ $events = $req->fetchAll();
 
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary">Save changes</button>
+                            <button type="submit" class="btn btn-primary">Add Event</button>
                         </div>
                     </form>
                 </div>
