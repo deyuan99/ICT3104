@@ -1,6 +1,6 @@
 <!-- Footer -->
 <footer id="footer">
-    <div class="container">
+    <div class="container style2" >
         <ul class="icons">
             <li><a href="#" class="icon fa-facebook"></a></li>
             <li><a href="changepassword.php" class="icon fa-twitter"></a></li>

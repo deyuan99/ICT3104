@@ -89,7 +89,7 @@ $events = $req->fetchAll();
                         if ($_SESSION['email'] == "trainee1@gmail.com") {
                             //echo "You are logged in as user ";
                         }
-                        echo "<form action='uploadProfileImg.php' method='POST' enctype='multipart/form-data'>
+                        echo "<form action='scripts/uploadProfileImg.php' method='POST' enctype='multipart/form-data'>
 			<input type='file' name='file'>
 			<button type='submit' name='submit'>UPLOAD</button>
                         </form>";

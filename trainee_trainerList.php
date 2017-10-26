@@ -8,7 +8,7 @@
         <!-- FullCalendar -->
         <link href='fullcalendar-3.5.1/fullcalendar.css' rel='stylesheet' />
         <link href="assets/css/calendar.css" rel="stylesheet" type="text/css"/>
-        
+
         <!-- Main CSS -->
         <link rel="stylesheet" href="assets/css/main.css" />
     </head>
@@ -36,36 +36,12 @@
                                     <th>Profile</th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                <tr>
-                                    <td>Trainer 1</td>
-                                    <td>some decription</td>
-                                    <td><a href="#" class="button small">View</a></td>
-                                </tr>
-                                <tr>
-                                    <td>Trainer 2</td>
-                                    <td>some decription</td>
-                                    <td><a href="#" class="button small">View</a></td>
-                                </tr>
-                                <tr>
-                                    <td>Trainer 3</td>
-                                    <td>some decription</td>
-                                    <td><a href="#" class="button small">View</a></td>
-                                </tr>
-                                <tr>
-                                    <td>Trainer 4</td>
-                                    <td>some decription</td>
-                                    <td><a href="#" class="button small">View</a></td>
-                                </tr>
-                                <tr>
-                                    <td>Trainer 5</td>
-                                    <td>some decription</td>
-                                    <td><a href="#" class="button small">View</a></td>
-                                </tr>
-                            </tbody>
+                                <?php
+                                include "scripts/listTrainers.php";
+                                ?>
                             <tfoot>
                                 <tr>
-                                   <!- pagination -->
+                                    <!- pagination -->
                                 </tr>
                             </tfoot>
                         </table>
