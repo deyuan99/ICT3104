@@ -71,32 +71,27 @@ $events = $req->fetchAll();
                     echo "There are no users yet!";
                 }
                 ?>
-                
+
+                <!-- profile picture -->
                 <!-- profile picture -->
                     <?php
-                    $sqlProfile = "SELECT * FROM users";
+                    $sqlProfile = "SELECT * FROM users where email = '$Semail'";
                     $result = $conn->prepare($sqlProfile);
                     $result->execute();
                     
                     $count = $result->rowCount();
-
+                    
                     if ($count > 0) {
                         while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
-                            $id = $row['email'];
-                            $sqlImg = "SELECT * FROM profileimg WHERE email='$id'";
-                            $resultImg = $conn->prepare($sqlImg);
-                            $resultImg->execute();
-                            
-                            while ($rowImg = $resultImg->fetch(PDO::FETCH_ASSOC)) {
-                                echo "<div class='user-container'>";
-                                if ($rowImg['status'] == 0) {
-                                    echo "<img src='images/uploads/profile" . $id . ".jpg?'" . mt_rand() . ">";
-                                } else {
-                                    echo "<img src='images/uploads/profiledefault.jpg'>";
-                                }
-                                echo "<p>" . $row['email'] . "</p>";
-                                echo "</div>";
+                            $sqlImg = $row['profilePicture'];
+                            echo "<div class='user-container'>";
+                            if (strlen($sqlImg) > 0) {
+                                echo "<img src='$sqlImg'>";
+                            } else {
+                                echo "<img src='images/uploads/profiledefault.jpg'>";
                             }
+                            echo "<p>" . $row['email'] . "</p>";
+                            echo "</div>";
                         }
                     } else {
                         echo "There are no users yet!";
@@ -121,9 +116,6 @@ $events = $req->fetchAll();
 		</form>";
                     }
                     ?>
-
-
-                <form method="POST">
                     <table id="form" class="view">
                         <tbody>
                             <tr>
@@ -131,11 +123,11 @@ $events = $req->fetchAll();
                                     <h3>Contact Info</h3>
                                 </td>
                                 <td>
-                                    <button id="edit" class="button special">Edit</button>
-                                    <!--<button id="update" class="button special" style="display:none">Submit</button>-->
+                                    <button id="edit" class="button ">Edit</button>
+                                    <button id="update" class="button special" style="display:none">Update</button>
                                 </td>
                             </tr>
-                        <form method="POST">
+                        
                             <tr>
                                 <td class="col-md-1">
                                     <p class='leftspacing'>First Name</p>
@@ -170,8 +162,6 @@ $events = $req->fetchAll();
                         </div>
                         </tbody>
                     </table>
-                </form>
-
             </div>
         </section>
 
@@ -195,7 +185,7 @@ $events = $req->fetchAll();
 
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                            <h4 class="modal-title" id="myModalLabel">View/Edit Events</h4>
+                            <h4 class="modal-title" id="myModalLabel">View Events</h4>
                         </div>
                         <div class="modal-body">
 
@@ -204,89 +194,63 @@ $events = $req->fetchAll();
                                 <div class="col-sm-10">
                                     <input type="text" name="category" class="form-control" id="category" value="<?php echo $event['category']; ?>" readonly>
                                 </div>
-                          </div>
-                            
-                          <div class="form-group">
-                            <label for="color" class="col-sm-2 control-label">Date</label>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="color" class="col-sm-2 control-label">Date</label>
                                 <div class="col-sm-10">
                                     <input type="text" name="date" class="form-control" id="date" value="<?php echo $event['date']; ?>" readonly>
                                 </div>
-                        </div>
-                          
-                        <div class="form-group">
-                            <label for="start" class="col-sm-2 control-label">Start Time</label>
-                            <div class="col-sm-10">
-                                <!--<input type="text" name="startTime" class="form-control" id="startTime" value="<?php //echo $event['startTime']; ?>" readonly>-->
-                                <select name="starttime" class="form-control" id="starttime" >
-                                        <option value="09:00:00">9am</option>
-                                        <option value="10:00:00">10am</option>
-                                        <option value="11:00:00">11am</option>
-                                        <option value="12:00:00">12am</option>
-                                        <option value="13:00:00">1pm</option>
-                                        <option value="14:00:00">2pm</option>
-                                        <option value="15:00:00">3pm</option>
-                                        <option value="16:00:00">4pm</option>
-                                        <option value="17:00:00">5pm</option>
-                                </select>
-                           </div>
-                          </div>
-                          
-                        <div class="form-group">
-                            <label for="end" class="col-sm-2 control-label">End Time</label>
-                            <div class="col-sm-10">
-                                <!--<input type="text" name="endTime" class="form-control" id="endTime" value="<?php //echo $event['endTime']; ?>" readonly>-->
-                                <select name="endtime" class="form-control" id="endtime" >
-                                        <option value="10:00:00">10am</option>
-                                        <option value="11:00:00">11am</option>
-                                        <option value="12:00:00">12am</option>
-                                        <option value="13:00:00">1pm</option>
-                                        <option value="14:00:00">2pm</option>
-                                        <option value="15:00:00">3pm</option>
-                                        <option value="16:00:00">4pm</option>
-                                        <option value="17:00:00">5pm</option>
-                                        <option value="18:00:00">6pm</option>
-                                </select>
                             </div>
-                        </div>
-                            
+
                             <div class="form-group">
-                            <label for="end" class="col-sm-2 control-label">Description</label>
-                            <div class="col-sm-10">
-                                <input type="text" name="description" class="form-control" id="description" value="<?php echo $event['description']; ?>">
+                                <label for="start" class="col-sm-2 control-label">Start Time</label>
+                                <div class="col-sm-10">
+                                    <input type="text" name="startTime" class="form-control" id="startTime" value="<?php echo $event['startTime']; ?>" readonly>
+                                </div>
                             </div>
-                        </div>    
-                       	
-                         <div class="form-group">
-                            <label for="end" class="col-sm-2 control-label">Cost $</label>
-                            <div class="col-sm-10">
-                                <input type="text" name="cost" class="form-control" id="cost" value="<?php echo $event['cost']; ?>" >
+
+                            <div class="form-group">
+                                <label for="end" class="col-sm-2 control-label">End Time</label>
+                                <div class="col-sm-10">
+                                    <input type="text" name="endTime" class="form-control" id="endTime" value="<?php echo $event['endTime']; ?>" readonly>
+                                </div>
                             </div>
-                        </div>
-                            
-                            <input type="hidden" name="evid" class="form-control" id="evid">
-                            
-                      <?php if($Srole == "trainer"){ ?>
-                        <div class="form-group">
-                            <label for="trainee" class="col-sm-2 control-label">Tainee Gmail</label>
-                            <div class="col-sm-10">
-                                <input type="text" name="trainee" class="form-control" id="trainee" value="<?php echo $event['traineeEmail']; ?>" readonly>
+
+                            <div class="form-group">
+                                <label for="end" class="col-sm-2 control-label">Description</label>
+                                <div class="col-sm-10">
+                                    <input type="text" name="description" class="form-control" id="description" value="<?php echo $event['description']; ?>" readonly>
+                                </div>
+                            </div>    
+
+                            <div class="form-group">
+                                <label for="end" class="col-sm-2 control-label">Cost $</label>
+                                <div class="col-sm-10">
+                                    <input type="text" name="cost" class="form-control" id="cost" value="<?php echo $event['cost']; ?>" readonly>
+                                </div>
                             </div>
-                        </div>
-                        <?php } ?>
+                            <?php if ($Srole == "trainer") { ?>
+                                <div class="form-group">
+                                    <label for="trainee" class="col-sm-2 control-label">Tainee Gmail</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" name="trainee" class="form-control" id="trainee" value="<?php echo $event['traineeEmail']; ?>" readonly>
+                                    </div>
+                                </div>
+                            <?php } ?>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary">Save changes</button>
-                            <!--<input type="hidden" id="evid" name="evid" value="<?php //echo $event['id']; ?>" />-->
-                            <?php if ($Srole == "trainee"){ ?>
-                            <button type="submit" class="btn btn-primary">Apply</button>
+                            <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button> 
+                            <input type="hidden" id="evid" name="evid" value="<?php echo $event['id']; ?>" />
+                            <?php if ($Srole == "trainee") { ?>
+                                <button type="submit" class="btn btn-primary">Apply</button>
                             <?php } ?>
                         </div>
                     </form>
                 </div>
             </div>
         </div>
-  
+
 
         <?php if ($Srole == 'trainer') { ?>
             <!-- Modal -->
@@ -306,9 +270,9 @@ $events = $req->fetchAll();
                                     <label for="category" class="col-sm-2 control-label">Category</label>
                                     <div class="col-sm-10">
                                         <select name="category" class="form-control" id="category" >
-                                          <option style="color:#000;" value="Personal Training">&#9724; Personal Training</option>
-                                          <option style="color:#008000;" value="Group Training">&#9724; Group Training</option>
-                                          <option style="color:#0071c5;" value="1-1 Training">&#9724; 1-1 Training</option>
+                                            <option value="Personal Training">Personal Training</option>
+                                            <option value="Group Training">Group Training</option>
+                                            <option value="1-1 Training">1-1 Training</option>
                                         </select>
                                     </div>
                                 </div>
@@ -364,13 +328,13 @@ $events = $req->fetchAll();
                                 <div class="form-group">
                                     <label for="cost" class="col-sm-2 control-label">Cost $</label>
                                     <div class="col-sm-10">
-                                        <input type="text" name="cost" class="form-control" id="cost">
+                                        <input type="text" name="cost" class="form-control" id="cost"
                                     </div>
                                 </div>
 
                             </div>
-                              
-                               <div class="modal-footer">
+
+                            <div class="modal-footer">
                                 <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
                                 <button type="submit" class="btn btn-primary">Create Event</button>
                             </div>
@@ -407,34 +371,33 @@ $events = $req->fetchAll();
     <!-- Bootstrap Core JavaScript -->
     <script src="bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>
 
-        <!-- FullCalendar -->
-        <script src='fullcalendar-3.5.1/lib/moment.min.js'></script>
-        <script src='fullcalendar-3.5.1/fullcalendar.min.js'></script>
+    <!-- FullCalendar -->
+    <script src='fullcalendar-3.5.1/lib/moment.min.js'></script>
+    <script src='fullcalendar-3.5.1/fullcalendar.min.js'></script>
 
-        <!--Calendar script-->
-        <script>
-            $(document).ready(function () {
-                //var today = moment().day();
+    <!--Calendar script-->
+    <script>
+        $(document).ready(function () {
+            //var today = moment().day();
 
-                $('#calendar').fullCalendar({
-                    header: {
-                        left: 'title',
-                        center: 'prev,next today',
-                        right: 'month,agendaWeek,agendaDay'
-                    },
-                    //defaultDate: '2016-01-12',
-                    defaultDate: $('#calendar').fullCalendar('today'),
-                    editable: true,
-                    eventLimit: true, // allow "more" link when too many events
-                    selectable: true,
-                    selectHelper: true,
-                    select: function (start) {
+            $('#calendar').fullCalendar({
+                header: {
+                    left: 'title',
+                    center: 'prev,next today',
+                    right: 'month,basicWeek,basicDay'
+                },
+                //defaultDate: '2016-01-12',
+                defaultDate: $('#calendar').fullCalendar('today'),
+                editable: true,
+                eventLimit: true, // allow "more" link when too many events
+                selectable: true,
+                selectHelper: true,
+                select: function (start) {
 
-                        $('#ModalAdd #date').val(moment(start).format('DD-MM-YYYY '));
-                        $('#ModalAdd').modal('show');
-                    },
-                    events: [
-
+                    $('#ModalAdd #date').val(moment(start).format('DD-MM-YYYY '));
+                    $('#ModalAdd').modal('show');
+                },
+                events: [
 <?php
 foreach ($events as $event):
     $start = $event['startTime'];
@@ -450,93 +413,38 @@ foreach ($events as $event):
     } else if ($traineeEmail == NULL && $cat == "1-1 Training") {
         $traineeEmail = "Still available";
     }
-    
-    if($cat== 'Personal Training'){
-        $color = '#000';
-    } elseif($cat== 'Group Training') {
-        $color = '#008000';
-    }elseif($cat== '1-1 Training'){
-        $color = '#0071c5';
-    }
-    $event['color']=$color;
-    
-
     ?>
-                            {
-                                evid: '<?php echo $event['id']; ?>',
-                                title: '<?php echo $event['category']; ?>',
-                                date: '<?php echo $event['date']; ?>',
-                                startTime: '<?php echo $event['startTime']; ?>',
-                                endTime: '<?php echo $event['endTime']; ?>',
-                                start: '<?php echo $combinedstart ?>',
-                                end: '<?php echo $combinedend; ?>',
-                                description: '<?php echo $event['description']; ?>',
-                                cost: '<?php echo $event['cost']; ?>',
-                                trainee: '<?php echo $traineeEmail ?>',
-                                color: '<?php echo $event['color']; ?>',
-                            },
-
+                        {
+                            evid: '<?php echo $event['id']; ?>',
+                            title: '<?php echo $event['category']; ?>',
+                            date: '<?php echo $event['date']; ?>',
+                            startTime: '<?php echo $event['startTime']; ?>',
+                            endTime: '<?php echo $event['endTime']; ?>',
+                            start: '<?php echo $combinedstart ?>',
+                            end: '<?php echo $combinedend; ?>',
+                            description: '<?php echo $event['description']; ?>',
+                            cost: '<?php echo $event['cost']; ?>',
+                            trainee: '<?php echo $traineeEmail ?>',
+                        },
 <?php endforeach;
 ?>
+                ]
+                ,
+                eventRender: function (event, element) {
+                    element.bind('click', function () {
+                        $('#ModalView #evid').val(event.evid);
+                        $('#ModalView #category').val(event.title);
+                        $('#ModalView #date').val(event.date);
+                        $('#ModalView #startTime').val(event.startTime);
+                        $('#ModalView #endTime').val(event.endTime);
+                        $('#ModalView #description').val(event.description);
+                        $('#ModalView #cost').val(event.cost);
+                        $('#ModalView #trainee').val(event.trainee);
+                        $('#ModalView').modal('show');
+                    });
+                }
 
-                    ]
-                    ,
-                        eventRender: function(event, element) {
-                            element.bind('click', function() {
-                              $('#ModalView #evid').val(event.evid);
-                              $('#ModalView #category').val(event.title);
-                              $('#ModalView #date').val(event.date);
-                              $('#ModalView #startTime').val(event.startTime);
-                              $('#ModalView #endTime').val(event.endTime);
-                              $('#ModalView #description').val(event.description);
-                              $('#ModalView #cost').val(event.cost);
-                              $('#ModalView #trainee').val(event.trainee);
-                              $('#ModalView').modal('show');
-                              });
-                          },
-                    eventDrop: function(event, delta, revertFunc) { 
-
-				                edit(event);
-
-                    },
-                   eventResize: function(event,dayDelta,minuteDelta,revertFunc) { 
-
-				                edit(event);
-
-                    }
-                          
-                });
-                
-      function edit(event){
-			startTime = event.start.format('Y-m-d H:i:s');
-			if(event.endTime){
-				endTime = event.end.format('Y-m-d H:i:s');
-			}else{
-				endTime = startTime;
-			}	
-			id =  event.evid;
-			date = event.date;
-                        
-			Event = [];
-			Event[0] = id;
-			Event[1] = startTime;
-			Event[2] = endTime;
-      Event[3] = date;
-                        
-			$.ajax({
-			 url: 'editCalendarEventDate.php',
-			 type: "POST",
-			 data: {Event:Event},
-			 success: function(rep) {
-					if(rep === 'OK'){
-						alert('Saved');
-					}else{
-						alert('Could not be saved. try again.'); 
-					}
-				}
-			});
-		}
-
+            });
         });</script>
 
     <!-- Profile update -->
@@ -551,19 +459,8 @@ foreach ($events as $event):
 
                 if (inp.attr('readonly')) {
                     inp.removeAttr('readonly');
-                    var fName = $('#firstName').val();
-
-                    //alert(fName);
-
-                    $.ajax({
-                        type: "POST",
-                        url: "scripts/profileUpdate.php",
-                        data: "firstName=" + fName,
-                        success: function (data) {
-                            $('data').html(data);
-                        }
-                    })
-
+                    $('#edit').css('display', 'none');
+                    $('#update').css('display', 'block');
                 }
                 else {
                     inp.attr('readonly', 'readonly');
@@ -579,18 +476,11 @@ foreach ($events as $event):
             $('#edit').css('display', 'block');
             $('#update').css('display', 'none');
 
-            var fName = $('#firstName').val();
+            //var fName = $('#firstName').val();
 
             //alert(fName);
 
-            $.ajax({
-                type: "POST",
-                url: "scripts/profileUpdate.php",
-                data: "firstName=" + fName,
-                success: function (data) {
-                    $('data').html(data);
-                }
-            })
+
         });</script>
 
 </body>

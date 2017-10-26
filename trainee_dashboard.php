@@ -100,8 +100,6 @@ $events = $req->fetchAll();
                     ?>
 
                 </div>
-
-
             </div>
         </section>
 
