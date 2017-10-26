@@ -1,7 +1,7 @@
 <?php
 
 session_start();
-include_once 'database/dbconfig.php';
+include_once '../database/dbconfig.php';
 $id = $_SESSION['email'];
 
 $sql = "UPDATE users SET firstName= ('".$_POST['firstName']."') WHERE email='$id';";

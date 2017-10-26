@@ -74,94 +74,95 @@ $events = $req->fetchAll();
 
                 <!-- profile picture -->
                 <!-- profile picture -->
-                    <?php
-                    $sqlProfile = "SELECT * FROM users where email = '$Semail'";
-                    $result = $conn->prepare($sqlProfile);
-                    $result->execute();
-                    
-                    $count = $result->rowCount();
-                    
-                    if ($count > 0) {
-                        while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
-                            $sqlImg = $row['profilePicture'];
-                            echo "<div class='user-container'>";
-                            if (strlen($sqlImg) > 0) {
-                                echo "<img src='$sqlImg'>";
-                            } else {
-                                echo "<img src='images/uploads/profiledefault.jpg'>";
-                            }
-                            echo "<p>" . $row['email'] . "</p>";
-                            echo "</div>";
-                        }
-                    } else {
-                        echo "There are no users yet!";
-                    }
+                <?php
+                $sqlProfile = "SELECT * FROM users where email = '$Semail'";
+                $result = $conn->prepare($sqlProfile);
+                $result->execute();
 
-                    if (isset($_SESSION['email'])) {
-                        if ($_SESSION['email'] == "trainee1@gmail.com") {
-                            //echo "You are logged in as user ";
+                $count = $result->rowCount();
+
+                if ($count > 0) {
+                    while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
+                        $sqlImg = $row['profilePicture'];
+                        echo "<div class='user-container'>";
+                        if (strlen($sqlImg) > 0) {
+                            echo "<img src='$sqlImg'>";
+                        } else {
+                            echo "<img src='images/uploads/profiledefault.jpg'>";
                         }
-                        echo "<form action='scripts/uploadProfileImg.php' method='POST' enctype='multipart/form-data'>
+                        echo "<p>" . $row['email'] . "</p>";
+                        echo "</div>";
+                    }
+                } else {
+                    echo "There are no users yet!";
+                }
+
+                if (isset($_SESSION['email'])) {
+                    if ($_SESSION['email'] == "trainee1@gmail.com") {
+                        //echo "You are logged in as user ";
+                    }
+                    echo "<form action='scripts/uploadProfileImg.php' method='POST' enctype='multipart/form-data'>
 			<input type='file' name='file'>
 			<button type='submit' name='submit'>UPLOAD</button>
                         </form>";
-                    } else {
-                        echo "You are not logged in!";
-                        echo "<form action='signup.php' method='POST'>
+                } else {
+                    echo "You are not logged in!";
+                    echo "<form action='signup.php' method='POST'>
 			<input type='text' name='first' placeholder='First name'>
 			<input type='text' name='last' placeholder='Last name'>
 			<input type='text' name='uid' placeholder='Username'>
 			<input type='password' name='pwd' placeholder='Password'>
 			<button type='submit' name='submitSignup'>Signup</button>
 		</form>";
-                    }
-                    ?>
-                    <table id="form" class="view">
-                        <tbody>
-                            <tr>
-                                <td class="col-md-3">
-                                    <h3>Contact Info</h3>
-                                </td>
-                                <td>
-                                    <button id="edit" class="button ">Edit</button>
-                                    <button id="update" class="button special" style="display:none">Update</button>
-                                </td>
-                            </tr>
-                        
-                            <tr>
-                                <td class="col-md-1">
-                                    <p class='leftspacing'>First Name</p>
-                                </td>
-                                <td>
+                }
+                ?>
+                <
+                <table id="form" class="view">
+                    <tbody>
+                        <tr>
+                            <td class="col-md-3">
+                                <h3>Contact Info</h3>
+                            </td>
+                            <td>
+                                <button id="edit" class="button ">Edit</button>
+                                <button id="update" class="button special" style="display:none">Update</button>
+                            </td>
+                        </tr>
 
-                                    <p><input type='text' id="firstName" class="data" value="<?php echo $firstName ?>" readonly/></p>
+                        <tr>
+                            <td class="col-md-1">
+                                <p class='leftspacing'>First Name</p>
+                            </td>
+                            <td>
 
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <p class='leftspacing'>Last Name</p>
-                                </td>
-                                <td>
-                                    <?php
-                                    echo "<p><input type='text' value=" . $lastName . " readonly/></p>"
-                                    ?>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <p class='leftspacing'>Phone Number</p>
-                                </td>
-                                <td>
-                                    <?php
-                                    echo "<p><input type='text' value=" . $phoneNumber . " readonly/></p>"
-                                    ?>
-                                </td>
-                            </tr>
+                                <p><input type='text' id="firstName" class="data" value="<?php echo $firstName ?>" readonly/></p>
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p class='leftspacing'>Last Name</p>
+                            </td>
+                            <td>
+                                <?php
+                                echo "<p><input type='text' value=" . $lastName . " readonly/></p>"
+                                ?>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p class='leftspacing'>Phone Number</p>
+                            </td>
+                            <td>
+                                <?php
+                                echo "<p><input type='text' value=" . $phoneNumber . " readonly/></p>"
+                                ?>
+                            </td>
+                        </tr>
                         </form>
                         </div>
-                        </tbody>
-                    </table>
+                    </tbody>
+                </table>
             </div>
         </section>
 
@@ -479,6 +480,18 @@ foreach ($events as $event):
             //var fName = $('#firstName').val();
 
             //alert(fName);
+
+<?php
+require('../database/dbconfig.php');
+$email = $_POST['edit_email'];
+$mobile = $_POST['mobile'];
+if (is_numeric($mobile) && $mobile > 9999999 && $mobile < 100000000) {
+    $sql = "UPDATE users SET phoneNumber = $mobile WHERE email = '$email'";
+    $req = $conn->prepare($sql);
+    $req->execute();
+}
+header('Location: user-management.php');
+?>
 
 
         });</script>
