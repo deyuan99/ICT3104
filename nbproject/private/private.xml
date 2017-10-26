@@ -3,11 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/xampp/htdocs/ICT3104/trainee_dashboard.php</file>
-            <file>file:/C:/xampp/htdocs/ICT3104/addCalendarEvent.php</file>
-            <file>file:/C:/xampp/htdocs/ICT3104/addCalendarEventTrainer.php</file>
-            <file>file:/C:/xampp/htdocs/ICT3104/trainer_dashboard.php</file>
-            <file>file:/C:/xampp/htdocs/ICT3104/applyfor1to1.php</file>
+            <file>file:/Applications/XAMPP/xamppfiles/htdocs/ICT3104/editCalendarEvent.php</file>
+            <file>file:/Applications/XAMPP/xamppfiles/htdocs/ICT3104/trainer_dashboard.php</file>
+            <file>file:/Applications/XAMPP/xamppfiles/htdocs/ICT3104/trainee_dashboard.php</file>
+            <file>file:/Applications/XAMPP/xamppfiles/htdocs/ICT3104/applyfor1to1.php</file>
         </group>
     </open-files>
 </project-private>

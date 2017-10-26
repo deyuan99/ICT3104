@@ -21,10 +21,10 @@ if (isset($_POST['category']) && isset($_POST['starttime']) && isset($_POST['end
         $starttime = $_POST['starttime'];
         $endtime = $_POST['endtime'];
         $description = $_POST['description'];
-
+        
 	$sql = "INSERT INTO personalsession(category, startTime, endTime,date,description,traineeEmail) values ('$category', '$starttime', '$endtime','$dateformat','$description','$Semail')";
         
-	
+        
 	echo $sql;
 	
 	$query = $conn->prepare( $sql );
