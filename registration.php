@@ -6,6 +6,19 @@
 -->
 <?php
 session_start();
+$Srole = '';
+
+if (isset($_SESSION['email']) && !empty($_SESSION['email'])) {
+    $Srole = $_SESSION['role'];
+    
+    if ($Srole == 'trainee') {
+        header("Location: trainee_dashboard.php");
+    } else {
+        header("Location: trainer_dashboard.php");
+    }
+}
+
+
 ?>
 <html>
     <head>

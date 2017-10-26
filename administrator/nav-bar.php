@@ -21,7 +21,7 @@
                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-cog icon-space"></span><u><?php echo "admin";?></u><span style="margin-left:10px;" class="caret"></span></a>
                     <ul class="dropdown-menu dropdown-menu-right">
                         <li>  
-                            <a href="../index.php"><span class="glyphicon glyphicon-log-out icon-space"></span>SIGN OUT</a>
+                            <a href="../logout.php"><span class="glyphicon glyphicon-log-out icon-space"></span>SIGN OUT</a>
                         </li>
                     </ul>       
                 </li>

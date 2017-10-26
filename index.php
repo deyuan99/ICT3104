@@ -4,6 +4,15 @@ To change this license header, choose License Headers in Project Properties.
 To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
+<?php
+session_start();
+$Srole = '';
+
+if (isset($_SESSION['email']) && !empty($_SESSION['email'])) {
+    $Srole = $_SESSION['role'];
+}
+?>
+
 <html>
     <head>
         <meta charset="UTF-8">
@@ -13,7 +22,17 @@ and open the template in the editor.
     <body class="landing">
         <!-- Header -->
         <?php
-        include "header.php";
+        if ($Srole == 'trainee') {
+            echo '<link href="bootstrap-3.3.5-dist/css/bootstrap.min.css" rel="stylesheet">';
+            echo '<link rel="stylesheet" href="assets/css/trainee_dashboard.css" />';
+            include "trainee_header.php";
+        } else if ($Srole == 'trainer') {
+            echo '<link href="bootstrap-3.3.5-dist/css/bootstrap.min.css" rel="stylesheet">';
+            echo '<link rel="stylesheet" href="assets/css/trainee_dashboard.css" />';
+            include "trainer_header.php";
+        } else {
+            include "header.php";
+        }
         ?>
 
         <!-- Banner -->
