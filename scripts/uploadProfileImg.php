@@ -1,7 +1,7 @@
 <?php
 
 session_start();
-include_once 'database/dbconfig.php';
+include_once '../database/dbconfig.php';
 $id = $_SESSION['email'];
 
 if (isset($_POST['submit'])) {
@@ -22,12 +22,12 @@ if (isset($_POST['submit'])) {
         if ($fileError === 0) {
             if ($fileSize < 1000000) {
                 $fileNameNew = "profile" . $id . "." . $fileActualExt;
-                $fileDestination = 'images/uploads/' . $fileNameNew;
+                $fileDestination = '../images/uploads/' . $fileNameNew;
                 move_uploaded_file($fileTmpName, $fileDestination);
-                $sql = "UPDATE profileimg SET status=0 WHERE email='$id';";
+                $sql = "UPDATE users SET profilePicture='images/uploads/$fileNameNew' WHERE email='$id';";
                 $result = $conn->prepare($sql);
                 $result->execute();
-                header("Location: trainee_dashboard.php?uploadsuccess");
+                header("Location: ../trainee_dashboard.php?uploadsuccess");
             } else {
                 echo "Your file is too big!";
             }

@@ -57,29 +57,23 @@ $events = $req->fetchAll();
                 <div class="6u 4u(xsmall)">
                     <!-- profile picture -->
                     <?php
-                    $sqlProfile = "SELECT * FROM users";
+                    $sqlProfile = "SELECT * FROM users where email = '$Semail'";
                     $result = $conn->prepare($sqlProfile);
                     $result->execute();
                     
                     $count = $result->rowCount();
-
+                    
                     if ($count > 0) {
                         while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
-                            $id = $row['email'];
-                            $sqlImg = "SELECT * FROM profileimg WHERE email='$id'";
-                            $resultImg = $conn->prepare($sqlImg);
-                            $resultImg->execute();
-                            
-                            while ($rowImg = $resultImg->fetch(PDO::FETCH_ASSOC)) {
-                                echo "<div class='user-container'>";
-                                if ($rowImg['status'] == 0) {
-                                    echo "<img src='images/uploads/profile" . $id . ".jpg?'" . mt_rand() . ">";
-                                } else {
-                                    echo "<img src='images/uploads/profiledefault.jpg'>";
-                                }
-                                echo "<p>" . $row['email'] . "</p>";
-                                echo "</div>";
+                            $sqlImg = $row['profilePicture'];
+                            echo "<div class='user-container'>";
+                            if (strlen($sqlImg) > 0) {
+                                echo "<img src='$sqlImg'>";
+                            } else {
+                                echo "<img src='images/uploads/profiledefault.jpg'>";
                             }
+                            echo "<p>" . $row['email'] . "</p>";
+                            echo "</div>";
                         }
                     } else {
                         echo "There are no users yet!";
