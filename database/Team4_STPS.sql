@@ -43,8 +43,8 @@ CREATE TABLE IF NOT EXISTS `personalsession` (
 --
 
 INSERT INTO `personalsession` (`category`, `cost`, `startTime`, `endTime`, `date`, `description`, `trainerEmail`, `traineeEmail`) VALUES
-('Own Training', '0.00', '09:00:00', '10:00:00', '2017-10-10', 'Workout!!', '', 'trainee1@gmail.com'),
-('Personal Training', '10.50', '09:00:00', '10:00:00', '2017-10-11', '1v1 workout!!', 'trainer2@gmail.com', 'trainee2@gmail.com');
+('Personal Training', '0.00', '09:00:00', '10:00:00', '2017-10-10', 'Workout!!', '', 'trainee1@gmail.com'),
+('Personal Training', '10.50', '09:00:00', '10:00:00', '2017-10-11', '1v1 workout!!', '', 'trainee2@gmail.com');
 
 -- --------------------------------------------------------
 
