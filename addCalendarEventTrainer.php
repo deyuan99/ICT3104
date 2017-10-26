@@ -10,13 +10,13 @@
 session_start();
 require_once('database/dbconfig.php');
 
-if (isset($_POST['category']) && isset($_POST['starttime']) && isset($_POST['endtime']) && isset($_POST['description']) && isset($_POST['cost'])) {
+if (isset($_POST['Pcategory']) && isset($_POST['starttime']) && isset($_POST['endtime']) && isset($_POST['description']) && isset($_POST['cost'])) {
     $Semail = $_SESSION['email'];
     $Sname  = $_SESSION['name'];
     
     $date        = $_POST['date'];
     $dateformat  = date('Y-m-d', strtotime($date));
-    $category    = $_POST['category'];
+    $category    = $_POST['Pcategory'];
     $starttime   = $_POST['starttime'];
     $endtime     = $_POST['endtime'];
     $description = $_POST['description'];

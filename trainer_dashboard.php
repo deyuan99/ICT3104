@@ -6,12 +6,9 @@ $Semail = $_SESSION['email'];
 $Sname = $_SESSION['name'];
 $Srole = $_SESSION['role'];
 $notpersonal = "Personal Training";
-// for testing when trainee view
-$trainermail = "trainer1@gmail.com";
+
 if ($Srole == "trainer") {
     $sql = "SELECT * FROM personalsession where trainerEmail= '$Semail'";
-} else {
-    $sql = "SELECT * FROM personalsession where trainerEmail= '$trainermail' AND category !='$notpersonal' AND traineeEmail = ' ' ";
 }
 
 $req = $conn->prepare($sql);
@@ -143,7 +140,7 @@ $events = $req->fetchAll();
                                 <td>
 
                                     <p><input type='text' id="firstName" class="data" value="<?php echo $firstName ?>" readonly/></p>
-
+                                    
                                 </td>
                             </tr>
                             <tr>
@@ -305,7 +302,7 @@ $events = $req->fetchAll();
                                 <div class="form-group">
                                     <label for="category" class="col-sm-2 control-label">Category</label>
                                     <div class="col-sm-10">
-                                        <select name="category" class="form-control" id="category" >
+                                        <select name="Pcategory" class="form-control" id="Pcategory">
                                           <option style="color:#000;" value="Personal Training">&#9724; Personal Training</option>
                                           <option style="color:#008000;" value="Group Training">&#9724; Group Training</option>
                                           <option style="color:#0071c5;" value="1-1 Training">&#9724; 1-1 Training</option>
@@ -362,9 +359,11 @@ $events = $req->fetchAll();
                                 </div>    
 
                                 <div class="form-group">
+                                    <div id="hidden_div">
                                     <label for="cost" class="col-sm-2 control-label">Cost $</label>
                                     <div class="col-sm-10">
                                         <input type="text" name="cost" class="form-control" id="cost">
+                                    </div>
                                     </div>
                                 </div>
 
@@ -413,9 +412,21 @@ $events = $req->fetchAll();
 
         <!--Calendar script-->
         <script>
+            // for cost 
+            $(function() {
+                $('#hidden_div').hide(); 
+                $('#Pcategory').change(function(){
+                    if($('#Pcategory').val() === "1-1 Training") {
+                        $('#hidden_div').show(); 
+                    } else {
+                        $('#hidden_div').hide(); 
+                    } 
+                });
+             });
+                          
             $(document).ready(function () {
                 //var today = moment().day();
-
+            
                 $('#calendar').fullCalendar({
                     header: {
                         left: 'title',
@@ -440,6 +451,8 @@ foreach ($events as $event):
     $start = $event['startTime'];
     $end = $event['endTime'];
     $cat = $event['category'];
+    $cost = $event['cost'];
+
     $eventdate = $event['date'];
     $traineeEmail = $event['traineeEmail'];
     $combinedstart = date('Y-m-d H:i:s', strtotime("$eventdate $start"));
@@ -447,6 +460,7 @@ foreach ($events as $event):
 
     if ($cat == "Personal Training") {
         $traineeEmail = "Not Applicable";
+        $cost = "Not Applicable";
     } else if ($traineeEmail == NULL && $cat == "1-1 Training") {
         $traineeEmail = "Still available";
     }
@@ -471,7 +485,7 @@ foreach ($events as $event):
                                 start: '<?php echo $combinedstart ?>',
                                 end: '<?php echo $combinedend; ?>',
                                 description: '<?php echo $event['description']; ?>',
-                                cost: '<?php echo $event['cost']; ?>',
+                                cost: '<?php echo $cost; ?>',
                                 trainee: '<?php echo $traineeEmail ?>',
                                 color: '<?php echo $event['color']; ?>',
                             },
