@@ -31,9 +31,9 @@
                         <table>
                             <thead>
                                 <tr>
-                                    <th>Trainer's Name</th>
-                                    <th>Category</th>
-                                    <th>Profile</th>
+                                    <th class="col-md-4">Trainer's Name</th>
+                                    <th class="col-md-6">Email Address</th>
+                                    <th class="col-md-2">Action</th>
                                 </tr>
                             </thead>
                                 <?php
