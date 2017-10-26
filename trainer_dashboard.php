@@ -54,7 +54,7 @@ $events = $req->fetchAll();
                 </header>
 
                 <?php
-                $sqlProfile = "SELECT * FROM users";
+                $sqlProfile = "SELECT * FROM users where email='$Semail' ";
                 $result = $conn->prepare($sqlProfile);
                 $result->execute();
 
@@ -72,7 +72,6 @@ $events = $req->fetchAll();
                 }
                 ?>
 
-                <!-- profile picture -->
                 <!-- profile picture -->
                 <?php
                 $sqlProfile = "SELECT * FROM users where email = '$Semail'";
@@ -116,53 +115,54 @@ $events = $req->fetchAll();
 		</form>";
                 }
                 ?>
-                <
-                <table id="form" class="view">
-                    <tbody>
-                        <tr>
-                            <td class="col-md-3">
-                                <h3>Contact Info</h3>
-                            </td>
-                            <td>
-                                <button id="edit" class="button ">Edit</button>
-                                <button id="update" class="button special" style="display:none">Update</button>
-                            </td>
-                        </tr>
+                <form action="scripts/profileUpdate.php" method="post" onsubmit="return validateForm();">
+                    <table id="form" class="view">
+                        <tbody>
+                            <tr>
+                                <td class="col-md-3">
+                                    <h3>Contact Info</h3>
+                                </td>
+                                <td>
+                                    <button id="edit" class="button ">Edit</button>
+                                    <input type="submit" value="update" id="update" class="button special" style="display:none"/>
+                                </td>
+                            </tr>
 
-                        <tr>
-                            <td class="col-md-1">
-                                <p class='leftspacing'>First Name</p>
-                            </td>
-                            <td>
+                            <tr>
+                                <td class="col-md-1">
+                                    <p class='leftspacing'>First Name</p>
+                                </td>
+                                <td>
 
-                                <p><input type='text' id="firstName" class="data" value="<?php echo $firstName ?>" readonly/></p>
+                                    <p><input type='text' name= "firstName" id="firstName" class="data" value="<?php echo $firstName ?>" readonly/></p>
 
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <p class='leftspacing'>Last Name</p>
-                            </td>
-                            <td>
-                                <?php
-                                echo "<p><input type='text' value=" . $lastName . " readonly/></p>"
-                                ?>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <p class='leftspacing'>Phone Number</p>
-                            </td>
-                            <td>
-                                <?php
-                                echo "<p><input type='text' value=" . $phoneNumber . " readonly/></p>"
-                                ?>
-                            </td>
-                        </tr>
-                        </form>
-                        </div>
-                    </tbody>
-                </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p class='leftspacing'>Last Name</p>
+                                </td>
+                                <td>
+                                    <?php
+                                    echo "<p><input type='text' value=" . $lastName . " readonly/></p>"
+                                    ?>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p class='leftspacing'>Phone Number</p>
+                                </td>
+                                <td>
+                                    <?php
+                                    echo "<p><input type='text' value=" . $phoneNumber . " readonly/></p>"
+                                    ?>
+                                </td>
+                            </tr>
+                            </form>
+                            </div>
+                        </tbody>
+                    </table>
+                </form>
             </div>
         </section>
 
@@ -450,11 +450,13 @@ foreach ($events as $event):
 
     <!-- Profile update -->
     <script>
+        var flag = 0;
         $('#edit').click(function () {
             $('#form').toggleClass('view');
             $('#edit').css('display', 'none');
             $('#update').css('display', 'block');
             $('input').each(function () {
+
 
                 var inp = $(this);
 
@@ -462,39 +464,63 @@ foreach ($events as $event):
                     inp.removeAttr('readonly');
                     $('#edit').css('display', 'none');
                     $('#update').css('display', 'block');
+
+
                 }
                 else {
                     inp.attr('readonly', 'readonly');
                 }
             });
+            flag = 0;
         });
 
     </script>
+
     <script>
+
 
         $('#update').click(function () {
             $('#form').toggleClass('view');
             $('#edit').css('display', 'block');
             $('#update').css('display', 'none');
 
-            //var fName = $('#firstName').val();
+            flag = 1;
+            var fName = $('#firstName').val();
+
+            //document.getElementById("edit_mobile").value = mobile;
 
             //alert(fName);
+            $('input').each(function () {
 
-<?php
-require('../database/dbconfig.php');
-$email = $_POST['edit_email'];
-$mobile = $_POST['mobile'];
-if (is_numeric($mobile) && $mobile > 9999999 && $mobile < 100000000) {
-    $sql = "UPDATE users SET phoneNumber = $mobile WHERE email = '$email'";
-    $req = $conn->prepare($sql);
-    $req->execute();
-}
-header('Location: user-management.php');
-?>
+                var inp = $(this);
+
+                if (inp.attr('readonly')) {
+                    inp.removeAttr('readonly');
+                    $('#edit').css('display', 'block');
+                    $('#update').css('display', 'none');
+                }
+                else {
+                    inp.attr('readonly', 'readonly');
+                }
+            });
 
 
         });</script>
+
+    <script>
+        function validateForm() {
+
+            //alert("fName");
+
+            if (flag == 1) {
+                return true;
+            } else {
+                return false;
+            }
+
+            //if update button return true
+        }
+    </script>
 
 </body>
 </html>
