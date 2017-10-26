@@ -27,7 +27,7 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE IF NOT EXISTS `personalsession` (
-  `id` int(11) NOT NULL,
+  `id` int(11) AUTO_INCREMENT PRIMARY KEY NOT NULL,
   `category` varchar(20) NOT NULL,
   `cost` decimal(10,2) NOT NULL,
   `startTime` time NOT NULL,
@@ -42,9 +42,9 @@ CREATE TABLE IF NOT EXISTS `personalsession` (
 -- Dumping data for table `personalsession`
 --
 
-INSERT INTO `personalsession` (`id`, `category`, `cost`, `startTime`, `endTime`, `date`, `description`, `trainerEmail`, `traineeEmail`) VALUES
-(1, 'Own Training', '0.00', '09:00:00', '10:00:00', '2017-10-10', 'Workout!!', '', 'trainee1@gmail.com'),
-(2, 'Personal Training', '10.50', '09:00:00', '10:00:00', '2017-10-11', '1v1 workout!!', 'trainer2@gmail.com', 'trainee2@gmail.com');
+INSERT INTO `personalsession` (`category`, `cost`, `startTime`, `endTime`, `date`, `description`, `trainerEmail`, `traineeEmail`) VALUES
+('Own Training', '0.00', '09:00:00', '10:00:00', '2017-10-10', 'Workout!!', '', 'trainee1@gmail.com'),
+('Personal Training', '10.50', '09:00:00', '10:00:00', '2017-10-11', '1v1 workout!!', 'trainer2@gmail.com', 'trainee2@gmail.com');
 
 -- --------------------------------------------------------
 
@@ -53,7 +53,7 @@ INSERT INTO `personalsession` (`id`, `category`, `cost`, `startTime`, `endTime`,
 --
 
 CREATE TABLE IF NOT EXISTS `userapproval` (
-  `email` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL PRIMARY KEY,
   `firstName` varchar(35) NOT NULL,
   `lastName` varchar(35) NOT NULL,
   `phoneNumber` int(8) NOT NULL,
@@ -70,13 +70,35 @@ INSERT INTO `userapproval` (`email`, `firstName`, `lastName`, `phoneNumber`, `pr
 ('test@gmail.com', 'test', 'testing', 12312312, '', 'trainee', 'ddf170f924ba1ce072cd91b54614289524e70db2');
 
 -- --------------------------------------------------------
+--
+-- Table structure for table `groupsessionapproval`
+--
 
+CREATE TABLE IF NOT EXISTS `groupsessionapproval` (
+  `id` int(8) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  `venue` varchar(50) NULL DEFAULT NULL,
+  `cost` varchar(35) NULL DEFAULT NULL,
+  `startTime` datetime NULL DEFAULT NULL,
+  `endTime` datetime NULL DEFAULT NULL,
+  `date` date NULL DEFAULT NULL,
+  `description` varchar(255) NULL DEFAULT NULL,
+  `traineremail` varchar(255) NULL DEFAULT NULL,
+  `max` int(8) NULL DEFAULT NULL,
+  `status` int(1) NOT NULL 
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `groupsessionapproval`
+--
+
+
+-- --------------------------------------------------------
 --
 -- Table structure for table `users`
 --
 
 CREATE TABLE IF NOT EXISTS `users` (
-  `email` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL PRIMARY KEY,
   `firstName` varchar(35) NOT NULL,
   `lastName` varchar(35) NOT NULL,
   `phoneNumber` int(8) NOT NULL,
@@ -100,34 +122,3 @@ INSERT INTO `users` (`email`, `firstName`, `lastName`, `phoneNumber`, `profilePi
 --
 -- Indexes for dumped tables
 --
-
---
--- Indexes for table `personalsession`
---
-ALTER TABLE `personalsession`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `userapproval`
---
-ALTER TABLE `userapproval`
-  ADD PRIMARY KEY (`email`);
-
---
--- Indexes for table `users`
---
-ALTER TABLE `users`
-  ADD PRIMARY KEY (`email`);
-
---
--- AUTO_INCREMENT for dumped tables
---
-
---
--- AUTO_INCREMENT for table `personalsession`
---
-ALTER TABLE `personalsession`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
