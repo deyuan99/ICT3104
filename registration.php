@@ -24,11 +24,6 @@ session_start();
             <div class="container">
 
                 <div class="row">
-                    <?php
-                        if (isset($_SESSION['email'])) {
-                            header("location:index.php");
-                        } else {
-                    ?>
                     <!-- Login -->
                     <div class="6u 12u(xsmall)">
                         <header class="major special">
@@ -108,9 +103,6 @@ session_start();
                             </div>
                         </form>
                     </div>
-                    <?php
-                        }
-                    ?>
                 </div>
             </div>
         </section>
