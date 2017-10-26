@@ -3,9 +3,9 @@
 session_start();
 require_once('database/dbconfig.php');
 
-
+$email = $_SESSION['email'];
 $traineremail = $_GET['t'];
-$sql = "SELECT * FROM personalsession where trainerEmail= '$traineremail'";
+$sql = "SELECT * FROM personalsession where trainerEmail= '$traineremail' and category = '1-1 Training' and traineeEmail = ''";
 $req = $conn->prepare($sql);
 $req->execute();
 
@@ -48,11 +48,11 @@ $events = $req->fetchAll();
         <div class="modal fade" id="ModalView" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="padding-top: 70px;">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
-                    <form class="form-horizontal" method="POST" action="#">
+                    <form class="form-horizontal" method="POST" action="addCalendarEventTrainee.php">
 
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                            <h4 class="modal-title" id="myModalLabel">View Events</h4>
+                            <h4 class="modal-title" id="myModalLabel">View Event</h4>
                         </div>
                         <div class="modal-body">
 
@@ -90,11 +90,12 @@ $events = $req->fetchAll();
                                     <input type="text" name="description" class="form-control" id="description" value="<?php echo $event['description']; ?>" readonly>
                                 </div>
                             </div> 
-
+                            <input type="hidden" id="eid" name="eid" value="23"/>
                         </div>
 
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            <input type="submit" class="btn btn-primary" value="Add Event"/>
                         </div>
                     </form>
                 </div>
@@ -174,7 +175,7 @@ foreach ($events as $event):
                     ,
                     eventRender: function (event, element) {
                         element.bind('click', function () {
-                            $('#ModalView #id').val(event.evid);
+                            $('#eid').val(event.id);
                             $('#ModalView #category').val(event.title);
                             $('#ModalView #date').val(event.date);
                             $('#ModalView #startTime').val(event.startTime);

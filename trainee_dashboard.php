@@ -197,7 +197,7 @@ $events = $req->fetchAll();
 
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary">Save changes</button>
+                            <button type="submit" id="save" class="btn btn-primary">Save changes</button>
                         </div>
                     </form>
                 </div>
@@ -335,6 +335,14 @@ $events = $req->fetchAll();
                             $('#ModalView #startTime').val(event.startTime);
                             $('#ModalView #endTime').val(event.endTime);
                             $('#ModalView #description').val(event.description);
+                            
+                            if(event.title==="1-1 Training")
+                            {
+                                $('#save').hide();
+                            }
+                            else{
+                                $('#save').show();
+                            }
                             $('#ModalView').modal('show');
                         });
                     },
