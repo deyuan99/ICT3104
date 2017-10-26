@@ -374,10 +374,19 @@ $events = $req->fetchAll();
 
                 if ($cat == "Personal Training") {
                     $traineeEmail = "Not Applicable";
-                    $color = '#000';
+            
                 } else if ($traineeEmail != NULL) {
                     $color = '#378006';
                 }
+                
+                if($cat== 'Personal Training'){
+                    $color = '#000';
+                } elseif($cat== 'Group Training') {
+                    $color = '#008000';
+                }elseif($cat== '1-1 Training'){
+                    $color = '#0071c5';
+                }
+                $event['color']=$color;
                 ?>
                             {
                                 id: '<?php echo $event['id']; ?>',
@@ -388,6 +397,8 @@ $events = $req->fetchAll();
                                 start: '<?php echo $combinedstart ?>',
                                 end: '<?php echo $combinedend; ?>',
                                 description: '<?php echo $event['description']; ?>',
+                                color: '<?php echo $event['color']; ?>',
+                                
                             },
 <?php endforeach; ?>
                     ]

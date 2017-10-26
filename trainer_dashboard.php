@@ -331,7 +331,15 @@ foreach ($events as $event):
     }else if ($traineeEmail == NULL && $cat == "1-1 Training" ){
         $traineeEmail = "Still available";
     }
-        
+    
+    if($cat== 'Personal Training'){
+                    $color = '#000';
+                } elseif($cat== 'Group Training') {
+                    $color = '#008000';
+                }elseif($cat== '1-1 Training'){
+                    $color = '#0071c5';
+                }
+                $event['color']=$color;
     
 
     ?>
@@ -346,6 +354,7 @@ foreach ($events as $event):
                                 description: '<?php echo $event['description']; ?>',
                                 cost: '<?php echo $event['cost']; ?>',
                                 trainee: '<?php echo $traineeEmail ?>',
+                                color: '<?php echo $event['color']; ?>',
                             },
 <?php endforeach;
 
