@@ -34,8 +34,10 @@ $events = $req->fetchAll();
         <link href="assets/css/calendar.css" rel="stylesheet" type="text/css"/>
 
         <!-- Main CSS -->
-        <link rel="stylesheet" href="assets/css/trainee_dashboard.css" />
+        
 
+         <!-- trainer_dashboard CSS -->
+        <link rel="stylesheet" href="assets/css/trainer_dashboard.css" />
     </head>
     <body>
         <!-- Header -->
@@ -43,63 +45,120 @@ $events = $req->fetchAll();
         include "trainee_header.php";
         ?>
 
-        <!-- One: Trainee's Profile -->
+         <!-- One: Trainer Profile -->
         <section id="one" class="wrapper style1">
 
             <div class="container">
-                <div class="6u 6u(xsmall)">
-                    <header class="major special">
-                        <h3>Hello <?php echo $_SESSION['name']; ?> </h3>
 
-                        <p>this is your profile</p>
-                    </header>
-                </div>
-                <div class="6u 4u(xsmall)">
-                    <!-- profile picture -->
-                    <?php
-                    $sqlProfile = "SELECT * FROM users where email = '$Semail'";
-                    $result = $conn->prepare($sqlProfile);
-                    $result->execute();
-                    
-                    $count = $result->rowCount();
-                    
-                    if ($count > 0) {
-                        while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
-                            $sqlImg = $row['profilePicture'];
-                            echo "<div class='user-container'>";
-                            if (strlen($sqlImg) > 0) {
-                                echo "<img src='$sqlImg'>";
-                            } else {
-                                echo "<img src='images/uploads/profiledefault.jpg'>";
-                            }
-                            echo "<p>" . $row['email'] . "</p>";
-                            echo "</div>";
-                        }
-                    } else {
-                        echo "There are no users yet!";
+                <header class="major special">
+                    <h3>Hello, <?php echo $Sname; ?> </h3>
+                </header>
+
+                <?php
+                $sqlProfile = "SELECT * FROM users where email='$Semail' ";
+                $result = $conn->prepare($sqlProfile);
+                $result->execute();
+                $count = $result->rowCount();
+                if ($count > 0) {
+                    while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
+                        $id = $row['email'];
+                        $firstName = $row['firstName'];
+                        $lastName = $row['lastName'];
+                        $phoneNumber = $row['phoneNumber'];
                     }
+                } else {
+                    echo "There are no users yet!";
+                }
+                ?>
 
-                    if (isset($_SESSION['email'])) {
-                        if ($_SESSION['email'] == "trainee1@gmail.com") {
-                            //echo "You are logged in as user ";
+                <!-- profile picture -->
+                <?php
+                $sqlProfile = "SELECT * FROM users where email = '$Semail'";
+                $result = $conn->prepare($sqlProfile);
+                $result->execute();
+                $count = $result->rowCount();
+                if ($count > 0) {
+                    while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
+                        $sqlImg = $row['profilePicture'];
+                        echo "<div class='user-container'>";
+                        if (strlen($sqlImg) > 0) {
+                            echo "<img src='$sqlImg'>";
+                        } else {
+                            echo "<img src='images/uploads/profiledefault.jpg'>";
                         }
-                        echo "<form action='scripts/uploadProfileImg.php' method='POST' enctype='multipart/form-data'>
+                        echo "<p>" . $row['email'] . "</p>";
+                        echo "</div>";
+                    }
+                } else {
+                    echo "There are no users yet!";
+                }
+                if (isset($_SESSION['email'])) {
+                    if ($_SESSION['email'] == "trainee1@gmail.com") {
+                        //echo "You are logged in as user ";
+                    }
+                    echo "<form action='scripts/uploadProfileImg.php' method='POST' enctype='multipart/form-data'>
 			<input type='file' name='file'>
 			<button type='submit' name='submit'>UPLOAD</button>
                         </form>";
-                    } else {
-                        echo "You are not logged in!";
-                        echo "<form action='signup.php' method='POST'>
+                } else {
+                    echo "You are not logged in!";
+                    echo "<form action='signup.php' method='POST'>
 			<input type='text' name='first' placeholder='First name'>
 			<input type='text' name='last' placeholder='Last name'>
 			<input type='text' name='uid' placeholder='Username'>
 			<input type='password' name='pwd' placeholder='Password'>
 			<button type='submit' name='submitSignup'>Signup</button>
 		</form>";
-                    }
-                    ?>
+                }
+                ?>
+                <form action="scripts/trainee_profileUpdate.php" method="post" onsubmit="return validateForm();">
+                    <table id="form" class="view">
+                        <tbody>
+                            <tr>
+                                <td class="col-md-3">
+                                    <h3>Contact Info</h3>
+                                </td>
+                                <td>
+                                    <button id="edit" class="button ">Edit</button>
+                                    <input type="submit" value="update" id="update" class="button special" style="display:none"/>
+                                </td>
+                            </tr>
 
-                </div>
+                            <tr>
+                                <td class="col-md-1">
+                                    <p class='leftspacing'>First Name</p>
+                                </td>
+                                <td>
+
+                                    <p><input type='text' name= "firstName" id="firstName" class="data" value="<?php echo $firstName ?>" readonly/></p>
+
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p class='leftspacing'>Last Name</p>
+                                </td>
+                                <td>
+                                    <?php
+                                    echo "<p><input type='text' value=" . $lastName . " readonly/></p>"
+                                    ?>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p class='leftspacing'>Phone Number</p>
+                                </td>
+                                <td>
+                                    <?php
+                                    echo "<p><input type='text' value=" . $phoneNumber . " readonly/></p>"
+                                    ?>
+                                </td>
+                            </tr>
+                            </form>
+                            </div>
+                        </tbody>
+                    </table>
+                </form>
             </div>
         </section>
 
@@ -435,8 +494,59 @@ $events = $req->fetchAll();
             });
 
         </script>
-
-
+         <!-- Profile update -->
+    <script>
+        var flag = 0;
+        $('#edit').click(function () {
+            $('#form').toggleClass('view');
+            $('#edit').css('display', 'none');
+            $('#update').css('display', 'block');
+            $('input').each(function () {
+                var inp = $(this);
+                if (inp.attr('readonly')) {
+                    inp.removeAttr('readonly');
+                    $('#edit').css('display', 'none');
+                    $('#update').css('display', 'block');
+                }
+                else {
+                    inp.attr('readonly', 'readonly');
+                }
+            });
+            flag = 0;
+        });
+    </script>
+    <script>
+        $('#update').click(function () {
+            $('#form').toggleClass('view');
+            $('#edit').css('display', 'block');
+            $('#update').css('display', 'none');
+            flag = 1;
+            var fName = $('#firstName').val();
+            //document.getElementById("edit_mobile").value = mobile;
+            //alert(fName);
+            $('input').each(function () {
+                var inp = $(this);
+                if (inp.attr('readonly')) {
+                    inp.removeAttr('readonly');
+                    $('#edit').css('display', 'block');
+                    $('#update').css('display', 'none');
+                }
+                else {
+                    inp.attr('readonly', 'readonly');
+                }
+            });
+        });</script>
+    <script>
+        function validateForm() {
+            //alert("fName");
+            if (flag == 1) {
+                return true;
+            } else {
+                return false;
+            }
+            //if update button return true
+        }
+    </script>
 
     </body>
 </html>
