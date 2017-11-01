@@ -30,12 +30,21 @@ and open the template in the editor.
                 document.getElementById("reactivate_userid").value = email;
                 document.getElementById("reactivateMsg").innerHTML = "Are you sure you want to Reactivate " + "<strong>" + email +"</strong>" + "  ?" ;
             }
-            function setEditInfo(email,mobile)
+            function setEditInfo(email, firstName, lastName, address, mobile)
             {
                 document.getElementById("email").innerHTML = email;
+                document.getElementById("firstName").placeholder = firstName;
+                document.getElementById("lastName").placeholder = lastName;
+                document.getElementById("address").placeholder = address;
                 document.getElementById("mobile").placeholder = mobile;
                 document.getElementById("edit_email").value = "";
                 document.getElementById("edit_email").value = email;
+                document.getElementById("edit_firstName").value = "";
+                document.getElementById("edit_firstName").value = firstName;
+                document.getElementById("edit_lastName").value = "";
+                document.getElementById("edit_lastName").value = lastName;
+                document.getElementById("edit_address").value = "";
+                document.getElementById("edit_address").value = address;
                 document.getElementById("edit_mobile").value = "";
                 document.getElementById("edit_mobile").value = mobile;
             }
@@ -63,11 +72,12 @@ and open the template in the editor.
                                 <table id="esa-table" class="table table-striped table-bordered" cellspacing="0" width="100%">
                                     <thead>
                                         <tr>
-                                            <th class="col-md-2">Email Address</th>
-                                            <th class="col-md-2">First Name</th>
-                                            <th class="col-md-2">Last Name</th>
-                                            <th class="col-md-2">Mobile Number</th>
-                                            <th class="col-md-3">Action</th>
+                                            <th class="col-md-1">Email Address</th>
+                                            <th class="col-md-1">First Name</th>
+                                            <th class="col-md-1">Last Name</th>
+                                            <th class="col-md-1">Billing Address</th>
+                                            <th class="col-md-1">Mobile</th>
+                                            <th class="col-md-2">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -86,11 +96,12 @@ and open the template in the editor.
                                 <table id="supervisor-table" class="table table-striped table-bordered" cellspacing="0" width="100%">
                                     <thead>
                                         <tr>
-                                            <th class="col-md-2">Email Address</th>
-                                            <th class="col-md-2">First Name</th>
-                                            <th class="col-md-2">Last Name</th>
-                                            <th class="col-md-2">Mobile Number</th>
-                                            <th class="col-md-3">Action</th>
+                                            <th class="col-md-1">Email Address</th>
+                                            <th class="col-md-1">First Name</th>
+                                            <th class="col-md-1">Last Name</th>
+                                            <th class="col-md-2">Billing Address</th>
+                                            <th class="col-md-1">Mobile Number</th>
+                                            <th class="col-md-2">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -109,10 +120,11 @@ and open the template in the editor.
                                 <table id="archive-table" class="table table-striped table-bordered" cellspacing="0" width="100%">
                                     <thead>
                                         <tr>
-                                            <th class="col-md-2">Email Address</th>
-                                            <th class="col-md-2">First Name</th>
-                                            <th class="col-md-2">Last Name</th>
-                                            <th class="col-md-2">Mobile Number</th>
+                                            <th class="col-md-1">Email Address</th>
+                                            <th class="col-md-1">First Name</th>
+                                            <th class="col-md-1">Last Name</th>
+                                            <th class="col-md-2">Billing Address</th>
+                                            <th class="col-md-1">Mobile Number</th>
                                             <th class="col-md-2">Action</th>
                                         </tr>
                                     </thead>
@@ -139,11 +151,36 @@ and open the template in the editor.
                     <div class="modal-body">
                         <form method="post" role="form" action="editUserInfo.php">
                             <input type="hidden" name="edit_email" id="edit_email" value="">
-                            <input type="hidden" name="edit_mobile" id="edit_mobile" value="">
                             <div class="form-group row" style="margin-top: 20px;">
                                 <label class="form-control-label col-md-offset-2 col-md-3 col-xs-offset-0 col-xs-5" for="email">Email Address:</label>
                                 <div class="col-sm-5" id="email"></div> 
                             </div>
+                            
+                            <input type="hidden" name="edit_fName" id="edit_fName" value="">
+                            <div class="form-group row">
+                                <label class="form-control-label col-md-offset-2 col-md-3 col-xs-offset-0 col-xs-5 label-margin">First Name:</label>
+                                <div class="col-sm-5">
+                                    <input type="text" class="form-control" id="firstName" name="firstName" required>
+                                </div>
+                            </div>
+                            
+                            <input type="hidden" name="edit_lName" id="edit_lName" value="">
+                            <div class="form-group row">
+                                <label class="form-control-label col-md-offset-2 col-md-3 col-xs-offset-0 col-xs-5 label-margin">Last Name:</label>
+                                <div class="col-sm-5">
+                                    <input type="text" class="form-control" id="lastName" name="lastName" required>
+                                </div>
+                            </div>
+                            
+                            <input type="hidden" name="edit_address" id="edit_address" value="">
+                            <div class="form-group row">
+                                <label class="form-control-label col-md-offset-2 col-md-3 col-xs-offset-0 col-xs-5 label-margin">Billing Address:</label>
+                                <div class="col-sm-5">
+                                    <input type="text" class="form-control" id="address" name="address" required>
+                                </div>
+                            </div>
+                            
+                            <input type="hidden" name="edit_mobile" id="edit_mobile" value="">
                             <div class="form-group row">
                                 <label class="form-control-label col-md-offset-2 col-md-3 col-xs-offset-0 col-xs-5 label-margin" for="mobile">Mobile Number:</label>
                                 <div class="col-sm-5">
