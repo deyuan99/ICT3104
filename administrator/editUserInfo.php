@@ -12,9 +12,9 @@ $mobile = $_POST['mobile'];
   $req->execute(); */
 
 //this doesn't work
-$sqlF = "UPDATE users SET firstName = $firstName WHERE email = '$email'";
+/*$sqlF = "UPDATE users SET firstName = $firstName WHERE email = '$email'";
 $reqF = $conn->prepare($sqlF);
-$reqF->execute();
+$reqF->execute();*/
 
 $sql = "UPDATE users SET phoneNumber = $mobile WHERE email = '$email'";
 $req = $conn->prepare($sql);

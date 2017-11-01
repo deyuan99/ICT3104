@@ -1,13 +1,15 @@
 -- phpMyAdmin SQL Dump
--- version 4.4.14
--- http://www.phpmyadmin.net
+-- version 4.7.4
+-- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Oct 11, 2017 at 06:40 AM
--- Server version: 5.6.26
--- PHP Version: 5.6.12
+-- Host: localhost
+-- Generation Time: Nov 01, 2017 at 01:56 PM
+-- Server version: 10.1.26-MariaDB
+-- PHP Version: 7.1.9
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -17,7 +19,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `team4_stps`
+-- Database: `Team4_STPS`
 --
 
 -- --------------------------------------------------------
@@ -26,8 +28,8 @@ SET time_zone = "+00:00";
 -- Table structure for table `personalsession`
 --
 
-CREATE TABLE IF NOT EXISTS `personalsession` (
-  `id` int(11) AUTO_INCREMENT PRIMARY KEY NOT NULL,
+CREATE TABLE `personalsession` (
+  `id` int(11) NOT NULL,
   `category` varchar(20) NOT NULL,
   `cost` decimal(10,2) NOT NULL,
   `startTime` time NOT NULL,
@@ -36,15 +38,15 @@ CREATE TABLE IF NOT EXISTS `personalsession` (
   `description` varchar(255) NOT NULL,
   `trainerEmail` varchar(255) NOT NULL,
   `traineeEmail` varchar(255) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `personalsession`
 --
 
-INSERT INTO `personalsession` (`category`, `cost`, `startTime`, `endTime`, `date`, `description`, `trainerEmail`, `traineeEmail`) VALUES
-('Personal Training', '0.00', '09:00:00', '10:00:00', '2017-10-10', 'Workout!!', '', 'trainee1@gmail.com'),
-('Personal Training', '10.50', '09:00:00', '10:00:00', '2017-10-11', '1v1 workout!!', '', 'trainee2@gmail.com');
+INSERT INTO `personalsession` (`id`, `category`, `cost`, `startTime`, `endTime`, `date`, `description`, `trainerEmail`, `traineeEmail`) VALUES
+(1, 'Own Training', '0.00', '09:00:00', '10:00:00', '2017-10-10', 'Workout!!', '', 'trainee1@gmail.com'),
+(2, 'Personal Training', '10.50', '09:00:00', '10:00:00', '2017-10-11', '1v1 workout!!', 'trainer2@gmail.com', 'trainee2@gmail.com');
 
 -- --------------------------------------------------------
 
@@ -52,8 +54,8 @@ INSERT INTO `personalsession` (`category`, `cost`, `startTime`, `endTime`, `date
 -- Table structure for table `userapproval`
 --
 
-CREATE TABLE IF NOT EXISTS `userapproval` (
-  `email` varchar(255) NOT NULL PRIMARY KEY,
+CREATE TABLE `userapproval` (
+  `email` varchar(255) NOT NULL,
   `firstName` varchar(35) NOT NULL,
   `lastName` varchar(35) NOT NULL,
   `phoneNumber` int(8) NOT NULL,
@@ -70,55 +72,67 @@ INSERT INTO `userapproval` (`email`, `firstName`, `lastName`, `phoneNumber`, `pr
 ('test@gmail.com', 'test', 'testing', 12312312, '', 'trainee', 'ddf170f924ba1ce072cd91b54614289524e70db2');
 
 -- --------------------------------------------------------
---
--- Table structure for table `groupsessionapproval`
---
 
-CREATE TABLE IF NOT EXISTS `groupsessionapproval` (
-  `id` int(8) NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  `venue` varchar(50) NULL DEFAULT NULL,
-  `cost` varchar(35) NULL DEFAULT NULL,
-  `startTime` datetime NULL DEFAULT NULL,
-  `endTime` datetime NULL DEFAULT NULL,
-  `date` date NULL DEFAULT NULL,
-  `description` varchar(255) NULL DEFAULT NULL,
-  `traineremail` varchar(255) NULL DEFAULT NULL,
-  `max` int(8) NULL DEFAULT NULL,
-  `status` int(1) NOT NULL 
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `groupsessionapproval`
---
-
-
--- --------------------------------------------------------
 --
 -- Table structure for table `users`
 --
 
-CREATE TABLE IF NOT EXISTS `users` (
-  `email` varchar(255) NOT NULL PRIMARY KEY,
+CREATE TABLE `users` (
+  `email` varchar(255) NOT NULL,
   `firstName` varchar(35) NOT NULL,
   `lastName` varchar(35) NOT NULL,
   `phoneNumber` int(8) NOT NULL,
   `profilePicture` varchar(255) NOT NULL,
   `role` varchar(10) NOT NULL,
   `password` varchar(50) NOT NULL,
-  `status` int(1) NOT NULL
+  `status` int(1) NOT NULL,
+  `address` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`email`, `firstName`, `lastName`, `phoneNumber`, `profilePicture`, `role`, `password`, `status`) VALUES
-('admin1@gmail.com', 'ad', 'min', 12121212, '', 'admin', '6c7ca345f63f835cb353ff15bd6c5e052ec08e7a', 1),
-('trainee1@gmail.com', 'trainee1', 'te1', 13131313, '', 'trainee', 'ddf170f924ba1ce072cd91b54614289524e70db2', 1),
-('trainee2@gmail.com', 'trainee2', 'te2', 13131314, '', 'trainee', 'ddf170f924ba1ce072cd91b54614289524e70db2', 1),
-('trainer1@gmail.com', 'trainer1', 'tr1', 14141414, '', 'trainer', '69a6439936f0ef293d0a713f0aaf7a04ca82d272', 1),
-('trainer2@gmail.com', 'trainer2', 'tr2', 14141415, '', 'trainer', '69a6439936f0ef293d0a713f0aaf7a04ca82d272', 1);
+INSERT INTO `users` (`email`, `firstName`, `lastName`, `phoneNumber`, `profilePicture`, `role`, `password`, `status`, `address`) VALUES
+('admin1@gmail.com', 'ad', 'min', 12121212, 'images/uploads/profileadmin1@gmail.com.jpg', 'admin', '6c7ca345f63f835cb353ff15bd6c5e052ec08e7a', 1, ''),
+('trainee1@gmail.com', 'trainee11', 'tr1', 123456789, '', 'trainee', 'ddf170f924ba1ce072cd91b54614289524e70db2', 1, ''),
+('trainee2@gmail.com', 'trainee2', 'te2', 13131314, '', 'trainee', 'ddf170f924ba1ce072cd91b54614289524e70db2', 1, '212 afgreokmgr 23-234 s324235'),
+('trainer1@gmail.com', 'trainer123', 'tr1', 14141414, '', 'trainer', '69a6439936f0ef293d0a713f0aaf7a04ca82d272', 1, ''),
+('trainer2@gmail.com', 'trainer2', 'tr2', 14141415, '', 'trainer', '69a6439936f0ef293d0a713f0aaf7a04ca82d272', 1, '123 abc s890234');
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `personalsession`
+--
+ALTER TABLE `personalsession`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `userapproval`
+--
+ALTER TABLE `userapproval`
+  ADD PRIMARY KEY (`email`);
+
+--
+-- Indexes for table `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`email`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `personalsession`
+--
+ALTER TABLE `personalsession`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
