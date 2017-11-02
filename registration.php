@@ -64,6 +64,7 @@ if (isset($_SESSION['email']) && !empty($_SESSION['email'])) {
                                 <div class="8u 6u(small) 12u(xsmall)">
                                     <ul class="actions vertical">
                                         <li><input type="submit" name="submit" value="Login" class="button special fit"></li>
+                                        <a style="text-decoration:none;" href="forgetPassword.php">Forget Password?</a>
                                     </ul>
                                 </div>
                             </div>

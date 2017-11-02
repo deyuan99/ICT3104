@@ -32,11 +32,19 @@ if (isset($_POST['firstname']) && isset($_POST['lastname']) && isset($_POST['reg
 //    echo "\nresult = " . $result['firstName'];
 //    echo " result = " . count($checkResult) . "<br/>";
     
+    $header = 'From: nuruliffyne@gmail.com';
+    $message = 'thanks for signing up';
+    
     // If there is no existing email in db, add user to admin approval
     if (count($checkResult) == 1) {
         $insertsql = "INSERT INTO userApproval (firstName, lastName, email, phoneNumber, profilePicture, role, password) VALUES ('$firstname', '$lastname', '$regemail', '$phone', '', '$role', sha1('$regpass'))";
 //        echo "prepare ";
         $query = $conn->prepare($insertsql);
+       
+        //send email
+        mail($email, 'Confirmation Email', $message, $header);
+        echo "mail sent";
+        
         if ($query == false) {
             print_r($conn->errorInfo());
             die('Error prepare');
