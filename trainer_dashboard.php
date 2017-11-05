@@ -195,6 +195,7 @@ $events = $req->fetchAll();
                             <div class="form-group">
                                 <label for="color" class="col-sm-2 control-label">Date</label>
                                 <div class="col-sm-10">
+                                   <?php $celldate = "t"?>
                                     <input type="text" name="date" class="form-control" id="date" value="<?php echo $event['date']; ?>" readonly>
                                 </div>
                             </div>
@@ -250,7 +251,7 @@ $events = $req->fetchAll();
 
                             <input type="hidden" name="evid" class="form-control" id="evid">
 
-                            <?php if ($Srole == "trainer") { ?>
+                            <?php if ($Srole == "trainer") {?>
                                 <div class="form-group">
                                     <label for="trainee" class="col-sm-2 control-label">Tainee Gmail</label>
                                     <div class="col-sm-10">
@@ -260,8 +261,8 @@ $events = $req->fetchAll();
                             <?php } ?>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary">Save changes</button>
+                            <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button> 
+                            <button type="submit" class="btn btn-primary">Save changes</button>                          
                             <!--<input type="hidden" id="evid" name="evid" value="<?php //echo $event['id'];   ?>" />-->
                             <?php if ($Srole == "trainee") { ?>
                                 <button type="submit" class="btn btn-primary">Apply</button>
@@ -274,7 +275,7 @@ $events = $req->fetchAll();
 
 
         <?php if ($Srole == 'trainer') { ?>
-            <!-- Modal -->
+            <!-- Modal Create Event-->
             <div class="modal fade" id="ModalAdd" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
@@ -424,6 +425,10 @@ $events = $req->fetchAll();
                 eventLimit: true, // allow "more" link when too many events
                 selectable: true,
                 selectHelper: true,
+                selectConstraint: {
+                        start: $.fullCalendar.moment().subtract(1, 'days'),
+                        end: $.fullCalendar.moment().startOf('month').add(1, 'month')
+                    },
                 select: function (start) {
                     $('#ModalAdd #date').val(moment(start).format('DD-MM-YYYY '));
                     $('#ModalAdd').modal('show');
@@ -504,13 +509,13 @@ foreach ($events as $event):
                 }
                 id = event.evid;
                 date = event.date;
-
+                
                 Event = [];
                 Event[0] = id;
                 Event[1] = startTime;
                 Event[2] = endTime;
                 Event[3] = date;
-
+                
                 $.ajax({
                     url: 'editCalendarEventDate.php',
                     type: "POST",

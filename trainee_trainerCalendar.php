@@ -5,7 +5,7 @@ require_once('database/dbconfig.php');
 
 $email = $_SESSION['email'];
 $traineremail = $_GET['t'];
-$sql = "SELECT * FROM personalsession where trainerEmail= '$traineremail' and category = '1-1 Training' and traineeEmail = ''";
+$sql = "SELECT * FROM personalsession where trainerEmail= '$traineremail' and category = '1-1 Training' and traineeEmail = ''and date >= NOW()";
 $req = $conn->prepare($sql);
 $req->execute();
 
@@ -140,6 +140,10 @@ $events = $req->fetchAll();
                     eventLimit: true, // allow "more" link when too many events
                     selectable: true,
                     selectHelper: true,
+                    selectConstraint: {
+                        start: $.fullCalendar.moment().subtract(1, 'days'),
+                        end: $.fullCalendar.moment().startOf('month').add(1, 'month')
+                    },
                     events: [
 <?php
 foreach ($events as $event):
