@@ -69,7 +69,23 @@ session_start();
                                 <div class="panel-title">GROUP TRAININGS</div>
                             </div>
                             <div class="table-responsive my-table-style">
-                                <div class="h3" style="text-align:center;">- Under Construction -</div>
+                                <table id="esa-table" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                                    <thead>
+                                        <tr>
+                                            <th class="col-md-2">Email Address</th>
+                                            <th class="col-md-1">Venue</th>
+                                            <th class="col-md-1">Group Capacity</th>
+                                            <th class="col-md-2">Date</th>
+                                            <th class="col-md-1">Start Time</th>
+                                            <th class="col-md-1">End Time</th>
+                                            <th class="col-md-1">Status</th>
+                                            <th class="col-md-3">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php getApprovalGrouptraining(); ?>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     </div>
