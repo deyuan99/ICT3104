@@ -14,10 +14,9 @@ require_once('database/dbconfig.php');
         $endTime = $_POST['endtime'];
         $cost = $_POST['cost'];
         $todaydate = date('Y-m-d H:i:s');
-        $combinedstart = date('Y-m-d H:i:s', strtotime("$eventdate $start"));
+        $combinedstart = date('Y-m-d H:i:s', strtotime("$eventdate $startTime"));
 
         $hourdiff = round((strtotime($combinedstart) - strtotime($todaydate))/3600, 1);
-        echo $hourdiff;
         if($hourdiff  < 0){
            echo "<script type='text/javascript'>alert('Cant edit past event!');"
              . "window.location.href='trainer_dashboard.php';"
