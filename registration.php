@@ -10,15 +10,13 @@ $Srole = '';
 
 if (isset($_SESSION['email']) && !empty($_SESSION['email'])) {
     $Srole = $_SESSION['role'];
-    
+
     if ($Srole == 'trainee') {
         header("Location: trainee_dashboard.php");
     } else {
         header("Location: trainer_dashboard.php");
     }
 }
-
-
 ?>
 <html>
     <head>
@@ -43,20 +41,28 @@ if (isset($_SESSION['email']) && !empty($_SESSION['email'])) {
                             <h3>Login</h3>
                             <p>Welcome back</p>
                         </header>
-                           <form name="login" method="post" action="login.php">
+                        <form name="login" method="post" action="login.php">
                             <div class="row uniform 50%">
                                 <div class="8u 12u(xsmall)">
-                                    <input type="email" name="email" id="email" value="<?php if(isset($_COOKIE["member_login"])) { echo $_COOKIE["member_login"]; } ?>" placeholder="Email" />
+                                    <input type="email" name="email" id="email" value="<?php
+                                    if (isset($_COOKIE["member_login"])) {
+                                        echo $_COOKIE["member_login"];
+                                    }
+                                    ?>" placeholder="Email" />
                                 </div>
                                 <div class="8u">
-                                    <input type="password" name="password" id="password" value="<?php if(isset($_COOKIE["member_password"])) { echo $_COOKIE["member_password"]; } ?>" placeholder="Password" />
+                                    <input type="password" name="password" id="password" value="<?php
+                                    if (isset($_COOKIE["member_password"])) {
+                                        echo $_COOKIE["member_password"];
+                                    }
+                                    ?>" placeholder="Password" />
                                 </div>
                             </div>
                             <div class="row uniform 50%">
                                 <div class="6u 6u(small) 12u(xsmall)">
                                     <div class="7u 12u(small)">
-                                        <input type="checkbox" id="copy" name="copy" <?php if(isset($_COOKIE["member_login"])) { ?> checked <?php } ?>>
-                                        <label for="copy">Remember me</label>
+                                        <input type="checkbox" id="copy" name="copy" <?php if (isset($_COOKIE["member_login"])) { ?> checked <?php } ?>>
+                                        <p for="copy">Remember me</p>
                                     </div>
                                 </div>
                             </div>
@@ -70,7 +76,7 @@ if (isset($_SESSION['email']) && !empty($_SESSION['email'])) {
                             </div>
                         </form>
                     </div>
-                    
+
                     <!-- Registration -->
                     <div class="6u 12u(xsmall)">
                         <header class="major special">
@@ -93,19 +99,24 @@ if (isset($_SESSION['email']) && !empty($_SESSION['email'])) {
                                     <input type="text" name="phone" id="phone" value="" placeholder="Phone Number" required/>
                                 </div>
                                 <div class="12u">
-                                    <div class="select-wrapper">
-                                        <select name="category" id="category" required>
-                                            <option value="">Member Type</option>
-                                            <option value="trainer">Trainer</option>
-                                            <option value="trainee">Trainee</option>
-                                        </select>
-                                    </div>
+                                    <textarea style="resize: none;" name="address" id="address" rows="3"  placeholder="Address"></textarea>
                                 </div>
                                 <div class="12u">
                                     <input type="password" name="regpass" id="regpass" value="" placeholder="Password" required/>
                                 </div>
                                 <div class="12u">
                                     <input type="password" name="regconfpass" id="regconfpass" value="" placeholder="Confirm Password" required/>
+                                </div>
+                                <div class="12u"> <h4>Membership type</h4>
+                                    
+                                    <input type="radio" name="category" id="category" value="trainer"> Trainer
+                                    
+                                    <input type="radio" name="category" id="category" value="trainee"> Trainee
+
+                                    <select class="dropdown" name="subscription" id="member_type">
+                                        
+                                    </select>
+                                    
                                 </div>
                             </div>
                             <div class="row uniform 50%">
@@ -115,12 +126,13 @@ if (isset($_SESSION['email']) && !empty($_SESSION['email'])) {
                                     </ul>
                                 </div>
                             </div>
+
                         </form>
                     </div>
                 </div>
             </div>
         </section>
-        
+
         <!-- Footer -->
         <?php
         include "footer.php";
@@ -131,6 +143,34 @@ if (isset($_SESSION['email']) && !empty($_SESSION['email'])) {
         <script src="assets/js/skel.min.js"></script>
         <script src="assets/js/util.js"></script>
         <script src="assets/js/main.js"></script>
+
+        <script type="text/javascript">
+            $("input[type='radio'][name='category']").change(function () {
+
+                var selected = $("input[type='radio'][name='category']:checked").val();
+
+                if (selected === "trainer")
+                    var opts = [
+                        {name: "Not Applicable", val: ""}
+                    ];
+
+                else
+                    var opts = [
+                        {name: "Subscription type", val: ""},
+                        {name: "3 months- $27", val: "3"},
+                        {name: "6 months- $50", val: "6"},
+                        {name: "12 months- $80", val: "12"}
+                    ];
+
+                $("#member_type").empty();
+
+                $.each(opts, function (k, v) {
+
+                    $("#member_type").append("<option value='" + v.val + "'>" + v.name + "</option>");
+
+                });
+            });
+        </script>
 
     </body>
 </html>

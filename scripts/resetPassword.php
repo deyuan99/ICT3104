@@ -7,7 +7,7 @@ $password = "";
 $charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
 
 
-$header = 'From: nuruliffyne@gmail.com';
+$header = 'From: stps.team4@gmail.com';
 
 
 if (isset($_POST['email'])) {
@@ -18,11 +18,15 @@ if (isset($_POST['email'])) {
     $result = $conn->prepare($sql);
     $result->execute();
     $count = $result->rowCount();
+    
+    echo $count;
 
     if ($count > 0) {
         // output data of each row
         while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
             $id = $row['email'];
+            
+            echo $id;
 
             //generate random password
             for ($i = 0; $i < 8; $i++) {

@@ -5,15 +5,25 @@ require_once('database/dbconfig.php');
 //echo "firstname = " . $_POST['firstname'];
 //echo " regemail = " . $_POST['regemail'];
 
-if (isset($_POST['firstname']) && isset($_POST['lastname']) && isset($_POST['regemail']) && isset($_POST['phone']) && isset($_POST['category']) && isset($_POST['regpass']) && isset($_POST['regconfpass'])) {
+//Arifah: to change based on dates!
+//get date then add the months based on subscription = expiry date
+//
+
+
+
+if (isset($_POST['firstname']) && isset($_POST['lastname']) && isset($_POST['regemail']) && isset($_POST['phone']) && isset($_POST['category']) && isset($_POST['subscription']) && isset($_POST['regpass']) && isset($_POST['regconfpass'])) {
+  
+    echo "You have selected :".$_POST['subscription'];
     
-//    echo "<br/>in";
+//  echo "<br/>in";
     $firstname = $_POST['firstname'];
     $lastname = $_POST['lastname'];
     $regemail = $_POST['regemail'];
     $phone = $_POST['phone'];
     $role = $_POST['category'];
     $regpass = $_POST['regpass'];
+    $subscription = $_POST['subscription'];
+    
     
     $sql = "SELECT * FROM users u, userApproval ua WHERE u.email = '$regemail' OR ua.email = '$regemail'";
     
@@ -32,17 +42,18 @@ if (isset($_POST['firstname']) && isset($_POST['lastname']) && isset($_POST['reg
 //    echo "\nresult = " . $result['firstName'];
 //    echo " result = " . count($checkResult) . "<br/>";
     
-    $header = 'From: nuruliffyne@gmail.com';
+    $header = 'From: stps.team4@gmail.com';
     $message = 'thanks for signing up';
     
     // If there is no existing email in db, add user to admin approval
     if (count($checkResult) == 1) {
-        $insertsql = "INSERT INTO userApproval (firstName, lastName, email, phoneNumber, profilePicture, role, password) VALUES ('$firstname', '$lastname', '$regemail', '$phone', '', '$role', sha1('$regpass'))";
+        $insertsql = "INSERT INTO userApproval (firstName, lastName, email, phoneNumber, profilePicture, role, password, subscription) VALUES ('$firstname', '$lastname', '$regemail', '$phone', '', '$role', sha1('$regpass'), '$subscription')";
 //        echo "prepare ";
         $query = $conn->prepare($insertsql);
        
         //send email
-        mail($email, 'Confirmation Email', $message, $header);
+        mail($regemail, 'Confirmation Email', $message, $header);
+        
         echo "mail sent";
         
         if ($query == false) {
