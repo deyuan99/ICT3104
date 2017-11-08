@@ -73,6 +73,7 @@ $events = $req->fetchAll();
                     selectHelper: true,
                     
             events: [
+                
             <?php  foreach ($events as $event):
 
                 $TypeofTrainingID = $event['TypeofTrainingID'];
@@ -104,13 +105,14 @@ $events = $req->fetchAll();
                         endTime: '<?php echo $event['endTime']; ?>',
                         start: '<?php echo $combinedstart ?>',
                         end: '<?php echo $combinedend; ?>',
-                        description: '<?php echo $event['description']; ?>',
+                        title: '<?php echo $event['description']; ?>',
                         groupCapacity: '<?php echo $event['groupCapacity']; ?>',
                         status: '<?php echo $event['status']; ?>',
                         color: '<?php echo $event['color']; ?>',
 
                     },
                 <?php endforeach; ?>
+                    
                     
                     ]
                     
