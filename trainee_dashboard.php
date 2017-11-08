@@ -20,6 +20,14 @@ $req = $conn->prepare($sql);
 $req->execute();
 
 $events = $req->fetchAll();
+
+
+// For selecting all venue
+$sql2 = "SELECT location FROM venue";
+$req2 = $conn->prepare($sql2);
+$req2->execute();
+$venues = $req2->fetchAll();
+
 ?>
 <html>
     <head>
@@ -327,6 +335,30 @@ $events = $req->fetchAll();
                                     </select>
                                 </div>
                             </div>
+                            
+                            <div class="form-group">
+                                <label for="venue" class="col-sm-2 control-label">Venue</label>
+                                <div class="col-sm-10">
+                                    <select name="venue" class="form-control" id="venue" >
+                                        <option value="select">- Select Venue -</option>
+                                        <?php
+                                        foreach ($venues as $venue):
+                                            $location = $venue['location'];
+                                            echo '<option value="'. $location .'">'. $location .'</option>';
+                                        endforeach; ?>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <div id="hidden_div">
+                                    <label for="roomtype" class="col-sm-2 control-label">RoomType</label>
+                                    <div class="col-sm-10">
+                                        <select name="roomtype" class="form-control" id="roomtype" >
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
 
                             <div class="form-group">
                                 <label for="description" class="col-sm-2 control-label">Description</label>
@@ -369,6 +401,51 @@ $events = $req->fetchAll();
 
         <!--Calendar script-->
         <script>
+            // for showing the room types based on venue chosen
+//            $(function () {
+//                $('#hidden_div').hide();
+//                $('#venue').change(function () {
+//                    if ($('#venue').val() !== "select") {
+//                        $('#hidden_div').show();
+//                    } else {
+//                        $('#hidden_div').hide();
+//                    }
+//                });
+//            });
+//            
+            $('#hidden_div').hide();
+            $("#venue").change(function ()
+            {
+                if ($('#venue').val() === "select") {
+                    $('#hidden_div').hide();
+                } else {
+                    $('#hidden_div').show();
+                }
+                
+                var venueID = $(this).find(":selected").val();
+//                alert(id);
+                $.ajax
+                    ({
+                        type: "POST",
+                        url: 'phpCodes/getRoomType.php',
+                        data: {venueID: venueID},
+                        cache: false,
+                        success: function (r)
+                        {
+                            //document.getElementById("roomtype").value = r;
+                            var result = $.parseJSON(r);
+//                            alert(result);
+                            $('#roomtype').html("");
+                            result.forEach(function(item) {
+                                $('#roomtype').append($("<option></option>")
+                                                .attr("value",item)
+                                                .text(item)); 
+                            });
+                            
+                        }
+                    });
+            });
+            
             $(document).ready(function () {
                 //var today = moment().day();
 
