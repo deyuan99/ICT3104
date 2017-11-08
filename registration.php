@@ -1,9 +1,4 @@
 <!DOCTYPE HTML>
-<!--
-        Spatial by TEMPLATED
-        templated.co @templatedco
-        Released for free under the Creative Commons Attribution 3.0 license (templated.co/license)
--->
 <?php
 session_start();
 $Srole = '';
@@ -33,7 +28,6 @@ if (isset($_SESSION['email']) && !empty($_SESSION['email'])) {
 
         <section id="main" class="wrapper">
             <div class="container">
-
                 <div class="row">
                     <!-- Login -->
                     <div class="6u 12u(xsmall)">
@@ -108,13 +102,12 @@ if (isset($_SESSION['email']) && !empty($_SESSION['email'])) {
                                     <input type="password" name="regconfpass" id="regconfpass" value="" placeholder="Confirm Password" required/>
                                 </div>
                                 <div class="12u"> <h4>Membership type</h4>
-                                    
                                     <input type="radio" name="category" id="category" value="trainer"> Trainer
-                                    
                                     <input type="radio" name="category" id="category" value="trainee"> Trainee
 
                                     <select class="dropdown" name="subscription" id="member_type">
-                                        
+                                      
+                                        <option value="" disabled selected>Select membership type</option>
                                     </select>
                                     
                                 </div>
@@ -146,9 +139,7 @@ if (isset($_SESSION['email']) && !empty($_SESSION['email'])) {
 
         <script type="text/javascript">
             $("input[type='radio'][name='category']").change(function () {
-
                 var selected = $("input[type='radio'][name='category']:checked").val();
-
                 if (selected === "trainer")
                     var opts = [
                         {name: "Not Applicable", val: ""}
@@ -156,7 +147,7 @@ if (isset($_SESSION['email']) && !empty($_SESSION['email'])) {
 
                 else
                     var opts = [
-                        {name: "Subscription type", val: ""},
+                        {name: "Choose Trainee Subscription", val: ""},
                         {name: "3 months- $27", val: "3"},
                         {name: "6 months- $50", val: "6"},
                         {name: "12 months- $80", val: "12"}
@@ -165,7 +156,6 @@ if (isset($_SESSION['email']) && !empty($_SESSION['email'])) {
                 $("#member_type").empty();
 
                 $.each(opts, function (k, v) {
-
                     $("#member_type").append("<option value='" + v.val + "'>" + v.name + "</option>");
 
                 });
