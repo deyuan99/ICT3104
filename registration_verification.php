@@ -3,21 +3,6 @@
 require_once('database/dbconfig.php');
 
 //subscription is monthly: 3, 6, 12
-
-$expire = new DateTime('2010-12-07');
-$date2 = new DateTime('2017-11-08');
-
-$today = date("Y-m-d");
-echo "today: " . $today;
-
-if( $today > $expire ){
-  echo 'expired <br>';
-}
-
-elseif( $today > $date2 ){
-  echo 'valid <br>';
-}
-
 if (isset($_POST['firstname']) && isset($_POST['lastname']) && isset($_POST['regemail']) && isset($_POST['phone']) && isset($_POST['category']) && isset($_POST['subscription']) && isset($_POST['regpass']) && isset($_POST['regconfpass'])) {
 
     $firstname = $_POST['firstname'];
