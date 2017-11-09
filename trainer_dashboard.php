@@ -8,7 +8,7 @@ $Srole = $_SESSION['role'];
 $notpersonal = "Personal Training";
 if ($Srole == "trainer") {
     $sql = "SELECT * FROM personalsession where trainerEmail= '$Semail'";
-    $sql6 = "SELECT * FROM groupsession where trainerEmail= '$Semail' AND (status = 'Approved' OR status = 'Pending')";
+    $sql6 = "SELECT * FROM groupsession where trainerEmail= '$Semail'";
 }
 elseif ($Srole == "admin") {
     $sql = "SELECT * FROM users where trainerEmail= '$Semail'";
