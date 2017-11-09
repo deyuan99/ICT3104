@@ -184,6 +184,7 @@ foreach ($events as $event):
                                 venue: '<?php echo $event['location']; ?>',
                                 type: '<?php echo $event['trainingName']; ?>',
                                 cost: '<?php echo '$ ' . $event['cost']; ?>',
+                                color: '<?php echo '#3D9970'; ?>',
                                 capacity: '<?php echo $event['groupCapacity']; ?>'
                             },
 <?php endforeach; ?>
