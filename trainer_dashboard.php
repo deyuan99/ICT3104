@@ -561,7 +561,7 @@ $typeofTrainings = $req3->fetchAll();
                 },
                 //defaultDate: '2016-01-12',
                 defaultDate: $('#calendar').fullCalendar('today'),
-                editable: true,
+                editable: false,
                 eventLimit: true, // allow "more" link when too many events
                 selectable: true,
                 selectHelper: true,

@@ -4,8 +4,7 @@ session_start();
 require_once('database/dbconfig.php');
 
 $email = $_SESSION['email'];
-$traineremail = $_GET['t'];
-$sql = "SELECT * FROM personalsession where trainerEmail= '$traineremail' and category = '1-1 Training' and traineeEmail = ''and date >= NOW()";
+$sql = "SELECT * FROM groupsession g, roomtype r, typeoftraining t, venue v where g.status = 'approved' and g.roomtypeid = r.id and g.typeoftrainingid = t.id and v.id = r.venueid";
 $req = $conn->prepare($sql);
 $req->execute();
 
@@ -36,7 +35,7 @@ $events = $req->fetchAll();
         <section id="two" class="wrapper style2 special">
             <div class="container">
                 <header class="major">
-                    <h2>Trainer's Calendar</h2>
+                    <h2>Group Training Schedule</h2>
                     <p></p>
                 </header>
                 <div id="calendar" class="col-centered">
@@ -49,7 +48,7 @@ $events = $req->fetchAll();
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <form class="form-horizontal" method="POST" action="addCalendarEventTrainee.php">
-
+                            
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                             <h4 class="modal-title" id="myModalLabel">View Event</h4>
@@ -57,14 +56,35 @@ $events = $req->fetchAll();
                         <div class="modal-body">
 
                             <div class="form-group">
-                                <label for="category" class="col-sm-2 control-label">Category</label>
+                                <label for="category" class="col-sm-2 control-label">Trainer</label>
                                 <div class="col-sm-10">
-                                    <input type="text" name="category" class="form-control" id="category" value="<?php echo $event['category']; ?>" readonly>
+                                    <input type="text" name="trainer" class="form-control" id="trainer" value="<?php echo $event['trainerEmail']; ?>" readonly>
                                 </div>
                             </div>
+                            
+                            <div class="form-group">
+                                <label for="trainingname" class="col-sm-2 control-label">Type</label>
+                                <div class="col-sm-10">
+                                    <input type="text" name="trainingname" class="form-control" id="trainingname" value="<?php echo $event['trainingName']; ?>" readonly>
+                                </div>
+                            </div> 
+                            
+                            <div class="form-group">
+                                <label for="cost" class="col-sm-2 control-label">Cost</label>
+                                <div class="col-sm-10">
+                                    <input type="text" name="cost" class="form-control" id="cost" value="<?php echo $event['cost']; ?>" readonly>
+                                </div>
+                            </div> 
+                            
+                            <div class="form-group">
+                                <label for="description" class="col-sm-2 control-label">Description</label>
+                                <div class="col-sm-10">
+                                    <input type="text" name="description" class="form-control" id="description" value="<?php echo $event['description']; ?>" readonly>
+                                </div>
+                            </div> 
 
                             <div class="form-group">
-                                <label for="color" class="col-sm-2 control-label">Date</label>
+                                <label for="date" class="col-sm-2 control-label">Date</label>
                                 <div class="col-sm-10">
                                     <input type="text" name="date" class="form-control" id="date" value="<?php echo $event['date']; ?>" readonly>
                                 </div>
@@ -85,17 +105,25 @@ $events = $req->fetchAll();
                             </div>
 
                             <div class="form-group">
-                                <label for="end" class="col-sm-2 control-label">Description</label>
+                                <label for="venue" class="col-sm-2 control-label">Venue</label>
                                 <div class="col-sm-10">
-                                    <input type="text" name="description" class="form-control" id="description" value="<?php echo $event['description']; ?>" readonly>
+                                    <input type="text" name="venue" class="form-control" id="venue" value="<?php echo $event['location']; ?>" readonly>
                                 </div>
                             </div> 
+                            
+                            <div class="form-group">
+                                <label for="capacity" class="col-sm-2 control-label">Capacity</label>
+                                <div class="col-sm-10">
+                                    <input type="text" name="capacity" class="form-control" id="capacity" value="<?php echo $event['groupCapacity']; ?>" readonly>
+                                </div>
+                            </div> 
+                            
                             <input type="hidden" id="eid" name="eid" value="23"/>
                         </div>
 
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                            <input type="submit" class="btn btn-primary" value="Add Event"/>
+                            <input type="submit" class="btn btn-primary" value="Join Training"/>
                         </div>
                     </form>
                 </div>
@@ -140,39 +168,24 @@ $events = $req->fetchAll();
                     eventLimit: true, // allow "more" link when too many events
                     selectable: true,
                     selectHelper: true,
-                    selectConstraint: {
-                        start: $.fullCalendar.moment().subtract(1, 'days'),
-                        end: $.fullCalendar.moment().startOf('month').add(1, 'month')
-                    },
                     events: [
 <?php
 foreach ($events as $event):
 
-
-    $start = $event['startTime'];
-    $end = $event['endTime'];
-    $cat = $event['category'];
-    $eventdate = $event['date'];
-    $traineeEmail = $event['traineeEmail'];
-    $combinedstart = date('Y-m-d H:i:s', strtotime("$eventdate $start"));
-    $combinedend = date('Y-m-d H:i:s', strtotime("$eventdate $end"));
-
-    if ($cat == "Personal Training") {
-        $traineeEmail = "Not Applicable";
-        $color = '#000';
-    } else if ($traineeEmail != NULL) {
-        $color = '#378006';
-    }
     ?>
                             {
                                 id: '<?php echo $event['id']; ?>',
-                                title: '<?php echo $event['category']; ?>',
+                                trainer: '<?php echo $event['trainerEmail']; ?>',
+                                title: '<?php echo $event['trainingName']; ?>',
                                 date: '<?php echo $event['date']; ?>',
                                 startTime: '<?php echo $event['startTime']; ?>',
                                 endTime: '<?php echo $event['endTime']; ?>',
-                                start: '<?php echo $combinedstart ?>',
-                                end: '<?php echo $combinedend; ?>',
                                 description: '<?php echo $event['description']; ?>',
+                                venue: '<?php echo $event['location']; ?>',
+                                type: '<?php echo $event['trainingName']; ?>',
+                                cost: '<?php echo '$ ' . $event['cost']; ?>',
+                                color: '<?php echo '#3D9970'; ?>',
+                                capacity: '<?php echo $event['groupCapacity']; ?>'
                             },
 <?php endforeach; ?>
                     ]
@@ -180,11 +193,15 @@ foreach ($events as $event):
                     eventRender: function (event, element) {
                         element.bind('click', function () {
                             $('#eid').val(event.id);
-                            $('#ModalView #category').val(event.title);
+                            $('#ModalView #trainer').val(event.trainer);
                             $('#ModalView #date').val(event.date);
                             $('#ModalView #startTime').val(event.startTime);
                             $('#ModalView #endTime').val(event.endTime);
                             $('#ModalView #description').val(event.description);
+                            $('#ModalView #venue').val(event.venue);
+                            $('#ModalView #trainingname').val(event.type);
+                            $('#ModalView #cost').val(event.cost);
+                            $('#ModalView #capacity').val(event.capacity);
                             $('#ModalView').modal('show');
                         });
                     }
