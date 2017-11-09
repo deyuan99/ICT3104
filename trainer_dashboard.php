@@ -8,6 +8,7 @@ $Srole = $_SESSION['role'];
 $notpersonal = "Personal Training";
 if ($Srole == "trainer") {
     $sql = "SELECT * FROM personalsession where trainerEmail= '$Semail'";
+    $sql6 = "SELECT * FROM groupsession where trainerEmail= '$Semail' AND (status = 'Approved' OR status = 'Pending')";
 }
 elseif ($Srole == "admin") {
     $sql = "SELECT * FROM users where trainerEmail= '$Semail'";
@@ -15,6 +16,10 @@ elseif ($Srole == "admin") {
 $req = $conn->prepare($sql);
 $req->execute();
 $events = $req->fetchAll();
+
+$req6 = $conn->prepare($sql6);
+$req6->execute();
+$grpevents = $req6->fetchAll();
 
 
 // For selecting all venue
@@ -282,6 +287,13 @@ $typeofTrainings = $req3->fetchAll();
                                     <input type="text" name="typeview" class="form-control" id="typeview" readonly>
                                 </div>
                             </div>
+                            
+                            <div class="form-group">
+                                <label for="grpsizeview" class="col-sm-2 control-label">Max Group Size</label>
+                                <div class="col-sm-10">
+                                    <input type="text" name="grpsizeview" class="form-control" id="grpsizeview" readonly>
+                                </div>
+                            </div>
 
                             <div class="form-group">
                                 <label for="end" class="col-sm-2 control-label">Description</label>
@@ -300,6 +312,13 @@ $typeofTrainings = $req3->fetchAll();
                                     </div>
                                 </div>
                             <?php } ?>
+                            
+                            <div class="form-group">
+                                <label for="status" class="col-sm-2 control-label">Status</label>
+                                <div class="col-sm-10">
+                                    <input type="text" name="status" class="form-control" id="status" readonly>
+                                </div>
+                            </div>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button> 
@@ -429,6 +448,15 @@ $typeofTrainings = $req3->fetchAll();
                                         </div>
                                     </div>
                                 </div>
+                                
+                                <div class="form-group">
+                                    <div id="hidden_div_size">
+                                        <label for="groupsize" class="col-sm-2 control-label">Max Group Size</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" name="groupsize" class="form-control" id="groupsize">
+                                        </div>
+                                    </div>
+                                </div>
 
                                 <div class="form-group">
                                     <label for="description" class="col-sm-2 control-label">Description</label>
@@ -484,13 +512,19 @@ $typeofTrainings = $req3->fetchAll();
         $('#hidden_div_rm').hide();
         $('#hidden_div_1v1grp').hide();
         $('#hidden_div_cost').hide();
+        $('#hidden_div_size').hide();
+        
         // for training type
         $(function () {
             $('#Pcategory').change(function () {
                 if ($('#Pcategory').val() === "Personal Training") {
                     $('#hidden_div_1v1grp').hide();
+                    $('#hidden_div_size').hide();
+                } else if ($('#Pcategory').val() === "1-1 Training") {
+                    $('#hidden_div_1v1grp').show();
                 } else {
                     $('#hidden_div_1v1grp').show();
+                    $('#hidden_div_size').show();
                 }
             });
         });
@@ -636,12 +670,63 @@ foreach ($events as $event):
                         },
 <?php endforeach;
 ?>
+<?php 
+    foreach ($grpevents as $grpevent):
+    $start = $grpevent['startTime'];
+    $end = $grpevent['endTime'];
+    $eventdate = $grpevent['date'];
+    $grpsize = $grpevent['groupCapacity'];
+
+    $combinedstart = date('Y-m-d H:i:s', strtotime("$eventdate $start"));
+    $combinedend = date('Y-m-d H:i:s', strtotime("$eventdate $end"));
+    
+    $roomt = $grpevent['roomTypeID'];
+    $sql4 = "SELECT roomtype.name, venue.location FROM roomtype, venue WHERE roomtype.id = '$roomt' AND roomtype.venueID = venue.id";
+    $req4 = $conn->prepare($sql4);
+    $req4 -> execute();
+    $names = $req4 -> fetch(PDO::FETCH_ASSOC);
+    $roomname = $names['name'];
+    $venuename = $names['location'];
+       
+    $trainingtype = $grpevent['typeofTrainingID'];
+    $sql5 = "SELECT trainingName, cost FROM typeoftraining WHERE id = '$trainingtype'";
+    $req5 = $conn->prepare($sql5);
+    $req5 -> execute();
+    $names2 = $req5 -> fetch(PDO::FETCH_ASSOC);
+    $trainingname = $names2['trainingName'];
+    $cost = $names2['cost'];
+
+    $color = '#008000';
+    $grpevent['color'] = $color;
+?>
+                {
+                            evid: '<?php echo $grpevent['id']; ?>',
+                            title: '<?php echo "Group Training" ?>',
+                            status: '<?php echo $grpevent['status'] ?>',
+                            date: '<?php echo $grpevent['date']; ?>',
+                            startTime: '<?php echo $grpevent['startTime']; ?>',
+                            endTime: '<?php echo $grpevent['endTime']; ?>',
+                            start: '<?php echo $combinedstart; ?>',
+                            end: '<?php echo $combinedend; ?>',
+                            venue: '<?php echo $venuename; ?>',
+                            room: '<?php echo $roomname; ?>',
+                            type: '<?php echo $trainingname; ?>',
+                            cost: '<?php echo $cost; ?>',                            
+                            grpsize: '<?php echo $grpsize; ?>',
+                            description: '<?php echo $grpevent['description']; ?>',
+                            trainee: '<?php echo $traineeEmail ?>',
+                            color: '<?php echo $grpevent['color']; ?>',
+                        },
+<?php endforeach;
+?> 
+                
                 ]
                 ,
                 eventRender: function (event, element) {
                     element.bind('click', function () {
                         $('#ModalView #evid').val(event.evid);
                         $('#ModalView #category').val(event.title);
+                        $('#ModalView #status').val(event.status);
                         $('#ModalView #date').val(event.date);
                         $('#ModalView #startTime').val(event.startTime);
                         $('#ModalView #endTime').val(event.endTime);
@@ -649,6 +734,7 @@ foreach ($events as $event):
                         $('#ModalView #roomview').val(event.room);
                         $('#ModalView #typeview').val(event.type);
                         $('#ModalView #costview').val(event.cost);
+                        $('#ModalView #grpsizeview').val(event.grpsize);
                         $('#ModalView #description').val(event.description);
                         $('#ModalView #trainee').val(event.trainee);
                         $('#ModalView').modal('show');

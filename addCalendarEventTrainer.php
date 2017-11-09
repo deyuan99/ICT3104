@@ -109,7 +109,31 @@ if (isset($_POST['Pcategory']) && isset($_POST['starttime']) && isset($_POST['en
     
     // group training
     else {
+        $typename = $_POST['typeofTraining'];
+        $groupsize = $_POST['groupsize'];
         
+        $sql = "INSERT INTO groupsession(roomTypeID, typeofTrainingID, startTime, endTime, date, description, trainerEmail, groupCapacity, status) values ((SELECT id FROM roomtype WHERE name = '$roomtype' AND venueID = (SELECT id FROM venue WHERE location = '$venue')),"
+                . "(SELECT id FROM typeoftraining WHERE trainingName = '$typename'),"
+                . "'$starttime','$endtime','$dateformat','$description','$Semail','$groupsize','Pending')";
+
+        $query = $conn->prepare($sql);
+        if ($query == false) {
+            print_r($conn->errorInfo());
+            die('Error prepare');
+        }
+        $sth = $query->execute();
+        if ($sth == false) {
+            print_r($query->errorInfo());
+            die('Error execute');
+        }
+
+        if ($query) {
+            echo "<script type='text/javascript'>alert('proposal submitted successfully!');"
+            . "window.location.href='trainer_dashboard.php';"
+            . "</script>";
+        } else {
+            echo "<script type='text/javascript'>alert('failed');" . "window.location.href='trainer_dashboard.php';" . "</script>";
+        }
     }
 }
 
