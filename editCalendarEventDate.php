@@ -33,5 +33,16 @@ if (isset($_POST['Event'][0]) && isset($_POST['Event'][1]) && isset($_POST['Even
 	}else{
 		die ('OK');
 	}
+              if( $query ){ 
+             echo "<script type='text/javascript'>alert('submitted successfully!');"
+             . "window.location.href='trainee_dashboard.php';"
+             . "</script>";
+           }
+             else{
+         echo "<script type='text/javascript'>alert('failed');"
+             . "window.location.href='trainee_dashboard.php';"
+              . "</script>";    
+             }
+        
 
 }

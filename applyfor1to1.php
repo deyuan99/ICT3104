@@ -5,49 +5,23 @@
 // connect to database
 session_start();
 require_once('database/dbconfig.php');
-
-	 $Semail = $_SESSION['email'];
-         $Sname = $_SESSION['name'];
-
-         $id = $_POST['evid'];
-
-	$sql = "UPDATE personalsession set traineeEmail = '$Semail' WHERE id = '$id'";
-	//$req = $bdd->prepare($sql
-	//$req->execute();
-	//	echo $sql;
-	
-	$query = $conn->prepare( $sql );
-	if ($query == false) {
-	 print_r($conn->errorInfo());
-	 die ('Error prepare');
-	}
-	$sth = $query->execute();
-	if ($sth == false) {
-	 print_r($query->errorInfo());
-	 die ('Error execute');
-	}
-        
-     if( $query ){ 
-     echo "<script type='text/javascript'>alert('submitted successfully!');"
-     . "window.location.href='trainer_dashboard.php';"
-     . "</script>";
-   }
-     else{
- echo "<script type='text/javascript'>alert('failed');"
-     . "window.location.href='trainer_dashboard.php';"
-      . "</script>";    
-     }
-
-     
-     if (isset($_POST['cost']) && isset($_POST['description']) && isset($_POST['starttime']) && isset($_POST['endtime']) && isset($_POST['evid'])){
+       if (isset($_POST['cost']) && isset($_POST['description']) && isset($_POST['starttime']) && isset($_POST['endtime']) && isset($_POST['evid'])){
 	
 	$id = $_POST['evid'];
-	//$category = $_POST['category'];
+        $eventdate = $_POST['date'];
 	$description = $_POST['description'];
         $startTime = $_POST['starttime'];
         $endTime = $_POST['endtime'];
         $cost = $_POST['cost'];
-        
+        $todaydate = date('Y-m-d H:i:s');
+        $combinedstart = date('Y-m-d H:i:s', strtotime("$eventdate $startTime"));
+
+        $hourdiff = round((strtotime($combinedstart) - strtotime($todaydate))/3600, 1);
+        if($hourdiff  < 0){
+           echo "<script type='text/javascript'>alert('Cant edit past event!');"
+             . "window.location.href='trainer_dashboard.php';"
+              . "</script>";    
+        }else{
 	//category = '$category'
 	$sql = "UPDATE personalsession SET cost = '$cost', startTime = '$startTime', endTime = '$endTime', description = '$description' WHERE id = '$id' ";
 
@@ -64,13 +38,14 @@ require_once('database/dbconfig.php');
 	}
         if( $query ){ 
              echo "<script type='text/javascript'>alert('submitted successfully!');"
-             . "window.location.href='trainee_dashboard.php';"
+             . "window.location.href='trainer_dashboard.php';"
              . "</script>";
            }
              else{
          echo "<script type='text/javascript'>alert('failed');"
-             . "window.location.href='trainee_dashboard.php';"
+             . "window.location.href='trainer_dashboard.php';"
               . "</script>";    
              }
+        }
 }
 	

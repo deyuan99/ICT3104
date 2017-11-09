@@ -2,12 +2,6 @@
 session_start();
 ?>
 <!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
-
 <html>
     <head>
         <meta charset="UTF-8">
@@ -160,15 +154,15 @@ and open the template in the editor.
                             <div class="form-group row">
                                 <label class="form-control-label col-md-offset-2 col-md-3 col-xs-offset-0 col-xs-5 label-margin">First Name:</label>
                                 <div class="col-sm-5">
-                                    <input type="text" class="form-control" id="firstName" name="firstName" required>
+                                    <input type="text" class="form-control" id="firstName" name="firstName" value="">
                                 </div>
                             </div>
                             
-                            <input type="hidden" name="edit_lName" id="edit_lName" value="">
+                            <input type="hidden" name="edit_lName" id="edit_lName" value="<?php echo $lastName;?>">
                             <div class="form-group row">
                                 <label class="form-control-label col-md-offset-2 col-md-3 col-xs-offset-0 col-xs-5 label-margin">Last Name:</label>
                                 <div class="col-sm-5">
-                                    <input type="text" class="form-control" id="lastName" name="lastName" required>
+                                    <input type="text" class="form-control" id="lastName" name="lastName" value="">
                                 </div>
                             </div>
                             
@@ -176,7 +170,7 @@ and open the template in the editor.
                             <div class="form-group row">
                                 <label class="form-control-label col-md-offset-2 col-md-3 col-xs-offset-0 col-xs-5 label-margin">Billing Address:</label>
                                 <div class="col-sm-5">
-                                    <input type="text" class="form-control" id="address" name="address" required>
+                                    <input type="text" class="form-control" id="address" name="address">
                                 </div>
                             </div>
                             
@@ -184,7 +178,7 @@ and open the template in the editor.
                             <div class="form-group row">
                                 <label class="form-control-label col-md-offset-2 col-md-3 col-xs-offset-0 col-xs-5 label-margin" for="mobile">Mobile Number:</label>
                                 <div class="col-sm-5">
-                                    <input type="number" class="form-control" id="mobile" name="mobile" required>
+                                    <input type="number" class="form-control" id="mobile" name="mobile" value="">
                                 </div>
                             </div>
                             <div class="form-group row" style="margin-top: 30px;">
@@ -211,7 +205,7 @@ and open the template in the editor.
                     </div>
                     <div class="modal-body">
                         <div id="deactivateMsg"></div>
-                        <div class="widget-body" id="manualForm">
+                        <div class="widget-body" id="manualForm"> 
                             <form name="form" id="form" class="form-horizontal" role="form" action="doDeactivate.php" enctype="multipart/form-data" method="POST">
                                 <input type="hidden" name="deactivate_userid" id="deactivate_userid" value="">
                                 <div class="form-actions">

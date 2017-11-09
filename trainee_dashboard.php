@@ -20,6 +20,14 @@ $req = $conn->prepare($sql);
 $req->execute();
 
 $events = $req->fetchAll();
+
+
+// For selecting all venue
+$sql2 = "SELECT location FROM venue";
+$req2 = $conn->prepare($sql2);
+$req2->execute();
+$venues = $req2->fetchAll();
+
 ?>
 <html>
     <head>
@@ -256,7 +264,9 @@ $events = $req->fetchAll();
 
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                            <button type="submit" id="save" class="btn btn-primary">Save changes</button>
+                            <button type="submit" name="save" id="save" value="save" class="btn btn-primary">Save changes</button>
+                            <button type="submit" name="delete" id="delete" value="delete" class="btn btn-primary">Delete</button>
+
                         </div>
                     </form>
                 </div>
@@ -325,6 +335,30 @@ $events = $req->fetchAll();
                                     </select>
                                 </div>
                             </div>
+                            
+                            <div class="form-group">
+                                <label for="venue" class="col-sm-2 control-label">Venue</label>
+                                <div class="col-sm-10">
+                                    <select name="venue" class="form-control" id="venue" >
+                                        <option value="select">- Select Venue -</option>
+                                        <?php
+                                        foreach ($venues as $venue):
+                                            $location = $venue['location'];
+                                            echo '<option value="'. $location .'">'. $location .'</option>';
+                                        endforeach; ?>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <div id="hidden_div">
+                                    <label for="roomtype" class="col-sm-2 control-label">RoomType</label>
+                                    <div class="col-sm-10">
+                                        <select name="roomtype" class="form-control" id="roomtype" >
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
 
                             <div class="form-group">
                                 <label for="description" class="col-sm-2 control-label">Description</label>
@@ -367,6 +401,51 @@ $events = $req->fetchAll();
 
         <!--Calendar script-->
         <script>
+            // for showing the room types based on venue chosen
+//            $(function () {
+//                $('#hidden_div').hide();
+//                $('#venue').change(function () {
+//                    if ($('#venue').val() !== "select") {
+//                        $('#hidden_div').show();
+//                    } else {
+//                        $('#hidden_div').hide();
+//                    }
+//                });
+//            });
+//            
+            $('#hidden_div').hide();
+            $("#venue").change(function ()
+            {
+                if ($('#venue').val() === "select") {
+                    $('#hidden_div').hide();
+                } else {
+                    $('#hidden_div').show();
+                }
+                
+                var venueID = $(this).find(":selected").val();
+//                alert(id);
+                $.ajax
+                    ({
+                        type: "POST",
+                        url: 'phpCodes/getRoomType.php',
+                        data: {venueID: venueID},
+                        cache: false,
+                        success: function (r)
+                        {
+                            //document.getElementById("roomtype").value = r;
+                            var result = $.parseJSON(r);
+//                            alert(result);
+                            $('#roomtype').html("");
+                            result.forEach(function(item) {
+                                $('#roomtype').append($("<option></option>")
+                                                .attr("value",item)
+                                                .text(item)); 
+                            });
+                            
+                        }
+                    });
+            });
+            
             $(document).ready(function () {
                 //var today = moment().day();
 
@@ -382,29 +461,15 @@ $events = $req->fetchAll();
                     eventLimit: true, // allow "more" link when too many events
                     selectable: true,
                     selectHelper: true,
+                    selectConstraint: {
+                        start: $.fullCalendar.moment().subtract(1, 'days'),
+                        end: $.fullCalendar.moment().startOf('month').add(1, 'month')
+                    },
                     select: function (start) {
                         $('#ModalAdd #date').val(moment(start).format('DD-MM-YYYY '));
                         $('#ModalAdd').modal('show');
                     },
-                    eventRender: function (event, element) {
-                        element.bind('click', function () {
-                            $('#ModalView #id').val(event.id);
-                            $('#ModalView #category').val(event.title);
-                            $('#ModalView #date').val(event.date);
-                            $('#ModalView #startTime').val(event.startTime);
-                            $('#ModalView #endTime').val(event.endTime);
-                            $('#ModalView #description').val(event.description);
-                            
-                            if(event.title==="1-1 Training")
-                            {
-                                $('#save').hide();
-                            }
-                            else{
-                                $('#save').show();
-                            }
-                            $('#ModalView').modal('show');
-                        });
-                    },
+                   
                     eventDrop: function(event, delta, revertFunc) { 
 
 				edit(event);
@@ -415,7 +480,6 @@ $events = $req->fetchAll();
 				edit(event);
 
                     },
-                   
                     events: [
             <?php
             foreach ($events as $event):
@@ -429,6 +493,7 @@ $events = $req->fetchAll();
                 $combinedstart = date('Y-m-d H:i:s', strtotime("$eventdate $start"));
                 $combinedend = date('Y-m-d H:i:s', strtotime("$eventdate $end"));
 
+                
                 if ($cat == "Personal Training") {
                     $traineeEmail = "Not Applicable";
             
@@ -458,8 +523,27 @@ $events = $req->fetchAll();
                                 
                             },
 <?php endforeach; ?>
-                    ]
-                    
+                    ],
+                     eventRender: function (event, element) {
+                         
+                        element.bind('click', function () {
+                            $('#ModalView #id').val(event.id);
+                            $('#ModalView #category').val(event.title);
+                            $('#ModalView #date').val(event.date);
+                            $('#ModalView #startTime').val(event.startTime);
+                            $('#ModalView #endTime').val(event.endTime);
+                            $('#ModalView #description').val(event.description);
+                            
+                            if(event.title==="1-1 Training")
+                            {
+                                $('#save').hide();
+                            }
+                            else{
+                                $('#save').show();
+                            }
+                            $('#ModalView').modal('show');
+                        });
+                    }
                     });
 
                   function edit(event){
@@ -494,6 +578,12 @@ $events = $req->fetchAll();
             });
 
         </script>
+<script>
+
+				  
+        
+</script>
+
          <!-- Profile update -->
     <script>
         var flag = 0;

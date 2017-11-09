@@ -22,6 +22,7 @@ foreach ($rows as $row):
     $firstname = $row['firstName'];
     $lastname = $row['lastName'];
     $status = $row['status'];
+    $subscription = $row['subscription'];
 endforeach;
 
 if ($req->rowCount() == 1) {
@@ -42,7 +43,13 @@ if ($req->rowCount() == 1) {
         }
 
         if ($role == "trainee") {
-            header("location: trainee_dashboard.php");
+            //Arifah: to change based on expiry date!
+            //get date compare date
+            if ($subscription == 0) {
+                echo "sorry";
+            } else {
+                header("location: trainee_dashboard.php");
+            }
         } else if ($role == "trainer") {
             header("location: trainer_dashboard.php");
         } else {

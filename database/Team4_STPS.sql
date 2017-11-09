@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Nov 01, 2017 at 01:56 PM
+-- Generation Time: Nov 08, 2017 at 08:35 PM
 -- Server version: 10.1.26-MariaDB
 -- PHP Version: 7.1.9
 
@@ -61,15 +61,22 @@ CREATE TABLE `userapproval` (
   `phoneNumber` int(8) NOT NULL,
   `profilePicture` varchar(255) NOT NULL,
   `role` varchar(10) NOT NULL,
-  `password` varchar(50) NOT NULL
+  `password` varchar(50) NOT NULL,
+  `subscription` varchar(255) NOT NULL,
+  `expiryDate` date NOT NULL,
+  `registerDate` date NOT NULL,
+  `address` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `userapproval`
 --
 
-INSERT INTO `userapproval` (`email`, `firstName`, `lastName`, `phoneNumber`, `profilePicture`, `role`, `password`) VALUES
-('test@gmail.com', 'test', 'testing', 12312312, '', 'trainee', 'ddf170f924ba1ce072cd91b54614289524e70db2');
+INSERT INTO `userapproval` (`email`, `firstName`, `lastName`, `phoneNumber`, `profilePicture`, `role`, `password`, `subscription`, `expiryDate`, `registerDate`, `address`) VALUES
+('5234@mail.com', 'fg', 'dfgd', 872334578, '', 'trainee', '356a192b7913b04c54574d18c28d46e6395428ab', '+3 month', '0000-00-00', '0000-00-00', ''),
+('wet@mail.com', '234', '435', 987654321, '', 'trainee', '356a192b7913b04c54574d18c28d46e6395428ab', '3', '0000-00-00', '2017-11-08', ''),
+('wqr12@mail.com', '24354', 'rgewr', 98763211, '', 'trainee', '356a192b7913b04c54574d18c28d46e6395428ab', '+3 month', '0000-00-00', '0000-00-00', ''),
+('wqrq2@mail.com', '24354', 'rgewr', 98763211, '', 'trainee', '356a192b7913b04c54574d18c28d46e6395428ab', '+3 month', '0000-00-00', '0000-00-00', '');
 
 -- --------------------------------------------------------
 
@@ -86,19 +93,23 @@ CREATE TABLE `users` (
   `role` varchar(10) NOT NULL,
   `password` varchar(50) NOT NULL,
   `status` int(1) NOT NULL,
-  `address` varchar(255) NOT NULL
+  `address` varchar(255) NOT NULL,
+  `subscription` varchar(255) NOT NULL,
+  `registerDate` date NOT NULL,
+  `expiryDate` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`email`, `firstName`, `lastName`, `phoneNumber`, `profilePicture`, `role`, `password`, `status`, `address`) VALUES
-('admin1@gmail.com', 'ad', 'min', 12121212, 'images/uploads/profileadmin1@gmail.com.jpg', 'admin', '6c7ca345f63f835cb353ff15bd6c5e052ec08e7a', 1, ''),
-('trainee1@gmail.com', 'trainee11', 'tr1', 123456789, '', 'trainee', 'ddf170f924ba1ce072cd91b54614289524e70db2', 1, ''),
-('trainee2@gmail.com', 'trainee2', 'te2', 13131314, '', 'trainee', 'ddf170f924ba1ce072cd91b54614289524e70db2', 1, '212 afgreokmgr 23-234 s324235'),
-('trainer1@gmail.com', 'trainer123', 'tr1', 14141414, '', 'trainer', '69a6439936f0ef293d0a713f0aaf7a04ca82d272', 1, ''),
-('trainer2@gmail.com', 'trainer2', 'tr2', 14141415, '', 'trainer', '69a6439936f0ef293d0a713f0aaf7a04ca82d272', 1, '123 abc s890234');
+INSERT INTO `users` (`email`, `firstName`, `lastName`, `phoneNumber`, `profilePicture`, `role`, `password`, `status`, `address`, `subscription`, `registerDate`, `expiryDate`) VALUES
+('admin1@gmail.com', 'admin', 'min', 12121212, 'images/uploads/profileadmin1@gmail.com.jpg', 'admin', '6c7ca345f63f835cb353ff15bd6c5e052ec08e7a', 1, '', '0', '0000-00-00', '0000-00-00'),
+('trainee1@gmail.com', 'nurul', 'trainee1', 0, '', 'trainee', 'ddf170f924ba1ce072cd91b54614289524e70db2', 1, '', '0', '0000-00-00', '0000-00-00'),
+('trainee2@gmail.com', '', '', 0, '', 'trainee', 'ddf170f924ba1ce072cd91b54614289524e70db2', 1, '', '3', '0000-00-00', '0000-00-00'),
+('trainer1@gmail.com', 'trainer123', 'tr1', 14141414, '', 'trainer', '69a6439936f0ef293d0a713f0aaf7a04ca82d272', 1, '', '0', '0000-00-00', '0000-00-00'),
+('trainer2@gmail.com', 'trainer2', 'tr2', 14141415, '', 'trainer', '69a6439936f0ef293d0a713f0aaf7a04ca82d272', 1, '123 abc s890234', '0', '0000-00-00', '0000-00-00'),
+('yellow6629@hotmail.com', 'test', 'ff', 987654321, '', 'trainee', 'pyVrIi2H', 1, '', '0', '0000-00-00', '0000-00-00');
 
 --
 -- Indexes for dumped tables
