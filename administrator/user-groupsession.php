@@ -153,14 +153,14 @@ $events = $req->fetchAll();
                 $combinedstart = date('Y-m-d H:i:s', strtotime("$eventdate $start"));
                 $combinedend = date('Y-m-d H:i:s', strtotime("$eventdate $end"));
 
-                if($status == 'Approved'){
+                /*if($status == 'Approved'){
                     $color = '#3D9970';
                 } elseif($status== 'Rejected') {
                     $color = '#FF4136';
                 }elseif($status== 'pending'){
                     $color = '#AAAAAA';
-                }
-                $event['color']=$color;
+                }*/
+                //$event['color']=$color;
                 ?>
                     {
                         id: '<?php echo $event['id']; ?>',
@@ -174,7 +174,7 @@ $events = $req->fetchAll();
                         description: '<?php echo $event['description']; ?>',
                         groupCapacity: '<?php echo $event['groupCapacity']; ?>',
                         status: '<?php echo $event['status']; ?>',
-                        color: '<?php echo $event['color']; ?>',
+                        color: '<?php echo '#3D9970'; ?>',
                         trainerEmail: '<?php echo $event['trainerEmail']; ?>',
 
                     },
