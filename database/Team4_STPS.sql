@@ -106,8 +106,8 @@ INSERT INTO `users` (`email`, `firstName`, `lastName`, `phoneNumber`, `profilePi
 
 CREATE TABLE `groupsession` (
   `id` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
-  `venue` varchar(50),
-  `TypeofTrainingID` int(11),
+  `roomTypeID` int(11) NOT NULL,
+  `typeofTrainingID` int(11) NOT NULL,
   `startTime` time NOT NULL,
   `endTime` time NOT NULL,
   `date` date NOT NULL,
