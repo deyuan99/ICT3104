@@ -4,7 +4,7 @@ require('../database/dbconfig.php');
 $email = $_POST['approve_userid'];
 
 // copy from userapproval to users table
-$sql = "INSERT INTO users (email, firstName, lastName, phoneNumber, profilePicture, role, password) SELECT * FROM userapproval WHERE email = '$email'";
+$sql = "INSERT INTO users (email, firstName, lastName, phoneNumber, profilePicture, role, password, address, subscription, registerDate, expiryDate) SELECT * FROM userapproval WHERE email = '$email'";
 $query = $conn->prepare($sql);
 $stmt = $query->execute();
 

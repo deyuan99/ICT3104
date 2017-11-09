@@ -66,11 +66,12 @@ session_start();
                                 <table id="esa-table" class="table table-striped table-bordered" cellspacing="0" width="100%">
                                     <thead>
                                         <tr>
-                                            <th class="col-md-1">Email Address</th>
+                                            <th class="col-md-2">Email Address</th>
                                             <th class="col-md-1">First Name</th>
                                             <th class="col-md-1">Last Name</th>
                                             <th class="col-md-1">Billing Address</th>
                                             <th class="col-md-1">Mobile</th>
+                                            <th class="col-md-1">Expiry Date</th>
                                             <th class="col-md-2">Action</th>
                                         </tr>
                                     </thead>
@@ -90,11 +91,12 @@ session_start();
                                 <table id="supervisor-table" class="table table-striped table-bordered" cellspacing="0" width="100%">
                                     <thead>
                                         <tr>
-                                            <th class="col-md-1">Email Address</th>
+                                            <th class="col-md-2">Email Address</th>
                                             <th class="col-md-1">First Name</th>
                                             <th class="col-md-1">Last Name</th>
                                             <th class="col-md-2">Billing Address</th>
                                             <th class="col-md-1">Mobile Number</th>
+                                            <th class="col-md-1">Expiry Date</th>
                                             <th class="col-md-2">Action</th>
                                         </tr>
                                     </thead>

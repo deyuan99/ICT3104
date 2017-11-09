@@ -1,11 +1,4 @@
 <?php
-
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 // connect to database
 session_start();
 require_once('database/dbconfig.php');
@@ -21,8 +14,10 @@ if (isset($_POST['category']) && isset($_POST['starttime']) && isset($_POST['end
         $starttime = $_POST['starttime'];
         $endtime = $_POST['endtime'];
         $description = $_POST['description'];
+        $venue = $_POST['venue'];
+        $roomtype = $_POST['roomtype'];
         
-	$sql = "INSERT INTO personalsession(category, startTime, endTime,date,description,traineeEmail) values ('$category', '$starttime', '$endtime','$dateformat','$description','$Semail')";
+	$sql = "INSERT INTO personalsession(category, roomTypeID, startTime, endTime, date, description, traineeEmail) values ('$category', (SELECT id FROM roomtype WHERE name = '$roomtype' AND venueID = (SELECT id FROM venue WHERE location = '$venue')), '$starttime', '$endtime','$dateformat','$description','$Semail')";
         	
 	$query = $conn->prepare( $sql );
 	if ($query == false) {

@@ -1,7 +1,7 @@
 <?php
 require('../database/dbconfig.php');
 
-$email = $_POST['reactivate_userid'];
+$email = $_POST['reject_userid'];
 
 $sql = "DELETE FROM userapproval WHERE email = '$email'";
 $query = $conn->prepare($sql);
