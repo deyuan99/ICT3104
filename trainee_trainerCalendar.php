@@ -5,7 +5,7 @@ require_once('database/dbconfig.php');
 
 $email = $_SESSION['email'];
 $traineremail = $_GET['t'];
-$sql = "SELECT * FROM personalsession where trainerEmail= '$traineremail' and category = '1-1 Training' and traineeEmail = ''and date >= NOW()";
+$sql = "SELECT * FROM personalsession where trainerEmail= '$traineremail' and category = '1-1 Training' and date >= NOW()";
 $req = $conn->prepare($sql);
 $req->execute();
 

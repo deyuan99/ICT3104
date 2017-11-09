@@ -5,14 +5,11 @@ require_once('database/dbconfig.php');
 $Semail = $_SESSION['email'];
 $Sname = $_SESSION['name'];
 $Srole = $_SESSION['role'];
-$notpersonal = "Personal Training";
-if ($Srole == "trainer") {
-    $sql = "SELECT * FROM personalsession where trainerEmail= '$Semail'";
-    $sql6 = "SELECT * FROM groupsession where trainerEmail= '$Semail'";
-}
-elseif ($Srole == "admin") {
-    $sql = "SELECT * FROM users where trainerEmail= '$Semail'";
-}
+
+$sql = "SELECT * FROM personalsession where trainerEmail= '$Semail'";
+$sql6 = "SELECT * FROM groupsession where trainerEmail= '$Semail'";
+
+
 $req = $conn->prepare($sql);
 $req->execute();
 $events = $req->fetchAll();
@@ -665,7 +662,7 @@ foreach ($events as $event):
                             type: '<?php echo $trainingname; ?>',
                             cost: '<?php echo $cost; ?>',
                             description: '<?php echo $event['description']; ?>',
-                            trainee: '<?php echo $traineeEmail ?>',
+                            trainee: '<?php echo ""; ?>',
                             color: '<?php echo $event['color']; ?>',
                         },
 <?php endforeach;
@@ -697,7 +694,7 @@ foreach ($events as $event):
     $cost = $names2['cost'];
 
     $color = '#008000';
-    $grpevent['color'] = $color;
+
 ?>
                 {
                             evid: '<?php echo $grpevent['id']; ?>',
@@ -714,8 +711,8 @@ foreach ($events as $event):
                             cost: '<?php echo $cost; ?>',                            
                             grpsize: '<?php echo $grpsize; ?>',
                             description: '<?php echo $grpevent['description']; ?>',
-                            trainee: '<?php echo $traineeEmail ?>',
-                            color: '<?php echo $grpevent['color']; ?>',
+                            trainee: '<?php echo "" ?>',
+                            color: '<?php echo $color; ?>',
                         },
 <?php endforeach;
 ?> 
