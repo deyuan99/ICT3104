@@ -176,7 +176,7 @@ foreach ($events as $event):
                             {
                                 id: '<?php echo $event['id']; ?>',
                                 trainer: '<?php echo $event['trainerEmail']; ?>',
-                                title: '<?php echo "hhh";?>',
+                                title: '<?php echo $event['trainingName']; ?>',
                                 date: '<?php echo $event['date']; ?>',
                                 startTime: '<?php echo $event['startTime']; ?>',
                                 endTime: '<?php echo $event['endTime']; ?>',

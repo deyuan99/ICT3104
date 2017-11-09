@@ -133,9 +133,12 @@ CREATE TABLE `groupsession` (
 --
 
 INSERT INTO `groupsession` (`id`, `roomTypeID`, `typeofTrainingID`, `startTime`, `endTime`, `date`, `description`, `trainerEmail`, `groupCapacity`, `status`) VALUES
-(1, 7, 5, '10:00:00', '11:00:00', '2017-11-10', 'for yoga at yogaroom', 'trainer1@gmail.com', 20, 'Pending'),
-(2, 6, 4, '12:00:00', '13:00:00', '2017-11-11', 'for workout at treadmill', 'trainer2@gmail.com', 13, 'Approved'),
-(3, 1, 3, '10:00:00', '12:00:00', '2017-11-13', 'for freestyle at openspace', 'trainer2@gmail.com', 30, 'Rejected');
+(1, 7, 5, '10:00:00', '11:00:00', '2017-11-12', 'for yoga at yogaroom', 'trainer1@gmail.com', 20, 'Pending'),
+(2, 6, 1, '12:00:00', '13:00:00', '2017-11-13', 'welcome to training', 'trainer2@gmail.com', 8, 'Approved'),
+(3, 1, 2, '15:00:00', '17:00:00', '2017-11-13', 'for workout at treadmill', 'trainer1@gmail.com', 13, 'Approved'),
+(4, 6, 4, '12:00:00', '13:00:00', '2017-11-15', 'for freestyle at openspace', 'trainer1@gmail.com', 10, 'Approved'),
+(5, 1, 3, '10:00:00', '12:00:00', '2017-11-14', 'for freestyle at openspace', 'trainer2@gmail.com', 30, 'Rejected');
+
 
 --
 -- AUTO_INCREMENT for table `groupsession`
