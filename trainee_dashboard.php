@@ -7,15 +7,16 @@ require_once('database/dbconfig.php');
 $Semail = $_SESSION['email'];
 $Sname = $_SESSION['name'];
 $Srole = $_SESSION['role'];
-$notpersonal = "Personal Training";
+$traineemail = $_SESSION['email'];
 
-// for testing when trainee view
-$traineemail = "trainee1@gmail.com";
-if ($Srole == "trainee") {
-    $sql = "SELECT * FROM personalsession where traineeEmail= '$Semail'";
-} else {
-    $sql = "SELECT * FROM personalsession where traineeEmail= '$traineemail' AND category !='$notpersonal' AND trainerEmail = ' ' ";
-}
+$sql = "SELECT id, category, roomTypeID, typeoftrainingid, startTime, endTime, date, description, trainerEmail, traineeEmail, null as groupCapacity 
+FROM personalsession p 
+where p.traineeEmail = '$traineemail' 
+UNION 
+SELECT g.id, 'Group Training' as category, roomTypeID, typeoftrainingid, startTime, endTime, date, description, g.trainerEmail, a.traineeEmail, g.groupCapacity 
+FROM groupsessionapplicant a, groupsession g  
+Where a.traineeEmail = '$traineemail' and g.id = a.groupSessionID and g.status = 'approved'";
+
 $req = $conn->prepare($sql);
 $req->execute();
 
@@ -279,7 +280,7 @@ $venues = $req2->fetchAll();
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                             <button type="submit" name="save" id="save" value="save" class="btn btn-primary">Save changes</button>
-                            <button type="submit" name="delete" id="delete" value="delete" class="btn btn-primary">Delete</button>
+                            <!--<button type="submit" name="delete" id="delete" value="delete" class="btn btn-primary">Delete</button>-->
 
                         </div>
                     </form>
@@ -531,7 +532,7 @@ $venues = $req2->fetchAll();
                 }elseif($cat== '1-1 Training'){
                     $color = '#0071c5';
                 }
-                $event['color']=$color;
+  
                 ?>
                             {
                                 id: '<?php echo $event['id']; ?>',
@@ -544,7 +545,7 @@ $venues = $req2->fetchAll();
                                 venue: '<?php echo $venuename; ?>',
                                 room: '<?php echo $roomname; ?>',
                                 description: '<?php echo $event['description']; ?>',
-                                color: '<?php echo $event['color']; ?>',
+                                color: '<?php echo $color; ?>',
                                 
                             },
 <?php endforeach; ?>
@@ -561,7 +562,7 @@ $venues = $req2->fetchAll();
                             $('#ModalView #roomview').val(event.room);
                             $('#ModalView #description').val(event.description);
                             
-                            if(event.title==="1-1 Training")
+                            if(event.title==="1-1 Training" || event.title==="Group Training")
                             {
                                 $('#save').hide();
                             }

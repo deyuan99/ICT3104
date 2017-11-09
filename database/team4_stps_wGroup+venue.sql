@@ -75,8 +75,8 @@ CREATE TABLE `personalsession` (
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 INSERT INTO `personalsession` (`id`, `category`, `startTime`, `endTime`, `date`, `description`, `trainerEmail`, `traineeEmail`) VALUES
-(1, 'Own Training', '09:00:00', '10:00:00', '2017-10-10', 'Workout!!', '', 'trainee1@gmail.com'),
-(2, 'Personal Training', '09:00:00', '10:00:00', '2017-10-11', '1v1 workout!!', 'trainer2@gmail.com', 'trainee2@gmail.com');
+(1, 'Personal Training', '09:00:00', '10:00:00', '2017-11-17', 'Workout!!', '', 'trainee1@gmail.com'),
+(2, 'Personal Training', '09:00:00', '10:00:00', '2017-11-18', '1v1 workout!!', '', 'trainee2@gmail.com');
 
 -- --------------------------------------------------------
 

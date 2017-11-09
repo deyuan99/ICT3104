@@ -2,7 +2,8 @@
 session_start();
 require_once('../database/dbconfig.php');
 
-$sql = "SELECT * FROM groupsession g, roomtype r, typeoftraining t, venue v where g.status = 'approved' and g.roomtypeid = r.id and g.typeoftrainingid = t.id and v.id = r.venueid";
+$sql = "SELECT g.id, g.roomTypeID, g.typeofTrainingID, g.startTime, g.endTime, g.date, g.description, g.trainerEmail, g.groupCapacity, g.status, r.name, r.capacity, t.trainingName, t.cost, v.location "
+        . "FROM groupsession g, roomtype r, typeoftraining t, venue v where g.status = 'approved' and g.roomtypeid = r.id and g.typeoftrainingid = t.id and v.id = r.venueid";
 $req = $conn->prepare($sql);
 $req->execute();
 
