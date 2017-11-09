@@ -16,7 +16,14 @@ $stmt2 = $query2->execute();
 $rmsql = "DELETE FROM userapproval WHERE email = '$email'";
 $query3 = $conn->prepare($rmsql);
 $stmt = $query3->execute();
+header('Location: user-approval.php#trainee_tab');
 
-header('Location: user-approval.php');
+//update groupsession status to approved
+$id = $_POST['approve_userid'];
+$sql3 = "UPDATE groupsession SET status = 'Approved' WHERE id = '$id'";
+$query4 = $conn->prepare($sql3);
+$stmt3 = $query4->execute();
+
+header('Location: user-approval.php#trainer_tab');
 exit();
 

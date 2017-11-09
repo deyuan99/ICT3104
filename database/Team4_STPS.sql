@@ -115,6 +115,20 @@ INSERT INTO `users` (`email`, `firstName`, `lastName`, `phoneNumber`, `profilePi
 -- Indexes for dumped tables
 --
 
+CREATE TABLE `groupsession` (
+  `id` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  `roomTypeID` int(11) NOT NULL,
+  `typeofTrainingID` int(11) NOT NULL,
+  `startTime` time NOT NULL,
+  `endTime` time NOT NULL,
+  `date` date NOT NULL,
+  `description` varchar(255) NOT NULL,
+  `trainerEmail` varchar(255) NOT NULL,
+  `groupCapacity` int(11),
+  `status` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
 --
 -- Indexes for table `personalsession`
 --
