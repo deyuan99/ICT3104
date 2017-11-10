@@ -258,14 +258,14 @@ $typeofTrainings = $req3->fetchAll();
                             </div>
                             
                             <div class="form-group">
-                                <label for="roomview" class="col-sm-2 control-label">RoomType</label>
+                                <label for="roomview" class="col-sm-2 control-label">Room</label>
                                 <div class="col-sm-10">
                                     <input type="text" name="roomview" class="form-control" id="roomview" readonly>
                                 </div>
                             </div>
                             
                             <div class="form-group">
-                                <label for="typeview" class="col-sm-2 control-label">Training Type</label>
+                                <label for="typeview" class="col-sm-2 control-label">Type</label>
                                 <div class="col-sm-10">
                                     <input type="text" name="typeview" class="form-control" id="typeview" readonly>
                                 </div>
@@ -279,7 +279,7 @@ $typeofTrainings = $req3->fetchAll();
                             </div>
                             
                             <div class="form-group">
-                                <label for="grpsizeview" class="col-sm-2 control-label">Max Group Size</label>
+                                <label for="grpsizeview" class="col-sm-2 control-label">Capacity</label>
                                 <div class="col-sm-10">
                                     <input type="text" name="grpsizeview" class="form-control" id="grpsizeview" readonly>
                                 </div>
@@ -296,7 +296,7 @@ $typeofTrainings = $req3->fetchAll();
 
                             <?php if ($Srole == "trainer") {?>
                                 <div class="form-group">
-                                    <label for="trainee" class="col-sm-2 control-label">Trainee Email</label>
+                                    <label for="trainee" class="col-sm-2 control-label">Trainee</label>
                                     <div class="col-sm-10">
                                         <input type="text" name="trainee" class="form-control" id="trainee" value="<?php echo $event['traineeEmail']; ?>" readonly>
                                     </div>

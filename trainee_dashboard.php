@@ -252,7 +252,7 @@ $venues = $req2->fetchAll();
                             </div>
                             
                             <div class="form-group">
-                                <label for="roomview" class="col-sm-2 control-label">RoomType</label>
+                                <label for="roomview" class="col-sm-2 control-label">Room</label>
                                 <div class="col-sm-10">
                                     <input type="text" name="roomview" class="form-control" id="roomview" readonly>
                                 </div>
