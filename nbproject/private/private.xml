@@ -3,9 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/xampp/htdocs/ICT3104/trainee_trainerCalendar.php</file>
-            <file>file:/C:/xampp/htdocs/ICT3104/trainee_dashboard.php</file>
-            <file>file:/C:/xampp/htdocs/ICT3104/trainer_dashboard.php</file>
+            <file>file:/Applications/XAMPP/xamppfiles/htdocs/ICT3104/administrator/doReactivate.php</file>
+            <file>file:/Applications/XAMPP/xamppfiles/htdocs/ICT3104/administrator/loadApprovalInfo.php</file>
+            <file>file:/Applications/XAMPP/xamppfiles/htdocs/ICT3104/administrator/user-groupsession.php</file>
+            <file>file:/Applications/XAMPP/xamppfiles/htdocs/ICT3104/administrator/nav-bar.php</file>
         </group>
     </open-files>
 </project-private>

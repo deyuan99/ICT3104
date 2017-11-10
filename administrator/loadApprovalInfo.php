@@ -1,6 +1,4 @@
-
 <?php
-
 function getApprovalUsers() {
     require('../database/dbconfig.php');
     $sql = "SELECT firstName, lastName, email, phoneNumber, role, subscription, registerDate, address FROM userapproval";
@@ -38,8 +36,6 @@ function getApprovalUsers() {
         echo "</td></tr>";
     }
 }
-
-
 function getApprovalGrouptraining() {
     require('../database/dbconfig.php');
     //$sql1 = "SELECT id, venue, startTime, endTime, date, description, trainerEmail, groupCapacity, status FROM groupsession where status = 'pending'";
@@ -81,7 +77,6 @@ function getApprovalGrouptraining() {
         echo "</td></tr>";
     }
 }
-
 function getApprovedGrouptraining() {
     require('../database/dbconfig.php');
     //$sql2 = "SELECT venue, startTime, endTime, date, description, trainerEmail, status FROM groupsession where status = 'Approved'";
@@ -116,7 +111,6 @@ function getApprovedGrouptraining() {
         echo "</td></tr>";
     }
 }
-
 function getRejectedGrouptraining() {
     require('../database/dbconfig.php');
     //$sql3 = "SELECT venue, startTime, endTime, date, description, trainerEmail, status FROM groupsession where status = 'Rejected'";
@@ -151,7 +145,6 @@ function getRejectedGrouptraining() {
         echo "</td></tr>";
     }
 }
-
 function getDeletedGrouptraining() {
     require('../database/dbconfig.php');
     //$sql3 = "SELECT venue, startTime, endTime, date, description, trainerEmail, status FROM groupsession where status = 'Rejected'";
