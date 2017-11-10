@@ -123,7 +123,8 @@ if (isset($_POST['delete']) && isset($_POST['id'])){
         $startTime = $_POST['starttime'];
         $endTime = $_POST['endtime'];
         $todaydate = date('Y-m-d H:i:s');
-	$hourdiff = round((strtotime($combinedstart) - strtotime($todaydate))/3600, 1);
+        $combinedstart = date('Y-m-d H:i:s', strtotime("$eventdate $startTime"));
+         $hourdiff = round((strtotime($combinedstart) - strtotime($todaydate))/3600, 1);
         if($hourdiff  < 0){
            echo "<script type='text/javascript'>alert('Cant edit past event!');"
              . "window.location.href='trainee_dashboard.php';"
