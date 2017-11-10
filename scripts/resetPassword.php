@@ -38,7 +38,7 @@ if (isset($_POST['email'])) {
             echo "<br>";
             echo $password, "\n";
             //update password
-            $sqlUpdate = "UPDATE users SET password= '$password' WHERE email='$id';";
+            $sqlUpdate = "UPDATE users SET password= sha1('$password') WHERE email='$id';";
 
             $resultUpdate = $conn->prepare($sqlUpdate);
             $resultUpdate->execute();
