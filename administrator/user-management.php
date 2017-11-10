@@ -102,7 +102,7 @@ session_start();
                                             <th class="col-md-1">Last Name</th>
                                             <th class="col-md-2">Billing Address</th>
                                             <th class="col-md-1">Mobile Number</th>
-                                            <th class="col-md-1">Expiry Date</th>
+                                            <th class="col-md-1">Password</th>
                                             <th class="col-md-2">Action</th>
                                         </tr>
                                     </thead>
