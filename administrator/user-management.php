@@ -1,5 +1,7 @@
 <?php
 session_start();
+
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -100,7 +102,7 @@ session_start();
                                             <th class="col-md-1">Last Name</th>
                                             <th class="col-md-2">Billing Address</th>
                                             <th class="col-md-1">Mobile Number</th>
-                                            <th class="col-md-1">Expiry Date</th>
+                                            <th class="col-md-1">Password</th>
                                             <th class="col-md-2">Action</th>
                                         </tr>
                                     </thead>
@@ -124,7 +126,7 @@ session_start();
                                             <th class="col-md-1">First Name</th>
                                             <th class="col-md-1">Last Name</th>
                                             <th class="col-md-2">Billing Address</th>
-                                            <th class="col-md-1">Mobile Number</th>
+                                            <th class="col-md-1">Password</th>
                                             <th class="col-md-2">Action</th>
                                         </tr>
                                     </thead>
@@ -164,7 +166,7 @@ session_start();
                                 </div>
                             </div>
                             
-                            <input type="hidden" name="edit_lName" id="edit_lName" value="<?php echo $lastName;?>">
+                            <input type="hidden" name="edit_lName" id="edit_lName" value="">
                             <div class="form-group row">
                                 <label class="form-control-label col-md-offset-2 col-md-3 col-xs-offset-0 col-xs-5 label-margin">Last Name:</label>
                                 <div class="col-sm-5">

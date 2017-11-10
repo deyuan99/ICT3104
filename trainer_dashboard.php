@@ -7,7 +7,7 @@ $Sname = $_SESSION['name'];
 $Srole = $_SESSION['role'];
 
 $sql = "SELECT * FROM personalsession where trainerEmail= '$Semail'";
-$sql6 = "SELECT * FROM groupsession where trainerEmail= '$Semail'";
+$sql6 = "SELECT * FROM groupsession where trainerEmail= '$Semail' and status != 'Rejected' ";
 
 
 $req = $conn->prepare($sql);

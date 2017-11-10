@@ -106,7 +106,6 @@ if (isset($_SESSION['email']) && !empty($_SESSION['email'])) {
                                     <input type="radio" name="category" id="category" value="trainee"> Trainee
 
                                     <select class="dropdown" name="subscription" id="member_type">
-                                      
                                         <option value="" disabled selected>Select membership type</option>
                                     </select>
                                     
