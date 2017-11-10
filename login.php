@@ -46,7 +46,8 @@ if ($req->rowCount() == 1) {
             //Arifah: to change based on expiry date!
             //get date compare date
             if ($subscription == 0) {
-                echo "Sorry, your subscription is over. Please contact us for assisstance.";
+                header("location: trainee_expiredSubscription.php");
+            
             } else {
                 header("location: trainee_dashboard.php");
             }
