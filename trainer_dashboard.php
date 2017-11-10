@@ -49,6 +49,16 @@ $typeofTrainings = $req3->fetchAll();
         <!-- Editable profile -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 
+        
+        
+        <style>
+            /* calendar hover */
+            .qtip-content-margin {
+                margin-left:0;
+                margin-right:0;
+                margin-bottom:8px;
+            }
+        </style>
     </head>
     <body>
         <!-- Header -->
@@ -313,6 +323,7 @@ $typeofTrainings = $req3->fetchAll();
                         <div class="modal-footer">
                             <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button> 
                             <button type="submit" name="save" id="save" value="save" class="btn btn-primary">Save changes</button>
+                            <button type="submit" name="delete" id="delete" value="delete" class="btn btn-primary">Delete</button>
                             <!--<input type="hidden" id="evid" name="evid" value="<?php //echo $event['id'];   ?>" />-->
                             <?php if ($Srole == "trainee") { ?>
                                 <button type="submit" class="btn btn-primary">Apply</button>
@@ -497,6 +508,10 @@ $typeofTrainings = $req3->fetchAll();
     <script src='fullcalendar-3.5.1/lib/moment.min.js'></script>
     <script src='fullcalendar-3.5.1/fullcalendar.min.js'></script>
 
+    <!--qtip must be after funllcalendarJS-->
+    <link type="text/css" rel="stylesheet" href="jquery_qtip/jquery.qtip.css" />
+    <script src="jquery_qtip/jquery.qtip.js"></script>
+    
     <!--Calendar script-->
     <script>
             // get today date javascript
@@ -716,13 +731,11 @@ foreach ($events as $event):
                             grpsize: '<?php echo $grpsize; ?>',
                             description: '<?php echo $grpevent['description']; ?>',
                             trainee: '<?php echo "" ?>',
-                            color: '<?php echo $color; ?>',
+                            color: '<?php echo $color; ?>'
                         },
-<?php endforeach;
-?> 
+<?php endforeach;?> 
                 
-                ]
-                ,
+                ],
                 eventRender: function (event, element) {
                     element.bind('click', function () {
                         $('#ModalView #evid').val(event.evid);
@@ -745,6 +758,46 @@ foreach ($events as $event):
 
                     });
                 },
+                eventMouseover: function (event, jsEvent, view) {
+
+                                var tooltip = $(this).qtip({
+                                    id: 'calendar',
+                                    prerender: true,
+                                    content: {
+                                        text: ''
+                                    },
+                                    position: {
+                                        my: 'left center',
+                                        at: 'right center',
+                                        viewport: $('#calendar'),
+                                        adjust: {
+                                            mouse: true,
+                                            scroll: true
+                                        }
+                                    },
+                                    show: {
+                                        solo: true
+                                    },
+                                    hide: {
+                                        event: 'mouseleave',
+                                        fixed: true
+                                    },
+                                    style: 'qtip-light'
+                                }).qtip('api');
+
+                                current = new Date();
+
+                                var content = '<h4>' + event.title + '</h4>';
+                                content += '<div class="row qtip-content-margin"><b>Description: </b> ' + event.description + '</div>';
+                                content += '<div class="row qtip-content-margin"><b>Date: </b> ' + event.date + '</div>';
+                                content += '<div class="row qtip-content-margin"><b>Training Time: </b> ' + event.startTime + ' to ' + event.endTime + '</div>';
+                                content += '<div class="row qtip-content-margin"><b>Venue: </b> ' + event.room + ' room at ' + event.venue + '</div>';
+                               
+                                tooltip.set({
+                                    'content.text': content
+                                }).show(jsEvent);
+
+                            },
                 eventDrop: function (event, delta, revertFunc) {
                     edit(event);
                 },

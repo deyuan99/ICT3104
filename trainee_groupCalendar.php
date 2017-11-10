@@ -26,6 +26,14 @@ $events = $req->fetchAll();
         <!-- Main CSS -->
         <link rel="stylesheet" href="assets/css/trainee_dashboard.css" />
 
+        <style>
+            /* calendar hover */
+            .qtip-content-margin {
+                margin-left:0;
+                margin-right:0;
+                margin-bottom:8px;
+            }
+        </style>
     </head>
     <body>
         <!-- Header -->
@@ -152,6 +160,9 @@ $events = $req->fetchAll();
         <script src='fullcalendar-3.5.1/lib/moment.min.js'></script>
         <script src='fullcalendar-3.5.1/fullcalendar.min.js'></script>
 
+        <!--qtip must be after funllcalendarJS-->
+        <link type="text/css" rel="stylesheet" href="jquery_qtip/jquery.qtip.css" />
+        <script src="jquery_qtip/jquery.qtip.js"></script>
         <!--Calendar script-->
         <script>
             $(document).ready(function () {
@@ -205,7 +216,48 @@ foreach ($events as $event):
                             $('#ModalView #capacity').val(event.capacity);
                             $('#ModalView').modal('show');
                         });
-                    }
+                    },
+                    
+                    eventMouseover: function (event, jsEvent, view) {
+
+                                var tooltip = $(this).qtip({
+                                    id: 'calendar',
+                                    prerender: true,
+                                    content: {
+                                        text: ''
+                                    },
+                                    position: {
+                                        my: 'left center',
+                                        at: 'right center',
+                                        viewport: $('#calendar'),
+                                        adjust: {
+                                            mouse: true,
+                                            scroll: true
+                                        }
+                                    },
+                                    show: {
+                                        solo: true
+                                    },
+                                    hide: {
+                                        event: 'mouseleave',
+                                        fixed: true
+                                    },
+                                    style: 'qtip-light'
+                                }).qtip('api');
+
+                                current = new Date();
+
+                                var content = '<h4>' + event.type + '</h4>';
+                                content += '<div class="row qtip-content-margin"><b>Description: </b> ' + event.description + '</div>';
+                                content += '<div class="row qtip-content-margin"><b>Date: </b> ' + event.date + '</div>';
+                                content += '<div class="row qtip-content-margin"><b>Training Time: </b> ' + event.startTime + ' to ' + event.endTime + '</div>';
+                                content += '<div class="row qtip-content-margin"><b>Venue: </b> ' + event.room + ' room at ' + event.venue + '</div>';
+                               
+                                tooltip.set({
+                                    'content.text': content
+                                }).show(jsEvent);
+
+                            }
                 });
 
 
