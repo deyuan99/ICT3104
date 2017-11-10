@@ -20,13 +20,13 @@ $events = $req->fetchAll();
         <?php include_once 'include.php'; ?>
         <link rel="stylesheet" type="text/css" href="css/user-management.css" />
         <!-- Bootstrap Core CSS -->
-        <link href="../bootstrap-3.3.5-dist/css/bootstrap.min.css" rel="stylesheet">
+        <link href="../bootstrap-3.3.5-dist/css/bootstrap.min.css" rel="stylesheet"/>
 
         <!-- FullCalendar -->
         <link href='../fullcalendar-3.5.1/fullcalendar.css' rel='stylesheet' />
         <link href="../assets/css/calendar.css" rel="stylesheet" type="text/css"/>
         <!-- Custom CSS -->
-        <!--<style>
+        <style>
       
             #calendar {
                     max-width: 800px;
@@ -35,7 +35,7 @@ $events = $req->fetchAll();
                     float: none;
                     margin: 0 auto;
             }
-        </style>-->
+        </style>
 
     </head>
     <body>
@@ -43,13 +43,18 @@ $events = $req->fetchAll();
             <?php include_once 'nav-bar.php'; ?>
             <h1 class="text-center"><span class="glyphicon glyphicon-list-alt icon-space"></span> GROUP SESSION</h1>
             <div class="col-md-8 col-md-offset-2 padding-0" id="usermanagement">
-                <div id="calendar" class="col-centered"></div>
+                
+                <div id="calendar" class="col-centered">
+                </div>
+            
+    
+               <!-- <div id="calendar" class="col-centered"></div>-->
 
                 <!--view groupTraining-->
                 <div class="modal fade" id="ModalView" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="padding-top: 70px;">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
-                            <form class="form-horizontal" method="POST" action="#">
+                            <form class="form-horizontal" method="POST" action="doDeleteGroupevent.php">
 
                                 <div class="modal-header">
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -121,26 +126,21 @@ $events = $req->fetchAll();
                                     </div> 
 
                                     <input type="hidden" id="eid" name="eid" value="23"/>
+                                    
+                                     <input type="hidden" id="status" name="status" value="Deleted"/>
                                 </div>
 
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                    <button type="submit" class="btn btn-danger">Delete</button>
+                                    
                                 </div>
                             </form>
                         </div>
                     </div>
                 </div>
 
-                <!-- jQuery Version 1.11.1 -->
-                <script src="../fullcalendar-3.5.1/lib/jquery.js"></script>
-
-                <!-- Bootstrap Core JavaScript -->
-                <script src="../bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>
-
-                <!-- FullCalendar -->
-                <script src='../fullcalendar-3.5.1/lib/moment.min.js'></script>
-                <script src='../fullcalendar-3.5.1/fullcalendar.min.js'></script>
-
+ 
                 <!--Calendar script-->
                 <script>
                     $(document).ready(function () {
