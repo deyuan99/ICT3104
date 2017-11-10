@@ -27,13 +27,19 @@ $events = $req->fetchAll();
         <link href="../assets/css/calendar.css" rel="stylesheet" type="text/css"/>
         <!-- Custom CSS -->
         <style>
-      
+
             #calendar {
-                    max-width: 800px;
+                max-width: 800px;
             }
             .col-centered{
-                    float: none;
-                    margin: 0 auto;
+                float: none;
+                margin: 0 auto;
+            }
+            /* calendar hover */
+            .qtip-content-margin {
+                margin-left:0;
+                margin-right:0;
+                margin-bottom:8px;
             }
         </style>
 
@@ -43,12 +49,12 @@ $events = $req->fetchAll();
             <?php include_once 'nav-bar.php'; ?>
             <h1 class="text-center"><span class="glyphicon glyphicon-list-alt icon-space"></span> GROUP SESSION</h1>
             <div class="col-md-8 col-md-offset-2 padding-0" id="usermanagement">
-                
+
                 <div id="calendar" class="col-centered">
                 </div>
-            
-    
-               <!-- <div id="calendar" class="col-centered"></div>-->
+
+
+                <!-- <div id="calendar" class="col-centered"></div>-->
 
                 <!--view groupTraining-->
                 <div class="modal fade" id="ModalView" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="padding-top: 70px;">
@@ -126,21 +132,21 @@ $events = $req->fetchAll();
                                     </div> 
 
                                     <input type="hidden" id="eid" name="eid" value="23"/>
-                                    
-                                     <input type="hidden" id="status" name="status" value="Deleted"/>
+
+                                    <input type="hidden" id="status" name="status" value="Deleted"/>
                                 </div>
 
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                                     <button type="submit" class="btn btn-danger">Delete</button>
-                                    
+
                                 </div>
                             </form>
                         </div>
                     </div>
                 </div>
 
- 
+
                 <!--Calendar script-->
                 <script>
                     $(document).ready(function () {
@@ -151,15 +157,12 @@ $events = $req->fetchAll();
                                 center: 'prev,next today',
                                 right: 'month,agendaWeek,agendaDay'
                             },
-
                             defaultDate: $('#calendar').fullCalendar('today'),
                             editable: false,
                             eventLimit: true, // allow "more" link when too many events
                             selectable: true,
                             selectHelper: true,
-
                             events: [
-
 <?php
 foreach ($events as $event):
     ?>
@@ -175,7 +178,8 @@ foreach ($events as $event):
                                         type: '<?php echo $event['trainingName']; ?>',
                                         cost: '<?php echo '$ ' . $event['cost']; ?>',
                                         color: '<?php echo '#3D9970'; ?>',
-                                        capacity: '<?php echo $event['groupCapacity']; ?>'
+                                        capacity: '<?php echo $event['groupCapacity']; ?>',
+                                        room:'<?php echo $event['name']; ?>'
 
                                     },
 <?php endforeach; ?>
@@ -196,6 +200,65 @@ foreach ($events as $event):
                                     $('#ModalView #capacity').val(event.capacity);
                                     $('#ModalView').modal('show');
                                 });
+                            },
+                            eventMouseover: function (event, jsEvent, view) {
+
+                                var tooltip = $(this).qtip({
+                                    id: 'calendar',
+                                    prerender: true,
+                                    content: {
+                                        text: ''
+                                    },
+                                    position: {
+                                        my: 'left center',
+                                        at: 'right center',
+                                        viewport: $('#calendar'),
+                                        adjust: {
+                                            mouse: true,
+                                            scroll: true
+                                        }
+                                    },
+                                    show: {
+                                        solo: true
+                                    },
+                                    hide: {
+                                        event: 'mouseleave',
+                                        fixed: true
+                                    },
+                                    style: 'qtip-light'
+                                }).qtip('api');
+
+                                current = new Date();
+
+                                var content = '<h4>' + event.title + '</h4>';
+                                content += '<div class="row qtip-content-margin"><b>Description:</b> '+ event.description + '</div>';
+                                content += '<div class="row qtip-content-margin"><b>Date:</b> '+ event.date + '</div>';
+                                content += '<div class="row qtip-content-margin"><b>Training Time:</b> '+ event.startTime + ' to ' + event.endTime + '</div>';
+                                content += '<div class="row qtip-content-margin"><b>Venue:</b> '+ event.room + ' room at ' + event.venue + '</div>';
+                                
+
+                                /* if (event.type != <?php //echo SELFT;  ?>) {
+                                 content += '<div class="row qtip-content-margin"><b>Category:</b> ' + event.category + '</div>';
+                                 }
+                                 
+                                 content += '<div class="row qtip-content-margin"><b>Start:</b> ' + moment(event.start).format('YYYY-MM-DD HH:mm:ss') + '</div>';
+                                 content += '<div class="row qtip-content-margin"><b>End:</b> ' + moment(event.end).format('YYYY-MM-DD HH:mm:ss') + '</div>';
+                                 content += '<div class="row qtip-content-margin"><b>Gym:</b> ' + event.gym + '</div>';
+                                 content += '<div class="row qtip-content-margin"><b>Venue:</b> ' + event.room + '</div>';
+                                 
+                                 // Check if less than 2 days to the event, cannot cancel
+                                 if (differenceInDays(event.start) > 2 && event.type != <?php //echo SELFT;  ?> && event.start > current) {
+                                 content += '<form class="form-horizontal" action="../Functions/doWithdrawTraining.php" method="POST"><input type="hidden" name="training_id" value="' + event.id + '"><button type="submit" id="withdrawTraining" name="withdrawTraining" class="btn btn-primary btn-xs">Withdraw Training</button></form>';
+                                 }
+                                 
+                                 if (event.type == <?php // echo SELFT;  ?> && event.start > current) {
+                                 content += '<form class="form-horizontal" action="../Functions/doCancelTraineeSelf.php" method="POST"><input type="hidden" name="training_id" value="' + event.id + '"><button type="submit" id="removeTraining" name="removeTraining" class="btn btn-primary btn-xs">Cancel Training</button></form>';
+                                 }*/
+
+                                tooltip.set({
+                                    'content.text': content
+                                }).show(jsEvent);
+
                             }
 
                         });

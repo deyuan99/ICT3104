@@ -37,6 +37,9 @@
 <script src="../fullcalendar-3.5.1/lib/moment.min.js"></script>
 <script src="../fullcalendar-3.5.1/fullcalendar.min.js"></script>
 
+<!--qtip-->
+<link type="text/css" rel="stylesheet" href="../jquery_qtip/jquery.qtip.css" />
+<script src="../jquery_qtip/jquery.qtip.js"></script>
 
 <!-- Self-defined Styles -->
 <link rel="stylesheet" type="text/css" href="css/style.css" />
