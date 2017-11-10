@@ -24,13 +24,14 @@ session_start();
                 document.getElementById("reactivate_userid").value = email;
                 document.getElementById("reactivateMsg").innerHTML = "Are you sure you want to Reactivate " + "<strong>" + email +"</strong>" + "  ?" ;
             }
-            function setEditInfo(email, firstName, lastName, address, mobile)
+            function setEditInfo(email, firstName, lastName, address, mobile, password)
             {
                 document.getElementById("email").innerHTML = email;
                 document.getElementById("firstName").placeholder = firstName;
                 document.getElementById("lastName").placeholder = lastName;
                 document.getElementById("address").placeholder = address;
                 document.getElementById("mobile").placeholder = mobile;
+                document.getElementById("pass").placeholder = "*****";
                 document.getElementById("edit_email").value = "";
                 document.getElementById("edit_email").value = email;
                 document.getElementById("edit_firstName").value = "";
@@ -41,6 +42,8 @@ session_start();
                 document.getElementById("edit_address").value = address;
                 document.getElementById("edit_mobile").value = "";
                 document.getElementById("edit_mobile").value = mobile;
+                document.getElementById("edit_pass").value = "";
+                document.getElementById("edit_pass").value = password;
             }
         </script>
     </head>
@@ -71,6 +74,7 @@ session_start();
                                             <th class="col-md-1">Last Name</th>
                                             <th class="col-md-1">Billing Address</th>
                                             <th class="col-md-1">Mobile</th>
+                                            <th class="col-md-1">Password</th>
                                             <th class="col-md-1">Expiry Date</th>
                                             <th class="col-md-2">Action</th>
                                         </tr>
@@ -183,6 +187,15 @@ session_start();
                                     <input type="number" class="form-control" id="mobile" name="mobile" value="">
                                 </div>
                             </div>
+                            
+                            <input type="hidden" name="edit_pass" id="edit_pass" value="">
+                            <div class="form-group row">
+                                <label class="form-control-label col-md-offset-2 col-md-3 col-xs-offset-0 col-xs-5 label-margin" for="pass">Password:</label>
+                                <div class="col-sm-5">
+                                    <input type="password" class="form-control" id="pass" name="pass" value="">
+                                </div>
+                            </div>
+                            
                             <div class="form-group row" style="margin-top: 30px;">
                                 <div class="row">
                                     <div class="col-sm-6 col-sm-offset-3 col-xs-8 col-xs-offset-2">
