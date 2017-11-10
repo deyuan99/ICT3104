@@ -427,7 +427,10 @@ $venues = $req2->fetchAll();
 //                    }
 //                });
 //            });
-//            
+// get today date javascript
+            var today = new Date();
+            var datetoday = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+            
             $('#hidden_div').hide();
             $("#venue").change(function ()
             {
@@ -497,6 +500,8 @@ $venues = $req2->fetchAll();
                     },
                     events: [
             <?php
+            //date to set colour
+            $todaydateis = date("Y-m-d");
             foreach ($events as $event):
 
 
@@ -531,6 +536,9 @@ $venues = $req2->fetchAll();
                     $color = '#008000';
                 }elseif($cat== '1-1 Training'){
                     $color = '#0071c5';
+                }
+                if(strtotime($todaydateis)>strtotime($eventdate)){
+                    $color = '#DC143C';
                 }
   
                 ?>
@@ -568,6 +576,11 @@ $venues = $req2->fetchAll();
                             }
                             else{
                                 $('#save').show();
+                            }
+                            // compare date for javascript
+                            if(new Date(datetoday).getTime()>new Date(event.date).getTime()){
+                                     $('#save').hide();
+                                     $('#delete').hide();
                             }
                             $('#ModalView').modal('show');
                         });

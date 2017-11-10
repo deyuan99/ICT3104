@@ -312,7 +312,7 @@ $typeofTrainings = $req3->fetchAll();
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button> 
-                            <button type="submit" class="btn btn-primary">Save changes</button>                          
+                            <button type="submit" name="save" id="save" value="save" class="btn btn-primary">Save changes</button>
                             <!--<input type="hidden" id="evid" name="evid" value="<?php //echo $event['id'];   ?>" />-->
                             <?php if ($Srole == "trainee") { ?>
                                 <button type="submit" class="btn btn-primary">Apply</button>
@@ -499,11 +499,15 @@ $typeofTrainings = $req3->fetchAll();
 
     <!--Calendar script-->
     <script>
+            // get today date javascript
+        var today = new Date();
+        var datetoday = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+    
         $('#hidden_div_rm').hide();
         $('#hidden_div_1v1grp').hide();
         $('#hidden_div_cost').hide();
         $('#hidden_div_size').hide();
-        
+      
         // for training type
         $(function () {
             $('#Pcategory').change(function () {
@@ -599,6 +603,9 @@ $typeofTrainings = $req3->fetchAll();
                 },
                 events: [
 <?php
+//date to set colour
+$todaydateis = date("Y-m-d");
+
 foreach ($events as $event):
     $start = $event['startTime'];
     $end = $event['endTime'];
@@ -639,6 +646,10 @@ foreach ($events as $event):
         $color = '#008000';
     } elseif ($cat == '1-1 Training') {
         $color = '#0071c5';
+    }
+    if(strtotime($todaydateis)>strtotime($eventdate)){
+        $color = '#DC143C';
+        
     }
     $event['color'] = $color;
     ?>
@@ -728,6 +739,10 @@ foreach ($events as $event):
                         $('#ModalView #description').val(event.description);
                         $('#ModalView #trainee').val(event.trainee);
                         $('#ModalView').modal('show');
+                       if(new Date(datetoday).getTime()>new Date(event.date).getTime()){
+                                     $('#save').hide();
+                            }
+
                     });
                 },
                 eventDrop: function (event, delta, revertFunc) {
@@ -736,7 +751,7 @@ foreach ($events as $event):
                 eventResize: function (event, dayDelta, minuteDelta, revertFunc) {
                     edit(event);
                 }
-
+ 
             });
 
             function edit(event) {
