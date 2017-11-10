@@ -280,7 +280,7 @@ $venues = $req2->fetchAll();
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                             <button type="submit" name="save" id="save" value="save" class="btn btn-primary">Save changes</button>
-                            <!--<button type="submit" name="delete" id="delete" value="delete" class="btn btn-primary">Delete</button>-->
+                            <button type="submit" name="delete" id="delete" value="delete" class="btn btn-primary">Delete</button>
 
                         </div>
                     </form>
