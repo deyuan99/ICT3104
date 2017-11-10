@@ -5,7 +5,7 @@ require_once('database/dbconfig.php');
 
 $email = $_SESSION['email'];
 $traineremail = $_GET['t'];
-$sql = "SELECT * FROM personalsession where trainerEmail= '$traineremail' and category = '1-1 Training' and traineeEmail = ''and date >= NOW()";
+$sql = "SELECT * FROM personalsession where trainerEmail= '$traineremail' and category = '1-1 Training' and date >= NOW()";
 $req = $conn->prepare($sql);
 $req->execute();
 
@@ -136,7 +136,7 @@ $events = $req->fetchAll();
                     },
                     //defaultDate: '2016-01-12',
                     defaultDate: $('#calendar').fullCalendar('today'),
-                    editable: true,
+                    editable: false,
                     eventLimit: true, // allow "more" link when too many events
                     selectable: true,
                     selectHelper: true,

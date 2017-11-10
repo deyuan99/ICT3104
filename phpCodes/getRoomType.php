@@ -1,9 +1,9 @@
 <?php
 require_once('../database/dbconfig.php');
 
-$venueID = $_POST['venueID'];
+$venue = $_POST['venue'];
 
-$sql = "SELECT name FROM roomtype where venueID = (SELECT id FROM venue WHERE location = '$venueID')";
+$sql = "SELECT name FROM roomtype where venueID = (SELECT id FROM venue WHERE location = '$venue')";
 $req = $conn->prepare($sql);
 $req->execute();
 $rooms = $req->fetchAll();

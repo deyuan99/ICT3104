@@ -32,10 +32,10 @@ $firstName = empty($_POST['firstName']) ? $firstName : $_POST['firstName'];
 $lastName = empty($_POST['lastName']) ? $lastName : $_POST['lastName'];
 $address = empty($_POST['address']) ? $address : $_POST['address'];
 $mobile = empty($_POST['mobile']) ? $mobile : $_POST['mobile'];
-$password = empty($_POST['password']) ? $password : $_POST['password']; 
+$password = empty($_POST['pass']) ? $password : $_POST['pass']; 
 
 
-$sql = "UPDATE users SET firstName = '$firstName', lastName = '$lastName', address ='$address', phoneNumber = '$mobile, password = '$password' WHERE email = '$email'";
+$sql = "UPDATE users SET firstName = '$firstName', lastName = '$lastName', address ='$address', phoneNumber = '$mobile', password = '$password' WHERE email = '$email'";
 $req = $conn->prepare($sql);
 $req->execute();
 
@@ -45,3 +45,4 @@ if (is_numeric($mobile) && $mobile > 9999999 && $mobile < 100000000) {
 header('Location: user-management.php');
 exit();
 
+?>

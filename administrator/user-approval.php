@@ -51,10 +51,13 @@ session_start();
                                     <thead>
                                         <tr>
                                             <th class="col-md-2">Email Address</th>
-                                            <th class="col-md-2">First Name</th>
-                                            <th class="col-md-2">Last Name</th>
-                                            <th class="col-md-2">Mobile Number</th>
+                                            <th class="col-md-1">First Name</th>
+                                            <th class="col-md-1">Last Name</th>
+                                            <th class="col-md-1">Mobile Number</th>
                                             <th class="col-md-1">Role</th>
+                                            <th class="col-md-1">Subscription</th>
+                                            <th class="col-md-1">Register Date</th>
+                                            <th class="col-md-1">Address</th>
                                             <th class="col-md-3">Action</th>
                                         </tr>
                                     </thead>
@@ -75,7 +78,7 @@ session_start();
                                     <thead>
                                         <tr>
                                             <th class="col-md-2">Email Address</th>
-                                            <!--<th class="col-md-1">Venue</th>-->
+                                            <th class="col-md-1">Venue</th>
                                             <th class="col-md-1">Type of Training</th>
                                             <th class="col-md-2">Room Type</th>
                                             <th class="col-md-1">Group Capacity</th>
@@ -101,6 +104,7 @@ session_start();
                                     <thead>
                                         <tr>
                                             <th class="col-md-2">Email Address</th>
+                                            <th class="col-md-1">Venue</th>
                                             <th class="col-md-1">Type of Training</th>
                                             <th class="col-md-2">Room Type</th>
                                             <th class="col-md-1">Group Capacity</th>
@@ -122,6 +126,7 @@ session_start();
                                     <thead>
                                         <tr>
                                             <th class="col-md-2">Email Address</th>
+                                            <th class="col-md-1">Venue</th>
                                             <th class="col-md-1">Type of Training</th>
                                             <th class="col-md-2">Room Type</th>
                                             <th class="col-md-1">Group Capacity</th>

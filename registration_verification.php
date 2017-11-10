@@ -3,7 +3,22 @@
 require_once('database/dbconfig.php');
 
 //subscription is monthly: 3, 6, 12
-if (isset($_POST['firstname']) && isset($_POST['lastname']) && isset($_POST['regemail']) && isset($_POST['phone']) && isset($_POST['category']) && isset($_POST['subscription']) && isset($_POST['regpass']) && isset($_POST['regconfpass'])) {
+
+$expire = new DateTime('2010-12-07');
+$date2 = new DateTime('2017-11-08');
+
+$today = date("Y-m-d");
+echo "today: " . $today;
+
+if( $today > $expire ){
+  echo 'expired <br>';
+}
+
+elseif( $today > $date2 ){
+  echo 'valid <br>';
+}
+
+if (isset($_POST['firstname']) && isset($_POST['lastname']) && isset($_POST['regemail']) && isset($_POST['phone']) && isset($_POST['category']) && isset($_POST['subscription']) && isset($_POST['regpass']) && isset($_POST['regconfpass']) && isset($_POST['address'])) {
 
     $firstname = $_POST['firstname'];
     $lastname = $_POST['lastname'];
@@ -12,6 +27,7 @@ if (isset($_POST['firstname']) && isset($_POST['lastname']) && isset($_POST['reg
     $role = $_POST['category'];
     $regpass = $_POST['regpass'];
     $subscription = $_POST['subscription'];
+    $address = $_POST['address'];
 
     //registration expiry
     $registerDate = date("Y-m-d");
@@ -51,7 +67,7 @@ if (isset($_POST['firstname']) && isset($_POST['lastname']) && isset($_POST['reg
 
     // If there is no existing email in db, add user to admin approval
     if (count($checkResult) == 1) {
-        $insertsql = "INSERT INTO userApproval (firstName, lastName, email, phoneNumber, profilePicture, role, password, subscription, expiryDate, registerDate) VALUES ('$firstname', '$lastname', '$regemail', '$phone', '', '$role', sha1('$regpass'), '$subscription', '$expiredDate', '$registerDate')";
+        $insertsql = "INSERT INTO userApproval (firstName, lastName, email, phoneNumber, profilePicture, role, password, address, subscription, expiryDate, registerDate) VALUES ('$firstname', '$lastname', '$regemail', '$phone', '', '$role', sha1('$regpass'), '$address', '$subscription', '$expiredDate', '$registerDate')";
 //        echo "prepare ";
         $query = $conn->prepare($insertsql);
 

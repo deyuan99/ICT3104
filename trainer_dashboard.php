@@ -5,16 +5,31 @@ require_once('database/dbconfig.php');
 $Semail = $_SESSION['email'];
 $Sname = $_SESSION['name'];
 $Srole = $_SESSION['role'];
-$notpersonal = "Personal Training";
-if ($Srole == "trainer") {
-    $sql = "SELECT * FROM personalsession where trainerEmail= '$Semail'";
-}
-elseif ($Srole == "admin") {
-    $sql = "SELECT * FROM users where trainerEmail= '$Semail'";
-}
+
+$sql = "SELECT * FROM personalsession where trainerEmail= '$Semail'";
+$sql6 = "SELECT * FROM groupsession where trainerEmail= '$Semail'";
+
+
 $req = $conn->prepare($sql);
 $req->execute();
 $events = $req->fetchAll();
+
+$req6 = $conn->prepare($sql6);
+$req6->execute();
+$grpevents = $req6->fetchAll();
+
+
+// For selecting all venue
+$sql2 = "SELECT location FROM venue";
+$req2 = $conn->prepare($sql2);
+$req2->execute();
+$venues = $req2->fetchAll();
+
+// For selecting all types of training
+$sql3 = "SELECT trainingName FROM typeoftraining";
+$req3 = $conn->prepare($sql3);
+$req3->execute();
+$typeofTrainings = $req3->fetchAll();
 ?>
 <html>
     <head>
@@ -234,6 +249,48 @@ $events = $req->fetchAll();
                                     </select>
                                 </div>
                             </div>
+                            
+                            <div class="form-group">
+                                <label for="venueview" class="col-sm-2 control-label">Venue</label>
+                                <div class="col-sm-10">
+                                    <input type="text" name="venueview" class="form-control" id="venueview" readonly>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="roomview" class="col-sm-2 control-label">RoomType</label>
+                                <div class="col-sm-10">
+                                    <input type="text" name="roomview" class="form-control" id="roomview" readonly>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="typeview" class="col-sm-2 control-label">Training Type</label>
+                                <div class="col-sm-10">
+                                    <input type="text" name="typeview" class="form-control" id="typeview" readonly>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="costview" class="col-sm-2 control-label">Cost</label>
+                                <div class="col-sm-10">
+                                    <input type="text" name="costview" class="form-control" id="costview" readonly>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="roomview" class="col-sm-2 control-label">Training Type</label>
+                                <div class="col-sm-10">
+                                    <input type="text" name="typeview" class="form-control" id="typeview" readonly>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="grpsizeview" class="col-sm-2 control-label">Max Group Size</label>
+                                <div class="col-sm-10">
+                                    <input type="text" name="grpsizeview" class="form-control" id="grpsizeview" readonly>
+                                </div>
+                            </div>
 
                             <div class="form-group">
                                 <label for="end" class="col-sm-2 control-label">Description</label>
@@ -242,23 +299,23 @@ $events = $req->fetchAll();
                                 </div>
                             </div>    
 
-                            <div class="form-group">
-                                <label for="end" class="col-sm-2 control-label">Cost $</label>
-                                <div class="col-sm-10">
-                                    <input type="text" name="cost" class="form-control" id="cost" value="<?php echo $event['cost']; ?>" readonly>
-                                </div>
-                            </div>
-
                             <input type="hidden" name="evid" class="form-control" id="evid">
 
                             <?php if ($Srole == "trainer") {?>
                                 <div class="form-group">
-                                    <label for="trainee" class="col-sm-2 control-label">Tainee Gmail</label>
+                                    <label for="trainee" class="col-sm-2 control-label">Trainee Email</label>
                                     <div class="col-sm-10">
                                         <input type="text" name="trainee" class="form-control" id="trainee" value="<?php echo $event['traineeEmail']; ?>" readonly>
                                     </div>
                                 </div>
                             <?php } ?>
+                            
+                            <div class="form-group">
+                                <label for="status" class="col-sm-2 control-label">Status</label>
+                                <div class="col-sm-10">
+                                    <input type="text" name="status" class="form-control" id="status" readonly>
+                                </div>
+                            </div>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button> 
@@ -339,20 +396,69 @@ $events = $req->fetchAll();
                                         </select>
                                     </div>
                                 </div>
+                                
+                                <div class="form-group">
+                                    <label for="venue" class="col-sm-2 control-label">Venue</label>
+                                    <div class="col-sm-10">
+                                        <select name="venue" class="form-control" id="venue" >
+                                            <option value="select">- Select Venue -</option>
+                                            <?php
+                                            foreach ($venues as $venue):
+                                                $location = $venue['location'];
+                                                echo '<option value="'. $location .'">'. $location .'</option>';
+                                            endforeach; ?>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div id="hidden_div_rm">
+                                        <label for="roomtype" class="col-sm-2 control-label">RoomType</label>
+                                        <div class="col-sm-10">
+                                            <select name="roomtype" class="form-control" id="roomtype" >
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div id="hidden_div_1v1grp">
+                                    <div class="form-group">
+                                        <label for="venue" class="col-sm-2 control-label">Training Type</label>
+                                        <div class="col-sm-10">
+                                            <select name="typeofTraining" class="form-control" id="typeofTraining" >
+                                                <option value="select">- Select Type -</option>
+                                                <?php
+                                                foreach ($typeofTrainings as $typeofTraining):
+                                                    $ttype = $typeofTraining['trainingName'];
+                                                    echo '<option value="'. $ttype .'">'. $ttype .'</option>';
+                                                endforeach; ?>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <div id="hidden_div_cost">
+                                            <label for="cost" class="col-sm-2 control-label">Cost</label>
+                                            <div class="col-sm-10">
+                                                <input type="text" name="tcost" class="form-control" id="tcost" readonly>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <div id="hidden_div_size">
+                                        <label for="groupsize" class="col-sm-2 control-label">Max Group Size</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" name="groupsize" class="form-control" id="groupsize">
+                                        </div>
+                                    </div>
+                                </div>
 
                                 <div class="form-group">
                                     <label for="description" class="col-sm-2 control-label">Description</label>
                                     <div class="col-sm-10">
                                         <input type="text" name="description" class="form-control" id="description">
-                                    </div>
-                                </div>    
-
-                                <div class="form-group">
-                                    <div id="hidden_div">
-                                        <label for="cost" class="col-sm-2 control-label">Cost $</label>
-                                        <div class="col-sm-10">
-                                            <input type="text" name="cost" class="form-control" id="cost">
-                                        </div>
                                     </div>
                                 </div>
 
@@ -400,17 +506,82 @@ $events = $req->fetchAll();
 
     <!--Calendar script-->
     <script>
-        // for cost 
+        $('#hidden_div_rm').hide();
+        $('#hidden_div_1v1grp').hide();
+        $('#hidden_div_cost').hide();
+        $('#hidden_div_size').hide();
+        
+        // for training type
         $(function () {
-            $('#hidden_div').hide();
             $('#Pcategory').change(function () {
-                if ($('#Pcategory').val() === "1-1 Training") {
-                    $('#hidden_div').show();
+                if ($('#Pcategory').val() === "Personal Training") {
+                    $('#hidden_div_1v1grp').hide();
+                    $('#hidden_div_size').hide();
+                } else if ($('#Pcategory').val() === "1-1 Training") {
+                    $('#hidden_div_1v1grp').show();
                 } else {
-                    $('#hidden_div').hide();
+                    $('#hidden_div_1v1grp').show();
+                    $('#hidden_div_size').show();
                 }
             });
         });
+        // for venue
+        $("#venue").change(function ()
+        {
+            if ($('#venue').val() === "select") {
+                $('#hidden_div_rm').hide();
+            } else {
+                $('#hidden_div_rm').show();
+            }
+
+            var venue = $(this).find(":selected").val();
+//                alert(id);
+            $.ajax
+                ({
+                    type: "POST",
+                    url: 'phpCodes/getRoomType.php',
+                    data: {venue: venue},
+                    cache: false,
+                    success: function (r)
+                    {
+                        //document.getElementById("roomtype").value = r;
+                        var result = $.parseJSON(r);
+//                            alert(result);
+                        $('#roomtype').html("");
+                        result.forEach(function(item) {
+                            $('#roomtype').append($("<option></option>")
+                                            .attr("value",item)
+                                            .text(item)); 
+                        });
+
+                    }
+                });
+        });
+        // for training type cost
+        $("#typeofTraining").change(function ()
+        {
+            if ($('#typeofTraining').val() === "select") {
+                $('#hidden_div_cost').hide();
+            } else {
+                $('#hidden_div_cost').show();
+            }
+
+            var ttype = $(this).find(":selected").val();
+//                alert(id);
+            $.ajax
+                ({
+                    type: "POST",
+                    url: 'phpCodes/getCost.php',
+                    data: {ttype: ttype},
+                    cache: false,
+                    success: function (r2)
+                    {
+//                        alert(r2);
+                        document.getElementById("tcost").value = r2;
+                    }
+                });
+        });
+
         $(document).ready(function () {
             //var today = moment().day();
             $('#calendar').fullCalendar({
@@ -421,7 +592,7 @@ $events = $req->fetchAll();
                 },
                 //defaultDate: '2016-01-12',
                 defaultDate: $('#calendar').fullCalendar('today'),
-                editable: true,
+                editable: false,
                 eventLimit: true, // allow "more" link when too many events
                 selectable: true,
                 selectHelper: true,
@@ -441,12 +612,29 @@ foreach ($events as $event):
     $cat = $event['category'];
     $eventdate = $event['date'];
     $traineeEmail = $event['traineeEmail'];
-    $cost = $event['cost'];
 
     $combinedstart = date('Y-m-d H:i:s', strtotime("$eventdate $start"));
     $combinedend = date('Y-m-d H:i:s', strtotime("$eventdate $end"));
+    
+    $roomt = $event['roomTypeID'];
+    $sql4 = "SELECT roomtype.name, venue.location FROM roomtype, venue WHERE roomtype.id = '$roomt' AND roomtype.venueID = venue.id";
+    $req4 = $conn->prepare($sql4);
+    $req4 -> execute();
+    $names = $req4 -> fetch(PDO::FETCH_ASSOC);
+    $roomname = $names['name'];
+    $venuename = $names['location'];
+       
+    $trainingtype = $event['typeofTrainingID'];
+    $sql5 = "SELECT trainingName, cost FROM typeoftraining WHERE id = '$trainingtype'";
+    $req5 = $conn->prepare($sql5);
+    $req5 -> execute();
+    $names2 = $req5 -> fetch(PDO::FETCH_ASSOC);
+    $trainingname = $names2['trainingName'];
+    $cost = $names2['cost'];
+    
     if ($cat == "Personal Training") {
         $traineeEmail = "Not Applicable";
+        $trainingname = "Not Applicable";
         $cost = "Not Applicable";
     } else if ($traineeEmail == NULL && $cat == "1-1 Training") {
         $traineeEmail = "Still available";
@@ -467,26 +655,84 @@ foreach ($events as $event):
                             date: '<?php echo $event['date']; ?>',
                             startTime: '<?php echo $event['startTime']; ?>',
                             endTime: '<?php echo $event['endTime']; ?>',
-                            start: '<?php echo $combinedstart ?>',
+                            start: '<?php echo $combinedstart; ?>',
                             end: '<?php echo $combinedend; ?>',
-                            description: '<?php echo $event['description']; ?>',
+                            venue: '<?php echo $venuename; ?>',
+                            room: '<?php echo $roomname; ?>',
+                            type: '<?php echo $trainingname; ?>',
                             cost: '<?php echo $cost; ?>',
-                            trainee: '<?php echo $traineeEmail ?>',
+                            description: '<?php echo $event['description']; ?>',
+                            trainee: '<?php echo ""; ?>',
                             color: '<?php echo $event['color']; ?>',
                         },
 <?php endforeach;
 ?>
+<?php 
+    foreach ($grpevents as $grpevent):
+    $start = $grpevent['startTime'];
+    $end = $grpevent['endTime'];
+    $eventdate = $grpevent['date'];
+    $grpsize = $grpevent['groupCapacity'];
+
+    $combinedstart = date('Y-m-d H:i:s', strtotime("$eventdate $start"));
+    $combinedend = date('Y-m-d H:i:s', strtotime("$eventdate $end"));
+    
+    $roomt = $grpevent['roomTypeID'];
+    $sql4 = "SELECT roomtype.name, venue.location FROM roomtype, venue WHERE roomtype.id = '$roomt' AND roomtype.venueID = venue.id";
+    $req4 = $conn->prepare($sql4);
+    $req4 -> execute();
+    $names = $req4 -> fetch(PDO::FETCH_ASSOC);
+    $roomname = $names['name'];
+    $venuename = $names['location'];
+       
+    $trainingtype = $grpevent['typeofTrainingID'];
+    $sql5 = "SELECT trainingName, cost FROM typeoftraining WHERE id = '$trainingtype'";
+    $req5 = $conn->prepare($sql5);
+    $req5 -> execute();
+    $names2 = $req5 -> fetch(PDO::FETCH_ASSOC);
+    $trainingname = $names2['trainingName'];
+    $cost = $names2['cost'];
+
+    $color = '#008000';
+
+?>
+                {
+                            evid: '<?php echo $grpevent['id']; ?>',
+                            title: '<?php echo "Group Training" ?>',
+                            status: '<?php echo $grpevent['status'] ?>',
+                            date: '<?php echo $grpevent['date']; ?>',
+                            startTime: '<?php echo $grpevent['startTime']; ?>',
+                            endTime: '<?php echo $grpevent['endTime']; ?>',
+                            start: '<?php echo $combinedstart; ?>',
+                            end: '<?php echo $combinedend; ?>',
+                            venue: '<?php echo $venuename; ?>',
+                            room: '<?php echo $roomname; ?>',
+                            type: '<?php echo $trainingname; ?>',
+                            cost: '<?php echo $cost; ?>',                            
+                            grpsize: '<?php echo $grpsize; ?>',
+                            description: '<?php echo $grpevent['description']; ?>',
+                            trainee: '<?php echo "" ?>',
+                            color: '<?php echo $color; ?>',
+                        },
+<?php endforeach;
+?> 
+                
                 ]
                 ,
                 eventRender: function (event, element) {
                     element.bind('click', function () {
                         $('#ModalView #evid').val(event.evid);
                         $('#ModalView #category').val(event.title);
+                        $('#ModalView #status').val(event.status);
                         $('#ModalView #date').val(event.date);
                         $('#ModalView #startTime').val(event.startTime);
                         $('#ModalView #endTime').val(event.endTime);
+                        $('#ModalView #venueview').val(event.venue);
+                        $('#ModalView #roomview').val(event.room);
+                        $('#ModalView #typeview').val(event.type);
+                        $('#ModalView #costview').val(event.cost);
+                        $('#ModalView #grpsizeview').val(event.grpsize);
                         $('#ModalView #description').val(event.description);
-                        $('#ModalView #cost').val(event.cost);
                         $('#ModalView #trainee').val(event.trainee);
                         $('#ModalView').modal('show');
                     });

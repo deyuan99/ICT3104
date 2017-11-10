@@ -33,6 +33,7 @@ session_start();
                 document.getElementById("lastName").placeholder = lastName;
                 document.getElementById("address").placeholder = address;
                 document.getElementById("mobile").placeholder = mobile;
+                document.getElementById("pass").placeholder = "*****";
                 document.getElementById("edit_email").value = "";
                 document.getElementById("edit_email").value = email;
                 document.getElementById("edit_firstName").value = "";
@@ -43,8 +44,8 @@ session_start();
                 document.getElementById("edit_address").value = address;
                 document.getElementById("edit_mobile").value = "";
                 document.getElementById("edit_mobile").value = mobile;
-                document.getElementById("edit_password").value = "";
-                document.getElementById("edit_password").value = password;
+                document.getElementById("edit_pass").value = "";
+                document.getElementById("edit_pass").value = password;
             }
         </script>
     </head>
@@ -70,12 +71,13 @@ session_start();
                                 <table id="esa-table" class="table table-striped table-bordered" cellspacing="0" width="100%">
                                     <thead>
                                         <tr>
-                                            <th class="col-md-1">Email Address</th>
+                                            <th class="col-md-2">Email Address</th>
                                             <th class="col-md-1">First Name</th>
                                             <th class="col-md-1">Last Name</th>
                                             <th class="col-md-1">Billing Address</th>
                                             <th class="col-md-1">Mobile</th>
                                             <th class="col-md-1">Password</th>
+                                            <th class="col-md-1">Expiry Date</th>
                                             <th class="col-md-2">Action</th>
                                         </tr>
                                     </thead>
@@ -95,12 +97,12 @@ session_start();
                                 <table id="supervisor-table" class="table table-striped table-bordered" cellspacing="0" width="100%">
                                     <thead>
                                         <tr>
-                                            <th class="col-md-1">Email Address</th>
+                                            <th class="col-md-2">Email Address</th>
                                             <th class="col-md-1">First Name</th>
                                             <th class="col-md-1">Last Name</th>
                                             <th class="col-md-2">Billing Address</th>
                                             <th class="col-md-1">Mobile Number</th>
-                                            <th class="col-md-1">Password</th>
+                                            <th class="col-md-1">Expiry Date</th>
                                             <th class="col-md-2">Action</th>
                                         </tr>
                                     </thead>
@@ -188,11 +190,11 @@ session_start();
                                 </div>
                             </div>
                             
-                            <input type="hidden" name="edit_password" id="edit_password" value="">
+                            <input type="hidden" name="edit_pass" id="edit_pass" value="">
                             <div class="form-group row">
-                                <label class="form-control-label col-md-offset-2 col-md-3 col-xs-offset-0 col-xs-5 label-margin">Password:</label>
+                                <label class="form-control-label col-md-offset-2 col-md-3 col-xs-offset-0 col-xs-5 label-margin" for="pass">Password:</label>
                                 <div class="col-sm-5">
-                                    <input type="password" class="form-control" id="password" name="password" value="">
+                                    <input type="password" class="form-control" id="pass" name="pass" value="">
                                 </div>
                             </div>
                             
