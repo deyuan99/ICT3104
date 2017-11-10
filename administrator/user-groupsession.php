@@ -138,7 +138,7 @@ $events = $req->fetchAll();
 
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                    <button type="submit" class="btn btn-danger">Delete</button>
+                                    <button type="submit" name="delete" id="delete" class="btn btn-danger">Delete</button>
 
                                 </div>
                             </form>
@@ -149,7 +149,9 @@ $events = $req->fetchAll();
 
                 <!--Calendar script-->
                 <script>
-                    $(document).ready(function () {
+       var today = new Date();
+       var datetoday = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();               
+        $(document).ready(function () {
 
                         $('#calendar').fullCalendar({
                             header: {
@@ -164,8 +166,16 @@ $events = $req->fetchAll();
                             selectHelper: true,
                             events: [
 <?php
+      $todaydateis = date("Y-m-d");
+
 foreach ($events as $event):
-    ?>
+                $eventdate = $event['date'];
+                if(strtotime($todaydateis)>strtotime($eventdate)){
+                $color = '#DC143C';
+                }else{                 
+                $color = '#3D9970';
+                }
+        ?>
                                     {
                                         id: '<?php echo $event['id']; ?>',
                                         trainer: '<?php echo $event['trainerEmail']; ?>',
@@ -177,7 +187,7 @@ foreach ($events as $event):
                                         venue: '<?php echo $event['location']; ?>',
                                         type: '<?php echo $event['trainingName']; ?>',
                                         cost: '<?php echo '$ ' . $event['cost']; ?>',
-                                        color: '<?php echo '#3D9970'; ?>',
+                                        color: '<?php echo $color; ?>',
                                         capacity: '<?php echo $event['groupCapacity']; ?>',
                                         room:'<?php echo $event['name']; ?>'
 
@@ -199,6 +209,12 @@ foreach ($events as $event):
                                     $('#ModalView #cost').val(event.cost);
                                     $('#ModalView #capacity').val(event.capacity);
                                     $('#ModalView').modal('show');
+                                              // compare date for javascript
+                            if(new Date(datetoday).getTime()>new Date(event.date).getTime()){
+                                     $('#delete').hide();
+                            }else{
+                                     $('#delete').show();  
+                            }
                                 });
                             },
                             eventMouseover: function (event, jsEvent, view) {

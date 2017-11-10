@@ -167,6 +167,8 @@ $events = $req->fetchAll();
 
         <!--Calendar script-->
         <script>
+       var today = new Date();
+       var datetoday = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate(); 
             $(document).ready(function () {
                 //var today = moment().day();
 
@@ -184,7 +186,16 @@ $events = $req->fetchAll();
                     selectHelper: true,
                     events: [
 <?php
+      $todaydateis = date("Y-m-d");
+
 foreach ($events as $event):
+                $eventdate = $event['date'];
+                if(strtotime($todaydateis)>strtotime($eventdate)){
+                $color = '#DC143C';
+                }else{                 
+                $color = '#3D9970';
+                }
+    
 
     ?>
                             {
@@ -198,7 +209,7 @@ foreach ($events as $event):
                                 venue: '<?php echo $event['location']; ?>',
                                 type: '<?php echo $event['trainingName']; ?>',
                                 cost: '<?php echo '$ ' . $event['cost']; ?>',
-                                color: '<?php echo '#3D9970'; ?>',
+                                color: '<?php echo $color; ?>',
                                 capacity: '<?php echo $event['groupCapacity']; ?>'
                             },
 <?php endforeach; ?>
@@ -217,6 +228,12 @@ foreach ($events as $event):
                             $('#ModalView #cost').val(event.cost);
                             $('#ModalView #capacity').val(event.capacity);
                             $('#ModalView').modal('show');
+                                   // compare date for javascript
+                         //   if(new Date(datetoday).getTime()>new Date(event.date).getTime()){
+                         //            $('#join').hide();
+                         //   }else{
+                        //             $('#join').show();  
+                         //   }
                         });
                     },
                     eventMouseover: function (event, jsEvent, view) {

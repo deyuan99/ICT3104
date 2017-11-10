@@ -583,17 +583,21 @@ $venues = $req2->fetchAll();
                             $('#ModalView #roomview').val(event.room);
                             $('#ModalView #description').val(event.description);
                             
-                            if(event.title==="1-1 Training" || event.title==="Group Training")
+                      
+                            // compare date for javascript
+                         
+                            
+                            if(event.title==="1-1 Training" || event.title==="Group Training" && new Date(datetoday).getTime()<new Date(event.date).getTime())
                             {
                                 $('#save').hide();
+                                $('#delete').show();
                             }
                             else{
                                 $('#save').show();
                             }
-                            // compare date for javascript
                             if(new Date(datetoday).getTime()>new Date(event.date).getTime()){
                                      $('#save').hide();
-                                     $('#delete').hide();
+                                     $('#delete').hide();                             
                             }
                             $('#ModalView').modal('show');
                         });

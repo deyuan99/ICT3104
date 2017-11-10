@@ -712,8 +712,12 @@ foreach ($events as $event):
     $trainingname = $names2['trainingName'];
     $cost = $names2['cost'];
 
+     if(strtotime($todaydateis)>strtotime($eventdate)){
+        $color = '#DC143C';
+        
+    }else{
     $color = '#008000';
-
+    }
 ?>
                 {
                             evid: '<?php echo $grpevent['id']; ?>',
@@ -754,6 +758,12 @@ foreach ($events as $event):
                         $('#ModalView').modal('show');
                        if(new Date(datetoday).getTime()>new Date(event.date).getTime()){
                                      $('#save').hide();
+                                     $('#delete').hide();
+
+                            }else{
+                                     $('#save').show();
+                                      $('#delete').show();
+
                             }
 
                     });
