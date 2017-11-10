@@ -279,13 +279,6 @@ $typeofTrainings = $req3->fetchAll();
                             </div>
                             
                             <div class="form-group">
-                                <label for="roomview" class="col-sm-2 control-label">Training Type</label>
-                                <div class="col-sm-10">
-                                    <input type="text" name="typeview" class="form-control" id="typeview" readonly>
-                                </div>
-                            </div>
-                            
-                            <div class="form-group">
                                 <label for="grpsizeview" class="col-sm-2 control-label">Max Group Size</label>
                                 <div class="col-sm-10">
                                     <input type="text" name="grpsizeview" class="form-control" id="grpsizeview" readonly>
