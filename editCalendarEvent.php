@@ -90,7 +90,7 @@ if (isset($_POST['delete']) && isset($_POST['id'])){
             else
                 {
                 
-                   $sql = "UPDATE personalsession SET traineeEmail = ' ' WHERE id = '$id' ";
+                   $sql = "UPDATE personalsession SET traineeEmail = '' WHERE id = '$id' ";
                 $query = $conn->prepare( $sql );
                 if ($query == false) {
                  print_r($conn->errorInfo());

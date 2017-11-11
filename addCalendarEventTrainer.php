@@ -54,7 +54,7 @@ if (isset($_POST['Pcategory']) && isset($_POST['starttime']) && isset($_POST['en
                     //$req = $bdd->prepare($sql);
                     //$req->execute();
                     //    echo $sql;
-                    echo "<script type='text/javascript'>alert('here!');</script>";
+                   // echo "<script type='text/javascript'>alert('here!');</script>";
                     
                     $query = $conn->prepare($sql);
                     if ($query == false) {

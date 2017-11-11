@@ -158,7 +158,7 @@ foreach ($events as $event):
     $combinedend = date('Y-m-d H:i:s', strtotime("$eventdate $end"));
     
     $eStatus = "";
-    if ($traineeEmail == "") {
+    if ($event['traineeEmail'] == "") {
         $color = '#0071c5';
     }
     else{

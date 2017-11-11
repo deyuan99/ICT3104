@@ -321,9 +321,9 @@ $typeofTrainings = $req3->fetchAll();
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button> 
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> 
                             <button type="submit" name="save" id="save" value="save" class="btn btn-primary">Save changes</button>
-                            <button type="submit" name="delete" id="delete" value="delete" class="btn btn-primary">Delete</button>
+                            <button type="submit" name="delete" id="delete" value="delete" class="btn btn-danger">Delete</button>
                             <!--<input type="hidden" id="evid" name="evid" value="<?php //echo $event['id'];   ?>" />-->
                             <?php if ($Srole == "trainee") { ?>
                                 <button type="submit" class="btn btn-primary">Apply</button>
@@ -469,7 +469,7 @@ $typeofTrainings = $req3->fetchAll();
                             </div>
 
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                                 <button type="submit" class="btn btn-primary">Create Event</button>
                             </div>
                         </form>

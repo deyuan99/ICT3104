@@ -52,7 +52,6 @@ if (isset($_POST['cost']) && isset($_POST['description']) && isset($_POST['start
 }
 	
 if (isset($_POST['delete']) && isset($_POST['evid'])){
-	session_start();
 
         $Semail = $_SESSION['email'];
     

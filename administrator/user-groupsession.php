@@ -149,9 +149,9 @@ $events = $req->fetchAll();
 
                 <!--Calendar script-->
                 <script>
-       var today = new Date();
-       var datetoday = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();               
-        $(document).ready(function () {
+                    var today = new Date();
+                    var datetoday = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+                    $(document).ready(function () {
 
                         $('#calendar').fullCalendar({
                             header: {
@@ -166,16 +166,20 @@ $events = $req->fetchAll();
                             selectHelper: true,
                             events: [
 <?php
-      $todaydateis = date("Y-m-d");
+$todaydateis = date("Y-m-d");
 
 foreach ($events as $event):
-                $eventdate = $event['date'];
-                if(strtotime($todaydateis)>strtotime($eventdate)){
-                $color = '#DC143C';
-                }else{                 
-                $color = '#3D9970';
-                }
-        ?>
+    $eventdate = $event['date'];
+    $start = $event['startTime'];
+    $end = $event['endTime'];
+    $combinedstart = date('Y-m-d H:i:s', strtotime("$eventdate $start"));
+    $combinedend = date('Y-m-d H:i:s', strtotime("$eventdate $end"));
+    if (strtotime($todaydateis) > strtotime($eventdate)) {
+        $color = '#DC143C';
+    } else {
+        $color = '#3D9970';
+    }
+    ?>
                                     {
                                         id: '<?php echo $event['id']; ?>',
                                         trainer: '<?php echo $event['trainerEmail']; ?>',
@@ -183,13 +187,15 @@ foreach ($events as $event):
                                         date: '<?php echo $event['date']; ?>',
                                         startTime: '<?php echo $event['startTime']; ?>',
                                         endTime: '<?php echo $event['endTime']; ?>',
+                                        start: '<?php echo $combinedstart ?>',
+                                        end: '<?php echo $combinedend; ?>',
                                         description: '<?php echo $event['description']; ?>',
                                         venue: '<?php echo $event['location']; ?>',
                                         type: '<?php echo $event['trainingName']; ?>',
                                         cost: '<?php echo '$ ' . $event['cost']; ?>',
                                         color: '<?php echo $color; ?>',
                                         capacity: '<?php echo $event['groupCapacity']; ?>',
-                                        room:'<?php echo $event['name']; ?>'
+                                        room: '<?php echo $event['name']; ?>'
 
                                     },
 <?php endforeach; ?>
@@ -209,12 +215,12 @@ foreach ($events as $event):
                                     $('#ModalView #cost').val(event.cost);
                                     $('#ModalView #capacity').val(event.capacity);
                                     $('#ModalView').modal('show');
-                                              // compare date for javascript
-                            if(new Date(datetoday).getTime()>new Date(event.date).getTime()){
-                                     $('#delete').hide();
-                            }else{
-                                     $('#delete').show();  
-                            }
+                                    // compare date for javascript
+                                    if (new Date(datetoday).getTime() > new Date(event.date).getTime()) {
+                                        $('#delete').hide();
+                                    } else {
+                                        $('#delete').show();
+                                    }
                                 });
                             },
                             eventMouseover: function (event, jsEvent, view) {
@@ -247,13 +253,13 @@ foreach ($events as $event):
                                 current = new Date();
 
                                 var content = '<h4>' + event.title + '</h4>';
-                                content += '<div class="row qtip-content-margin"><b>Description:</b> '+ event.description + '</div>';
-                                content += '<div class="row qtip-content-margin"><b>Date:</b> '+ event.date + '</div>';
-                                content += '<div class="row qtip-content-margin"><b>Training Time:</b> '+ event.startTime + ' to ' + event.endTime + '</div>';
-                                content += '<div class="row qtip-content-margin"><b>Venue:</b> '+ event.room + ' room at ' + event.venue + '</div>';
-                                
+                                content += '<div class="row qtip-content-margin"><b>Description:</b> ' + event.description + '</div>';
+                                content += '<div class="row qtip-content-margin"><b>Date:</b> ' + event.date + '</div>';
+                                content += '<div class="row qtip-content-margin"><b>Training Time:</b> ' + event.startTime + ' to ' + event.endTime + '</div>';
+                                content += '<div class="row qtip-content-margin"><b>Venue:</b> ' + event.room + ' room at ' + event.venue + '</div>';
 
-                                /* if (event.type != <?php //echo SELFT;  ?>) {
+
+                                /* if (event.type != <?php //echo SELFT;   ?>) {
                                  content += '<div class="row qtip-content-margin"><b>Category:</b> ' + event.category + '</div>';
                                  }
                                  
@@ -263,11 +269,11 @@ foreach ($events as $event):
                                  content += '<div class="row qtip-content-margin"><b>Venue:</b> ' + event.room + '</div>';
                                  
                                  // Check if less than 2 days to the event, cannot cancel
-                                 if (differenceInDays(event.start) > 2 && event.type != <?php //echo SELFT;  ?> && event.start > current) {
+                                 if (differenceInDays(event.start) > 2 && event.type != <?php //echo SELFT;   ?> && event.start > current) {
                                  content += '<form class="form-horizontal" action="../Functions/doWithdrawTraining.php" method="POST"><input type="hidden" name="training_id" value="' + event.id + '"><button type="submit" id="withdrawTraining" name="withdrawTraining" class="btn btn-primary btn-xs">Withdraw Training</button></form>';
                                  }
                                  
-                                 if (event.type == <?php // echo SELFT;  ?> && event.start > current) {
+                                 if (event.type == <?php // echo SELFT;   ?> && event.start > current) {
                                  content += '<form class="form-horizontal" action="../Functions/doCancelTraineeSelf.php" method="POST"><input type="hidden" name="training_id" value="' + event.id + '"><button type="submit" id="removeTraining" name="removeTraining" class="btn btn-primary btn-xs">Cancel Training</button></form>';
                                  }*/
 
