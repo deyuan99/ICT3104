@@ -83,6 +83,34 @@ $events = $req->fetchAll();
                                     <input type="text" name="endTime" class="form-control" id="endTime" value="<?php echo $event['endTime']; ?>" readonly>
                                 </div>
                             </div>
+                            
+                            <div class="form-group">
+                                <label for="venueview" class="col-sm-2 control-label">Venue</label>
+                                <div class="col-sm-10">
+                                    <input type="text" name="venueview" class="form-control" id="venueview" readonly>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="roomview" class="col-sm-2 control-label">Room</label>
+                                <div class="col-sm-10">
+                                    <input type="text" name="roomview" class="form-control" id="roomview" readonly>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="typeview" class="col-sm-2 control-label">Type</label>
+                                <div class="col-sm-10">
+                                    <input type="text" name="typeview" class="form-control" id="typeview" readonly>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="costview" class="col-sm-2 control-label">Cost</label>
+                                <div class="col-sm-10">
+                                    <input type="text" name="costview" class="form-control" id="costview" readonly>
+                                </div>
+                            </div>
 
                             <div class="form-group">
                                 <label for="end" class="col-sm-2 control-label">Description</label>
@@ -157,6 +185,22 @@ foreach ($events as $event):
     $combinedstart = date('Y-m-d H:i:s', strtotime("$eventdate $start"));
     $combinedend = date('Y-m-d H:i:s', strtotime("$eventdate $end"));
 
+    $roomt = $event['roomTypeID'];
+    $sql4 = "SELECT roomtype.name, venue.location FROM roomtype, venue WHERE roomtype.id = '$roomt' AND roomtype.venueID = venue.id";
+    $req4 = $conn->prepare($sql4);
+    $req4 -> execute();
+    $names = $req4 -> fetch(PDO::FETCH_ASSOC);
+    $roomname = $names['name'];
+    $venuename = $names['location'];
+    
+    $trainingtype = $event['typeofTrainingID'];
+    $sql5 = "SELECT trainingName, cost FROM typeoftraining WHERE id = '$trainingtype'";
+    $req5 = $conn->prepare($sql5);
+    $req5 -> execute();
+    $names2 = $req5 -> fetch(PDO::FETCH_ASSOC);
+    $trainingname = $names2['trainingName'];
+    $cost = "$" . $names2['cost'];
+    
     if ($cat == "Personal Training") {
         $traineeEmail = "Not Applicable";
         $color = '#000';
@@ -172,6 +216,10 @@ foreach ($events as $event):
                                 endTime: '<?php echo $event['endTime']; ?>',
                                 start: '<?php echo $combinedstart ?>',
                                 end: '<?php echo $combinedend; ?>',
+                                venue: '<?php echo $venuename; ?>',
+                                room: '<?php echo $roomname; ?>',
+                                type: '<?php echo $trainingname; ?>',
+                                cost: '<?php echo $cost; ?>',
                                 description: '<?php echo $event['description']; ?>',
                             },
 <?php endforeach; ?>
@@ -184,6 +232,10 @@ foreach ($events as $event):
                             $('#ModalView #date').val(event.date);
                             $('#ModalView #startTime').val(event.startTime);
                             $('#ModalView #endTime').val(event.endTime);
+                            $('#ModalView #venueview').val(event.venue);
+                            $('#ModalView #roomview').val(event.room);
+                            $('#ModalView #typeview').val(event.type);
+                            $('#ModalView #costview').val(event.cost);
                             $('#ModalView #description').val(event.description);
                             $('#ModalView').modal('show');
                         });

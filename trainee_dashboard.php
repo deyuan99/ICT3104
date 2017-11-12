@@ -257,6 +257,27 @@ $venues = $req2->fetchAll();
                                     <input type="text" name="roomview" class="form-control" id="roomview" readonly>
                                 </div>
                             </div>
+                            
+                            <div class="form-group">
+                                <label for="typeview" class="col-sm-2 control-label">Type</label>
+                                <div class="col-sm-10">
+                                    <input type="text" name="typeview" class="form-control" id="typeview" readonly>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="costview" class="col-sm-2 control-label">Cost</label>
+                                <div class="col-sm-10">
+                                    <input type="text" name="costview" class="form-control" id="costview" readonly>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="trainerview" class="col-sm-2 control-label">Trainer</label>
+                                <div class="col-sm-10">
+                                    <input type="text" name="trainerview" class="form-control" id="trainerview" readonly>
+                                </div>
+                            </div>
 
                             <div class="form-group">
                                 <label for="end" class="col-sm-2 control-label">Description</label>
@@ -354,8 +375,8 @@ $venues = $req2->fetchAll();
                             <div class="form-group">
                                 <label for="venue" class="col-sm-2 control-label">Venue</label>
                                 <div class="col-sm-10">
-                                    <select name="venue" class="form-control" id="venue" >
-                                        <option value="select">- Select Venue -</option>
+                                    <select name="venue" class="form-control" id="venue" required>
+                                        <option value="">- Select Venue -</option>
                                         <?php
                                         foreach ($venues as $venue):
                                             $location = $venue['location'];
@@ -367,9 +388,9 @@ $venues = $req2->fetchAll();
                             
                             <div class="form-group">
                                 <div id="hidden_div">
-                                    <label for="roomtype" class="col-sm-2 control-label">RoomType</label>
+                                    <label for="roomtype" class="col-sm-2 control-label">Room</label>
                                     <div class="col-sm-10">
-                                        <select name="roomtype" class="form-control" id="roomtype" >
+                                        <select name="roomtype" class="form-control" id="roomtype" required>
                                         </select>
                                     </div>
                                 </div>
@@ -378,7 +399,7 @@ $venues = $req2->fetchAll();
                             <div class="form-group">
                                 <label for="description" class="col-sm-2 control-label">Description</label>
                                 <div class="col-sm-10">
-                                    <input type="text" name="description" class="form-control" id="description">
+                                    <input type="text" name="description" class="form-control" id="description" placeholder="Description">
                                 </div>
                             </div> 
 
@@ -450,7 +471,8 @@ $venues = $req2->fetchAll();
                             //document.getElementById("roomtype").value = r;
                             var result = $.parseJSON(r);
 //                            alert(result);
-                            $('#roomtype').html("");
+                            //$('#roomtype').html("");
+                            $('#roomtype').html("<option value=''>- Select Room -</option>");
                             result.forEach(function(item) {
                                 $('#roomtype').append($("<option></option>")
                                                 .attr("value",item)
@@ -505,6 +527,7 @@ $venues = $req2->fetchAll();
                 $cat = $event['category'];
                 $eventdate = $event['date'];
                 $traineeEmail = $event['traineeEmail'];
+                $trainerEmail = $event['trainerEmail'];
                 $combinedstart = date('Y-m-d H:i:s', strtotime("$eventdate $start"));
                 $combinedend = date('Y-m-d H:i:s', strtotime("$eventdate $end"));
                 
@@ -517,10 +540,21 @@ $venues = $req2->fetchAll();
 //                echo "alert($roomname)";
                 $venuename = $names['location'];
 
+                if ($cat == "1-1 Training" || $cat == "Group Training") {
+                    $trainingtype = $event['typeoftrainingid'];
+                    $sql5 = "SELECT trainingName, cost FROM typeoftraining WHERE id = '$trainingtype'";
+                    $req5 = $conn->prepare($sql5);
+                    $req5 -> execute();
+                    $names2 = $req5 -> fetch(PDO::FETCH_ASSOC);
+                    $trainingname = $names2['trainingName'];
+                    $cost = "$" . $names2['cost'];
+                }
                 
                 if ($cat == "Personal Training") {
                     $traineeEmail = "Not Applicable";
-            
+                    $trainingname = "Not Applicable";
+                    $cost = "Not Applicable";
+                    $trainerEmail = "Not Applicable";
                 } else if ($traineeEmail != NULL) {
                     $color = '#378006';
                 }
@@ -544,9 +578,11 @@ $venues = $req2->fetchAll();
                                 end: '<?php echo $combinedend; ?>',
                                 venue: '<?php echo $venuename; ?>',
                                 room: '<?php echo $roomname; ?>',
+                                type: '<?php echo $trainingname; ?>',
+                                cost: '<?php echo $cost; ?>',
+                                trainer: '<?php echo $trainerEmail; ?>',
                                 description: '<?php echo $event['description']; ?>',
                                 color: '<?php echo $color; ?>',
-                                
                             },
 <?php endforeach; ?>
                     ],
@@ -560,6 +596,9 @@ $venues = $req2->fetchAll();
                             $('#ModalView #endTime').val(event.endTime);
                             $('#ModalView #venueview').val(event.venue);
                             $('#ModalView #roomview').val(event.room);
+                            $('#ModalView #typeview').val(event.type);
+                            $('#ModalView #costview').val(event.cost);
+                            $('#ModalView #trainerview').val(event.trainer);
                             $('#ModalView #description').val(event.description);
                             
                             if(event.title==="1-1 Training" || event.title==="Group Training")

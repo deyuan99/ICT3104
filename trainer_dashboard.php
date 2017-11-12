@@ -296,7 +296,7 @@ $typeofTrainings = $req3->fetchAll();
 
                             <?php if ($Srole == "trainer") {?>
                                 <div class="form-group">
-                                    <label for="trainee" class="col-sm-2 control-label">Trainee</label>
+                                    <label for="trainee" class="col-sm-2 control-label">Trainees</label>
                                     <div class="col-sm-10">
                                         <input type="text" name="trainee" class="form-control" id="trainee" value="<?php echo $event['traineeEmail']; ?>" readonly>
                                     </div>
@@ -393,8 +393,8 @@ $typeofTrainings = $req3->fetchAll();
                                 <div class="form-group">
                                     <label for="venue" class="col-sm-2 control-label">Venue</label>
                                     <div class="col-sm-10">
-                                        <select name="venue" class="form-control" id="venue" >
-                                            <option value="select">- Select Venue -</option>
+                                        <select name="venue" class="form-control" id="venue" required>
+                                            <option value="">- Select Venue -</option>
                                             <?php
                                             foreach ($venues as $venue):
                                                 $location = $venue['location'];
@@ -406,9 +406,9 @@ $typeofTrainings = $req3->fetchAll();
 
                                 <div class="form-group">
                                     <div id="hidden_div_rm">
-                                        <label for="roomtype" class="col-sm-2 control-label">RoomType</label>
+                                        <label for="roomtype" class="col-sm-2 control-label">Room</label>
                                         <div class="col-sm-10">
-                                            <select name="roomtype" class="form-control" id="roomtype" >
+                                            <select name="roomtype" class="form-control" id="roomtype" required>
                                             </select>
                                         </div>
                                     </div>
@@ -416,10 +416,10 @@ $typeofTrainings = $req3->fetchAll();
                                 
                                 <div id="hidden_div_1v1grp">
                                     <div class="form-group">
-                                        <label for="venue" class="col-sm-2 control-label">Training Type</label>
+                                        <label for="venue" class="col-sm-2 control-label">Type</label>
                                         <div class="col-sm-10">
                                             <select name="typeofTraining" class="form-control" id="typeofTraining" >
-                                                <option value="select">- Select Type -</option>
+                                                <option value="">- Select Type -</option>
                                                 <?php
                                                 foreach ($typeofTrainings as $typeofTraining):
                                                     $ttype = $typeofTraining['trainingName'];
@@ -441,7 +441,7 @@ $typeofTrainings = $req3->fetchAll();
                                 
                                 <div class="form-group">
                                     <div id="hidden_div_size">
-                                        <label for="groupsize" class="col-sm-2 control-label">Max Group Size</label>
+                                        <label for="groupsize" class="col-sm-2 control-label">Capacity</label>
                                         <div class="col-sm-10">
                                             <input type="text" name="groupsize" class="form-control" id="groupsize">
                                         </div>
@@ -451,7 +451,7 @@ $typeofTrainings = $req3->fetchAll();
                                 <div class="form-group">
                                     <label for="description" class="col-sm-2 control-label">Description</label>
                                     <div class="col-sm-10">
-                                        <input type="text" name="description" class="form-control" id="description">
+                                        <input type="text" name="description" class="form-control" id="description" placeholder="Description">
                                     </div>
                                 </div>
 
@@ -509,12 +509,19 @@ $typeofTrainings = $req3->fetchAll();
             $('#Pcategory').change(function () {
                 if ($('#Pcategory').val() === "Personal Training") {
                     $('#hidden_div_1v1grp').hide();
+                    document.getElementById("typeofTraining").required = false;
                     $('#hidden_div_size').hide();
+                    document.getElementById("groupsize").required = false;
                 } else if ($('#Pcategory').val() === "1-1 Training") {
                     $('#hidden_div_1v1grp').show();
+                    document.getElementById("typeofTraining").required = true;
+                    $('#hidden_div_size').hide();
+                    document.getElementById("groupsize").required = true;
                 } else {
                     $('#hidden_div_1v1grp').show();
+                    document.getElementById("typeofTraining").required = true;
                     $('#hidden_div_size').show();
+                    document.getElementById("groupsize").required = true;
                 }
             });
         });
@@ -540,7 +547,7 @@ $typeofTrainings = $req3->fetchAll();
                         //document.getElementById("roomtype").value = r;
                         var result = $.parseJSON(r);
 //                            alert(result);
-                        $('#roomtype').html("");
+                        $('#roomtype').html("<option value=''>- Select Room -</option>");
                         result.forEach(function(item) {
                             $('#roomtype').append($("<option></option>")
                                             .attr("value",item)
@@ -623,7 +630,7 @@ foreach ($events as $event):
     $req5 -> execute();
     $names2 = $req5 -> fetch(PDO::FETCH_ASSOC);
     $trainingname = $names2['trainingName'];
-    $cost = $names2['cost'];
+    $cost = "$" . $names2['cost'];
     
     if ($cat == "Personal Training") {
         $traineeEmail = "Not Applicable";
@@ -653,10 +660,12 @@ foreach ($events as $event):
                             venue: '<?php echo $venuename; ?>',
                             room: '<?php echo $roomname; ?>',
                             type: '<?php echo $trainingname; ?>',
-                            cost: '<?php echo $cost; ?>',
+                            cost: '<?php echo $cost; ?>',                            
+                            grpsize: '<?php echo "Not Applicable"; ?>',
                             description: '<?php echo $event['description']; ?>',
-                            trainee: '<?php echo ""; ?>',
+                            trainee: '<?php echo $traineeEmail; ?>',
                             color: '<?php echo $event['color']; ?>',
+                            status: '<?php echo "Not Applicable"; ?>',
                         },
 <?php endforeach;
 ?>
@@ -665,7 +674,6 @@ foreach ($events as $event):
     $start = $grpevent['startTime'];
     $end = $grpevent['endTime'];
     $eventdate = $grpevent['date'];
-    $grpsize = $grpevent['groupCapacity'];
 
     $combinedstart = date('Y-m-d H:i:s', strtotime("$eventdate $start"));
     $combinedend = date('Y-m-d H:i:s', strtotime("$eventdate $end"));
@@ -684,7 +692,26 @@ foreach ($events as $event):
     $req5 -> execute();
     $names2 = $req5 -> fetch(PDO::FETCH_ASSOC);
     $trainingname = $names2['trainingName'];
-    $cost = $names2['cost'];
+    $cost = "$" . $names2['cost'];
+    
+    $grpeventid = $grpevent['id'];
+    $sql6 = "SELECT traineeEmail FROM groupsessionapplicant where groupSessionID = '$grpeventid'";
+    $req6 = $conn->prepare($sql6);
+    $req6 -> execute();
+    $traineelist = $req6 -> fetchAll();
+    $trainees = "";
+    
+    foreach ($traineelist as $trainee):
+        $trainees = $trainees . $trainee['traineeEmail'] . ", ";
+    endforeach;
+    
+    if ($trainees == "") {
+        $trainees = "No Applicants yet";
+    }
+    
+    $grpsize = $grpevent['groupCapacity'];
+    $currentsize = count($traineelist);
+    $grpsize = $currentsize . " / " . $grpsize;
 
     $color = '#008000';
 
@@ -692,7 +719,6 @@ foreach ($events as $event):
                 {
                             evid: '<?php echo $grpevent['id']; ?>',
                             title: '<?php echo "Group Training" ?>',
-                            status: '<?php echo $grpevent['status'] ?>',
                             date: '<?php echo $grpevent['date']; ?>',
                             startTime: '<?php echo $grpevent['startTime']; ?>',
                             endTime: '<?php echo $grpevent['endTime']; ?>',
@@ -704,8 +730,9 @@ foreach ($events as $event):
                             cost: '<?php echo $cost; ?>',                            
                             grpsize: '<?php echo $grpsize; ?>',
                             description: '<?php echo $grpevent['description']; ?>',
-                            trainee: '<?php echo "" ?>',
+                            trainee: '<?php echo $trainees ?>',
                             color: '<?php echo $color; ?>',
+                            status: '<?php echo $grpevent['status'] ?>',
                         },
 <?php endforeach;
 ?> 

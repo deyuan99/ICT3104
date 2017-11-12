@@ -53,7 +53,7 @@ session_start();
         <div class="container-fluid">
             <?php include_once 'nav-bar.php'; ?>
             <h1 class="text-center"><span class="glyphicon glyphicon-user icon-space"></span> USER MANAGEMENT</h1>
-            <div class="col-md-8 col-md-offset-2 padding-0" id="usermanagement">
+            <div class="col-md-10 col-md-offset-1 padding-0" id="usermanagement">
                 <div class="row" style="margin-bottom: 10px;">
                     <ul class="nav nav-pills col-md-10 padding-l0-r0">
                         <li class="active data-tabs col-md-3 col-sm-6 col-xs-12"><a href="#trainee_tab" data-toggle="pill"><span class="glyphicon glyphicon-user icon-space"></span>Trainee</a></li>
