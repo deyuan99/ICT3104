@@ -27,6 +27,19 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/1000hz-bootstrap-validator/0.11.5/validator.min.js"></script>
 <!--<script type="text/javascript" src="../js/validator.min.js"></script>-->
 
+<!-- jQuery Version 1.11.1 -->
+<script src="../fullcalendar-3.5.1/lib/jquery.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="../bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>
+
+<!-- FullCalendar -->
+<script src="../fullcalendar-3.5.1/lib/moment.min.js"></script>
+<script src="../fullcalendar-3.5.1/fullcalendar.min.js"></script>
+
+<!--qtip-->
+<link type="text/css" rel="stylesheet" href="../jquery_qtip/jquery.qtip.css" />
+<script src="../jquery_qtip/jquery.qtip.js"></script>
 
 <!-- Self-defined Styles -->
 <link rel="stylesheet" type="text/css" href="css/style.css" />

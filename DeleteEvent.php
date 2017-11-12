@@ -8,7 +8,7 @@
 require_once('database/dbconfig.php');
 $id = $_POST['id'];
 echo $id;
-$sql = "UPDATE personalsession SET traineeEmail = ' ' WHERE id = '$id' ";
+$sql = "UPDATE personalsession SET traineeEmail = '' WHERE id = '$id' ";
 $query = $conn->prepare($sql);
 if ($query == false) {
     print_r($conn->errorInfo());

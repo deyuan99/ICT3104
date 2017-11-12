@@ -49,6 +49,16 @@ $typeofTrainings = $req3->fetchAll();
         <!-- Editable profile -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 
+        
+        
+        <style>
+            /* calendar hover */
+            .qtip-content-margin {
+                margin-left:0;
+                margin-right:0;
+                margin-bottom:8px;
+            }
+        </style>
     </head>
     <body>
         <!-- Header -->
@@ -311,8 +321,9 @@ $typeofTrainings = $req3->fetchAll();
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button> 
-                            <button type="submit" class="btn btn-primary">Save changes</button>                          
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> 
+                            <button type="submit" name="save" id="save" value="save" class="btn btn-primary">Save changes</button>
+                            <button type="submit" name="delete" id="delete" value="delete" class="btn btn-danger">Delete</button>
                             <!--<input type="hidden" id="evid" name="evid" value="<?php //echo $event['id'];   ?>" />-->
                             <?php if ($Srole == "trainee") { ?>
                                 <button type="submit" class="btn btn-primary">Apply</button>
@@ -458,7 +469,7 @@ $typeofTrainings = $req3->fetchAll();
                             </div>
 
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                                 <button type="submit" class="btn btn-primary">Create Event</button>
                             </div>
                         </form>
@@ -497,13 +508,21 @@ $typeofTrainings = $req3->fetchAll();
     <script src='fullcalendar-3.5.1/lib/moment.min.js'></script>
     <script src='fullcalendar-3.5.1/fullcalendar.min.js'></script>
 
+    <!--qtip must be after funllcalendarJS-->
+    <link type="text/css" rel="stylesheet" href="jquery_qtip/jquery.qtip.css" />
+    <script src="jquery_qtip/jquery.qtip.js"></script>
+    
     <!--Calendar script-->
     <script>
+            // get today date javascript
+        var today = new Date();
+        var datetoday = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+    
         $('#hidden_div_rm').hide();
         $('#hidden_div_1v1grp').hide();
         $('#hidden_div_cost').hide();
         $('#hidden_div_size').hide();
-        
+      
         // for training type
         $(function () {
             $('#Pcategory').change(function () {
@@ -606,6 +625,9 @@ $typeofTrainings = $req3->fetchAll();
                 },
                 events: [
 <?php
+//date to set colour
+$todaydateis = date("Y-m-d");
+
 foreach ($events as $event):
     $start = $event['startTime'];
     $end = $event['endTime'];
@@ -646,6 +668,10 @@ foreach ($events as $event):
         $color = '#008000';
     } elseif ($cat == '1-1 Training') {
         $color = '#0071c5';
+    }
+    if(strtotime($todaydateis)>strtotime($eventdate)){
+        $color = '#DC143C';
+        
     }
     $event['color'] = $color;
     ?>
@@ -713,8 +739,12 @@ foreach ($events as $event):
     $currentsize = count($traineelist);
     $grpsize = $currentsize . " / " . $grpsize;
 
+     if(strtotime($todaydateis)>strtotime($eventdate)){
+        $color = '#DC143C';
+        
+    }else{
     $color = '#008000';
-
+    }
 ?>
                 {
                             evid: '<?php echo $grpevent['id']; ?>',
@@ -734,11 +764,9 @@ foreach ($events as $event):
                             color: '<?php echo $color; ?>',
                             status: '<?php echo $grpevent['status'] ?>',
                         },
-<?php endforeach;
-?> 
+<?php endforeach;?> 
                 
-                ]
-                ,
+                ],
                 eventRender: function (event, element) {
                     element.bind('click', function () {
                         $('#ModalView #evid').val(event.evid);
@@ -755,15 +783,65 @@ foreach ($events as $event):
                         $('#ModalView #description').val(event.description);
                         $('#ModalView #trainee').val(event.trainee);
                         $('#ModalView').modal('show');
+                       if(new Date(datetoday).getTime()>new Date(event.date).getTime()){
+                                     $('#save').hide();
+                                     $('#delete').hide();
+
+                            }else{
+                                     $('#save').show();
+                                      $('#delete').show();
+
+                            }
+
                     });
                 },
+                eventMouseover: function (event, jsEvent, view) {
+
+                                var tooltip = $(this).qtip({
+                                    id: 'calendar',
+                                    prerender: true,
+                                    content: {
+                                        text: ''
+                                    },
+                                    position: {
+                                        my: 'left center',
+                                        at: 'right center',
+                                        viewport: $('#calendar'),
+                                        adjust: {
+                                            mouse: true,
+                                            scroll: true
+                                        }
+                                    },
+                                    show: {
+                                        solo: true
+                                    },
+                                    hide: {
+                                        event: 'mouseleave',
+                                        fixed: true
+                                    },
+                                    style: 'qtip-light'
+                                }).qtip('api');
+
+                                current = new Date();
+
+                                var content = '<h4>' + event.title + '</h4>';
+                                content += '<div class="row qtip-content-margin"><b>Description: </b> ' + event.description + '</div>';
+                                content += '<div class="row qtip-content-margin"><b>Date: </b> ' + event.date + '</div>';
+                                content += '<div class="row qtip-content-margin"><b>Training Time: </b> ' + event.startTime + ' to ' + event.endTime + '</div>';
+                                content += '<div class="row qtip-content-margin"><b>Venue: </b> ' + event.room + ' room at ' + event.venue + '</div>';
+                               
+                                tooltip.set({
+                                    'content.text': content
+                                }).show(jsEvent);
+
+                            },
                 eventDrop: function (event, delta, revertFunc) {
                     edit(event);
                 },
                 eventResize: function (event, dayDelta, minuteDelta, revertFunc) {
                     edit(event);
                 }
-
+ 
             });
 
             function edit(event) {

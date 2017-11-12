@@ -18,15 +18,15 @@ if (isset($_POST['email'])) {
     $result = $conn->prepare($sql);
     $result->execute();
     $count = $result->rowCount();
-    
-    echo $count;
+
+    //echo $count;
 
     if ($count > 0) {
         // output data of each row
         while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
             $id = $row['email'];
-            
-            echo $id;
+
+            //echo $id;
 
             //generate random password
             for ($i = 0; $i < 8; $i++) {
@@ -34,19 +34,19 @@ if (isset($_POST['email'])) {
                 $password .= $charset[$random_int % strlen($charset)];
             }
 
-
-            echo "<br>";
-            echo $password, "\n";
+            //echo "<br>";
+            //echo $password, "\n";
             //update password
-            $sqlUpdate = "UPDATE users SET password= '$password' WHERE email='$id';";
+            $sqlUpdate = "UPDATE users SET password= sha1('$password') WHERE email='$id';";
 
             $resultUpdate = $conn->prepare($sqlUpdate);
             $resultUpdate->execute();
 
             //send email with password
-            $message = "your new password:" .' '. $password;
+            $message = "your new password:" . ' ' . $password;
             mail($email, 'Reset password', $message, $header);
-            echo "mail sent";
+            
+            header("location: ../resetPassword_mailSent.php");
         }
 
         //if yes
@@ -58,7 +58,8 @@ if (isset($_POST['email'])) {
           } */
     } else {
         //echo sorry
-        echo "none";
+
+        header("location: ../resetPassword_invalidEmail.php");
     }
 }
 ?>

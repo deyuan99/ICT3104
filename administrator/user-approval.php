@@ -1,3 +1,4 @@
+
 <?php
 session_start();
 ?>
@@ -36,7 +37,7 @@ session_start();
                     <ul class="nav nav-pills col-md-10 padding-l0-r0">
                         <li class="active data-tabs col-md-3 col-sm-6 col-xs-12"><a href="#trainee_tab" data-toggle="pill"><span class="glyphicon glyphicon-user icon-space"></span>New Users</a></li>
                         <li class="data-tabs col-md-3 col-xs-12 col-sm-6"><a href="#trainer_tab" data-toggle="pill"><span class="glyphicon glyphicon-user icon-space"></span>Group Trainings</a></li>
-                        <li class="data-tabs col-md-4 col-xs-12 col-sm-6"><a href="#approvel_reject_tab" data-toggle="pill"><span class="glyphicon glyphicon-user icon-space"></span>Approved/Rejected</a></li>
+                        <li class="data-tabs col-md-5 col-xs-12 col-sm-6"><a href="#approvel_reject_tab" data-toggle="pill"><span class="glyphicon glyphicon-user icon-space"></span>Approved/Rejected/Deleted</a></li>
 
                     </ul>
                 </div>
@@ -138,7 +139,30 @@ session_start();
                                         <?php getRejectedGrouptraining(); ?>
                                     </tbody>
                                 </table>
+                            </div><br><br>
+                            
+                            <div class="panel-heading">
+                                <div class="panel-title">Deleted Group-Training</div>
                             </div>
+                            <div class="table-responsive my-table-style">
+                                <table id="esa-table" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                                    <thead>
+                                        <tr>
+                                            <th class="col-md-2">Email Address</th>
+                                            <th class="col-md-1">Venue</th>
+                                            <th class="col-md-1">Type of Training</th>
+                                            <th class="col-md-2">Room Type</th>
+                                            <th class="col-md-1">Group Capacity</th>
+                                            <th class="col-md-1">Date</th>
+                                            <th class="col-md-1">Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php getDeletedGrouptraining(); ?>
+                                    </tbody>
+                                </table>
+                            </div>
+                            
                         </div>
                     </div>
                 </div>
@@ -198,4 +222,5 @@ session_start();
             </div>
         </div>
     </body>
+
 </html>

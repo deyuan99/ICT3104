@@ -26,6 +26,15 @@ $events = $req->fetchAll();
         <!-- Main CSS -->
         <link rel="stylesheet" href="assets/css/trainee_dashboard.css" />
 
+        <style>
+            /* calendar hover */
+            .qtip-content-margin {
+                margin-left:0;
+                margin-right:0;
+                margin-bottom:8px;
+            }
+        </style>
+
     </head>
     <body>
         <!-- Header -->
@@ -49,7 +58,7 @@ $events = $req->fetchAll();
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <form class="form-horizontal" method="POST" action="addCalendarEventTrainee.php">
-                            
+
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                             <h4 class="modal-title" id="myModalLabel">View Event</h4>
@@ -62,21 +71,21 @@ $events = $req->fetchAll();
                                     <input type="text" name="trainer" class="form-control" id="trainer" value="<?php echo $event['trainerEmail']; ?>" readonly>
                                 </div>
                             </div>
-                            
+
                             <div class="form-group">
                                 <label for="trainingname" class="col-sm-2 control-label">Type</label>
                                 <div class="col-sm-10">
                                     <input type="text" name="trainingname" class="form-control" id="trainingname" value="<?php echo $event['trainingName']; ?>" readonly>
                                 </div>
                             </div> 
-                            
+
                             <div class="form-group">
                                 <label for="cost" class="col-sm-2 control-label">Cost</label>
                                 <div class="col-sm-10">
                                     <input type="text" name="cost" class="form-control" id="cost" value="<?php echo $event['cost']; ?>" readonly>
                                 </div>
                             </div> 
-                            
+
                             <div class="form-group">
                                 <label for="description" class="col-sm-2 control-label">Description</label>
                                 <div class="col-sm-10">
@@ -111,20 +120,20 @@ $events = $req->fetchAll();
                                     <input type="text" name="venue" class="form-control" id="venue" value="<?php echo $event['location']; ?>" readonly>
                                 </div>
                             </div> 
-                            
+
                             <div class="form-group">
                                 <label for="capacity" class="col-sm-2 control-label">Capacity</label>
                                 <div class="col-sm-10">
                                     <input type="text" name="capacity" class="form-control" id="capacity" value="<?php echo $event['groupCapacity']; ?>" readonly>
                                 </div>
                             </div> 
-                            
+
                             <input type="hidden" id="eid" name="eid" value="23"/>
                         </div>
 
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                
+
                         </div>
                     </form>
                 </div>
@@ -152,8 +161,14 @@ $events = $req->fetchAll();
         <script src='fullcalendar-3.5.1/lib/moment.min.js'></script>
         <script src='fullcalendar-3.5.1/fullcalendar.min.js'></script>
 
+        <!--qtip must be after funllcalendarJS-->
+        <link type="text/css" rel="stylesheet" href="jquery_qtip/jquery.qtip.css" />
+        <script src="jquery_qtip/jquery.qtip.js"></script>
+
         <!--Calendar script-->
         <script>
+            var today = new Date();
+            var datetoday = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
             $(document).ready(function () {
                 //var today = moment().day();
 
@@ -171,8 +186,19 @@ $events = $req->fetchAll();
                     selectHelper: true,
                     events: [
 <?php
-foreach ($events as $event):
+$todaydateis = date("Y-m-d");
 
+foreach ($events as $event):
+    $eventdate = $event['date'];
+    $start = $event['startTime'];
+    $end = $event['endTime'];
+    $combinedstart = date('Y-m-d H:i:s', strtotime("$eventdate $start"));
+    $combinedend = date('Y-m-d H:i:s', strtotime("$eventdate $end"));
+    if (strtotime($todaydateis) > strtotime($eventdate)) {
+        $color = '#DC143C';
+    } else {
+        $color = '#3D9970';
+    }
     ?>
                             {
                                 id: '<?php echo $event['id']; ?>',
@@ -181,11 +207,13 @@ foreach ($events as $event):
                                 date: '<?php echo $event['date']; ?>',
                                 startTime: '<?php echo $event['startTime']; ?>',
                                 endTime: '<?php echo $event['endTime']; ?>',
+                                start: '<?php echo $combinedstart ?>',
+                                end: '<?php echo $combinedend; ?>',
                                 description: '<?php echo $event['description']; ?>',
                                 venue: '<?php echo $event['location']; ?>',
                                 type: '<?php echo $event['trainingName']; ?>',
                                 cost: '<?php echo '$ ' . $event['cost']; ?>',
-                                color: '<?php echo '#3D9970'; ?>',
+                                color: '<?php echo $color; ?>',
                                 capacity: '<?php echo $event['groupCapacity']; ?>'
                             },
 <?php endforeach; ?>
@@ -204,7 +232,53 @@ foreach ($events as $event):
                             $('#ModalView #cost').val(event.cost);
                             $('#ModalView #capacity').val(event.capacity);
                             $('#ModalView').modal('show');
+                            // compare date for javascript
+                            //   if(new Date(datetoday).getTime()>new Date(event.date).getTime()){
+                            //            $('#join').hide();
+                            //   }else{
+                            //             $('#join').show();  
+                            //   }
                         });
+                    },
+                    eventMouseover: function (event, jsEvent, view) {
+
+                        var tooltip = $(this).qtip({
+                            id: 'calendar',
+                            prerender: true,
+                            content: {
+                                text: ''
+                            },
+                            position: {
+                                my: 'left center',
+                                at: 'right center',
+                                viewport: $('#calendar'),
+                                adjust: {
+                                    mouse: true,
+                                    scroll: true
+                                }
+                            },
+                            show: {
+                                solo: true
+                            },
+                            hide: {
+                                event: 'mouseleave',
+                                fixed: true
+                            },
+                            style: 'qtip-light'
+                        }).qtip('api');
+
+                        current = new Date();
+
+                        var content = '<h4>' + event.title + '</h4>';
+                        content += '<div class="row qtip-content-margin"><b>Description: </b> ' + event.description + '</div>';
+                        content += '<div class="row qtip-content-margin"><b>Date: </b> ' + event.date + '</div>';
+                        content += '<div class="row qtip-content-margin"><b>Training Time: </b> ' + event.startTime + ' to ' + event.endTime + '</div>';
+                        content += '<div class="row qtip-content-margin"><b>Venue: </b> ' + event.room + ' room at ' + event.venue + '</div>';
+
+                        tooltip.set({
+                            'content.text': content
+                        }).show(jsEvent);
+
                     }
                 });
 

@@ -49,13 +49,13 @@ $events = $req->fetchAll();
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <form class="form-horizontal" method="POST" action="addCalendarEventTrainee.php">
-
+                        
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                             <h4 class="modal-title" id="myModalLabel">View Event</h4>
                         </div>
                         <div class="modal-body">
-
+                            <h3 id="e-status" style="text-align: center; color:red;"></h3>
                             <div class="form-group">
                                 <label for="category" class="col-sm-2 control-label">Category</label>
                                 <div class="col-sm-10">
@@ -123,7 +123,7 @@ $events = $req->fetchAll();
 
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                            <input type="submit" class="btn btn-primary" value="Add Event"/>
+                            <input type="submit" id="joinBtn" class="btn btn-primary" value="Join Training"/>
                         </div>
                     </form>
                 </div>
@@ -201,11 +201,19 @@ foreach ($events as $event):
     $trainingname = $names2['trainingName'];
     $cost = "$" . $names2['cost'];
     
-    if ($cat == "Personal Training") {
-        $traineeEmail = "Not Applicable";
-        $color = '#000';
-    } else if ($traineeEmail != NULL) {
-        $color = '#378006';
+//    if ($cat == "Personal Training") {
+//        $traineeEmail = "Not Applicable";
+//        $color = '#000';
+//    } else if ($traineeEmail != NULL) {
+//        $color = '#378006';
+    
+    $eStatus = "";
+    if ($event['traineeEmail'] == "") {
+        $color = '#0071c5';
+    }
+    else{
+        $color = '#808080';
+        $eStatus = "NOT AVAILABLE";
     }
     ?>
                             {
@@ -220,6 +228,8 @@ foreach ($events as $event):
                                 room: '<?php echo $roomname; ?>',
                                 type: '<?php echo $trainingname; ?>',
                                 cost: '<?php echo $cost; ?>',
+                                eStatus: '<?php echo $eStatus; ?>',
+                                color: '<?php echo $color; ?>',
                                 description: '<?php echo $event['description']; ?>',
                             },
 <?php endforeach; ?>
@@ -237,6 +247,10 @@ foreach ($events as $event):
                             $('#ModalView #typeview').val(event.type);
                             $('#ModalView #costview').val(event.cost);
                             $('#ModalView #description').val(event.description);
+                            $('#ModalView #e-status').html(event.eStatus);
+                            if(event.eStatus==="NOT AVAILABLE"){
+                                 $('#ModalView #joinBtn').hide();
+                            }
                             $('#ModalView').modal('show');
                         });
                     }
