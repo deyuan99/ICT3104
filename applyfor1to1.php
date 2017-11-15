@@ -7,14 +7,12 @@
 // connect to database
 session_start();
 require_once('database/dbconfig.php');
-if (isset($_POST['cost']) && isset($_POST['description']) && isset($_POST['starttime']) && isset($_POST['endtime']) && isset($_POST['evid'])){
+if (isset($_POST['description']) && isset($_POST['starttime']) && isset($_POST['endtime']) && isset($_POST['evid']) && isset($_POST['save'])){
 	
 	$id = $_POST['evid'];
         $eventdate = $_POST['date'];
-	$description = $_POST['description'];
         $startTime = $_POST['starttime'];
         $endTime = $_POST['endtime'];
-        $cost = $_POST['cost'];
         $todaydate = date('Y-m-d H:i:s');
         $combinedstart = date('Y-m-d H:i:s', strtotime("$eventdate $startTime"));
 
@@ -25,7 +23,7 @@ if (isset($_POST['cost']) && isset($_POST['description']) && isset($_POST['start
               . "</script>";    
         }else{
 	//category = '$category'
-	$sql = "UPDATE personalsession SET cost = '$cost', startTime = '$startTime', endTime = '$endTime', description = '$description' WHERE id = '$id' ";
+	$sql = "UPDATE personalsession SET startTime = '$startTime', endTime = '$endTime' WHERE id = '$id' ";
 
 	
 	$query = $conn->prepare( $sql );
@@ -54,9 +52,7 @@ if (isset($_POST['cost']) && isset($_POST['description']) && isset($_POST['start
 if (isset($_POST['delete']) && isset($_POST['evid'])){
 
         $Semail = $_SESSION['email'];
-    
         $eventdate = $_POST['date'];
-        $category = $_POST['category'];
         $start= $_POST['starttime'];
         $combinedstart = date('Y-m-d H:i:s', strtotime("$eventdate $start"));
         
@@ -68,7 +64,6 @@ if (isset($_POST['delete']) && isset($_POST['evid'])){
              . "window.location.href='trainer_dashboard.php';"
               . "</script>";    
         }else{
-        if ($category == 'Personal Training' ){
         $sql = "DELETE FROM personalsession WHERE id = '$id'";
 	$query = $conn->prepare( $sql );
 	if ($query == false) {
@@ -91,6 +86,5 @@ if (isset($_POST['delete']) && isset($_POST['evid'])){
               . "</script>";    
              }
             
-        }
         }
 }	

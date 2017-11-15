@@ -783,7 +783,7 @@ foreach ($events as $event):
                         $('#ModalView #description').val(event.description);
                         $('#ModalView #trainee').val(event.trainee);
                         $('#ModalView').modal('show');
-                       if(new Date(datetoday).getTime()>new Date(event.date).getTime()){
+                       if(new Date(datetoday).getTime()>new Date(event.date).getTime() || event.title == "Group Training" ){
                                      $('#save').hide();
                                      $('#delete').hide();
 
