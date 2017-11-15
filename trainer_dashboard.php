@@ -535,7 +535,7 @@ $typeofTrainings = $req3->fetchAll();
                     $('#hidden_div_1v1grp').show();
                     document.getElementById("typeofTraining").required = true;
                     $('#hidden_div_size').hide();
-                    document.getElementById("groupsize").required = true;
+                    document.getElementById("groupsize").required = false;
                 } else {
                     $('#hidden_div_1v1grp').show();
                     document.getElementById("typeofTraining").required = true;
