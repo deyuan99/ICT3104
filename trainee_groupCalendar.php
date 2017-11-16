@@ -41,7 +41,7 @@ $events = $req->fetchAll();
         include "trainee_header.php";
         ?>
         <!-- Trainer Calendar -->
-        <section id="two" class="wrapper style2 special">
+        <section id="two" class="wrapper style1 special">
             <div class="container">
                 <header class="major">
                     <h2>Group Training Schedule</h2>

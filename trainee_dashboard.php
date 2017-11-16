@@ -42,10 +42,8 @@ $venues = $req2->fetchAll();
         <link href='fullcalendar-3.5.1/fullcalendar.css' rel='stylesheet' />
         <link href="assets/css/calendar.css" rel="stylesheet" type="text/css"/>
 
-        <!-- Main CSS -->
         
-
-         <!-- trainer_dashboard CSS -->
+        <!-- trainer_dashboard CSS -->
         <link rel="stylesheet" href="assets/css/trainer_dashboard.css" />
         
         <style>
@@ -64,7 +62,7 @@ $venues = $req2->fetchAll();
         ?>
 
          <!-- One: Trainer Profile -->
-        <section id="one" class="wrapper style1">
+        <section id="one" class="wrapper style2 special">
 
             <div class="container">
 
@@ -181,7 +179,7 @@ $venues = $req2->fetchAll();
         </section>
 
         <!-- Two: Trainee Calendar -->
-        <section id="two" class="wrapper style2 special">
+        <section id="two" class="wrapper style1">
             <div class="container">
                 <header class="major">
                     <h2>Your Calendar</h2>
