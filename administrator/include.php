@@ -1,8 +1,4 @@
 <!DOCTYPE html>
-<!--
-    Created on : 11-Aug-2017
-    Author     : Lionel
--->
 
 <!-- Bootstrap/CSS library -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">

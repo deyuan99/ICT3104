@@ -1,7 +1,5 @@
 <?php
 session_start();
-
-
 ?>
 <!DOCTYPE html>
 <html>
@@ -10,7 +8,8 @@ session_start();
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>STPS</title>
         <!-- CSS import -->
-        <?php include_once 'include.php'; ?>
+        
+<?php include_once 'include.php'; ?>
         <?php include_once 'loadUserInfo.php'; ?>
         <link rel="stylesheet" type="text/css" href="css/user-management.css" />
         <script>
@@ -18,13 +17,13 @@ session_start();
             {
                 document.getElementById("deactivate_userid").value = "";
                 document.getElementById("deactivate_userid").value = email;
-                document.getElementById("deactivateMsg").innerHTML = "Are you sure you want to Deactivate " + "<strong>" + email +"</strong>" + "  ?" ;
+                document.getElementById("deactivateMsg").innerHTML = "Are you sure you want to Deactivate " + "<strong>" + email + "</strong>" + "  ?";
             }
             function setReactivateInfo(email)
             {
                 document.getElementById("reactivate_userid").value = "";
                 document.getElementById("reactivate_userid").value = email;
-                document.getElementById("reactivateMsg").innerHTML = "Are you sure you want to Reactivate " + "<strong>" + email +"</strong>" + "  ?" ;
+                document.getElementById("reactivateMsg").innerHTML = "Are you sure you want to Reactivate " + "<strong>" + email + "</strong>" + "  ?";
             }
             function setEditInfo(email, firstName, lastName, address, mobile, password)
             {
@@ -50,96 +49,99 @@ session_start();
         </script>
     </head>
     <body>
-        <div class="container-fluid">
-            <?php include_once 'nav-bar.php'; ?>
-            <h1 class="text-center"><span class="glyphicon glyphicon-user icon-space"></span> USER MANAGEMENT</h1>
-            <div class="col-md-10 col-md-offset-1 padding-0" id="usermanagement">
-                <div class="row" style="margin-bottom: 10px;">
-                    <ul class="nav nav-pills col-md-10 padding-l0-r0">
-                        <li class="active data-tabs col-md-3 col-sm-6 col-xs-12"><a href="#trainee_tab" data-toggle="pill"><span class="glyphicon glyphicon-user icon-space"></span>Trainee</a></li>
-                        <li class="data-tabs col-md-3 col-xs-12 col-sm-6"><a href="#trainer_tab" data-toggle="pill"><span class="glyphicon glyphicon-user icon-space"></span>Trainer</a></li>
-                        <li class="data-tabs col-md-3 col-xs-12 col-sm-6"><a href="#deactivated_tab" data-toggle="pill"><span class="glyphicon glyphicon-user icon-space"></span>Deactivated</a></li>
-                    </ul>
-                </div>
-                <div class="tab-content">
-                    <div class="tab-pane active add--15-margin" id="trainee_tab">
-                        <div class="panel panel-default margin-l0-r0">
-                            <div class="panel-heading">
-                                <div class="panel-title">TRAINEE</div>
-                            </div>
-                            <div class="table-responsive my-table-style">
-                                <table id="esa-table" class="table table-striped table-bordered" cellspacing="0" width="100%">
-                                    <thead>
-                                        <tr>
-                                            <th class="col-md-2">Email Address</th>
-                                            <th class="col-md-1">First Name</th>
-                                            <th class="col-md-1">Last Name</th>
-                                            <th class="col-md-1">Billing Address</th>
-                                            <th class="col-md-1">Mobile</th>
-                                            <th class="col-md-1">Password</th>
-                                            <th class="col-md-1">Expiry Date</th>
-                                            <th class="col-md-2">Action</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <?php getTrainee(); ?>
-                                    </tbody>
-                                </table>
+        
+<?php include_once 'nav-bar.php'; ?>
+        <section id="main" class="wrapper">
+            <div class="container-fluid">
+                <h1 class="text-center"><span class="glyphicon glyphicon-user icon-space"></span> USER MANAGEMENT</h1>
+                <div class="col-md-10 col-md-offset-1 padding-0" id="usermanagement">
+                    <div class="row" style="margin-bottom: 10px;">
+                        <ul class="nav nav-tabs col-md-10 padding-l0-r0">
+                            <li class="active data-tabs col-md-3 col-sm-6 col-xs-12"><a href="#trainee_tab" data-toggle="pill"><span class="glyphicon glyphicon-user icon-space"></span>Trainee</a></li>
+                            <li class="data-tabs col-md-3 col-xs-12 col-sm-6"><a href="#trainer_tab" data-toggle="pill"><span class="glyphicon glyphicon-user icon-space"></span>Trainer</a></li>
+                            <li class="data-tabs col-md-3 col-xs-12 col-sm-6"><a href="#deactivated_tab" data-toggle="pill"><span class="glyphicon glyphicon-user icon-space"></span>Deactivated</a></li>
+                        </ul>
+                    </div>
+                    <div class="tab-content">
+                        <div class="tab-pane active add--15-margin" id="trainee_tab">
+                            <div class="panel panel-default margin-l0-r0">
+                                <div class="panel-heading">
+                                    <div class="panel-title">TRAINEE</div>
+                                </div>
+                                <div class="table-responsive my-table-style">
+                                    <table id="esa-table" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                                        <thead>
+                                            <tr>
+                                                <th class="col-md-2">Email Address</th>
+                                                <th class="col-md-1">First Name</th>
+                                                <th class="col-md-1">Last Name</th>
+                                                <th class="col-md-1">Billing Address</th>
+                                                <th class="col-md-1">Mobile</th>
+                                                <th class="col-md-1">Password</th>
+                                                <th class="col-md-1">Expiry Date</th>
+                                                <th class="col-md-2">Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+<?php getTrainee(); ?>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="tab-pane add--15-margin" id="trainer_tab">
-                        <div class="panel panel-default margin-l0-r0">
-                            <div class="panel-heading">
-                                <div class="panel-title">TRAINER</div>
-                            </div>
-                            <div class="table-responsive my-table-style">
-                                <table id="supervisor-table" class="table table-striped table-bordered" cellspacing="0" width="100%">
-                                    <thead>
-                                        <tr>
-                                            <th class="col-md-2">Email Address</th>
-                                            <th class="col-md-1">First Name</th>
-                                            <th class="col-md-1">Last Name</th>
-                                            <th class="col-md-2">Billing Address</th>
-                                            <th class="col-md-1">Mobile Number</th>
-                                            <th class="col-md-1">Password</th>
-                                            <th class="col-md-2">Action</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <?php getTrainer(); ?>
-                                    </tbody>
-                                </table>
+                        <div class="tab-pane add--15-margin" id="trainer_tab">
+                            <div class="panel panel-default margin-l0-r0">
+                                <div class="panel-heading">
+                                    <div class="panel-title">TRAINER</div>
+                                </div>
+                                <div class="table-responsive my-table-style">
+                                    <table id="supervisor-table" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                                        <thead>
+                                            <tr>
+                                                <th class="col-md-2">Email Address</th>
+                                                <th class="col-md-1">First Name</th>
+                                                <th class="col-md-1">Last Name</th>
+                                                <th class="col-md-2">Billing Address</th>
+                                                <th class="col-md-1">Mobile Number</th>
+                                                <th class="col-md-1">Password</th>
+                                                <th class="col-md-2">Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+<?php getTrainer(); ?>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="tab-pane add--15-margin" id="deactivated_tab">
-                        <div class="panel panel-default panel-archive">
-                            <div class="panel-heading">
-                                <div class="panel-title">DEACTIVATED</div>
-                            </div>
-                            <div class="table-responsive my-table-style">
-                                <table id="archive-table" class="table table-striped table-bordered" cellspacing="0" width="100%">
-                                    <thead>
-                                        <tr>
-                                            <th class="col-md-1">Email Address</th>
-                                            <th class="col-md-1">First Name</th>
-                                            <th class="col-md-1">Last Name</th>
-                                            <th class="col-md-2">Billing Address</th>
-                                            <th class="col-md-1">Password</th>
-                                            <th class="col-md-2">Action</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <?php getDeactivated(); ?>
-                                    </tbody>
-                                </table>
+                        <div class="tab-pane add--15-margin" id="deactivated_tab">
+                            <div class="panel panel-default panel-archive">
+                                <div class="panel-heading">
+                                    <div class="panel-title">DEACTIVATED</div>
+                                </div>
+                                <div class="table-responsive my-table-style">
+                                    <table id="archive-table" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                                        <thead>
+                                            <tr>
+                                                <th class="col-md-1">Email Address</th>
+                                                <th class="col-md-1">First Name</th>
+                                                <th class="col-md-1">Last Name</th>
+                                                <th class="col-md-2">Billing Address</th>
+                                                <th class="col-md-1">Password</th>
+                                                <th class="col-md-2">Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+<?php getDeactivated(); ?>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
+             
         <div class="modal fade" id="editUserModal" tabindex="-1" role="dialog">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -157,7 +159,7 @@ session_start();
                                 <label class="form-control-label col-md-offset-2 col-md-3 col-xs-offset-0 col-xs-5" for="email">Email Address:</label>
                                 <div class="col-sm-5" id="email"></div> 
                             </div>
-                            
+
                             <input type="hidden" name="edit_fName" id="edit_fName" value="">
                             <div class="form-group row">
                                 <label class="form-control-label col-md-offset-2 col-md-3 col-xs-offset-0 col-xs-5 label-margin">First Name:</label>
@@ -165,7 +167,7 @@ session_start();
                                     <input type="text" class="form-control" id="firstName" name="firstName" value="">
                                 </div>
                             </div>
-                            
+
                             <input type="hidden" name="edit_lName" id="edit_lName" value="">
                             <div class="form-group row">
                                 <label class="form-control-label col-md-offset-2 col-md-3 col-xs-offset-0 col-xs-5 label-margin">Last Name:</label>
@@ -173,7 +175,7 @@ session_start();
                                     <input type="text" class="form-control" id="lastName" name="lastName" value="">
                                 </div>
                             </div>
-                            
+
                             <input type="hidden" name="edit_address" id="edit_address" value="">
                             <div class="form-group row">
                                 <label class="form-control-label col-md-offset-2 col-md-3 col-xs-offset-0 col-xs-5 label-margin">Billing Address:</label>
@@ -181,7 +183,7 @@ session_start();
                                     <input type="text" class="form-control" id="address" name="address">
                                 </div>
                             </div>
-                            
+
                             <input type="hidden" name="edit_mobile" id="edit_mobile" value="">
                             <div class="form-group row">
                                 <label class="form-control-label col-md-offset-2 col-md-3 col-xs-offset-0 col-xs-5 label-margin" for="mobile">Mobile Number:</label>
@@ -189,7 +191,7 @@ session_start();
                                     <input type="number" class="form-control" id="mobile" name="mobile" value="">
                                 </div>
                             </div>
-                            
+
                             <input type="hidden" name="edit_pass" id="edit_pass" value="">
                             <div class="form-group row">
                                 <label class="form-control-label col-md-offset-2 col-md-3 col-xs-offset-0 col-xs-5 label-margin" for="pass">Password:</label>
@@ -197,7 +199,7 @@ session_start();
                                     <input type="password" class="form-control" id="pass" name="pass" value="">
                                 </div>
                             </div>
-                            
+
                             <div class="form-group row" style="margin-top: 30px;">
                                 <div class="row">
                                     <div class="col-sm-6 col-sm-offset-3 col-xs-8 col-xs-offset-2">
