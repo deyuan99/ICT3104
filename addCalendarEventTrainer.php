@@ -16,6 +16,42 @@ if (isset($_POST['Pcategory']) && isset($_POST['starttime']) && isset($_POST['en
     $venue       = $_POST['venue'];
     $roomtype    = $_POST['roomtype'];
     
+    // (1)get the number from personal training on this date, roomtype and venue and startime
+        $sql6 = "SELECT COUNT(*) as total_rows FROM personalsession p,roomtype r, venue v where p.roomTypeID=r.id and v.id = r.venueID and p.date ='$dateformat' and p.startTime = '$starttime' and r.name = '$roomtype' and v.location = '$venue'";
+        $req1 = $conn->prepare($sql6);
+        $req1->execute();
+        $row = $req1->fetch(PDO::FETCH_ASSOC);
+        $total_rows = $row['total_rows'];
+        
+        //(2) get the group cap base on this date, roomtype and venue and startime
+        $totalgroupcap = 0;
+        $sql9 = "SELECT * FROM groupsession g,roomtype r, venue v where g.roomTypeID=r.id and v.id = r.venueID and date= '$dateformat'and g.startTime = '$starttime' and status = 'Approved' and r.name = '$roomtype' and v.location = '$venue' ";
+        $req2 = $conn->prepare($sql9);
+        $req2->execute();
+         $coungroup = $req2->rowCount();
+        if ($coungroup > 0) {
+                            while ($row2 = $req2->fetch(PDO::FETCH_ASSOC)) {
+                                $grpcap = $row2['groupCapacity'];
+                                $totalgroupcap  = $grpcap + $totalgroupcap;
+         }
+       }
+       
+        //(3)get the number limit base on  roomtype and venue
+         $sql12 = "SELECT capacity FROM roomtype r, venue v where v.id = r.venueID and r.name = '$roomtype' and v.location = '$venue' ";
+         $req3 = $conn->prepare($sql12);
+         $req3->execute();
+         $row3 = $req3->fetch(PDO::FETCH_ASSOC);
+        $capacity = $row3['capacity'];         
+         
+         $currenttotalevent = $totalgroupcap + $total_rows;
+         echo $currenttotalevent;
+        //comparing
+        if ($currenttotalevent>=$capacity){
+             echo "<script type='text/javascript'>alert('Unable to book due to capacity reached');"
+            . "window.location.href='trainer_dashboard.php';"
+            . "</script>";
+        }else{
+    
     // if category is personal
     if ($category == 'Personal Training') {
     
@@ -135,5 +171,6 @@ if (isset($_POST['Pcategory']) && isset($_POST['starttime']) && isset($_POST['en
             echo "<script type='text/javascript'>alert('failed');" . "window.location.href='trainer_dashboard.php';" . "</script>";
         }
     }
+        }
 }
 
