@@ -9,7 +9,7 @@ session_start();
         <title>STPS</title>
         <!-- CSS import -->
         
-<?php include_once 'include.php'; ?>
+        <?php include_once 'include.php'; ?>
         <?php include_once 'loadUserInfo.php'; ?>
         <link rel="stylesheet" type="text/css" href="css/user-management.css" />
         <script>
@@ -50,13 +50,13 @@ session_start();
     </head>
     <body>
         
-<?php include_once 'nav-bar.php'; ?>
+        <?php include_once 'nav-bar.php'; ?>
         <section id="main" class="wrapper">
             <div class="container-fluid">
-                <h1 class="text-center"><span class="glyphicon glyphicon-user icon-space"></span> USER MANAGEMENT</h1>
+                <h2 class="text-center" id="toptitle"><span class="glyphicon glyphicon-user icon-space"></span> USER MANAGEMENT</h2>
                 <div class="col-md-10 col-md-offset-1 padding-0" id="usermanagement">
                     <div class="row" style="margin-bottom: 10px;">
-                        <ul class="nav nav-tabs col-md-10 padding-l0-r0">
+                        <ul class="nav nav-pills col-md-10 padding-l0-r0">
                             <li class="active data-tabs col-md-3 col-sm-6 col-xs-12"><a href="#trainee_tab" data-toggle="pill"><span class="glyphicon glyphicon-user icon-space"></span>Trainee</a></li>
                             <li class="data-tabs col-md-3 col-xs-12 col-sm-6"><a href="#trainer_tab" data-toggle="pill"><span class="glyphicon glyphicon-user icon-space"></span>Trainer</a></li>
                             <li class="data-tabs col-md-3 col-xs-12 col-sm-6"><a href="#deactivated_tab" data-toggle="pill"><span class="glyphicon glyphicon-user icon-space"></span>Deactivated</a></li>
@@ -267,5 +267,6 @@ session_start();
                 </div>
             </div>
         </div>
+            </section>
     </body>
 </html>

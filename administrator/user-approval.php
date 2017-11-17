@@ -29,9 +29,10 @@ session_start();
         </script>
     </head>
     <body>
+        <?php include_once 'nav-bar.php'; ?>
+        <section id="main" class="wrapper">
         <div class="container-fluid">
-            <?php include_once 'nav-bar.php'; ?>
-            <h1 class="text-center"><span class="glyphicon glyphicon-ok-sign icon-space"></span> APPROVAL REQUEST</h1>
+            <h2 class="text-center" id="toptitle"><span class="glyphicon glyphicon-ok-sign icon-space"></span> APPROVAL REQUEST</h2>
             <div class="col-md-10 col-md-offset-1 padding-0" id="usermanagement">
                 <div class="row" style="margin-bottom: 10px;">
                     <ul class="nav nav-pills col-md-10 padding-l0-r0">
@@ -221,6 +222,7 @@ session_start();
                 </div>
             </div>
         </div>
+            </section>
     </body>
 
 </html>

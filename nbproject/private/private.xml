@@ -3,11 +3,18 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/Applications/XAMPP/xamppfiles/htdocs/ICT3104/administrator/doReactivate.php</file>
-            <file>file:/Applications/XAMPP/xamppfiles/htdocs/ICT3104/administrator/loadApprovalInfo.php</file>
-            <file>file:/Applications/XAMPP/xamppfiles/htdocs/ICT3104/administrator/user-groupsession.php</file>
-            <file>file:/Applications/XAMPP/xamppfiles/htdocs/ICT3104/administrator/nav-bar.php</file>
+            <file>file:/C:/xampp/htdocs/ICT3104/addCalendarEventTrainer.php</file>
+            <file>file:/C:/xampp/htdocs/ICT3104/addCalendarEvent.php</file>
+            <file>file:/C:/xampp/htdocs/ICT3104/trainee_dashboard.php</file>
+            <file>file:/C:/xampp/htdocs/ICT3104/database/dbconfig.php</file>
+            <file>file:/C:/xampp/htdocs/ICT3104/administrator/user-management.php</file>
+            <file>file:/C:/xampp/htdocs/ICT3104/administrator/nav-bar.php</file>
+            <file>file:/C:/xampp/htdocs/ICT3104/registration_verification.php</file>
+            <file>file:/C:/xampp/htdocs/ICT3104/registration.php</file>
+            <file>file:/C:/xampp/htdocs/ICT3104/administrator/manageRoomAndTypes.php</file>
+            <file>file:/C:/xampp/htdocs/ICT3104/administrator/user-approval.php</file>
+            <file>file:/C:/xampp/htdocs/ICT3104/administrator/managePromotion.php</file>
+            <file>file:/C:/xampp/htdocs/ICT3104/trainer_dashboard.php</file>
         </group>
     </open-files>
 </project-private>
->>>>>>> 54323d17e4162fac48272addbc7d35aa21744a96

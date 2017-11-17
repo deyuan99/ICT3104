@@ -825,10 +825,10 @@ foreach ($events as $event):
                                 current = new Date();
 
                                 var content = '<h4>' + event.title + '</h4>';
-                                content += '<div class="row qtip-content-margin"><b>Description: </b> ' + event.description + '</div>';
-                                content += '<div class="row qtip-content-margin"><b>Date: </b> ' + event.date + '</div>';
-                                content += '<div class="row qtip-content-margin"><b>Training Time: </b> ' + event.startTime + ' to ' + event.endTime + '</div>';
-                                content += '<div class="row qtip-content-margin"><b>Venue: </b> ' + event.room + ' room at ' + event.venue + '</div>';
+                                content += '<div class="row qtip-content-margin"><b>Description: </b> &nbsp' + event.description + '</div>';
+                                content += '<div class="row qtip-content-margin"><b>Date: </b> &nbsp' + event.date + '</div>';
+                                content += '<div class="row qtip-content-margin"><b>Time: </b> &nbsp' + event.startTime + ' to ' + event.endTime + '</div>';
+                                content += '<div class="row qtip-content-margin"><b>Venue: </b> &nbsp' + event.room + ' room at ' + event.venue + '</div>';
                                
                                 tooltip.set({
                                     'content.text': content
