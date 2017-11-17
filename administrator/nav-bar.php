@@ -1,6 +1,6 @@
 <!--Trainee Header -->
 <header id="header">
-    <h1><strong><a href="index.php">STPS</a></strong> by Group 4</h1>
+    <h1><strong><a href="../index.php">STPS</a></strong> by Group 4</h1>
     <nav id="nav">
         <ul>
                  <!--<li><a href="../index.php"><span class="glyphicon glyphicon-home icon-space"></span>HOME</a></li>-->
@@ -10,9 +10,9 @@
             <li class="dropdown">
                 <a class="dropdown-toggle" data-toggle="dropdown" href="">MANAGE <span class="caret"></span></a>
                 <ul class="dropdown-menu">
-                    <li><a href="#">Venues</a></li>
-                    <li><a href="#">Room Types</a></li>
-                    <li><a href="#">Types of Trainings</a></li>
+                    <li><a href="manageVenues.php">Venues</a></li>
+                    <li><a href="manageRooms.php">Room Types</a></li>
+                    <li><a href="manageTypes.php">Types of Trainings</a></li>
                 </ul>
             </li>
             <li><a href="../logout.php"><span class="glyphicon glyphicon-log-out icon-space"></span>SIGN OUT</a></li>

@@ -17,6 +17,8 @@ if (isset($_SESSION['email']) && !empty($_SESSION['email'])) {
         } else if ($Srole == 'admin'){
             header('Location: administrator/user-management.php');
         }
+} else {
+    include "header.php";
 }
 ?>
 

@@ -12,7 +12,6 @@ session_start();
         <!-- CSS import -->
         <?php include_once 'include.php'; ?>
         <?php include_once 'loadApprovalInfo.php'; ?>
-        <link rel="stylesheet" type="text/css" href="css/user-management.css" />
         <script>
             function setApproveInfo(email)
             {

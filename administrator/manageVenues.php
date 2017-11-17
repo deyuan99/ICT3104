@@ -1,7 +1,6 @@
 <?php
 session_start();
 ?>
-<!DOCTYPE html>
 <html>
     <head>
         <meta charset="UTF-8">
@@ -52,7 +51,7 @@ session_start();
         <?php include_once 'nav-bar.php'; ?>
         <section id="main" class="wrapper">
             <div class="container-fluid">
-                <h2 class="text-center" id="toptitle"><span class="glyphicon glyphicon-user icon-space"></span> USER MANAGEMENT</h2>
+                <h2 class="text-center" id="toptitle"><span class="glyphicon glyphicon-globe icon-space"></span> MANAGE VENUES</h2>
                 <div class="col-md-10 col-md-offset-1 padding-0" id="usermanagement">
                     <div class="row" style="margin-bottom: 10px;">
                         <ul class="nav nav-pills col-md-10 padding-l0-r0">
@@ -74,15 +73,15 @@ session_start();
                                                 <th class="col-md-2">Email Address</th>
                                                 <th class="col-md-1">First Name</th>
                                                 <th class="col-md-1">Last Name</th>
-                                                <th class="col-md-2">Billing Address</th>
+                                                <th class="col-md-1">Billing Address</th>
                                                 <th class="col-md-1">Mobile</th>
                                                 <th class="col-md-1">Password</th>
                                                 <th class="col-md-1">Expiry Date</th>
-                                                <th class="col-md-3">Action</th>
+                                                <th class="col-md-2">Action</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-<?php getTrainee(); ?>
+                                        <?php getTrainee(); ?>
                                         </tbody>
                                     </table>
                                 </div>
@@ -100,11 +99,10 @@ session_start();
                                                 <th class="col-md-2">Email Address</th>
                                                 <th class="col-md-1">First Name</th>
                                                 <th class="col-md-1">Last Name</th>
-                                                <th class="col-md-1">Billing Address</th>
-                                                <th class="col-md-1">Mobile</th>
-                                                <th class="col-md-2">Bio</th>
-                                                <th class="col-md-1">Featured</th>
-                                                <th class="col-md-3">Action</th>
+                                                <th class="col-md-2">Billing Address</th>
+                                                <th class="col-md-1">Mobile Number</th>
+                                                <th class="col-md-1">Password</th>
+                                                <th class="col-md-2">Action</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -123,14 +121,12 @@ session_start();
                                     <table id="archive-table" class="table table-striped table-bordered" cellspacing="0" width="100%">
                                         <thead>
                                             <tr>
-                                                <th class="col-md-2">Email Address</th>
+                                                <th class="col-md-1">Email Address</th>
                                                 <th class="col-md-1">First Name</th>
                                                 <th class="col-md-1">Last Name</th>
                                                 <th class="col-md-2">Billing Address</th>
-                                                <th class="col-md-1">Role</th>
-                                                <th class="col-md-1">Register Date</th>
-                                                <th class="col-md-1">Expiry Date</th>
-                                                <th class="col-md-3">Action</th>
+                                                <th class="col-md-1">Password</th>
+                                                <th class="col-md-2">Action</th>
                                             </tr>
                                         </thead>
                                         <tbody>
