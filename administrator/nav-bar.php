@@ -5,7 +5,7 @@
     <nav id="nav">
         <ul>
             <li class="dropdown">
-                 <li><a href="../index.php"><span class="glyphicon glyphicon-home icon-space"></span>HOME</a></li>
+                <!--<li><a href="../index.php"><span class="glyphicon glyphicon-home icon-space"></span>HOME</a></li>-->
                 <li><a href="user-management.php"><span class="glyphicon glyphicon-user icon-space"></span>USER MANAGEMENT</a></li>
                 <li><a href="user-approval.php"><span class="glyphicon glyphicon-ok-sign icon-space"></span>APPROVAL REQUEST</a></li>
                 <li><a href="user-groupsession.php"><span class="glyphicon glyphicon-list-alt icon-space"></span>GROUP SESSION</a></li>

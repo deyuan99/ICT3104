@@ -10,6 +10,13 @@ $Srole = '';
 
 if (isset($_SESSION['email']) && !empty($_SESSION['email'])) {
     $Srole = $_SESSION['role'];
+    if ($Srole == 'trainee') {
+            header('Location: trainee_dashboard.php');
+        } else if ($Srole == 'trainer') {
+            header('Location: trainer_dashboard.php');
+        } else if ($Srole == 'admin'){
+            header('Location: administrator/user-management.php');
+        }
 }
 ?>
 
@@ -20,20 +27,6 @@ if (isset($_SESSION['email']) && !empty($_SESSION['email'])) {
         <link rel="stylesheet" href="assets/css/main.css" />
     </head>
     <body class="landing">
-        <!-- Header -->
-        <?php
-        if ($Srole == 'trainee') {
-            echo '<link href="bootstrap-3.3.5-dist/css/bootstrap.min.css" rel="stylesheet">';
-            echo '<link rel="stylesheet" href="assets/css/trainee_dashboard.css" />';
-            include "trainee_header.php";
-        } else if ($Srole == 'trainer') {
-            echo '<link href="bootstrap-3.3.5-dist/css/bootstrap.min.css" rel="stylesheet">';
-            echo '<link rel="stylesheet" href="assets/css/trainee_dashboard.css" />';
-            include "trainer_header.php";
-        } else {
-            include "header.php";
-        }
-        ?>
 
         <!-- Banner -->
         <section id="banner">
@@ -85,7 +78,8 @@ if (isset($_SESSION['email']) && !empty($_SESSION['email'])) {
                                     </footer>
                                 </div>
                             </h3>
-                        </div>
+                        </div
+ >
                     </div>
                     <div class="6u 12u(xsmall)">
                         <div class="image fit captioned">
@@ -159,8 +153,7 @@ if (isset($_SESSION['email']) && !empty($_SESSION['email'])) {
                 </div>
             </div>
         </section>
-
-        <!-- Four: Contact us -->
+ <!-- Four: Contact us -->
         <section id="four" class="wrapper style3 special">
             <div class="container">
                 <header class="major">
