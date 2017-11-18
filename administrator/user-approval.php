@@ -13,7 +13,6 @@ require_once('../database/dbconfig.php');
         <!-- CSS import -->
         <?php include_once 'include.php'; ?>
         <?php include_once 'loadApprovalInfo.php'; ?>
-        <link rel="stylesheet" type="text/css" href="css/user-management.css" />
         <script>
             function setApproveInfo(email)
             {
@@ -30,9 +29,10 @@ require_once('../database/dbconfig.php');
         </script>
     </head>
     <body>
+        <?php include_once 'nav-bar.php'; ?>
+        <section id="main" class="wrapper">
         <div class="container-fluid">
-            <?php include_once 'nav-bar.php'; ?>
-            <h1 class="text-center"><span class="glyphicon glyphicon-ok-sign icon-space"></span> APPROVAL REQUEST</h1>
+            <h2 class="text-center" id="toptitle"><span class="glyphicon glyphicon-ok-sign icon-space"></span> APPROVAL REQUEST</h2>
             <div class="col-md-10 col-md-offset-1 padding-0" id="usermanagement">
                 <div class="row" style="margin-bottom: 10px;">
                     <ul class="nav nav-pills col-md-10 padding-l0-r0">
@@ -224,6 +224,7 @@ require_once('../database/dbconfig.php');
                 </div>
             </div>
         </div>     
+
     </body>
 
 </html>

@@ -18,11 +18,10 @@ $events = $req->fetchAll();
         <title>STPS</title>
         <!-- CSS import -->
         <?php include_once 'include.php'; ?>
-        <link rel="stylesheet" type="text/css" href="css/user-management.css" />
-        <!-- Bootstrap Core CSS -->
-        <link href="../bootstrap-3.3.5-dist/css/bootstrap.min.css" rel="stylesheet"/>
 
         <!-- FullCalendar -->
+        <script src="../fullcalendar-3.5.1/lib/moment.min.js"></script>
+        <script src="../fullcalendar-3.5.1/fullcalendar.min.js"></script>
         <link href='../fullcalendar-3.5.1/fullcalendar.css' rel='stylesheet' />
         <link href="../assets/css/calendar.css" rel="stylesheet" type="text/css"/>
         <!-- Custom CSS -->

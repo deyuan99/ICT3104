@@ -23,7 +23,11 @@
     font-weight: bolder;
     background-color: black;
     text-decoration: underline;
-    color: #FF1493;
+    color: #f32853;
+}
+
+.nav-tabs li a:active{
+    color: #f32853;
 }
 
 #nav-toggle > span {

@@ -11,7 +11,6 @@
 <script>
     function cancel() {
                 var id = "<?php echo $id; ?>";
-              console.log("public Key: ", id);
     if (confirm("you are about to cancel an event which start less than 48hours,fees will not be refund") === true) {
             $.ajax({
                 url: "DeleteEvent.php",
@@ -123,12 +122,13 @@ if (isset($_POST['delete']) && isset($_POST['id'])){
         $startTime = $_POST['starttime'];
         $endTime = $_POST['endtime'];
         $todaydate = date('Y-m-d H:i:s');
+        $eventdate = $_POST['date'];
         $combinedstart = date('Y-m-d H:i:s', strtotime("$eventdate $startTime"));
          $hourdiff = round((strtotime($combinedstart) - strtotime($todaydate))/3600, 1);
         if($hourdiff  < 0){
-           echo "<script type='text/javascript'>alert('Cant edit past event!');"
-             . "window.location.href='trainee_dashboard.php';"
-              . "</script>";    
+         //  echo "<script type='text/javascript'>alert('Cant edit past event!');"
+         //    . "window.location.href='trainee_dashboard.php';"
+         //     . "</script>";    
         }else{
          
 	$sql = "UPDATE personalsession SET category = '$category', startTime = '$startTime', endTime = '$endTime', description = '$description' WHERE id = '$id' ";

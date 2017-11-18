@@ -7,16 +7,16 @@ require_once('database/dbconfig.php');
 $expire = new DateTime('2010-12-07');
 $date2 = new DateTime('2017-11-08');
 
-$today = date("Y-m-d");
-echo "today: " . $today;
-
-if( $today > $expire ){
-  echo 'expired <br>';
-}
-
-elseif( $today > $date2 ){
-  echo 'valid <br>';
-}
+//$today = date("Y-m-d");
+//echo "today: " . $today;
+//
+//if( $today > $expire ){
+//  echo 'expired <br>';
+//}
+//
+//elseif( $today > $date2 ){
+//  echo 'valid <br>';
+//}
 
 if (isset($_POST['firstname']) && isset($_POST['lastname']) && isset($_POST['regemail']) && isset($_POST['phone']) && isset($_POST['category']) && isset($_POST['subscription']) && isset($_POST['regpass']) && isset($_POST['regconfpass']) && isset($_POST['address'])) {
 
@@ -40,6 +40,8 @@ if (isset($_POST['firstname']) && isset($_POST['lastname']) && isset($_POST['reg
     }
     elseif ($subscription == 12) {
         $date = strtotime(date("Y-m-d", strtotime($registerDate)) . " +12 month");
+    } else { // trainer
+        $date = strtotime($registerDate);
     }
 
     $expiredDate = date("Y-m-d", $date);
@@ -73,7 +75,7 @@ if (isset($_POST['firstname']) && isset($_POST['lastname']) && isset($_POST['reg
 
         //send email
         mail($regemail, 'Confirmation Email', $message, $header);
-        echo "mail sent";
+//        echo "mail sent";
 
         if ($query == false) {
             print_r($conn->errorInfo());

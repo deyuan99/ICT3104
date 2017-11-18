@@ -32,8 +32,8 @@ function getApprovalUsers() {
         endforeach;
     }
     else {
-        echo "<tr><td colspan = \"9\" style=\"text-align:center;\">";
-        echo "No trainee record found";
+        echo "<tr><td colspan = \"12\" style=\"text-align:center;\">";
+        echo "No user record found";
         echo "</td></tr>";
     }
 }
@@ -75,7 +75,7 @@ function getApprovalGrouptraining() {
         
     }
     else {
-        echo "<tr><td colspan = \"6\" style=\"text-align:center;\">";
+        echo "<tr><td colspan = \"12\" style=\"text-align:center;\">";
         echo "No Pending events record found";
         echo "</td></tr>";
     }
@@ -109,7 +109,7 @@ function getApprovedGrouptraining() {
         endforeach;
     }
     else {
-        echo "<tr><td colspan = \"6\" style=\"text-align:center;\">";
+        echo "<tr><td colspan = \"9\" style=\"text-align:center;\">";
         echo "No Approved events record found";
         echo "</td></tr>";
     }
@@ -143,7 +143,7 @@ function getRejectedGrouptraining() {
         endforeach;
     }
     else {
-        echo "<tr><td colspan = \"6\" style=\"text-align:center;\">";
+        echo "<tr><td colspan = \"9\" style=\"text-align:center;\">";
         echo "No Rejected events record found";
         echo "</td></tr>";
     }
@@ -177,7 +177,7 @@ function getDeletedGrouptraining() {
         endforeach;
     }
     else {
-        echo "<tr><td colspan = \"6\" style=\"text-align:center;\">";
+        echo "<tr><td colspan = \"9\" style=\"text-align:center;\">";
         echo "No Deleted events record found";
         echo "</td></tr>";
     }
