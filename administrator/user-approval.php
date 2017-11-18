@@ -2,10 +2,6 @@
 <?php
 session_start();
 require_once('../database/dbconfig.php');
-$sql1 = "SELECT id, trainerEmail, date, groupCapacity, status, (SELECT name FROM roomtype WHERE id=roomTypeID) AS name, (SELECT venueID FROM roomtype WHERE id=roomTypeID) AS venueID, (SELECT location FROM venue WHERE id=venueID) AS location, (SELECT trainingName FROM typeoftraining where id=typeofTrainingID) AS trainingName FROM groupsession WHERE status = 'Pending'";
-$query1 = $conn->prepare($sql1);
-$stmt1 = $query1->execute();
-$result1 = $query1->fetchAll();
 ?>
 <!DOCTYPE html>
 
@@ -56,6 +52,7 @@ $result1 = $query1->fetchAll();
                                 <table id="esa-table" class="table table-striped table-bordered" cellspacing="0" width="100%">
                                     <thead>
                                         <tr>
+                                            <th class="col-md-1"><button type="button" name="btn_approveUser" id="btn_approveUser" class="btn btn-success">ApproveSelected</button><button type="button" name="btn_rejectUser" id="btn_rejectUser" class="btn btn-danger">RejectSelected</button></th>
                                             <th class="col-md-2">Email Address</th>
                                             <th class="col-md-1">First Name</th>
                                             <th class="col-md-1">Last Name</th>
@@ -82,10 +79,7 @@ $result1 = $query1->fetchAll();
                             <div class="table-responsive my-table-style">
                                 <table id="esa-table" class="table table-striped table-bordered" cellspacing="0" width="100%">
                                     <thead>
-                                        <tr>        <!--<input id="clickMe" type="button" value="clickme" onclick="doFunction();" />-->
-                                            <!--<a data-toggle="modal" data-target="#approve" class="btn btn-info">APPROVE SELECTED</a>
-                                            <input name="submit1" type="submit" value="Approve Selected" >-->
-
+                                        <tr>   
                                             <th class="col-md-1"><button type="button" name="btn_approve" id="btn_approve" class="btn btn-success">ApproveSelected</button><button type="button" name="btn_reject" id="btn_reject" class="btn btn-danger">RejectSelected</button></th>
                                             <th class="col-md-2">Email Address</th>
                                             <th class="col-md-1">Venue</th>
@@ -237,10 +231,10 @@ $result1 = $query1->fetchAll();
 <script>
     $(document).ready(function () {
 
-        //approve all selected checkbox
+        //approve all selected checkbox for group training
         $('#btn_approve').click(function () {
 
-            if (confirm("Are you sure you want to Approve All this?"))
+            if (confirm("Are you sure you want to Approve All this selected Group Training?"))
             {
                 var id = [];
 
@@ -268,10 +262,7 @@ $result1 = $query1->fetchAll();
                         }
 
                     });
-                    //window.location.href=window.location.href;
                     window.location.reload();
-                    //window.location.href='user-approval.php#trainer_tab';
-                    //header('Location: user-approval.php#trainer_tab');
                 }
 
             }
@@ -281,10 +272,10 @@ $result1 = $query1->fetchAll();
             }
         });
         
-        //reject all selected checkbox
+        //reject all selected checkbox for group training
         $('#btn_reject').click(function () {
 
-            if (confirm("Are you sure you want to Reject All this?"))
+            if (confirm("Are you sure you want to Reject All this selected Group Training?"))
             {
                 var id = [];
 
@@ -312,10 +303,89 @@ $result1 = $query1->fetchAll();
                         }
 
                     });
-                    //window.location.href=window.location.href;
                     window.location.reload();
-                    //window.location.href='user-approval.php#trainer_tab';
-                    //header('Location: user-approval.php#trainer_tab');
+                }
+
+            }
+            else
+            {
+                return false;
+            }
+        });
+        
+        //reject all selected checkbox for users
+        $('#btn_rejectUser').click(function () {
+
+            if (confirm("Are you sure you want to Reject All this selected Users?"))
+            {
+                var email = [];
+
+                $(':checkbox:checked').each(function (i) {
+                    email[i] = $(this).val();
+                });
+
+                if (email.length === 0) //tell you if the array is empty
+                {
+                    alert("Please Select atleast one checkbox");
+                }
+                else
+                {
+                    $.ajax({
+                        url: 'doRejectAll.php',
+                        method: 'POST',
+                        data: {email: email},
+                        success: function ()
+                        {
+                            for (var i = 0; i < email.length; i++)
+                            {
+                                $("tr#" + email[i] + "").css('background-color', '#ccc');
+                                $("tr#" + email[i] + "").fadeOut('slow');
+                            }
+                        }
+
+                    });
+                    window.location.reload();
+                }
+
+            }
+            else
+            {
+                return false;
+            }
+        });
+        
+        //approve all selected checkbox for users
+        $('#btn_approveUser').click(function () {
+
+            if (confirm("Are you sure you want to Approve All this selected Users?"))
+            {
+                var email = [];
+
+                $(':checkbox:checked').each(function (i) {
+                    email[i] = $(this).val();
+                });
+
+                if (email.length === 0) //tell you if the array is empty
+                {
+                    alert("Please Select atleast one checkbox");
+                }
+                else
+                {
+                    $.ajax({
+                        url: 'doApproveAll.php',
+                        method: 'POST',
+                        data: {email: email},
+                        success: function ()
+                        {
+                            for (var i = 0; i < email.length; i++)
+                            {
+                                $("tr#" + email[i] + "").css('background-color', '#ccc');
+                                $("tr#" + email[i] + "").fadeOut('slow');
+                            }
+                        }
+
+                    });
+                    window.location.reload();
                 }
 
             }

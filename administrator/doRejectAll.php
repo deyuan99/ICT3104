@@ -17,4 +17,12 @@ if(isset($_POST["id"]))
     $query5 = $conn->prepare($sql4);
     $stmt4 = $query5->execute();
  }
+}elseif (isset($_POST["email"])) {
+   foreach($_POST["email"] as $email)
+ {
+  
+    $sql = "DELETE FROM userapproval WHERE email = '$email'";
+    $query = $conn->prepare($sql);
+    $stmt = $query->execute();
+ } 
 }

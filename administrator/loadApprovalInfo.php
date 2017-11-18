@@ -16,6 +16,7 @@ function getApprovalUsers() {
             $registerDate = $row['registerDate'];
             $address = $row['address'];            
             echo "<tr>";
+            echo "<td class=\"col-md-1\"><input name=\"email[]\" type=\"checkbox\" value=\"$email\" ></td>";
             echo "<td class=\"col-md-2\">$email</td>";
             echo "<td class=\"col-md-1\">$firstName</td>";
             echo "<td class=\"col-md-1\">$lastName</td>";
