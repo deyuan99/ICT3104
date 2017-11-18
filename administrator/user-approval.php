@@ -1,6 +1,11 @@
 
 <?php
 session_start();
+require_once('../database/dbconfig.php');
+$sql1 = "SELECT id, trainerEmail, date, groupCapacity, status, (SELECT name FROM roomtype WHERE id=roomTypeID) AS name, (SELECT venueID FROM roomtype WHERE id=roomTypeID) AS venueID, (SELECT location FROM venue WHERE id=venueID) AS location, (SELECT trainingName FROM typeoftraining where id=typeofTrainingID) AS trainingName FROM groupsession WHERE status = 'Pending'";
+$query1 = $conn->prepare($sql1);
+$stmt1 = $query1->execute();
+$result1 = $query1->fetchAll();
 ?>
 <!DOCTYPE html>
 
@@ -18,13 +23,13 @@ session_start();
             {
                 document.getElementById("approve_userid").value = "";
                 document.getElementById("approve_userid").value = email;
-                document.getElementById("approveMsg").innerHTML = "Are you sure you want to Approve " + "<strong>" + email +"</strong>" + "  ?" ;
+                document.getElementById("approveMsg").innerHTML = "Are you sure you want to Approve " + "<strong>" + email + "</strong>" + "  ?";
             }
             function setRejectInfo(email)
             {
                 document.getElementById("reject_userid").value = "";
                 document.getElementById("reject_userid").value = email;
-                document.getElementById("rejectMsg").innerHTML = "Are you sure you want to Reject " + "<strong>" + email +"</strong>" + "  ?" ;
+                document.getElementById("rejectMsg").innerHTML = "Are you sure you want to Reject " + "<strong>" + email + "</strong>" + "  ?";
             }
         </script>
     </head>
@@ -77,11 +82,15 @@ session_start();
                             <div class="table-responsive my-table-style">
                                 <table id="esa-table" class="table table-striped table-bordered" cellspacing="0" width="100%">
                                     <thead>
-                                        <tr>
+                                        <tr>        <!--<input id="clickMe" type="button" value="clickme" onclick="doFunction();" />-->
+                                            <!--<a data-toggle="modal" data-target="#approve" class="btn btn-info">APPROVE SELECTED</a>
+                                            <input name="submit1" type="submit" value="Approve Selected" >-->
+
+                                            <th class="col-md-1"><button type="button" name="btn_approve" id="btn_approve" class="btn btn-success">ApproveSelected</button><button type="button" name="btn_reject" id="btn_reject" class="btn btn-danger">RejectSelected</button></th>
                                             <th class="col-md-2">Email Address</th>
                                             <th class="col-md-1">Venue</th>
                                             <th class="col-md-1">Type of Training</th>
-                                            <th class="col-md-2">Room Type</th>
+                                            <th class="col-md-1">Room Type</th>
                                             <th class="col-md-1">Group Capacity</th>
                                             <th class="col-md-1">Date</th>
                                             <th class="col-md-1">Status</th>
@@ -118,7 +127,7 @@ session_start();
                                     </tbody>
                                 </table>
                             </div><br><br>
-                            
+
                             <div class="panel-heading">
                                 <div class="panel-title">Rejected Group-Training</div>
                             </div>
@@ -140,7 +149,7 @@ session_start();
                                     </tbody>
                                 </table>
                             </div><br><br>
-                            
+
                             <div class="panel-heading">
                                 <div class="panel-title">Deleted Group-Training</div>
                             </div>
@@ -162,13 +171,13 @@ session_start();
                                     </tbody>
                                 </table>
                             </div>
-                            
+
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        
+
         <div class="modal fade" id="approveUserModal" tabindex="-1" role="dialog">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -220,7 +229,101 @@ session_start();
                     </div>
                 </div>
             </div>
-        </div>
+        </div>     
     </body>
 
 </html>
+
+<script>
+    $(document).ready(function () {
+
+        //approve all selected checkbox
+        $('#btn_approve').click(function () {
+
+            if (confirm("Are you sure you want to Approve All this?"))
+            {
+                var id = [];
+
+                $(':checkbox:checked').each(function (i) {
+                    id[i] = $(this).val();
+                });
+
+                if (id.length === 0) //tell you if the array is empty
+                {
+                    alert("Please Select atleast one checkbox");
+                }
+                else
+                {
+                    $.ajax({
+                        url: 'doApproveAll.php',
+                        method: 'POST',
+                        data: {id: id},
+                        success: function ()
+                        {
+                            for (var i = 0; i < id.length; i++)
+                            {
+                                $("tr#" + id[i] + "").css('background-color', '#ccc');
+                                $("tr#" + id[i] + "").fadeOut('slow');
+                            }
+                        }
+
+                    });
+                    //window.location.href=window.location.href;
+                    window.location.reload();
+                    //window.location.href='user-approval.php#trainer_tab';
+                    //header('Location: user-approval.php#trainer_tab');
+                }
+
+            }
+            else
+            {
+                return false;
+            }
+        });
+        
+        //reject all selected checkbox
+        $('#btn_reject').click(function () {
+
+            if (confirm("Are you sure you want to Reject All this?"))
+            {
+                var id = [];
+
+                $(':checkbox:checked').each(function (i) {
+                    id[i] = $(this).val();
+                });
+
+                if (id.length === 0) //tell you if the array is empty
+                {
+                    alert("Please Select atleast one checkbox");
+                }
+                else
+                {
+                    $.ajax({
+                        url: 'doRejectAll.php',
+                        method: 'POST',
+                        data: {id: id},
+                        success: function ()
+                        {
+                            for (var i = 0; i < id.length; i++)
+                            {
+                                $("tr#" + id[i] + "").css('background-color', '#ccc');
+                                $("tr#" + id[i] + "").fadeOut('slow');
+                            }
+                        }
+
+                    });
+                    //window.location.href=window.location.href;
+                    window.location.reload();
+                    //window.location.href='user-approval.php#trainer_tab';
+                    //header('Location: user-approval.php#trainer_tab');
+                }
+
+            }
+            else
+            {
+                return false;
+            }
+        });
+
+    });
+</script>
