@@ -16,6 +16,7 @@ function getApprovalUsers() {
             $registerDate = $row['registerDate'];
             $address = $row['address'];            
             echo "<tr>";
+            echo "<td class=\"col-md-1\"><input name=\"email[]\" type=\"checkbox\" value=\"$email\" ></td>";
             echo "<td class=\"col-md-2\">$email</td>";
             echo "<td class=\"col-md-1\">$firstName</td>";
             echo "<td class=\"col-md-1\">$lastName</td>";
@@ -57,10 +58,11 @@ function getApprovalGrouptraining() {
             $status = $row['status'];
             echo "<tr>";
             //echo "<td class=\"col-md-1\">$id</td>";
+            echo "<td class=\"col-md-1\"><input name=\"id[]\" type=\"checkbox\" value=\"$id\" ></td>";
             echo "<td class=\"col-md-2\">$trainerEmail</td>";
             echo "<td class=\"col-md-1\">$venue</td>";
             echo "<td class=\"col-md-1\">$typeoftraining</td>";
-            echo "<td class=\"col-md-2\">$roomtype</td>";
+            echo "<td class=\"col-md-1\">$roomtype</td>";
             echo "<td class=\"col-md-1\">$groupCapacity</td>";
             echo "<td class=\"col-md-1\">$date</td>";
             //echo "<td class=\"col-md-2\">$description</td>";
@@ -70,6 +72,7 @@ function getApprovalGrouptraining() {
             echo "<a data-toggle=\"modal\" data-target=\"#rejectUserModal\" onclick=\"setRejectInfo('$id')\" class=\"btn btn-danger btn-sm col-md-offset-1 col-md-5\"><span class=\"glyphicon glyphicon-remove icon-space\"></span>REJECT</a>";
             echo "</td></tr>";
         endforeach;
+        
     }
     else {
         echo "<tr><td colspan = \"12\" style=\"text-align:center;\">";
