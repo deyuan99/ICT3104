@@ -224,7 +224,7 @@ require_once('../database/dbconfig.php');
                 </div>
             </div>
         </div>     
-
+        </section>
     </body>
 
 </html>
