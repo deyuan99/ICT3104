@@ -4,6 +4,7 @@
     <nav id="nav">
         <ul>
             <li class="dropdown">
+                <li><a href="trainer_traineeList.php">My Trainees</a></li>
                 <li><a href="trainer_groupCalendar.php">Group Training</a></li>
                 <li class="dropdown">
                 <a class="dropdown-toggle" data-toggle="dropdown" href="trainee_dashboard.php">My Account
