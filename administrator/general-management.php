@@ -11,6 +11,8 @@ session_start();
 
         <?php include_once 'include.php'; ?>
         <?php include_once 'loadIndex.php'; ?>
+        <!-- Bootstrap Core JavaScript -->
+        <script src="../bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>
         <script>
             function setEditInfo(title, description, startDate, endDate, featuredStatus)
                     {

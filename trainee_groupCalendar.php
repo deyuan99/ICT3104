@@ -16,8 +16,9 @@ $events = $req->fetchAll();
         <meta charset="UTF-8">
         <title>STPS</title>
 
-        <!-- Bootstrap Core CSS -->
-        <link href="bootstrap-3.3.5-dist/css/bootstrap.min.css" rel="stylesheet">
+        <script src="assets/js/jquery.min.js" rel="stylesheet"></script>
+        <script src="bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 
         <!-- FullCalendar -->
         <link href='fullcalendar-3.5.1/fullcalendar.css' rel='stylesheet' />
@@ -145,7 +146,7 @@ $events = $req->fetchAll();
         ?>
 
         <!-- Scripts -->
-        <script src="assets/js/jquery.min.js"></script>
+
         <script src="assets/js/skel.min.js"></script>
         <script src="assets/js/util.js"></script>
         <script src="assets/js/main.js"></script>

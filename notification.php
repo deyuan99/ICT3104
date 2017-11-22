@@ -5,7 +5,7 @@ $url = "";
 if($role=="admin"){
     $url = "../readNotification.php";
     require_once('../database/dbconfig.php');
-}
+}   
 else
 {
     $url = "readNotification.php";
@@ -26,7 +26,9 @@ if ($count > 0) {
 ?>
 <head>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.0/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+    <?php  
+        echo "<script src=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js\"></script>";
+    ?>
      <script>
          $(document).ready(function() {
             $('#msgfrm').on('submit', function(event) {
@@ -34,7 +36,7 @@ if ($count > 0) {
                 $('#modal').modal('hide');
                 $.ajax({
                     type: "POST",
-                    url: "<?php echo $role; ?>",
+                    url: "<?php echo $url; ?>",
                     data: "$(this).serialize()",
                     success: function(data) {
           
@@ -50,7 +52,7 @@ if ($count > 0) {
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title" style="color:black;"><span class="glyphicon glyphicon-alert" style="margin-right: 10px;"></span>Notification</h4>
+                    <h4 class="modal-title" style="color:black;"><span class="glyphicon glyphicon-alert" style="margin-right: 10px;"></span>New Notifications</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 
                 </div>
@@ -65,13 +67,13 @@ if ($count > 0) {
                         endforeach;
                         ?>
                     <form method="post" id="msgfrm" action="<?php echo $url; ?>">
-                        <input type="submit" value="OK" class="btn btn-info btn-md col-xs-8 col-xs-offset-2">
+                        <input type="submit" value="OK" class="btn btn-info btn-md col-xs-8 col-xs-offset-2" style="background: #5bc0de !important;">
                     </form>
                     <br>
 
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-default" style="color:black !important;" data-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>
