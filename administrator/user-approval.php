@@ -11,8 +11,8 @@ require_once('../database/dbconfig.php');
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>STPS</title>
         <!-- CSS import -->
-        <?php include_once 'include.php'; ?>
-        <?php include_once 'loadApprovalInfo.php'; ?>
+        <?php include 'include.php'; ?>
+        <?php include 'loadApprovalInfo.php'; ?>
         <script>
             function setApproveInfo(email)
             {
@@ -30,7 +30,7 @@ require_once('../database/dbconfig.php');
         
     </head>
     <body>
-        <?php include_once 'nav-bar.php'; ?>
+        <?php include 'nav-bar.php'; ?>
         <section id="main" class="wrapper">
         <div class="container-fluid">
             <h2 class="text-center" id="toptitle"><span class="glyphicon glyphicon-ok-sign icon-space"></span> APPROVAL REQUEST</h2>
@@ -181,7 +181,7 @@ require_once('../database/dbconfig.php');
             </div>
         </div>
 
-        <div class="modal fade" id="approveUserModal" tabindex="-1" role="dialog">
+        <div class="modal fade" id="approveUserModal" tabindex="-1" role="dialog" style="padding-top: 70px;">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -207,7 +207,7 @@ require_once('../database/dbconfig.php');
                 </div>
             </div>
         </div>
-        <div class="modal fade" id="rejectUserModal" tabindex="-1" role="dialog">
+        <div class="modal fade" id="rejectUserModal" tabindex="-1" role="dialog" style="padding-top: 70px;">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -234,11 +234,8 @@ require_once('../database/dbconfig.php');
             </div>
         </div>     
         </section>
-    </body>
-
-</html>
-
-<script>
+        
+        <script>
     $(document).ready(function () {
 
         //approve all selected checkbox for group training
@@ -407,3 +404,7 @@ require_once('../database/dbconfig.php');
 
     });
 </script>
+    </body>
+
+</html>
+

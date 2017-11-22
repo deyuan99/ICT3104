@@ -17,23 +17,19 @@ $events = $req->fetchAll();
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>STPS</title>
         <!-- CSS import -->
-        <?php include_once 'include.php'; ?>
-
-        <!-- Bootstrap Core CSS -->
-        <link href="../bootstrap-3.3.5-dist/css/bootstrap.min.css" rel="stylesheet">
-
+        <?php include 'include.php'; ?>
+    
         <!-- FullCalendar -->
-        <link href='../fullcalendar-3.5.1/fullcalendar.css' rel='stylesheet' />
+        <link href="../fullcalendar-3.5.1/fullcalendar.css" rel="stylesheet" />
         <link href="../assets/css/calendar.css" rel="stylesheet" type="text/css"/>
         <style>
-
-            /*#calendar {
+            #calendar {
                 max-width: 800px;
             }
             .col-centered{
                 float: none;
                 margin: 0 auto;
-            }*/
+            }*
             /* calendar hover */
             .qtip-content-margin {
                 margin-left:0;
@@ -44,13 +40,14 @@ $events = $req->fetchAll();
 
     </head>
     <body>
+        <?php include 'nav-bar.php'; ?>
         <div class="container-fluid" style="padding-top: 80px;">
-            <?php include_once 'nav-bar.php'; ?>
-            <h1 class="text-center"><span class="glyphicon glyphicon-list-alt icon-space"></span> GROUP SESSION</h1>
+            <h2 class="text-center" id="toptitle"><span class="glyphicon glyphicon-list-alt icon-space"></span> GROUP SESSION </h2>
+
+            <!--<h1 class="text-center"><span class="glyphicon glyphicon-list-alt icon-space"></span> GROUP SESSION</h1>-->
             <div class="col-md-8 col-md-offset-2 padding-0" id="usermanagement">
 
-                <div id="calendar" class="col-centered">
-                </div>
+                <div id="calendar" class="col-centered"></div>
 
                 <!--<a class="btn" href="#ModalView" data-toggle="modal">TEST</a>-->
                 <!-- <div id="calendar" class="col-centered"></div>-->
@@ -144,15 +141,23 @@ $events = $req->fetchAll();
                         </div>
                     </div>
                 </div>
-         <!-- jQuery Version 1.11.1 -->
+         
+
+            </div>
+        </div>
+        <!-- jQuery Version 1.11.1 -->
         <script src="../fullcalendar-3.5.1/lib/jquery.js"></script>
 
         <!-- Bootstrap Core JavaScript -->
         <script src="../bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>
 
         <!-- FullCalendar -->
-        <script src='../fullcalendar-3.5.1/lib/moment.min.js'></script>
-        <script src='../fullcalendar-3.5.1/fullcalendar.min.js'></script>
+        <script src="../fullcalendar-3.5.1/lib/moment.min.js"></script>
+        <script src="../fullcalendar-3.5.1/fullcalendar.min.js"></script>
+
+        <!--qtip must be after funllcalendarJS-->
+        <link type="text/css" rel="stylesheet" href="../jquery_qtip/jquery.qtip.css" />
+        <script src="../jquery_qtip/jquery.qtip.js"></script>
   
 
                 <!--Calendar script-->
@@ -283,9 +288,6 @@ foreach ($events as $event):
                     });
 
                 </script>
-
-            </div>
-        </div>
 
     </body>
 </html>
