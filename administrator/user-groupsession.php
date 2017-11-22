@@ -18,7 +18,6 @@ $events = $req->fetchAll();
         <title>STPS</title>
         <!-- CSS import -->
         <?php include 'include.php'; ?>
-        <?php include 'loadApprovalInfo.php'; ?>
     
         <!-- FullCalendar -->
         <link href="../fullcalendar-3.5.1/fullcalendar.css" rel="stylesheet" />
@@ -26,10 +25,6 @@ $events = $req->fetchAll();
         <style>
             #calendar {
                 max-width: 800px;
-                
-            }
-            h2{
-                color: #000;
             }
             .col-centered{
                 float: none;
@@ -53,6 +48,9 @@ $events = $req->fetchAll();
             <div class="col-md-8 col-md-offset-2 padding-0" id="usermanagement">
 
                 <div id="calendar" class="col-centered"></div>
+
+                <!--<a class="btn" href="#ModalView" data-toggle="modal">TEST</a>-->
+                <!-- <div id="calendar" class="col-centered"></div>-->
 
                 <!--view groupTraining-->
                 <div class="modal fade" id="ModalView" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="padding-top: 70px;">
@@ -143,82 +141,9 @@ $events = $req->fetchAll();
                         </div>
                     </div>
                 </div>
-                
-                <br><br>
-                 <h2 class="text-center" id="toptitle"><span class="glyphicon glyphicon-list-alt icon-space"></span> GROUP SESSION HISTORY/SUMMARY </h2>
-                <div class="tab-pane add--15-margin" id="approvel_reject_tab">
-                        <div class="panel panel-default margin-l0-r0">
-                            <div class="panel-heading">
-                                <div class="panel-title">Approved Group-Training</div>
-                            </div>
-                            <div class="table-responsive my-table-style">
-                                <table id="esa-table" class="table table-striped table-bordered" cellspacing="0" width="100%" >
-                                    <thead>
-                                        <tr>
-                                            <th class="col-md-2">Email Address</th>
-                                            <th class="col-md-1">Venue</th>
-                                            <th class="col-md-1">Type of Training</th>
-                                            <th class="col-md-2">Room Type</th>
-                                            <th class="col-md-1">Group Capacity</th>
-                                            <th class="col-md-1">Date</th>
-                                            <th class="col-md-1">Status</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <?php getApprovedGrouptraining(); ?>
-                                    </tbody>
-                                </table>
-                            </div><br><br>
-
-                            <div class="panel-heading">
-                                <div class="panel-title">Rejected Group-Training</div>
-                            </div>
-                            <div class="table-responsive my-table-style">
-                                <table id="esa-table" class="table table-striped table-bordered" cellspacing="0" width="100%">
-                                    <thead>
-                                        <tr>
-                                            <th class="col-md-2">Email Address</th>
-                                            <th class="col-md-1">Venue</th>
-                                            <th class="col-md-1">Type of Training</th>
-                                            <th class="col-md-2">Room Type</th>
-                                            <th class="col-md-1">Group Capacity</th>
-                                            <th class="col-md-1">Date</th>
-                                            <th class="col-md-1">Status</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <?php getRejectedGrouptraining(); ?>
-                                    </tbody>
-                                </table>
-                            </div><br><br>
-
-                            <div class="panel-heading">
-                                <div class="panel-title">Deleted Group-Training</div>
-                            </div>
-                            <div class="table-responsive my-table-style">
-                                <table id="esa-table" class="table table-striped table-bordered" cellspacing="0" width="100%">
-                                    <thead>
-                                        <tr>
-                                            <th class="col-md-2">Email Address</th>
-                                            <th class="col-md-1">Venue</th>
-                                            <th class="col-md-1">Type of Training</th>
-                                            <th class="col-md-2">Room Type</th>
-                                            <th class="col-md-1">Group Capacity</th>
-                                            <th class="col-md-1">Date</th>
-                                            <th class="col-md-1">Status</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <?php getDeletedGrouptraining(); ?>
-                                    </tbody>
-                                </table>
-                            </div>
-
-                        </div>
-            </div>
          
+
             </div>
-            
         </div>
         <!-- jQuery Version 1.11.1 -->
         <script src="../fullcalendar-3.5.1/lib/jquery.js"></script>
