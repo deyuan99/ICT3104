@@ -143,7 +143,7 @@ session_start();
                 </div>
             </div>
              
-        <div class="modal fade" id="editUserModal" tabindex="-1" role="dialog">
+        <div class="modal fade" id="editUserModal" tabindex="-1" role="dialog" style="padding-top: 70px;">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -216,7 +216,7 @@ session_start();
                 </div>
             </div>
         </div>
-        <div class="modal fade" id="deactivateUserModal" tabindex="-1" role="dialog">
+        <div class="modal fade" id="deactivateUserModal" tabindex="-1" role="dialog" style="padding-top: 70px;">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -242,7 +242,7 @@ session_start();
                 </div>
             </div>
         </div>
-        <div class="modal fade" id="reactivateUserModal" tabindex="-1" role="dialog">
+        <div class="modal fade" id="reactivateUserModal" tabindex="-1" role="dialog" style="padding-top: 70px;">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
