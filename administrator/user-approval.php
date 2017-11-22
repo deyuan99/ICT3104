@@ -27,6 +27,7 @@ require_once('../database/dbconfig.php');
                 document.getElementById("rejectMsg").innerHTML = "Are you sure you want to Reject " + "<strong>" + email + "</strong>" + "  ?";
             }
         </script>
+        
     </head>
     <body>
         <?php include_once 'nav-bar.php'; ?>
@@ -52,7 +53,7 @@ require_once('../database/dbconfig.php');
                                 <table id="esa-table" class="table table-striped table-bordered" cellspacing="0" width="100%">
                                     <thead>
                                         <tr>
-                                            <th class="col-md-1"><button type="button" name="btn_approveUser" id="btn_approveUser" class="btn btn-success">ApproveSelected</button><button type="button" name="btn_rejectUser" id="btn_rejectUser" class="btn btn-danger">RejectSelected</button></th>
+                                            <th class="col-md-1"></th>
                                             <th class="col-md-2">Email Address</th>
                                             <th class="col-md-1">First Name</th>
                                             <th class="col-md-1">Last Name</th>
@@ -70,6 +71,10 @@ require_once('../database/dbconfig.php');
                                 </table>
                             </div>
                         </div>
+                       <div style="text-align:center;">
+                            <button type="button" name="btn_approveUser" id="btn_approveUser" class="btn btn-success"><span class="glyphicon glyphicon-ok"></span>ApproveSelected</button>
+                            <button type="button" name="btn_rejectUser" id="btn_rejectUser" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span>RejectSelected</button>
+                       </div>
                     </div>
                     <div class="tab-pane add--15-margin" id="trainer_tab">
                         <div class="panel panel-default margin-l0-r0">
@@ -80,7 +85,7 @@ require_once('../database/dbconfig.php');
                                 <table id="esa-table" class="table table-striped table-bordered" cellspacing="0" width="100%">
                                     <thead>
                                         <tr>   
-                                            <th class="col-md-1"><button type="button" name="btn_approve" id="btn_approve" class="btn btn-success">ApproveSelected</button><button type="button" name="btn_reject" id="btn_reject" class="btn btn-danger">RejectSelected</button></th>
+                                            <th class="col-md-1"></th>
                                             <th class="col-md-2">Email Address</th>
                                             <th class="col-md-1">Venue</th>
                                             <th class="col-md-1">Type of Training</th>
@@ -96,6 +101,10 @@ require_once('../database/dbconfig.php');
                                     </tbody>
                                 </table>
                             </div>
+                        </div>
+                        <div style="text-align:center;">
+                            <button type="button" name="btn_approve" id="btn_approve" class="btn btn-success"><span class="glyphicon glyphicon-ok"></span>ApproveSelected</button>
+                            <button type="button" name="btn_reject" id="btn_reject" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span>RejectSelected</button>
                         </div>
                     </div>
                     <div class="tab-pane add--15-margin" id="approvel_reject_tab">

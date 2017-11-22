@@ -28,12 +28,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/1000hz-bootstrap-validator/0.11.5/validator.min.js"></script>
 <!--<script type="text/javascript" src="../js/validator.min.js"></script>-->
 
-<!-- jQuery Version 1.11.1 -->
-<script src="../fullcalendar-3.5.1/lib/jquery.js"></script>
 
-<!--qtip-->
-<link type="text/css" rel="stylesheet" href="../jquery_qtip/jquery.qtip.css" />
-<script src="../jquery_qtip/jquery.qtip.js"></script>
 
 <!-- Self-defined Styles -->
 <link rel="stylesheet" type="text/css" href="css/style.css" />

@@ -19,21 +19,21 @@ $events = $req->fetchAll();
         <!-- CSS import -->
         <?php include_once 'include.php'; ?>
 
+        <!-- Bootstrap Core CSS -->
+        <link href="../bootstrap-3.3.5-dist/css/bootstrap.min.css" rel="stylesheet">
+
         <!-- FullCalendar -->
-        <script src="../fullcalendar-3.5.1/lib/moment.min.js"></script>
-        <script src="../fullcalendar-3.5.1/fullcalendar.min.js"></script>
         <link href='../fullcalendar-3.5.1/fullcalendar.css' rel='stylesheet' />
         <link href="../assets/css/calendar.css" rel="stylesheet" type="text/css"/>
-        <!-- Custom CSS -->
         <style>
 
-            #calendar {
+            /*#calendar {
                 max-width: 800px;
             }
             .col-centered{
                 float: none;
                 margin: 0 auto;
-            }
+            }*/
             /* calendar hover */
             .qtip-content-margin {
                 margin-left:0;
@@ -52,7 +52,7 @@ $events = $req->fetchAll();
                 <div id="calendar" class="col-centered">
                 </div>
 
-
+                <!--<a class="btn" href="#ModalView" data-toggle="modal">TEST</a>-->
                 <!-- <div id="calendar" class="col-centered"></div>-->
 
                 <!--view groupTraining-->
@@ -144,7 +144,16 @@ $events = $req->fetchAll();
                         </div>
                     </div>
                 </div>
+         <!-- jQuery Version 1.11.1 -->
+        <script src="../fullcalendar-3.5.1/lib/jquery.js"></script>
 
+        <!-- Bootstrap Core JavaScript -->
+        <script src="../bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>
+
+        <!-- FullCalendar -->
+        <script src='../fullcalendar-3.5.1/lib/moment.min.js'></script>
+        <script src='../fullcalendar-3.5.1/fullcalendar.min.js'></script>
+  
 
                 <!--Calendar script-->
                 <script>
@@ -168,6 +177,12 @@ $events = $req->fetchAll();
 $todaydateis = date("Y-m-d");
 
 foreach ($events as $event):
+    $typeofTrainingID = $event['trainingName'];
+    $roomTypeID = $event['name'];
+    $status = $event['status'];
+    $trainerEmail = $event['trainerEmail'];
+    $groupCapacity = $event['groupCapacity'];
+    $description = $event ['description'];
     $eventdate = $event['date'];
     $start = $event['startTime'];
     $end = $event['endTime'];
@@ -194,7 +209,7 @@ foreach ($events as $event):
                                         cost: '<?php echo '$ ' . $event['cost']; ?>',
                                         color: '<?php echo $color; ?>',
                                         capacity: '<?php echo $event['groupCapacity']; ?>',
-                                        room: '<?php echo $event['name']; ?>'
+                                        room: '<?php echo $event['name']; ?>',
 
                                     },
 <?php endforeach; ?>
@@ -257,24 +272,6 @@ foreach ($events as $event):
                                 content += '<div class="row qtip-content-margin"><b>Training Time:</b> ' + event.startTime + ' to ' + event.endTime + '</div>';
                                 content += '<div class="row qtip-content-margin"><b>Venue:</b> ' + event.room + ' room at ' + event.venue + '</div>';
 
-
-                                /* if (event.type != <?php //echo SELFT;   ?>) {
-                                 content += '<div class="row qtip-content-margin"><b>Category:</b> ' + event.category + '</div>';
-                                 }
-                                 
-                                 content += '<div class="row qtip-content-margin"><b>Start:</b> ' + moment(event.start).format('YYYY-MM-DD HH:mm:ss') + '</div>';
-                                 content += '<div class="row qtip-content-margin"><b>End:</b> ' + moment(event.end).format('YYYY-MM-DD HH:mm:ss') + '</div>';
-                                 content += '<div class="row qtip-content-margin"><b>Gym:</b> ' + event.gym + '</div>';
-                                 content += '<div class="row qtip-content-margin"><b>Venue:</b> ' + event.room + '</div>';
-                                 
-                                 // Check if less than 2 days to the event, cannot cancel
-                                 if (differenceInDays(event.start) > 2 && event.type != <?php //echo SELFT;   ?> && event.start > current) {
-                                 content += '<form class="form-horizontal" action="../Functions/doWithdrawTraining.php" method="POST"><input type="hidden" name="training_id" value="' + event.id + '"><button type="submit" id="withdrawTraining" name="withdrawTraining" class="btn btn-primary btn-xs">Withdraw Training</button></form>';
-                                 }
-                                 
-                                 if (event.type == <?php // echo SELFT;   ?> && event.start > current) {
-                                 content += '<form class="form-horizontal" action="../Functions/doCancelTraineeSelf.php" method="POST"><input type="hidden" name="training_id" value="' + event.id + '"><button type="submit" id="removeTraining" name="removeTraining" class="btn btn-primary btn-xs">Cancel Training</button></form>';
-                                 }*/
 
                                 tooltip.set({
                                     'content.text': content
