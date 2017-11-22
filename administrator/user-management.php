@@ -48,7 +48,6 @@ session_start();
         </script>
     </head>
     <body>
-        
         <?php include_once 'nav-bar.php'; ?>
         <section id="main" class="wrapper">
             <div class="container-fluid">
