@@ -2,24 +2,28 @@
 
 require('../database/dbconfig.php');
 
+/*
+ * title, description, startDate, endDate, featuredStatus
+ */
 
-$email = $_POST['edit_email'];
 
-$sql = "SELECT * FROM users WHERE email = '$email' and status = 1";
+$sql = "SELECT * FROM promotions";
 $req = $conn->prepare($sql);
 $req->execute();
 $rows = $req->fetchAll();
 if (!empty($rows)) {
     foreach ($rows as $row):
-        $firstName = $row['firstName'];
-        $lastName = $row['lastName'];
-        $address = $row['address'];
-        $mobile = $row['phoneNumber'];
-        $password = $row['password'];
+        $title = $row['title'];
+        $description = $row['description'];
+        $startDate = $row['startDate'];
+        $endDate = $row['endDate'];
+        $imagePath = $row['imagePath'];
+        $featuredStatus = $row['featuredStatus'];
+
     endforeach;
 }
 else {
-    echo "No trainee record found";
+    echo "No promotions found";
 }
 
 
@@ -28,21 +32,18 @@ else {
 //$address = $_POST['address'];
 //$mobile = $_POST['mobile'];
 
-$firstName = empty($_POST['firstName']) ? $firstName : $_POST['firstName'];
-$lastName = empty($_POST['lastName']) ? $lastName : $_POST['lastName'];
-$address = empty($_POST['address']) ? $address : $_POST['address'];
-$mobile = empty($_POST['mobile']) ? $mobile : $_POST['mobile'];
-$password = empty(sha1($_POST['pass'])) ? sha1($password) : sha1($_POST['pass']); 
+$title = empty($_POST['title']) ? $title : $_POST['title'];
+$description = empty($_POST['description']) ? $description : $_POST['description'];
+$startDate = empty($_POST['startDate']) ? $startDate : $_POST['startDate'];
+$endDate = empty($_POST['endDate']) ? $endDate : $_POST['endDate'];
+$imagePath = empty($_POST['imagePath']) ? $imagePath : $_POST['imagePath'];
+$featuredStatus = empty($_POST['featuredStatus']) ? $featuredStatus : $_POST['featuredStatus'];
 
 
-$sql = "UPDATE users SET firstName = '$firstName', lastName = '$lastName', address ='$address', phoneNumber = '$mobile', password = '$password' WHERE email = '$email'";
+$sql = "UPDATE promotions SET title = '$title', description = '$description', startDate ='$startDate', endDate = '$endDate', imagePath = '$imagePath', featuredStatus='$featuredStatus'";
 $req = $conn->prepare($sql);
 $req->execute();
 
-if (is_numeric($mobile) && $mobile > 9999999 && $mobile < 100000000) {
-    //if i were to put $sql...$req in here it won't work either
-}
-header('Location: user-management.php');
+header('Location: promo-management.php');
 exit();
-
 ?>
