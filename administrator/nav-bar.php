@@ -25,3 +25,4 @@
 </header>
 
 <a href="#menu" class="navPanelToggle"><span class="fa fa-bars"></span></a>
+<?php include_once '../notification.php'; ?>
