@@ -13,6 +13,8 @@ require_once('../database/dbconfig.php');
         <!-- CSS import -->
         <?php include 'include.php'; ?>
         <?php include 'loadApprovalInfo.php'; ?>
+        <!-- Bootstrap Core JavaScript -->
+        <script src="../bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>
         <script>
             function setApproveInfo(email)
             {
