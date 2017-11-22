@@ -65,11 +65,11 @@ if (count($output_array) == 1) {
     $capacity = $row3['capacity'];
 
     $currenttotalevent = $totalgroupcap + $total_rows;
-    echo "current total event : ";
-    echo $currenttotalevent;
-    echo "</br>";
-    echo "total capacity :";
-    echo $capacity;
+  //  echo "current total event : ";
+   // echo $currenttotalevent;
+   // echo "</br>";
+   // echo "total capacity :";
+    //echo $capacity;
 
 
     //(4) get the group cap
@@ -78,9 +78,9 @@ if (count($output_array) == 1) {
     $req33->execute();
     $row33 = $req33->fetch(PDO::FETCH_ASSOC);
     $capacityapp = $row33['groupCapacity'];
-    echo "</br>";
-    echo "total cap for approve event :";
-    echo $capacityapp;
+ //   echo "</br>";
+ //   echo "total cap for approve event :";
+//    echo $capacityapp;
     //comparing
     if ($currenttotalevent >= $capacity || $currenttotalevent + $capacityapp >= $capacity) {
         echo "<script type='text/javascript'>alert('Unable to book due to capacity reached');"
@@ -95,7 +95,7 @@ if (count($output_array) == 1) {
         . "window.location.href='user-approval.php';"
         . "</script>";
     }
-    header('Location: user-approval.php#trainer_tab');
+    //header('Location: user-approval.php#trainer_tab');
 }
 exit();
 ?>

@@ -67,9 +67,9 @@ if (isset($_POST['category']) && isset($_POST['starttime']) && isset($_POST['end
 	}
         
         if( $query ){ 
-         //  echo "<script type='text/javascript'>alert('submitted successfully!');"
-       //     . "window.location.href='trainee_dashboard.php';"
-        //    . "</script>";
+          echo "<script type='text/javascript'>alert('submitted successfully!');"
+        . "window.location.href='trainee_dashboard.php';"
+         . "</script>";
           }
         else{
             echo "<script type='text/javascript'>alert('failed');"
