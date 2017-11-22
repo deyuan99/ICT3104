@@ -24,6 +24,10 @@ $events = $req->fetchAll();
         <link href="../fullcalendar-3.5.1/fullcalendar.css" rel="stylesheet" />
         <link href="../assets/css/calendar.css" rel="stylesheet" type="text/css"/>
         <style>
+            #toptitle{
+                padding-top: 30px;
+            }
+            
             #calendar {
                 max-width: 800px;
                 
@@ -47,7 +51,7 @@ $events = $req->fetchAll();
     <body>
         <?php include 'nav-bar.php'; ?>
         <div class="container-fluid" style="padding-top: 80px;">
-            <h2 class="text-center" id="toptitle"><span class="glyphicon glyphicon-list-alt icon-space"></span> GROUP SESSION </h2>
+            <h2 class="text-center" id="toptitle" ><span class="glyphicon glyphicon-list-alt icon-space"></span> GROUP SESSION </h2>
 
             <!--<h1 class="text-center"><span class="glyphicon glyphicon-list-alt icon-space"></span> GROUP SESSION</h1>-->
             <div class="col-md-8 col-md-offset-2 padding-0" id="usermanagement">

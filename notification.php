@@ -1,8 +1,16 @@
 <?php
-session_start();
-require_once('../database/dbconfig.php');
-
 $user = $_SESSION['email'];
+$role = $_SESSION['role'];
+$url = "";
+if($role=="admin"){
+    $url = "../readNotification.php";
+    require_once('../database/dbconfig.php');
+}
+else
+{
+    $url = "readNotification.php";
+    require_once('database/dbconfig.php');
+}
 $sql = "SELECT * FROM notificationlog WHERE userEmail = '$user' AND readStatus = 0 ";
 $req = $conn->prepare($sql);
 $req->execute();
@@ -26,7 +34,7 @@ if ($count > 0) {
                 $('#modal').modal('hide');
                 $.ajax({
                     type: "POST",
-                    url: "../readNotification.php",
+                    url: "<?php echo $role; ?>",
                     data: "$(this).serialize()",
                     success: function(data) {
           
@@ -56,7 +64,7 @@ if ($count > 0) {
                              <span class=\"glyphicon glyphicon-pushpin\" style=\"color: maroon; margin-right:20px;\"></span>$message</div></div>";
                         endforeach;
                         ?>
-                    <form method="post" id="msgfrm" action="../readNotification.php">
+                    <form method="post" id="msgfrm" action="<?php echo $url; ?>">
                         <input type="submit" value="OK" class="btn btn-info btn-md col-xs-8 col-xs-offset-2">
                     </form>
                     <br>
