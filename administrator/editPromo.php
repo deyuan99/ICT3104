@@ -6,7 +6,6 @@ require('../database/dbconfig.php');
  * title, description, startDate, endDate, featuredStatus
  */
 
-
 $sql = "SELECT * FROM promotions";
 $req = $conn->prepare($sql);
 $req->execute();
