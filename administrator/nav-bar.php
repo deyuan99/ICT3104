@@ -11,7 +11,7 @@
             <li class="dropdown">
                 <a class="dropdown-toggle" data-toggle="dropdown" href="">MANAGE PAGE
                     <span class="caret"></span></a>
-                <ul class="dropdown-menu">
+                <ul class="dropdown-menu" id="listdown">
                     <li><a href="general-management.php">Edit index page</a></li>
                     <li><a href="manageVenues.php">Venues</a></li>
                     <li><a href="manageRooms.php">Room Types</a></li>

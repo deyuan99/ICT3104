@@ -541,22 +541,21 @@ body.is-touch .wrapper.style3 {
     margin-left: 2.5em;
     padding-left: 0;
 }
-/*
+
 #header nav ul li a {
-    -moz-transition: color 0.2s ease-in-out;
-    -webkit-transition: color 0.2s ease-in-out;
-    -ms-transition: color 0.2s ease-in-out;
-    transition: color 0.2s ease-in-out;
-    color: #fff;
-    font-size:90%;
-    display: inline-block;
-    text-decoration: none;
+    color: whitesmoke;
+}
+#listdown{
+    background: #222;
+}
+#listdown li a:hover{
+    background: #222;
 }
 
-#header nav ul li a:hover {
-    color: #484848;
+#header nav ul li a:hover, #header nav ul li a:focus {
+    color: #f32853;
 }
-
+/*
 #header nav ul li:first-child {
     margin-left: 0;
 }
