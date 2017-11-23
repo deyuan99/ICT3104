@@ -9,6 +9,7 @@ require('../database/dbconfig.php');
 
 if(isset($_POST["id"]))
 {
+ 
  foreach($_POST["id"] as $id)
  {
   
@@ -33,7 +34,8 @@ if(isset($_POST["id"]))
 
     //(2) get the group cap base on this date, roomtype and venue and startime
     $totalgroupcap = 0;
-    $sql9 = "SELECT * FROM groupsession g,roomtype r where g.roomTypeID=r.id and date= '$dateformat'and g.startTime = '$starttime' and status = 'Approved' and r.id = '$roomtypeid'";
+    $array = $_POST["id"];
+    $sql9 = "SELECT * FROM groupsession g,roomtype r where g.roomTypeID=r.id and date= '$dateformat'and g.startTime = '$starttime' and status = 'Approved' and r.id = '$roomtypeid' ";
     $req2 = $conn->prepare($sql9);
     $req2->execute();
     $coungroup = $req2->rowCount();
