@@ -102,7 +102,7 @@ function getDeactivated() {
             echo "<td class=\"col-md-2\">$address</td>";
             echo "<td class=\"col-md-1\">$role</td>";
             echo "<td class=\"col-md-1\">$register</td>";
-            echo "<td class=\"col-md-1\">$expiry</td>";
+            echo "<td class=\"col-md-1\">$expiryDate</td>";
             echo "<td class=\"col-md-3 padding-l15-r15\" >";
             echo "<a data-toggle=\"modal\" data-target=\"#reactivateUserModal\" onclick=\"setReactivateInfo('$email')\" class=\"btn btn-warning btn-sm col-md-12\"><span class=\"glyphicon glyphicon-refresh icon-space\"></span>REACTIVATE</a>";
             echo "</td></tr>";
