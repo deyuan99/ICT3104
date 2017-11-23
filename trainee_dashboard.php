@@ -540,7 +540,7 @@ $venues = $req2->fetchAll();
                             selectHelper: true,
                             selectConstraint: {
                                 start: $.fullCalendar.moment().subtract(1, 'days'),
-                                end: $.fullCalendar.moment().startOf('month').add(1, 'month')
+                                end: $.fullCalendar.moment().startOf('month').add(2, 'month')
                             },
                             select: function (start) {
                                 $('#ModalAdd #date').val(moment(start).format('DD-MM-YYYY '));
