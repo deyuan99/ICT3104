@@ -11,6 +11,10 @@ session_start();
 
         <?php include_once 'include.php'; ?>
         <?php include_once 'loadIndex.php'; ?>
+<<<<<<< HEAD
+=======
+        <script src="../bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>
+>>>>>>> origin/master
         <script>
             function setDeactivateInfo(email)
             {
