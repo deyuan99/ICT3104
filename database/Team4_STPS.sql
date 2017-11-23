@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 17, 2017 at 12:08 PM
+-- Generation Time: Nov 23, 2017 at 05:40 AM
 -- Server version: 5.6.26
 -- PHP Version: 5.6.12
 
@@ -44,10 +44,10 @@ CREATE TABLE IF NOT EXISTS `groupsession` (
 --
 
 INSERT INTO `groupsession` (`id`, `roomTypeID`, `typeofTrainingID`, `startTime`, `endTime`, `date`, `description`, `trainerEmail`, `groupCapacity`, `status`) VALUES
-(1, 7, 5, '10:00:00', '11:00:00', '2017-11-12', 'for yoga at yogaroom', 'trainer1@gmail.com', 20, 'Pending'),
-(2, 6, 1, '12:00:00', '13:00:00', '2017-11-13', 'welcome to training', 'trainer2@gmail.com', 8, 'Approved'),
-(3, 1, 2, '15:00:00', '17:00:00', '2017-11-13', 'for workout at treadmill', 'trainer1@gmail.com', 13, 'Approved'),
-(4, 6, 4, '12:00:00', '13:00:00', '2017-11-15', 'for freestyle at openspace', 'trainer1@gmail.com', 10, 'Approved'),
+(1, 7, 5, '10:00:00', '11:00:00', '2017-11-28', 'for yoga at yogaroom', 'trainer1@gmail.com', 20, 'Pending'),
+(2, 6, 1, '12:00:00', '13:00:00', '2017-11-26', 'welcome to training', 'trainer2@gmail.com', 8, 'Approved'),
+(3, 1, 2, '15:00:00', '17:00:00', '2017-11-27', 'for workout at treadmill', 'trainer1@gmail.com', 13, 'Approved'),
+(4, 6, 4, '12:00:00', '13:00:00', '2017-11-22', 'for freestyle at openspace', 'trainer1@gmail.com', 10, 'Approved'),
 (5, 1, 3, '10:00:00', '12:00:00', '2017-11-14', 'for freestyle at openspace', 'trainer2@gmail.com', 30, 'Rejected');
 
 -- --------------------------------------------------------
@@ -106,11 +106,11 @@ CREATE TABLE IF NOT EXISTS `personalsession` (
 --
 
 INSERT INTO `personalsession` (`id`, `category`, `roomTypeID`, `typeofTrainingID`, `startTime`, `endTime`, `date`, `description`, `trainerEmail`, `traineeEmail`) VALUES
-(2, 'Personal Training', 1, 0, '09:00:00', '10:00:00', '2017-11-20', 'ts2', '', 'trainee1@gmail.com'),
-(3, 'Personal Training', 3, 0, '09:00:00', '10:00:00', '2017-11-21', 'er', 'trainer1@gmail.com', ''),
-(4, '1-1 Training', 4, 2, '09:00:00', '10:00:00', '2017-11-22', '111', 'trainer1@gmail.com', 'trainee1@gmail.com'),
-(5, '1-1 Training', 6, 3, '09:00:00', '10:00:00', '2017-11-24', 'eww', 'trainer1@gmail.com', ''),
-(7, 'Personal Training', 1, 0, '09:00:00', '10:00:00', '2017-11-30', '', 'trainer1@gmail.com', '');
+(2, 'Personal Training', 1, 0, '09:00:00', '10:00:00', '2017-11-25', 'ts2', '', 'trainee1@gmail.com'),
+(3, 'Personal Training', 3, 0, '09:00:00', '10:00:00', '2017-11-29', 'er', 'trainer1@gmail.com', ''),
+(4, '1-1 Training', 4, 2, '09:00:00', '10:00:00', '2017-11-28', '111', 'trainer1@gmail.com', 'trainee1@gmail.com'),
+(5, '1-1 Training', 6, 3, '09:00:00', '10:00:00', '2017-11-30', 'eww', 'trainer1@gmail.com', ''),
+(7, 'Personal Training', 1, 0, '09:00:00', '10:00:00', '2017-11-26', '', 'trainer1@gmail.com', '');
 
 -- --------------------------------------------------------
 
@@ -159,7 +159,7 @@ INSERT INTO `roomtype` (`id`, `name`, `capacity`, `venueID`) VALUES
 (4, 'OpenSpace', 100, 2),
 (5, 'Dumbbell', 50, 2),
 (6, 'Treadmill', 30, 2),
-(7, 'Yoga', 25, 1);
+(7, 'Yoga', 26, 1);
 
 -- --------------------------------------------------------
 
@@ -224,19 +224,20 @@ CREATE TABLE IF NOT EXISTS `users` (
   `registerDate` date NOT NULL,
   `expiryDate` date NOT NULL,
   `featuredStatus` int(1) NOT NULL,
-  `profileBio` varchar(255) NOT NULL
+  `profileBio` varchar(255) NOT NULL,
+  `bondTo` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`email`, `firstName`, `lastName`, `phoneNumber`, `profilePicture`, `role`, `password`, `status`, `address`, `subscription`, `registerDate`, `expiryDate`, `featuredStatus`, `profileBio`) VALUES
-('admin1@gmail.com', 'admin', 'min', 12121212, '', 'admin', '6c7ca345f63f835cb353ff15bd6c5e052ec08e7a', 1, '', 0, '0000-00-00', '0000-00-00', 0, ''),
-('trainee1@gmail.com', 'trainee1', 'te1', 15151515, '', 'trainee', 'ddf170f924ba1ce072cd91b54614289524e70db2', 1, 'Eunos', 6, '2018-05-17', '2017-11-17', 0, ''),
-('trainee2@gmail.com', 'trainee2', 'te2', 17171717, '', 'trainee', 'ddf170f924ba1ce072cd91b54614289524e70db2', 1, 'Bedok', 3, '2018-02-17', '2017-11-17', 0, ''),
-('trainer1@gmail.com', 'trainer1', 'tr1', 12121212, '', 'trainer', '69a6439936f0ef293d0a713f0aaf7a04ca82d272', 1, 'Dover', 0, '2017-11-17', '2017-11-17', 0, 'Training is not just a way to stay in shape. For me it should build a good base to improve the way we live, tackle health issues and prepare and enable us to enjoy all kinds of movement such as skiing, hiking, or any other kind of sport!'),
-('trainer2@gmail.com', 'trainer2', 'tr2', 13131313, '', 'trainer', '69a6439936f0ef293d0a713f0aaf7a04ca82d272', 1, 'Bugis', 0, '2017-11-17', '2017-11-17', 0, '');
+INSERT INTO `users` (`email`, `firstName`, `lastName`, `phoneNumber`, `profilePicture`, `role`, `password`, `status`, `address`, `subscription`, `registerDate`, `expiryDate`, `featuredStatus`, `profileBio`, `bondTo`) VALUES
+('admin1@gmail.com', 'admin', 'min', 12121212, '', 'admin', '6c7ca345f63f835cb353ff15bd6c5e052ec08e7a', 1, '', 0, '0000-00-00', '0000-00-00', 0, '', ''),
+('trainee1@gmail.com', 'trainee1', 'te1', 15151515, '', 'trainee', 'ddf170f924ba1ce072cd91b54614289524e70db2', 1, 'Eunos', 6, '2018-05-17', '2017-11-17', 0, '', ''),
+('trainee2@gmail.com', 'trainee2', 'te2', 17171717, '', 'trainee', 'ddf170f924ba1ce072cd91b54614289524e70db2', 1, 'Bedok', 3, '2018-02-17', '2017-11-17', 0, '', ''),
+('trainer1@gmail.com', 'trainer1', 'tr1', 12121212, '', 'trainer', '69a6439936f0ef293d0a713f0aaf7a04ca82d272', 1, 'Dover', 0, '2017-11-17', '2017-11-17', 0, 'Training is not just a way to stay in shape. For me it should build a good base to improve the way we live, tackle health issues and prepare and enable us to enjoy all kinds of movement such as skiing, hiking, or any other kind of sport!', ''),
+('trainer2@gmail.com', 'trainer2', 'tr2', 13131313, '', 'trainer', '69a6439936f0ef293d0a713f0aaf7a04ca82d272', 1, 'Bugis', 0, '2017-11-17', '2017-11-17', 0, '', '');
 
 -- --------------------------------------------------------
 
@@ -246,16 +247,17 @@ INSERT INTO `users` (`email`, `firstName`, `lastName`, `phoneNumber`, `profilePi
 
 CREATE TABLE IF NOT EXISTS `venue` (
   `id` int(11) NOT NULL,
-  `location` varchar(255) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+  `location` varchar(255) NOT NULL,
+  `address` varchar(255) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `venue`
 --
 
-INSERT INTO `venue` (`id`, `location`) VALUES
-(1, 'Bishan'),
-(2, 'Jurong');
+INSERT INTO `venue` (`id`, `location`, `address`) VALUES
+(1, 'Bishan', '5 Bishan Street 14, Singapore 579783'),
+(2, 'Jurong', '21 Jurong East Street 31, Singapore 609517');
 
 --
 -- Indexes for dumped tables
@@ -359,7 +361,7 @@ ALTER TABLE `typeoftraining`
 -- AUTO_INCREMENT for table `venue`
 --
 ALTER TABLE `venue`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
