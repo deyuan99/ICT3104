@@ -1,4 +1,5 @@
 <?php
+
 require('../database/dbconfig.php');
 
 /*
@@ -38,6 +39,40 @@ $startDate = empty($_POST['startDate']) ? $startDate : $_POST['startDate'];
 $endDate = empty($_POST['endDate']) ? $endDate : $_POST['endDate'];
 $imagePath = empty($_POST['imagePath']) ? $imagePath : $_POST['imagePath'];
 $featuredStatus = empty($_POST['featuredStatus']) ? $featuredStatus : $_POST['featuredStatus'];
+
+//upload image
+/*$file = $_FILES['file'];
+
+$fileName = $file['name'];
+$fileTmpName = $file['tmp_name'];
+$fileSize = $file['size'];
+$fileError = $file['error'];
+$fileType = $file['type'];
+
+$fileExt = explode('.', $fileName);
+$fileActualExt = strtolower(end($fileExt));
+
+$allowed = array('jpg', 'jpeg', 'png', 'pdf');
+
+if (in_array($fileActualExt, $allowed)) {
+    if ($fileError === 0) {
+        if ($fileSize < 1000000) {
+            $fileNameNew = "profile" . $id . "." . $fileActualExt;
+            $fileDestination = '../images/uploads/' . $fileNameNew;
+            move_uploaded_file($fileTmpName, $fileDestination);
+            $sql = "UPDATE users SET profilePicture='images/uploads/$fileNameNew' WHERE email='$id';";
+            $result = $conn->prepare($sql);
+            $result->execute();
+            header("Location: ../trainee_dashboard.php?uploadsuccess");
+        } else {
+            echo "Your file is too big!";
+        }
+    } else {
+        echo "There was an error uploading your file!";
+    }
+} else {
+    echo "You cannot upload files of this type!";
+}*/
 
 
 $sql = "UPDATE promotions SET title = '$title', description = '$description', startDate ='$startDate', endDate = '$endDate', imagePath = '$imagePath', featuredStatus='$featuredStatus' WHERE id = '$id'";

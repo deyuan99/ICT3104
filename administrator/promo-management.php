@@ -26,6 +26,8 @@ session_start();
             function setEditPromo(id, title, description, startDate, endDate, imagePath, featuredStatus)
             {
                 document.getElementById("id").innerHTML = id;
+                
+                document.getElementById("id").placeholder = id;
                 document.getElementById("title").placeholder = title;
                 document.getElementById("description").placeholder = description;
                 document.getElementById("startDate").placeholder = startDate;
@@ -139,7 +141,7 @@ session_start();
                                         <input type="text" class="form-control" id="title" name="title" value="">
                                     </div>
                                 </div>
-                                
+
 
                                 <input type="hidden" name="edit_description" id="edit_description" value="">
                                 <div class="form-group row">
@@ -169,7 +171,7 @@ session_start();
                                 <div class="form-group row">
                                     <label class="form-control-label col-md-offset-2 col-md-3 col-xs-offset-0 col-xs-5 label-margin">Image Path:</label>
                                     <div class="col-sm-5">
-                                        <input type="text" class="form-control" id="imagePath" name="imagePath" value="">
+                                        <input type="file" class="form-control" id="imagePath" name="imagePath" value="">
                                     </div>
                                 </div>
 
@@ -246,7 +248,7 @@ session_start();
                                 <div class="form-group row">
                                     <label class="form-control-label col-md-offset-2 col-md-3 col-xs-offset-0 col-xs-5 label-margin">Image Path:</label>
                                     <div class="col-sm-5">
-                                        <input type="text" class="form-control" id="imagePath" name="imagePath">
+                                        <input type="file" class="form-control" id="imagePath" name="imagePath">
                                     </div>
                                 </div>
 
