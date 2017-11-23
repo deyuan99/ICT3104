@@ -10,10 +10,13 @@ function getCurrentPromotions() {
         foreach ($rows as $row):
             $title = $row['title'];
             $desription = $row['description'];
-            $startDate = $row['startDate'];
-            $endDate = $row['endDate'];
             $imagePath = $row['imagePath'];
             $featuredStatus = $row['featuredStatus'];
+            
+            // check if date expired            
+            $startDate = $row['startDate'];
+            $endDate = $row['endDate'];
+            
             echo "<tr>";
             echo "<td class=\"col-md-2\">$title</td>";
             echo "<td class=\"col-md-1\">$desription</td>";

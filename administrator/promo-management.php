@@ -10,7 +10,7 @@ session_start();
         <!-- CSS import -->
 
         <?php include_once 'include.php'; ?>
-        <?php include_once 'loadIndex.php'; ?>
+        <?php include_once 'loadPromo.php'; ?>
 <<<<<<< HEAD
 =======
         <script src="../bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>
