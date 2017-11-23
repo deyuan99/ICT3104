@@ -27,7 +27,14 @@
         <!-- Header -->
         <?php
         session_start();
+        require_once('database/dbconfig.php');
+        $Srole = $_SESSION['role'];
+        
+        if($Srole == "trainee"){
         include "trainee_header.php";
+        }else if($Srole == "trainer"){
+        include "trainer_header.php";
+        }
         ?>     
 
         <section id="main" class="wrapper">
