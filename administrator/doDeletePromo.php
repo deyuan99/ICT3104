@@ -10,7 +10,7 @@ echo $table;
 echo $id;
 
 if ($table == 'promotions') {
-    $sql = "DELETE FROM promotions WHERE id = '$id'";
+    $sql = "DELETE FROM promotions WHERE id = $id";
 } else {
     echo "Error";
 }
