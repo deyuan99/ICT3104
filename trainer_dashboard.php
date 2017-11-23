@@ -338,7 +338,7 @@ $typeofTrainings = $req3->fetchAll();
 
         <?php if ($Srole == 'trainer') { ?>
             <!-- Modal Create Event-->
-            <div class="modal fade" id="ModalAdd" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal fade" id="ModalAdd" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="padding-top: 70px;">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
 
