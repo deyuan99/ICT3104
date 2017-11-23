@@ -102,7 +102,7 @@ if (isset($_SESSION['email']) && !empty($_SESSION['email'])) {
                                     <input type="password" name="regconfpass" id="regconfpass" value="" placeholder="Confirm Password" required/>
                                 </div>
                                 <div class="12u"> <h4>Membership type</h4>
-                                    <input type="radio" name="category" id="category" value="trainer"> Trainer
+                                    <input type="radio" name="category" id="category" value="trainer" required> Trainer
                                     <input type="radio" name="category" id="category" value="trainee"> Trainee
 
                                     <select class="dropdown" name="subscription" id="member_type">
@@ -151,7 +151,8 @@ if (isset($_SESSION['email']) && !empty($_SESSION['email'])) {
                         {name: "6 months- $50", val: "6"},
                         {name: "12 months- $80", val: "12"}
                     ];
-
+                
+                    document.getElementById("member_type").required = true;
                 $("#member_type").empty();
 
                 $.each(opts, function (k, v) {

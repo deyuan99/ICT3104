@@ -18,7 +18,7 @@ $date2 = new DateTime('2017-11-08');
 //  echo 'valid <br>';
 //}
 
-if (isset($_POST['firstname']) && isset($_POST['lastname']) && isset($_POST['regemail']) && isset($_POST['phone']) && isset($_POST['category']) && isset($_POST['subscription']) && isset($_POST['regpass']) && isset($_POST['regconfpass']) && isset($_POST['address'])) {
+if (isset($_POST['firstname']) && isset($_POST['lastname']) && isset($_POST['regemail']) && isset($_POST['phone']) && isset($_POST['category']) && isset($_POST['subscription']) && isset($_POST['regpass']) && isset($_POST['regconfpass'])) {
 
     $firstname = $_POST['firstname'];
     $lastname = $_POST['lastname'];
@@ -27,7 +27,11 @@ if (isset($_POST['firstname']) && isset($_POST['lastname']) && isset($_POST['reg
     $role = $_POST['category'];
     $regpass = $_POST['regpass'];
     $subscription = $_POST['subscription'];
-    $address = $_POST['address'];
+    if (isset($_POST['address'])) {
+        $address = $_POST['address'];
+    } else {
+        $address = "";
+    }
 
     //registration expiry
     $registerDate = date("Y-m-d");

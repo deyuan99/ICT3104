@@ -80,105 +80,105 @@ function getApprovalGrouptraining() {
         echo "</td></tr>";
     }
 }
-function getApprovedGrouptraining() {
-    require('../database/dbconfig.php');
-    //$sql2 = "SELECT venue, startTime, endTime, date, description, trainerEmail, status FROM groupsession where status = 'Approved'";
-    //$sql2 = "SELECT id, trainerEmail, date, groupCapacity, status, (SELECT name FROM roomtype WHERE id=roomTypeID) AS name, (SELECT trainingName FROM typeoftraining where id=typeofTrainingID) AS trainingName FROM groupsession WHERE status = 'Approved'";
-    $sql2 = "SELECT id, trainerEmail, date, groupCapacity, status, (SELECT name FROM roomtype WHERE id=roomTypeID) AS name, (SELECT venueID FROM roomtype WHERE id=roomTypeID) AS venueID, (SELECT location FROM venue WHERE id=venueID) AS location, (SELECT trainingName FROM typeoftraining where id=typeofTrainingID) AS trainingName FROM groupsession WHERE status = 'Approved'";
-    $query2 = $conn->prepare($sql2);
-    $stmt2 = $query2->execute();
-    $result2 = $query2->fetchAll();
-    if(count($result2) > 0) {
-        foreach ($result2 as $row):
-            $trainerEmail = $row['trainerEmail'];
-            $venue = $row['location'];
-            $typeoftraining = $row['trainingName'];
-            $roomtype = $row['name'];
-            $groupCapacity = $row['groupCapacity'];
-            $date = $row['date'];
-            $status = $row['status'];
-            echo "<tr>";
-            echo "<td class=\"col-md-2\">$trainerEmail</td>";
-            echo "<td class=\"col-md-1\">$venue</td>";
-            echo "<td class=\"col-md-1\">$typeoftraining</td>";
-            echo "<td class=\"col-md-2\">$roomtype</td>";
-            echo "<td class=\"col-md-1\">$groupCapacity</td>";
-            echo "<td class=\"col-md-1\">$date</td>";
-            echo "<td class=\"col-md-1\">$status</td>";
-            echo "</td></tr>";
-        endforeach;
-    }
-    else {
-        echo "<tr><td colspan = \"9\" style=\"text-align:center;\">";
-        echo "No Approved events record found";
-        echo "</td></tr>";
-    }
-}
-function getRejectedGrouptraining() {
-    require('../database/dbconfig.php');
-    //$sql3 = "SELECT venue, startTime, endTime, date, description, trainerEmail, status FROM groupsession where status = 'Rejected'";
-    //$sql3 = "SELECT id, trainerEmail, date, groupCapacity, status, (SELECT name FROM roomtype WHERE id=roomTypeID) AS name, (SELECT trainingName FROM typeoftraining where id=typeofTrainingID) AS trainingName FROM groupsession WHERE status = 'Rejected'";
-    $sql3 = "SELECT id, trainerEmail, date, groupCapacity, status, (SELECT name FROM roomtype WHERE id=roomTypeID) AS name, (SELECT venueID FROM roomtype WHERE id=roomTypeID) AS venueID, (SELECT location FROM venue WHERE id=venueID) AS location, (SELECT trainingName FROM typeoftraining where id=typeofTrainingID) AS trainingName FROM groupsession WHERE status = 'Rejected'";
-    $query3 = $conn->prepare($sql3);
-    $stmt3 = $query3->execute();
-    $result3 = $query3->fetchAll();
-    if(count($result3) > 0) {
-        foreach ($result3 as $row):
-            $trainerEmail = $row['trainerEmail'];
-            $venue = $row['location'];
-            $typeoftraining = $row['trainingName'];
-            $roomtype = $row['name'];
-            $groupCapacity = $row['groupCapacity'];
-            $date = $row['date'];
-            $status = $row['status'];
-            echo "<tr>";
-            echo "<td class=\"col-md-2\">$trainerEmail</td>";
-            echo "<td class=\"col-md-1\">$venue</td>";
-            echo "<td class=\"col-md-1\">$typeoftraining</td>";
-            echo "<td class=\"col-md-2\">$roomtype</td>";
-            echo "<td class=\"col-md-1\">$groupCapacity</td>";
-            echo "<td class=\"col-md-1\">$date</td>";
-            echo "<td class=\"col-md-1\">$status</td>";
-            echo "</td></tr>";
-        endforeach;
-    }
-    else {
-        echo "<tr><td colspan = \"9\" style=\"text-align:center;\">";
-        echo "No Rejected events record found";
-        echo "</td></tr>";
-    }
-}
-function getDeletedGrouptraining() {
-    require('../database/dbconfig.php');
-    //$sql3 = "SELECT venue, startTime, endTime, date, description, trainerEmail, status FROM groupsession where status = 'Rejected'";
-    //$sql3 = "SELECT id, trainerEmail, date, groupCapacity, status, (SELECT name FROM roomtype WHERE id=roomTypeID) AS name, (SELECT trainingName FROM typeoftraining where id=typeofTrainingID) AS trainingName FROM groupsession WHERE status = 'Rejected'";
-    $sql4 = "SELECT id, trainerEmail, date, groupCapacity, status, (SELECT name FROM roomtype WHERE id=roomTypeID) AS name, (SELECT venueID FROM roomtype WHERE id=roomTypeID) AS venueID, (SELECT location FROM venue WHERE id=venueID) AS location, (SELECT trainingName FROM typeoftraining where id=typeofTrainingID) AS trainingName FROM groupsession WHERE status = 'Deleted'";
-    $query4 = $conn->prepare($sql4);
-    $stmt4 = $query4->execute();
-    $result4 = $query4->fetchAll();
-    if(count($result4) > 0) {
-        foreach ($result4 as $row):
-            $trainerEmail = $row['trainerEmail'];
-            $venue = $row['location'];
-            $typeoftraining = $row['trainingName'];
-            $roomtype = $row['name'];
-            $groupCapacity = $row['groupCapacity'];
-            $date = $row['date'];
-            $status = $row['status'];
-            echo "<tr>";
-            echo "<td class=\"col-md-2\">$trainerEmail</td>";
-            echo "<td class=\"col-md-1\">$venue</td>";
-            echo "<td class=\"col-md-1\">$typeoftraining</td>";
-            echo "<td class=\"col-md-2\">$roomtype</td>";
-            echo "<td class=\"col-md-1\">$groupCapacity</td>";
-            echo "<td class=\"col-md-1\">$date</td>";
-            echo "<td class=\"col-md-1\">$status</td>";
-            echo "</td></tr>";
-        endforeach;
-    }
-    else {
-        echo "<tr><td colspan = \"9\" style=\"text-align:center;\">";
-        echo "No Deleted events record found";
-        echo "</td></tr>";
-    }
-}
+//function getApprovedGrouptraining() {
+//    require('../database/dbconfig.php');
+//    //$sql2 = "SELECT venue, startTime, endTime, date, description, trainerEmail, status FROM groupsession where status = 'Approved'";
+//    //$sql2 = "SELECT id, trainerEmail, date, groupCapacity, status, (SELECT name FROM roomtype WHERE id=roomTypeID) AS name, (SELECT trainingName FROM typeoftraining where id=typeofTrainingID) AS trainingName FROM groupsession WHERE status = 'Approved'";
+//    $sql2 = "SELECT id, trainerEmail, date, groupCapacity, status, (SELECT name FROM roomtype WHERE id=roomTypeID) AS name, (SELECT venueID FROM roomtype WHERE id=roomTypeID) AS venueID, (SELECT location FROM venue WHERE id=venueID) AS location, (SELECT trainingName FROM typeoftraining where id=typeofTrainingID) AS trainingName FROM groupsession WHERE status = 'Approved'";
+//    $query2 = $conn->prepare($sql2);
+//    $stmt2 = $query2->execute();
+//    $result2 = $query2->fetchAll();
+//    if(count($result2) > 0) {
+//        foreach ($result2 as $row):
+//            $trainerEmail = $row['trainerEmail'];
+//            $venue = $row['location'];
+//            $typeoftraining = $row['trainingName'];
+//            $roomtype = $row['name'];
+//            $groupCapacity = $row['groupCapacity'];
+//            $date = $row['date'];
+//            $status = $row['status'];
+//            echo "<tr>";
+//            echo "<td class=\"col-md-2\">$trainerEmail</td>";
+//            echo "<td class=\"col-md-1\">$venue</td>";
+//            echo "<td class=\"col-md-1\">$typeoftraining</td>";
+//            echo "<td class=\"col-md-2\">$roomtype</td>";
+//            echo "<td class=\"col-md-1\">$groupCapacity</td>";
+//            echo "<td class=\"col-md-1\">$date</td>";
+//            echo "<td class=\"col-md-1\">$status</td>";
+//            echo "</td></tr>";
+//        endforeach;
+//    }
+//    else {
+//        echo "<tr><td colspan = \"9\" style=\"text-align:center;\">";
+//        echo "No Approved events record found";
+//        echo "</td></tr>";
+//    }
+//}
+//function getRejectedGrouptraining() {
+//    require('../database/dbconfig.php');
+//    //$sql3 = "SELECT venue, startTime, endTime, date, description, trainerEmail, status FROM groupsession where status = 'Rejected'";
+//    //$sql3 = "SELECT id, trainerEmail, date, groupCapacity, status, (SELECT name FROM roomtype WHERE id=roomTypeID) AS name, (SELECT trainingName FROM typeoftraining where id=typeofTrainingID) AS trainingName FROM groupsession WHERE status = 'Rejected'";
+//    $sql3 = "SELECT id, trainerEmail, date, groupCapacity, status, (SELECT name FROM roomtype WHERE id=roomTypeID) AS name, (SELECT venueID FROM roomtype WHERE id=roomTypeID) AS venueID, (SELECT location FROM venue WHERE id=venueID) AS location, (SELECT trainingName FROM typeoftraining where id=typeofTrainingID) AS trainingName FROM groupsession WHERE status = 'Rejected'";
+//    $query3 = $conn->prepare($sql3);
+//    $stmt3 = $query3->execute();
+//    $result3 = $query3->fetchAll();
+//    if(count($result3) > 0) {
+//        foreach ($result3 as $row):
+//            $trainerEmail = $row['trainerEmail'];
+//            $venue = $row['location'];
+//            $typeoftraining = $row['trainingName'];
+//            $roomtype = $row['name'];
+//            $groupCapacity = $row['groupCapacity'];
+//            $date = $row['date'];
+//            $status = $row['status'];
+//            echo "<tr>";
+//            echo "<td class=\"col-md-2\">$trainerEmail</td>";
+//            echo "<td class=\"col-md-1\">$venue</td>";
+//            echo "<td class=\"col-md-1\">$typeoftraining</td>";
+//            echo "<td class=\"col-md-2\">$roomtype</td>";
+//            echo "<td class=\"col-md-1\">$groupCapacity</td>";
+//            echo "<td class=\"col-md-1\">$date</td>";
+//            echo "<td class=\"col-md-1\">$status</td>";
+//            echo "</td></tr>";
+//        endforeach;
+//    }
+//    else {
+//        echo "<tr><td colspan = \"9\" style=\"text-align:center;\">";
+//        echo "No Rejected events record found";
+//        echo "</td></tr>";
+//    }
+//}
+//function getDeletedGrouptraining() {
+//    require('../database/dbconfig.php');
+//    //$sql3 = "SELECT venue, startTime, endTime, date, description, trainerEmail, status FROM groupsession where status = 'Rejected'";
+//    //$sql3 = "SELECT id, trainerEmail, date, groupCapacity, status, (SELECT name FROM roomtype WHERE id=roomTypeID) AS name, (SELECT trainingName FROM typeoftraining where id=typeofTrainingID) AS trainingName FROM groupsession WHERE status = 'Rejected'";
+//    $sql4 = "SELECT id, trainerEmail, date, groupCapacity, status, (SELECT name FROM roomtype WHERE id=roomTypeID) AS name, (SELECT venueID FROM roomtype WHERE id=roomTypeID) AS venueID, (SELECT location FROM venue WHERE id=venueID) AS location, (SELECT trainingName FROM typeoftraining where id=typeofTrainingID) AS trainingName FROM groupsession WHERE status = 'Deleted'";
+//    $query4 = $conn->prepare($sql4);
+//    $stmt4 = $query4->execute();
+//    $result4 = $query4->fetchAll();
+//    if(count($result4) > 0) {
+//        foreach ($result4 as $row):
+//            $trainerEmail = $row['trainerEmail'];
+//            $venue = $row['location'];
+//            $typeoftraining = $row['trainingName'];
+//            $roomtype = $row['name'];
+//            $groupCapacity = $row['groupCapacity'];
+//            $date = $row['date'];
+//            $status = $row['status'];
+//            echo "<tr>";
+//            echo "<td class=\"col-md-2\">$trainerEmail</td>";
+//            echo "<td class=\"col-md-1\">$venue</td>";
+//            echo "<td class=\"col-md-1\">$typeoftraining</td>";
+//            echo "<td class=\"col-md-2\">$roomtype</td>";
+//            echo "<td class=\"col-md-1\">$groupCapacity</td>";
+//            echo "<td class=\"col-md-1\">$date</td>";
+//            echo "<td class=\"col-md-1\">$status</td>";
+//            echo "</td></tr>";
+//        endforeach;
+//    }
+//    else {
+//        echo "<tr><td colspan = \"9\" style=\"text-align:center;\">";
+//        echo "No Deleted events record found";
+//        echo "</td></tr>";
+//    }
+//}

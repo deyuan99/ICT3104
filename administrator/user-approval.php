@@ -41,8 +41,7 @@ require_once('../database/dbconfig.php');
                     <ul class="nav nav-pills col-md-10 padding-l0-r0">
                         <li class="active data-tabs col-md-3 col-sm-6 col-xs-12"><a href="#trainee_tab" data-toggle="pill"><span class="glyphicon glyphicon-user icon-space"></span>New Users</a></li>
                         <li class="data-tabs col-md-3 col-xs-12 col-sm-6"><a href="#trainer_tab" data-toggle="pill"><span class="glyphicon glyphicon-user icon-space"></span>Group Trainings</a></li>
-                        <li class="data-tabs col-md-5 col-xs-12 col-sm-6"><a href="#approvel_reject_tab" data-toggle="pill"><span class="glyphicon glyphicon-user icon-space"></span>Approved/Rejected/Deleted</a></li>
-
+                        <!--<li class="data-tabs col-md-5 col-xs-12 col-sm-6"><a href="#approvel_reject_tab" data-toggle="pill"><span class="glyphicon glyphicon-user icon-space"></span>Approved/Rejected/Deleted</a></li>-->
                     </ul>
                 </div>
                 <div class="tab-content">
@@ -109,7 +108,8 @@ require_once('../database/dbconfig.php');
                             <button type="button" name="btn_reject" id="btn_reject" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span>RejectSelected</button>
                         </div>
                     </div>
-                    <div class="tab-pane add--15-margin" id="approvel_reject_tab">
+                    
+<!--                    <div class="tab-pane add--15-margin" id="approvel_reject_tab">
                         <div class="panel panel-default margin-l0-r0">
                             <div class="panel-heading">
                                 <div class="panel-title">Approved Group-Training</div>
@@ -128,7 +128,7 @@ require_once('../database/dbconfig.php');
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <?php getApprovedGrouptraining(); ?>
+                                        <?php // getApprovedGrouptraining(); ?>
                                     </tbody>
                                 </table>
                             </div><br><br>
@@ -150,7 +150,7 @@ require_once('../database/dbconfig.php');
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <?php getRejectedGrouptraining(); ?>
+                                        <?php // getRejectedGrouptraining(); ?>
                                     </tbody>
                                 </table>
                             </div><br><br>
@@ -172,13 +172,13 @@ require_once('../database/dbconfig.php');
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <?php getDeletedGrouptraining(); ?>
+                                        <?php // getDeletedGrouptraining(); ?>
                                     </tbody>
                                 </table>
                             </div>
 
                         </div>
-                    </div>
+                    </div>-->
                 </div>
             </div>
         </div>
