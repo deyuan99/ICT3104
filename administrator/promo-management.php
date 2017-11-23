@@ -26,19 +26,11 @@ session_start();
             function setEditPromo(id, title, description, startDate, endDate, imagePath, featuredStatus)
             {
                 document.getElementById("id").innerHTML = id;
-                document.getElementById("id").placeholder = id;
-                document.getElementById("title").innerHTML = title;
                 document.getElementById("title").placeholder = title;
-                document.getElementById("description").innerHTML = description;
                 document.getElementById("description").placeholder = description;
-                document.getElementById("startDate").innerHTML = startDate;
                 document.getElementById("startDate").placeholder = startDate;
-                document.getElementById("endDate").innerHTML = endDate;
                 document.getElementById("endDate").placeholder = endDate;
-                document.getElementById("imagePath").innerHTML = imagePath;
                 document.getElementById("imagePath").placeholder = imagePath;
-                document.getElementById("featuredStatus").innerHTML = featuredStatus;
-                document.getElementById("featuredStatus").placeholder = featuredStatus;
 
                 document.getElementById("edit_title").value = "";
                 document.getElementById("edit_title").value = title;
@@ -87,7 +79,7 @@ session_start();
     <body>
         <?php include_once 'nav-bar.php'; ?>
         <section id="main" class="wrapper">
-            <div class="container">
+            <div class="container-fluid" style="margin: 0px 80px 0px 80px;">
                 <h2 class="text-center" id="toptitle"><span class="glyphicon glyphicon-tags icon-space"></span>PROMOTIONS MANAGEMENT</h2>
                 <div class="panel panel-default margin-l0-r0">
                     <div class="panel-heading">
@@ -118,31 +110,6 @@ session_start();
                     <br>
                 </div>
             </div>
-            <!-- Past promotions-->
-            <div class="container">
-                <div class="panel panel-default margin-l0-r0">
-                    <div class="panel-heading">
-                        <div class="panel-title">PAST PROMOTIONS</div>
-                    </div>
-                    <div class="table-responsive my-table-style">
-                        <table id="esa-table" class="table table-striped table-bordered" cellspacing="0" width="100%">
-                            <thead>
-                                <tr>
-                                    <th class="col-md-1">Title</th>
-                                    <th class="col-md-3">Description</th>
-                                    <th class="col-md-2">Start Date</th>
-                                    <th class="col-md-2">End Date</th>
-                                    <th class="col-md-1">Image Path</th>
-                                    <th class="col-md-1">Featured Status</th>
-                                    <th class="col-md-1">Delete</th>
-                                </tr>
-                            </thead>
-                            <tbody><?php getPastPromotions(); ?>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
 
             <!-- Edit promo modal-->
             <div class="modal fade" id="editPromoModal" tabindex="-1" role="dialog" style="padding-top: 70px;">
@@ -153,10 +120,15 @@ session_start();
                                 <span aria-hidden="true">&times;</span>
                                 <span class="sr-only">Close</span>
                             </button>
-                            <h2>EDIT PROMOTIONS</h2>
+                            <h2 style="color: black; text-align:center; margin-top: 12px;">EDIT PROMOTIONS</h2>
                         </div>
                         <div class="modal-body">
                             <form method="post" role="form" action="editPromo.php">
+                                <input type="hidden" name="edit_id" id="edit_id" value="">
+                                <div class="form-group row" style="margin-top: 20px;">
+                                    <label class="form-control-label col-md-offset-2 col-md-3 col-xs-offset-0 col-xs-5">ID:</label>
+                                    <div class="col-sm-5" id="id"></div> 
+                                </div>
                                 <input type="hidden" name="edit_title" id="edit_title" value="">
                                 <div class="form-group row">
                                     <label class="form-control-label col-md-offset-2 col-md-3 col-xs-offset-0 col-xs-5 label-margin">Title:</label>
@@ -220,7 +192,7 @@ session_start();
                     </div>
                 </div>
             </div>
-            
+
             <!-- Add promo modal-->
             <div class="modal fade" id="addPromoModal" tabindex="-1" role="dialog" style="padding-top: 70px;">
                 <div class="modal-dialog">
@@ -310,8 +282,8 @@ session_start();
                             <div id="deleteMsg"></div>
                             <div class="widget-body" id="manualForm"> 
                                 <form name="form" id="form" class="form-horizontal" role="form" action="doDeletePromo.php" enctype="multipart/form-data" method="POST">
-                                   <input type="hidden" name="delete_table" id="delete_table" value="">
-                                <input type="hidden" name="delete_id" id="delete_id" value="">
+                                    <input type="hidden" name="delete_table" id="delete_table" value="">
+                                    <input type="hidden" name="delete_id" id="delete_id" value="">
                                     <div class="form-actions">
                                         <div class="row">
                                             <div class="col-sm-offset-7 col-sm-5 col-xs-offset-0 col-xs-12">
