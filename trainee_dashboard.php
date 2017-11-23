@@ -28,7 +28,6 @@ $sql2 = "SELECT location FROM venue";
 $req2 = $conn->prepare($sql2);
 $req2->execute();
 $venues = $req2->fetchAll();
-
 ?>
 <html>
     <head>
@@ -38,15 +37,15 @@ $venues = $req2->fetchAll();
         <script src="assets/js/jquery.min.js" rel="stylesheet"></script>
         <script src="bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-        
+
         <!-- FullCalendar -->
         <link href='fullcalendar-3.5.1/fullcalendar.css' rel='stylesheet' />
         <link href="assets/css/calendar.css" rel="stylesheet" type="text/css"/>
 
-        
+
         <!-- trainer_dashboard CSS -->
         <link rel="stylesheet" href="assets/css/trainer_dashboard.css" />
-        
+
         <style>
             /* calendar hover */
             .qtip-content-margin {
@@ -62,7 +61,7 @@ $venues = $req2->fetchAll();
         include "trainee_header.php";
         ?>
 
-         <!-- One: Trainer Profile -->
+        <!-- One: Trainer Profile -->
         <section id="one" class="wrapper style2 special">
 
             <div class="container">
@@ -81,7 +80,10 @@ $venues = $req2->fetchAll();
                         $id = $row['email'];
                         $firstName = $row['firstName'];
                         $lastName = $row['lastName'];
+                        $address = $row['address'];
+                        $profileBio = $row['profileBio'];
                         $phoneNumber = $row['phoneNumber'];
+                        $password = $row['password'];
                     }
                 } else {
                     echo "There are no users yet!";
@@ -103,7 +105,7 @@ $venues = $req2->fetchAll();
                         } else {
                             echo "<img src='images/uploads/profiledefault.jpg'>";
                         }
-                        echo "<p>" . $row['email'] . "</p>";
+                        echo "<p> Joined since: " . $row['registerDate'] . "</p>";
                         echo "</div>";
                     }
                 } else {
@@ -114,8 +116,10 @@ $venues = $req2->fetchAll();
                         //echo "You are logged in as user ";
                     }
                     echo "<form action='scripts/uploadProfileImg.php' method='POST' enctype='multipart/form-data'>
-			<input type='file' name='file'>
-			<button type='submit' name='submit'>UPLOAD</button>
+			<div align='center'>
+                            <input type='file' name='file'><br>
+                            <button class='button' type='submit' name='submit'>UPLOAD</button>
+                        </div>
                         </form>";
                 } else {
                     echo "You are not logged in!";
@@ -146,9 +150,7 @@ $venues = $req2->fetchAll();
                                     <p class='leftspacing'>First Name</p>
                                 </td>
                                 <td>
-
                                     <p><input type='text' name= "firstName" id="firstName" class="data" value="<?php echo $firstName ?>" readonly/></p>
-
                                 </td>
                             </tr>
                             <tr>
@@ -156,9 +158,15 @@ $venues = $req2->fetchAll();
                                     <p class='leftspacing'>Last Name</p>
                                 </td>
                                 <td>
-                                    <?php
-                                    echo "<p><input type='text' value=" . $lastName . " readonly/></p>"
-                                    ?>
+                                    <p><input type='text' name= "lastName" id="lastName" class="data" value="<?php echo $lastName  ?>" readonly/></p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p class='leftspacing'>Address</p>
+                                </td>
+                                <td>
+                                    <p><input type='text' name= "address" id="address " class="data" value="<?php echo $address  ?>" readonly/></p>                             
                                 </td>
                             </tr>
                             <tr>
@@ -166,9 +174,25 @@ $venues = $req2->fetchAll();
                                     <p class='leftspacing'>Phone Number</p>
                                 </td>
                                 <td>
-                                    <?php
-                                    echo "<p><input type='text' value=" . $phoneNumber . " readonly/></p>"
-                                    ?>
+                                  <p><input type='text' name= "phoneNumber" id="phoneNumber " class="data" value="<?php echo $phoneNumber  ?>" readonly/></p>                             
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p class='leftspacing'>Profile Bio</p>
+                                </td>
+                                <td>
+                                      <p><input type='text' name= "profileBio" id="profileBio " class="data" value="<?php echo $profileBio  ?>" readonly/></p>                             
+                                
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p class='leftspacing'>Password</p>
+                                </td>
+                                <td>
+                                    <p><input type='text' name= "password" id="password " class="data" value="<?php echo $password  ?>" readonly/>*******</p>                             
+                                
                                 </td>
                             </tr>
                             </form>
@@ -231,7 +255,7 @@ $venues = $req2->fetchAll();
                                         <option value="16:00:00">4pm</option>
                                         <option value="17:00:00">5pm</option>
                                     </select>
-                                    
+
                                 </div>
                             </div>
 
@@ -251,35 +275,35 @@ $venues = $req2->fetchAll();
                                     </select>
                                 </div>
                             </div>
-                            
+
                             <div class="form-group">
                                 <label for="venueview" class="col-sm-2 control-label">Venue</label>
                                 <div class="col-sm-10">
                                     <input type="text" name="venueview" class="form-control" id="venueview" readonly>
                                 </div>
                             </div>
-                            
+
                             <div class="form-group">
                                 <label for="roomview" class="col-sm-2 control-label">Room</label>
                                 <div class="col-sm-10">
                                     <input type="text" name="roomview" class="form-control" id="roomview" readonly>
                                 </div>
                             </div>
-                            
+
                             <div class="form-group">
                                 <label for="typeview" class="col-sm-2 control-label">Type</label>
                                 <div class="col-sm-10">
                                     <input type="text" name="typeview" class="form-control" id="typeview" readonly>
                                 </div>
                             </div>
-                            
+
                             <div class="form-group">
                                 <label for="costview" class="col-sm-2 control-label">Cost</label>
                                 <div class="col-sm-10">
                                     <input type="text" name="costview" class="form-control" id="costview" readonly>
                                 </div>
                             </div>
-                            
+
                             <div class="form-group">
                                 <label for="trainerview" class="col-sm-2 control-label">Trainer</label>
                                 <div class="col-sm-10">
@@ -301,9 +325,9 @@ $venues = $req2->fetchAll();
                                   </div>
                                 </div>
                             </div>-->
-				  
+
                             <input type="hidden" name="id" class="form-control" id="id">
-				
+
                         </div>
 
                         <div class="modal-footer">
@@ -379,7 +403,7 @@ $venues = $req2->fetchAll();
                                     </select>
                                 </div>
                             </div>
-                            
+
                             <div class="form-group">
                                 <label for="venue" class="col-sm-2 control-label">Venue</label>
                                 <div class="col-sm-10">
@@ -388,12 +412,13 @@ $venues = $req2->fetchAll();
                                         <?php
                                         foreach ($venues as $venue):
                                             $location = $venue['location'];
-                                            echo '<option value="'. $location .'">'. $location .'</option>';
-                                        endforeach; ?>
+                                            echo '<option value="' . $location . '">' . $location . '</option>';
+                                        endforeach;
+                                        ?>
                                     </select>
                                 </div>
                             </div>
-                            
+
                             <div class="form-group">
                                 <div id="hidden_div">
                                     <label for="roomtype" class="col-sm-2 control-label">Room</label>
@@ -449,7 +474,7 @@ $venues = $req2->fetchAll();
 
         <!--Calendar script-->
         <script>
-            // for showing the room types based on venue chosen
+                    // for showing the room types based on venue chosen
 //            $(function () {
 //                $('#hidden_div').hide();
 //                $('#venue').change(function () {
@@ -461,186 +486,184 @@ $venues = $req2->fetchAll();
 //                });
 //            });
 // get today date javascript
-            var today = new Date();
-            var datetoday = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
-            
-            $('#hidden_div').hide();
-            $("#venue").change(function ()
-            {
-                if ($('#venue').val() === "select") {
+                    var today = new Date();
+                    var datetoday = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+
                     $('#hidden_div').hide();
-                } else {
-                    $('#hidden_div').show();
-                }
-                
-                var venue = $(this).find(":selected").val();
-//                alert(id);
-                $.ajax
-                    ({
-                        type: "POST",
-                        url: 'phpCodes/getRoomType.php',
-                        data: {venue: venue},
-                        cache: false,
-                        success: function (r)
-                        {
-                            //document.getElementById("roomtype").value = r;
-                            var result = $.parseJSON(r);
-//                            alert(result);
-                            //$('#roomtype').html("");
-                            $('#roomtype').html("<option value=''>- Select Room -</option>");
-                            result.forEach(function(item) {
-                                $('#roomtype').append($("<option></option>")
-                                                .attr("value",item)
-                                                .text(item)); 
-                            });
-                            
+                    $("#venue").change(function ()
+                    {
+                        if ($('#venue').val() === "select") {
+                            $('#hidden_div').hide();
+                        } else {
+                            $('#hidden_div').show();
                         }
+
+                        var venue = $(this).find(":selected").val();
+//                alert(id);
+                        $.ajax
+                                ({
+                                    type: "POST",
+                                    url: 'phpCodes/getRoomType.php',
+                                    data: {venue: venue},
+                                    cache: false,
+                                    success: function (r)
+                                    {
+                                        //document.getElementById("roomtype").value = r;
+                                        var result = $.parseJSON(r);
+//                            alert(result);
+                                        //$('#roomtype').html("");
+                                        $('#roomtype').html("<option value=''>- Select Room -</option>");
+                                        result.forEach(function (item) {
+                                            $('#roomtype').append($("<option></option>")
+                                                    .attr("value", item)
+                                                    .text(item));
+                                        });
+
+                                    }
+                                });
                     });
-            });
-            
-            $(document).ready(function () {
-                //var today = moment().day();
 
-                $('#calendar').fullCalendar({
-                    header: {
-                        left: 'title',
-                        center: 'prev,next today',
-                        right: 'month,agendaWeek,agendaDay'
-                    },
-                    //defaultDate: '2016-01-12',
-                    defaultDate: $('#calendar').fullCalendar('today'),
-                    editable: false,
-                    eventLimit: true, // allow "more" link when too many events
-                    selectable: true,
-                    selectHelper: true,
-                    selectConstraint: {
-                        start: $.fullCalendar.moment().subtract(1, 'days'),
-                        end: $.fullCalendar.moment().startOf('month').add(1, 'month')
-                    },
-                    select: function (start) {
-                        $('#ModalAdd #date').val(moment(start).format('DD-MM-YYYY '));
-                        $('#ModalAdd').modal('show');
-                    },
-                   
-                    eventDrop: function(event, delta, revertFunc) { 
+                    $(document).ready(function () {
+                        //var today = moment().day();
 
-				edit(event);
-
-                    },
-                    eventResize: function(event,dayDelta,minuteDelta,revertFunc) { 
-
-				edit(event);
-
-                    },
-                    events: [
-            <?php
-            //date to set colour
-            $todaydateis = date("Y-m-d");
-            foreach ($events as $event):
-
-
-                $start = $event['startTime'];
-                $end = $event['endTime'];
-                $cat = $event['category'];
-                $eventdate = $event['date'];
-                $traineeEmail = $event['traineeEmail'];
-                $trainerEmail = $event['trainerEmail'];
-                $combinedstart = date('Y-m-d H:i:s', strtotime("$eventdate $start"));
-                $combinedend = date('Y-m-d H:i:s', strtotime("$eventdate $end"));
-                
-                $roomt = $event['roomTypeID'];
-                $sql4 = "SELECT roomtype.name, venue.location FROM roomtype, venue WHERE roomtype.id = '$roomt' AND roomtype.venueID = venue.id";
-                $req4 = $conn->prepare($sql4);
-                $req4 -> execute();
-                $names = $req4 -> fetch(PDO::FETCH_ASSOC);
-                $roomname = $names['name'];
-//                echo "alert($roomname)";
-                $venuename = $names['location'];
-
-                if ($cat == "1-1 Training" || $cat == "Group Training") {
-                    $trainingtype = $event['typeoftrainingid'];
-                    $sql5 = "SELECT trainingName, cost FROM typeoftraining WHERE id = '$trainingtype'";
-                    $req5 = $conn->prepare($sql5);
-                    $req5 -> execute();
-                    $names2 = $req5 -> fetch(PDO::FETCH_ASSOC);
-                    $trainingname = $names2['trainingName'];
-                    $cost = "$" . $names2['cost'];
-                }
-                
-                if ($cat == "Personal Training") {
-                    $traineeEmail = "Not Applicable";
-                    $trainingname = "Not Applicable";
-                    $cost = "Not Applicable";
-                    $trainerEmail = "Not Applicable";
-                } else if ($traineeEmail != NULL) {
-                    $color = '#378006';
-                }
-                
-                if($cat== 'Personal Training'){
-                    $color = '#000';
-                } elseif($cat== 'Group Training') {
-                    $color = '#008000';
-                }elseif($cat== '1-1 Training'){
-                    $color = '#0071c5';
-                }
-                if(strtotime($todaydateis)>strtotime($eventdate)){
-                    $color = '#DC143C';
-                }
-  
-                ?>
-                            {
-                                id: '<?php echo $event['id']; ?>',
-                                title: '<?php echo $event['category']; ?>',
-                                date: '<?php echo $event['date']; ?>',
-                                startTime: '<?php echo $event['startTime']; ?>',
-                                endTime: '<?php echo $event['endTime']; ?>',
-                                start: '<?php echo $combinedstart; ?>',
-                                end: '<?php echo $combinedend; ?>',
-                                venue: '<?php echo $venuename; ?>',
-                                room: '<?php echo $roomname; ?>',
-                                type: '<?php echo $trainingname; ?>',
-                                cost: '<?php echo $cost; ?>',
-                                trainer: '<?php echo $trainerEmail; ?>',
-                                description: '<?php echo $event['description']; ?>',
-                                color: '<?php echo $color; ?>',
+                        $('#calendar').fullCalendar({
+                            header: {
+                                left: 'title',
+                                center: 'prev,next today',
+                                right: 'month,agendaWeek,agendaDay'
                             },
+                            //defaultDate: '2016-01-12',
+                            defaultDate: $('#calendar').fullCalendar('today'),
+                            editable: false,
+                            eventLimit: true, // allow "more" link when too many events
+                            selectable: true,
+                            selectHelper: true,
+                            selectConstraint: {
+                                start: $.fullCalendar.moment().subtract(1, 'days'),
+                                end: $.fullCalendar.moment().startOf('month').add(1, 'month')
+                            },
+                            select: function (start) {
+                                $('#ModalAdd #date').val(moment(start).format('DD-MM-YYYY '));
+                                $('#ModalAdd').modal('show');
+                            },
+                            eventDrop: function (event, delta, revertFunc) {
+
+                                edit(event);
+
+                            },
+                            eventResize: function (event, dayDelta, minuteDelta, revertFunc) {
+
+                                edit(event);
+
+                            },
+                            events: [
+<?php
+//date to set colour
+$todaydateis = date("Y-m-d");
+foreach ($events as $event):
+
+
+    $start = $event['startTime'];
+    $end = $event['endTime'];
+    $cat = $event['category'];
+    $eventdate = $event['date'];
+    $traineeEmail = $event['traineeEmail'];
+    $trainerEmail = $event['trainerEmail'];
+    $combinedstart = date('Y-m-d H:i:s', strtotime("$eventdate $start"));
+    $combinedend = date('Y-m-d H:i:s', strtotime("$eventdate $end"));
+
+    $roomt = $event['roomTypeID'];
+    $sql4 = "SELECT roomtype.name, venue.location FROM roomtype, venue WHERE roomtype.id = '$roomt' AND roomtype.venueID = venue.id";
+    $req4 = $conn->prepare($sql4);
+    $req4->execute();
+    $names = $req4->fetch(PDO::FETCH_ASSOC);
+    $roomname = $names['name'];
+//                echo "alert($roomname)";
+    $venuename = $names['location'];
+
+    if ($cat == "1-1 Training" || $cat == "Group Training") {
+        $trainingtype = $event['typeoftrainingid'];
+        $sql5 = "SELECT trainingName, cost FROM typeoftraining WHERE id = '$trainingtype'";
+        $req5 = $conn->prepare($sql5);
+        $req5->execute();
+        $names2 = $req5->fetch(PDO::FETCH_ASSOC);
+        $trainingname = $names2['trainingName'];
+        $cost = "$" . $names2['cost'];
+    }
+
+    if ($cat == "Personal Training") {
+        $traineeEmail = "Not Applicable";
+        $trainingname = "Not Applicable";
+        $cost = "Not Applicable";
+        $trainerEmail = "Not Applicable";
+    } else if ($traineeEmail != NULL) {
+        $color = '#378006';
+    }
+
+    if ($cat == 'Personal Training') {
+        $color = '#000';
+    } elseif ($cat == 'Group Training') {
+        $color = '#008000';
+    } elseif ($cat == '1-1 Training') {
+        $color = '#0071c5';
+    }
+    if (strtotime($todaydateis) > strtotime($eventdate)) {
+        $color = '#DC143C';
+    }
+    ?>
+                                    {
+                                        id: '<?php echo $event['id']; ?>',
+                                        title: '<?php echo $event['category']; ?>',
+                                        date: '<?php echo $event['date']; ?>',
+                                        startTime: '<?php echo $event['startTime']; ?>',
+                                        endTime: '<?php echo $event['endTime']; ?>',
+                                        start: '<?php echo $combinedstart; ?>',
+                                        end: '<?php echo $combinedend; ?>',
+                                        venue: '<?php echo $venuename; ?>',
+                                        room: '<?php echo $roomname; ?>',
+                                        type: '<?php echo $trainingname; ?>',
+                                        cost: '<?php echo $cost; ?>',
+                                        trainer: '<?php echo $trainerEmail; ?>',
+                                        description: '<?php echo $event['description']; ?>',
+                                        color: '<?php echo $color; ?>',
+                                    },
 <?php endforeach; ?>
-                    ],
-                     eventRender: function (event, element) {
-                         
-                        element.bind('click', function () {
-                            $('#ModalView #id').val(event.id);
-                            $('#ModalView #category').val(event.title);
-                            $('#ModalView #date').val(event.date);
-                            $('#ModalView #startTime').val(event.startTime);
-                            $('#ModalView #endTime').val(event.endTime);
-                            $('#ModalView #venueview').val(event.venue);
-                            $('#ModalView #roomview').val(event.room);
-                            $('#ModalView #typeview').val(event.type);
-                            $('#ModalView #costview').val(event.cost);
-                            $('#ModalView #trainerview').val(event.trainer);
-                            $('#ModalView #description').val(event.description);
-                            
-                      
-                            // compare date for javascript
-                         
-                            
-                            if(event.title==="1-1 Training" || event.title==="Group Training" && new Date(datetoday).getTime()<new Date(event.date).getTime())
-                            {
-                                $('#save').hide();
-                                $('#delete').show();
-                            }
-                            else{
-                                $('#save').show();
-                            }
-                            if(new Date(datetoday).getTime()>new Date(event.date).getTime()){
-                                     $('#save').hide();
-                                     $('#delete').hide();                             
-                            }
-                            $('#ModalView').modal('show');
-                        });
-                    },
-                    eventMouseover: function (event, jsEvent, view) {
+                            ],
+                            eventRender: function (event, element) {
+
+                                element.bind('click', function () {
+                                    $('#ModalView #id').val(event.id);
+                                    $('#ModalView #category').val(event.title);
+                                    $('#ModalView #date').val(event.date);
+                                    $('#ModalView #startTime').val(event.startTime);
+                                    $('#ModalView #endTime').val(event.endTime);
+                                    $('#ModalView #venueview').val(event.venue);
+                                    $('#ModalView #roomview').val(event.room);
+                                    $('#ModalView #typeview').val(event.type);
+                                    $('#ModalView #costview').val(event.cost);
+                                    $('#ModalView #trainerview').val(event.trainer);
+                                    $('#ModalView #description').val(event.description);
+
+
+                                    // compare date for javascript
+
+
+                                    if (event.title === "1-1 Training" || event.title === "Group Training" && new Date(datetoday).getTime() < new Date(event.date).getTime())
+                                    {
+                                        $('#save').hide();
+                                        $('#delete').show();
+                                    }
+                                    else {
+                                        $('#save').show();
+                                    }
+                                    if (new Date(datetoday).getTime() > new Date(event.date).getTime()) {
+                                        $('#save').hide();
+                                        $('#delete').hide();
+                                    }
+                                    $('#ModalView').modal('show');
+                                });
+                            },
+                            eventMouseover: function (event, jsEvent, view) {
 
                                 var tooltip = $(this).qtip({
                                     id: 'calendar',
@@ -674,105 +697,105 @@ $venues = $req2->fetchAll();
                                 content += '<div class="row qtip-content-margin"><b>Date: </b> &nbsp' + event.date + '</div>';
                                 content += '<div class="row qtip-content-margin"><b>Time: </b> &nbsp' + event.startTime + ' to ' + event.endTime + '</div>';
                                 content += '<div class="row qtip-content-margin"><b>Venue: </b> &nbsp' + event.room + ' room at ' + event.venue + '</div>';
-                               
+
                                 tooltip.set({
                                     'content.text': content
                                 }).show(jsEvent);
 
                             }
+                        });
+
+                        function edit(event) {
+                            startTime = event.start.format('Y-m-d H:i:s');
+                            if (event.endTime) {
+                                endTime = event.end.format('Y-m-d H:i:s');
+                            } else {
+                                endTime = startTime;
+                            }
+                            id = event.id;
+                            date = event.date;
+
+                            Event = [];
+                            Event[0] = id;
+                            Event[1] = startTime;
+                            Event[2] = endTime;
+                            Event[3] = date;
+
+                            $.ajax({
+                                url: 'editCalendarEventDate.php',
+                                type: "POST",
+                                data: {Event: Event},
+                                success: function (rep) {
+                                    if (rep === 'OK') {
+                                        alert('Saved');
+                                    } else {
+                                        alert('Could not be saved. try again.');
+                                    }
+                                }
+                            });
+                        }
                     });
 
-                  function edit(event){
-			startTime = event.start.format('Y-m-d H:i:s');
-			if(event.endTime){
-				endTime = event.end.format('Y-m-d H:i:s');
-			}else{
-				endTime = startTime;
-			}	
-			id =  event.id;
-			date = event.date;
-                        
-			Event = [];
-			Event[0] = id;
-			Event[1] = startTime;
-			Event[2] = endTime;
-                        Event[3] = date;
-                        
-			$.ajax({
-			 url: 'editCalendarEventDate.php',
-			 type: "POST",
-			 data: {Event:Event},
-			 success: function(rep) {
-					if(rep === 'OK'){
-						alert('Saved');
-					}else{
-						alert('Could not be saved. try again.'); 
-					}
-				}
-			});
-		}
-            });
-
         </script>
-<script>
 
-				  
-        
-</script>
-
-         <!-- Profile update -->
-    <script>
-        var flag = 0;
-        $('#edit').click(function () {
-            $('#form').toggleClass('view');
-            $('#edit').css('display', 'none');
-            $('#update').css('display', 'block');
-            $('input').each(function () {
-                var inp = $(this);
-                if (inp.attr('readonly')) {
-                    inp.removeAttr('readonly');
-                    $('#edit').css('display', 'none');
-                    $('#update').css('display', 'block');
-                }
-                else {
-                    inp.attr('readonly', 'readonly');
-                }
+        <!-- Profile update -->
+        <script>
+            var flag = 0;
+            $('#edit').click(function () {
+                $('#form').toggleClass('view');
+                $('#edit').css('display', 'none');
+                $('#update').css('display', 'block');
+                $('input').each(function () {
+                    var inp = $(this);
+                    if (inp.attr('readonly')) {
+                        inp.removeAttr('readonly');
+                        $('#edit').css('display', 'none');
+                        $('#update').css('display', 'block');
+                    }
+                    else {
+                        inp.attr('readonly', 'readonly');
+                    }
+                });
+                flag = 0;
             });
-            flag = 0;
-        });
-    </script>
-    <script>
-        $('#update').click(function () {
-            $('#form').toggleClass('view');
-            $('#edit').css('display', 'block');
-            $('#update').css('display', 'none');
-            flag = 1;
-            var fName = $('#firstName').val();
-            //document.getElementById("edit_mobile").value = mobile;
-            //alert(fName);
-            $('input').each(function () {
-                var inp = $(this);
-                if (inp.attr('readonly')) {
-                    inp.removeAttr('readonly');
-                    $('#edit').css('display', 'block');
-                    $('#update').css('display', 'none');
+        </script>
+        <script>
+            $('#update').click(function () {
+                $('#form').toggleClass('view');
+                $('#edit').css('display', 'block');
+                $('#update').css('display', 'none');
+                flag = 1;
+                var fName = $('#firstName').val();
+                var lName = $('#lastName').val();
+                var address = $('#address').val();
+                var phoneNumber = $('#phoneNumber').val();
+                var profileBio = $('#profileBio').val();
+                var password = $('#password').val();
+                //document.getElementById("edit_mobile").value = mobile;
+                //alert(fName);
+                $('input').each(function () {
+                    var inp = $(this);
+                    if (inp.attr('readonly')) {
+                        inp.removeAttr('readonly');
+                        $('#edit').css('display', 'block');
+                        $('#update').css('display', 'none');
+                    }
+                    else {
+                        inp.attr('readonly', 'readonly');
+                    }
+                });
+            });</script>
+        <script>
+            function validateForm() {
+                //alert("fName");
+                if (flag == 1) {
+                    return true;
+                } else {
+                    return false;
                 }
-                else {
-                    inp.attr('readonly', 'readonly');
-                }
-            });
-        });</script>
-    <script>
-        function validateForm() {
-            //alert("fName");
-            if (flag == 1) {
-                return true;
-            } else {
-                return false;
+                //if update button return true
             }
-            //if update button return true
-        }
-    </script>
+        </script>
 
     </body>
 </html>
