@@ -153,7 +153,7 @@ session_start();
                             <span aria-hidden="true">&times;</span>
                             <span class="sr-only">Close</span>
                         </button>
-                        <h4>EDIT USER PARTICULARS</h4>
+                        <h4 style="color: black; text-align:center; margin-top: 12px;">EDIT USER PARTICULARS</h4>
                     </div>
                     <div class="modal-body">
                         <form method="post" role="form" action="editUserInfo.php">

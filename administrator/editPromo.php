@@ -6,12 +6,17 @@ require('../database/dbconfig.php');
  * title, description, startDate, endDate, featuredStatus
  */
 
+
+
+$id = $_POST['edit_id'];
+
 $sql = "SELECT * FROM promotions";
 $req = $conn->prepare($sql);
 $req->execute();
 $rows = $req->fetchAll();
 if (!empty($rows)) {
     foreach ($rows as $row):
+        $id = $row['id'];
         $title = $row['title'];
         $description = $row['description'];
         $startDate = $row['startDate'];
@@ -39,7 +44,7 @@ $imagePath = empty($_POST['imagePath']) ? $imagePath : $_POST['imagePath'];
 $featuredStatus = empty($_POST['featuredStatus']) ? $featuredStatus : $_POST['featuredStatus'];
 
 
-$sql = "UPDATE promotions SET title = '$title', description = '$description', startDate ='$startDate', endDate = '$endDate', imagePath = '$imagePath', featuredStatus='$featuredStatus'";
+$sql = "UPDATE promotions SET title = '$title', description = '$description', startDate ='$startDate', endDate = '$endDate', imagePath = '$imagePath', featuredStatus='$featuredStatus' WHERE id='$id'";
 $req = $conn->prepare($sql);
 $req->execute();
 
