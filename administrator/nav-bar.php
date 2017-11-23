@@ -11,7 +11,7 @@
                 <a class="dropdown-toggle" data-toggle="dropdown" href="">MANAGE SITE
                     <span class="caret"></span></a>
                 <ul class="dropdown-menu" id="listdown">
-                    <li><a href="promo-management.php"><span class="glyphicon glyphicon-plus icon-space"></span> PROMOTIONS</a></li>
+                    <li><a href="promo-management.php"><span class="glyphicon glyphicon-tags icon-space"></span> PROMOTIONS</a></li>
                     <li><a href="manageGym.php"><span class="glyphicon glyphicon-globe icon-space"></span> MANAGE GYM</a></li>
                 </ul>
             </li>
