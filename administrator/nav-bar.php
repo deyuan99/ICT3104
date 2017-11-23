@@ -9,13 +9,11 @@
             <li><a href="user-groupsession.php"><span class="glyphicon glyphicon-calendar icon-space"></span>GROUP SESSION</a></li>
             
             <li class="dropdown">
-                <a class="dropdown-toggle" data-toggle="dropdown" href="">MANAGE PAGE
+                <a class="dropdown-toggle" data-toggle="dropdown" href="">MANAGE SITE
                     <span class="caret"></span></a>
                 <ul class="dropdown-menu" id="listdown">
-                    <li><a href="promo-management.php">Promotions</a></li>
-                    <li><a href="manageVenues.php">Venues</a></li>
-                    <li><a href="manageRooms.php">Room Types</a></li>
-                    <li><a href="manageTypes.php">Types of Trainings</a></li>
+                    <li><a href="promo-management.php"><span class="glyphicon glyphicon-plus icon-space"></span> Promotions</a></li>
+                    <li><a href="manageGym.php"><span class="glyphicon glyphicon-globe icon-space"></span> Manage Gym</a></li>
                 </ul>
             </li>
             
