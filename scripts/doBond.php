@@ -14,12 +14,12 @@ if ($option == "bond") {
     
     // send notification to trainer
     $msg = "A Trainee - $useremail, has decided to bond to your training.";
-    $sql2 = "INSERT into notificationlog VALUES ('$msg', '$traineremail', '0')";
+    $sql2 = "INSERT into notificationlog (message, userEmail, readStatus) VALUES ('$msg', '$traineremail', '0')";
     $req2 = $conn->prepare($sql2);
     $req2->execute();
     
-    // remove all other trainee's 1-1 training with other trainers
-    $sql3 = "DELETE FROM personalsession WHERE category = '1-1 Training' AND trainerEmail != '$traineremail' AND traineeEmail = '$useremail'";
+    // remove all other trainee's 1-1 training email with other trainers
+    $sql3 = "UPDATE personalsession SET traineeEmail = '' WHERE category = '1-1 Training' AND trainerEmail != '$traineremail' AND traineeEmail = '$useremail'";
     $req3 = $conn->prepare($sql3);
     $req3->execute();
     

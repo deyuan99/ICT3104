@@ -34,6 +34,7 @@ if (count($output_array) == 1) {
     $dateformat = $row22['date'];
     $starttime = $row22['startTime'];
     $roomtypeid = $row22['roomTypeID'];
+    $trainerEmail = $row22['trainerEmail'];
 
 
 
@@ -91,6 +92,13 @@ if (count($output_array) == 1) {
         $sql3 = "UPDATE groupsession SET status = 'Approved' WHERE id = '$id'";
         $query4 = $conn->prepare($sql3);
         $stmt3 = $query4->execute();
+        
+        // send a notification to the trainer
+        $msg5 = "Your group session on $dateformat at $starttime has been approved.";
+        $sql5 = "INSERT into notificationlog (message, userEmail, readStatus) VALUES ('$msg5', '$trainerEmail', '0')";
+        $query5 = $conn->prepare($sql5);
+        $stmt5 = $query5->execute();
+        
         echo "<script type='text/javascript'>alert('Success');"
         . "window.location.href='user-approval.php';"
         . "</script>";
