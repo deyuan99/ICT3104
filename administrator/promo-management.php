@@ -33,6 +33,8 @@ session_start();
                 document.getElementById("imagePath").placeholder = imagePath;
                 document.getElementById("featuredStatus").placeholder = featuredStatus;
 
+                document.getElementById("edit_id").value = "";
+                document.getElementById("edit_id").value = id;
                 document.getElementById("edit_title").value = "";
                 document.getElementById("edit_title").value = title;
                 document.getElementById("edit_description").value = "";

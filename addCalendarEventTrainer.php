@@ -182,6 +182,12 @@ if (isset($_POST['Pcategory']) && isset($_POST['starttime']) && isset($_POST['en
                             die('Error execute');
                         }
                         
+                        // send a notification to the admin
+                        $msg = "A new group session request from Trainer ($Semail) is waiting for approval.";
+                        $sql3 = "INSERT into notificationlog (message, userEmail, readStatus) VALUES ('$msg', 'admin1@gmail.com', '0')";
+                        $query2 = $conn->prepare($sql3);
+                        $stmt2 = $query2->execute();
+                        
                         if ($query) {
                             echo "<script type='text/javascript'>alert('proposal submitted successfully!');" . "window.location.href='trainer_dashboard.php';" . "</script>";
                         } else {
