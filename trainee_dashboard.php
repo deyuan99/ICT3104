@@ -191,7 +191,7 @@ $venues = $req2->fetchAll();
                                     <p class='leftspacing'>Password</p>
                                 </td>
                                 <td>
-                                    <p><input type='text' name= "password" id="password " class="data" value="<?php echo "*******"  ?>" readonly/></p>                             
+                                    <p><input type='text' name= "password" id="password " class="data" value="<?php echo $password  ?>" readonly/>*******</p>                             
                                 
                                 </td>
                             </tr>

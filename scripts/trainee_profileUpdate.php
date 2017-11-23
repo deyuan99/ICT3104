@@ -8,9 +8,7 @@ $lastName = $_POST['lastName'];
 $address = $_POST['address'];
 $profileBio = $_POST['profileBio'];
 $phoneNumber = $_POST['phoneNumber'];
-$password = $_POST['password'];
-
-//$password = empty(sha1($_POST['pass'])) ? sha1($password) : sha1($_POST['pass']); 
+$password = empty(sha1($_POST['password'])) ? sha1($password) : sha1($_POST['password']); 
 
 
 
