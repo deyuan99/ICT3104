@@ -3,9 +3,17 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/xampp/htdocs/ICT3104/editCalendarEvent.php</file>
-            <file>file:/C:/xampp/htdocs/ICT3104/addCalendarEvent.php</file>
-            <file>file:/C:/xampp/htdocs/ICT3104/administrator/user-groupsession.php</file>
+            <file>file:/C:/xampp/htdocs/ICT3104/addCalendarEventTrainer.php</file>
+            <file>file:/C:/xampp/htdocs/ICT3104/trainee_dashboard.php</file>
+            <file>file:/C:/xampp/htdocs/ICT3104/database/dbconfig.php</file>
+            <file>file:/C:/xampp/htdocs/ICT3104/administrator/include.php</file>
+            <file>file:/C:/xampp/htdocs/ICT3104/administrator/loadUserInfo.php</file>
+            <file>file:/C:/xampp/htdocs/ICT3104/administrator/doReject.php</file>
+            <file>file:/C:/xampp/htdocs/ICT3104/index.php</file>
+            <file>file:/C:/xampp/htdocs/ICT3104/registration_verification.php</file>
+            <file>file:/C:/xampp/htdocs/ICT3104/registration.php</file>
+            <file>file:/C:/xampp/htdocs/ICT3104/administrator/user-approval.php</file>
+            <file>file:/C:/xampp/htdocs/ICT3104/trainer_dashboard.php</file>
         </group>
     </open-files>
 </project-private>

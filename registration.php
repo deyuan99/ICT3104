@@ -147,6 +147,7 @@ if (isset($_SESSION['email']) && !empty($_SESSION['email'])) {
                     var opts = [
                         {name: "Not Applicable", val: ""}
                     ];
+					document.getElementById("member_type").required = false;
 
                 else
                     var opts = [

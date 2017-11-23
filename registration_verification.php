@@ -18,7 +18,7 @@ $date2 = new DateTime('2017-11-08');
 //  echo 'valid <br>';
 //}
 
-if (isset($_POST['firstname']) && isset($_POST['lastname']) && isset($_POST['regemail']) && isset($_POST['phone']) && isset($_POST['category']) && isset($_POST['subscription']) && isset($_POST['regpass']) && isset($_POST['regconfpass'])) {
+if (isset($_POST['firstname']) && isset($_POST['lastname']) && isset($_POST['regemail']) && isset($_POST['phone']) && isset($_POST['category']) && isset($_POST['regpass']) && isset($_POST['regconfpass'])) {
 
     $firstname = $_POST['firstname'];
     $lastname = $_POST['lastname'];
@@ -26,7 +26,11 @@ if (isset($_POST['firstname']) && isset($_POST['lastname']) && isset($_POST['reg
     $phone = $_POST['phone'];
     $role = $_POST['category'];
     $regpass = $_POST['regpass'];
-    $subscription = $_POST['subscription'];
+	if (isset($_POST['subscription'])) {
+        $subscription = $_POST['subscription'];
+    } else {
+        $subscription = "";
+    }
     if (isset($_POST['address'])) {
         $address = $_POST['address'];
     } else {
