@@ -8,8 +8,20 @@ $traineremail = $_GET['t'];
 $sql = "SELECT * FROM personalsession where trainerEmail= '$traineremail' and category = '1-1 Training' and date >= NOW()";
 $req = $conn->prepare($sql);
 $req->execute();
-
 $events = $req->fetchAll();
+
+$sql2 = "SELECT * FROM users where email = '$traineremail'";
+$req2 = $conn->prepare($sql2);
+$req2->execute();
+
+$trainerInfo = $req2->fetch(PDO::FETCH_ASSOC);
+
+$sql3 = "SELECT * FROM users where email = '$email'";
+$req3 = $conn->prepare($sql3);
+$req3->execute();
+$userInfo = $req3->fetch(PDO::FETCH_ASSOC);
+$bondStatus = $userInfo['bondTo'];
+
 ?>
 <html>
     <head>
@@ -37,8 +49,29 @@ $events = $req->fetchAll();
         <section id="two" class="wrapper style2 special">
             <div class="container">
                 <header class="major">
-                    <h2>Trainer's Calendar</h2>
-                    <p></p>
+                    <!--<h2>Trainer's Calendar</h2>-->
+                    <h2><?php echo $trainerInfo['firstName'] . " " . $trainerInfo['lastName']; ?></h2>
+                    <?php
+                    $sqlImg = $userInfo['profilePicture'];
+                    echo "<p>";
+                    if (strlen($sqlImg) > 0) {
+                        echo "<img src='$sqlImg'>";
+                    } else {
+                        echo "<img src='images/uploads/profiledefault.jpg'>";
+                    }
+                    echo "</p><br/>";
+                    ?>
+                    <p><?php echo $trainerInfo['profileBio']; ?></p><br/>
+                    <form class="form-inline" role="form" action="scripts/doBond.php" method="POST">
+                        <input type="hidden" name="traineremail" id="traineremail" value="<?php echo $traineremail;?>">
+                        <?php 
+                        if ($bondStatus == $traineremail) {
+                            echo '<button type="submit" class="btn btn-danger btn-lg" value="unbound" id="option" name="option">Unbound from Trainer</button>';
+                        } else {
+                            echo '<button type="submit" class="btn btn-primary btn-lg" value="bond" id="option" name="option" onclick="return confirm(\'Are you sure? This will remove ALL your 1-1 trainings!\')">Bond to Trainer</button>';
+                        }
+                        ?>
+                    </form>
                 </header>
                 <div id="calendar" class="col-centered">
                 </div>
@@ -124,7 +157,14 @@ $events = $req->fetchAll();
 
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                            <input type="submit" id="joinBtn" class="btn btn-primary" value="Join Training"/>
+                            <?php 
+                            if (empty($bondStatus)) {
+                                echo '<input type="submit" id="joinBtn" class="btn btn-primary" value="Join Training"/>';
+                            } else {
+                                echo '<input type="submit" id="joinBtn" class="btn" value="Join Training" disabled/>';
+                            }
+                            ?>
+                            <!--<input type="submit" id="joinBtn" class="btn btn-primary" value="Join Training" disabled/>-->
                         </div>
                     </form>
                 </div>
