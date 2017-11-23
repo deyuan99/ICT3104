@@ -31,6 +31,7 @@ session_start();
                 document.getElementById("startDate").placeholder = startDate;
                 document.getElementById("endDate").placeholder = endDate;
                 document.getElementById("imagePath").placeholder = imagePath;
+                document.getElementById("featuredStatus").placeholder = featuredStatus;
 
                 document.getElementById("edit_title").value = "";
                 document.getElementById("edit_title").value = title;
@@ -83,7 +84,7 @@ session_start();
                 <h2 class="text-center" id="toptitle"><span class="glyphicon glyphicon-tags icon-space"></span>PROMOTIONS MANAGEMENT</h2>
                 <div class="panel panel-default margin-l0-r0">
                     <div class="panel-heading">
-                        <div class="panel-title">ONGOING PROMOTIONS</div>
+                        <div class="panel-title">PROMOTIONS</div>
                     </div>
                     <div class="table-responsive my-table-style">
                         <table id="esa-table" class="table table-striped table-bordered" cellspacing="0" width="100%">
@@ -91,12 +92,12 @@ session_start();
                                 <tr>
                                     <th class="col-md-1">ID</th>
                                     <th class="col-md-1">Title</th>
-                                    <th class="col-md-3">Description</th>
-                                    <th class="col-md-2">Start Date</th>
-                                    <th class="col-md-2">End Date</th>
+                                    <th class="col-md-1">Description</th>
+                                    <th class="col-md-1">Start Date</th>
+                                    <th class="col-md-1">End Date</th>
                                     <th class="col-md-1">Image Path</th>
                                     <th class="col-md-1">Featured Status</th>
-                                    <th class="col-md-1">Action</th>
+                                    <th class="col-md-2">Action</th>
                                 </tr>
                             </thead>
                             <tbody><?php getCurrentPromotions(); ?>
@@ -136,6 +137,7 @@ session_start();
                                         <input type="text" class="form-control" id="title" name="title" value="">
                                     </div>
                                 </div>
+                                
 
                                 <input type="hidden" name="edit_description" id="edit_description" value="">
                                 <div class="form-group row">
@@ -147,9 +149,9 @@ session_start();
 
                                 <input type="hidden" name="edit_startDate" id="edit_startDate" value="">
                                 <div class="form-group row">
-                                    <label class="form-control-label col-md-offset-2 col-md-3 col-xs-offset-0 col-xs-5 label-margin">Start Date:</label>
+                                    <label class="form-control-label col-md-offset-2 col-md-3 col-xs-offset-0 col-xs-5 label-margin" for="date">Start Date:</label>
                                     <div class="col-sm-5">
-                                        <input type="text" class="form-control" id="startDate" name="startDate">
+                                        <input type="date" class="form-control" id="startDate" name="startDate" value="">
                                     </div>
                                 </div>
 
@@ -157,7 +159,7 @@ session_start();
                                 <div class="form-group row">
                                     <label class="form-control-label col-md-offset-2 col-md-3 col-xs-offset-0 col-xs-5 label-margin">End Date:</label>
                                     <div class="col-sm-5">
-                                        <input type="text" class="form-control" id="endDate" name="endDate">
+                                        <input type="date" class="form-control" id="endDate" name="endDate" value="">
                                     </div>
                                 </div>
 
@@ -165,7 +167,7 @@ session_start();
                                 <div class="form-group row">
                                     <label class="form-control-label col-md-offset-2 col-md-3 col-xs-offset-0 col-xs-5 label-margin">Image Path:</label>
                                     <div class="col-sm-5">
-                                        <input type="text" class="form-control" id="imagePath" name="imagePath">
+                                        <input type="text" class="form-control" id="imagePath" name="imagePath" value="">
                                     </div>
                                 </div>
 
@@ -173,7 +175,7 @@ session_start();
                                 <div class="form-group row">
                                     <label class="form-control-label col-md-offset-2 col-md-3 col-xs-offset-0 col-xs-5 label-margin">Featured Status:</label>
                                     <div class="col-sm-5">
-                                        <input type="text" class="form-control" id="featuredStatus" name="featuredStatus">
+                                        <input type="text" class="form-control" id="featuredStatus" name="featuredStatus" value="">
                                     </div>
                                 </div>
 

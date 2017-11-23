@@ -22,7 +22,6 @@ else {
     echo "No trainee record found";
 }
 
-
 //$firstName = $_POST['firstName'];
 //$lastName = $_POST['lastName'];
 //$address = $_POST['address'];
