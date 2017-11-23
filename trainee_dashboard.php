@@ -35,9 +35,10 @@ $venues = $req2->fetchAll();
         <meta charset="UTF-8">
         <title>STPS</title>
 
-        <!-- Bootstrap Core CSS -->
-        <link href="bootstrap-3.3.5-dist/css/bootstrap.min.css" rel="stylesheet">
-
+        <script src="assets/js/jquery.min.js" rel="stylesheet"></script>
+        <script src="bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+        
         <!-- FullCalendar -->
         <link href='fullcalendar-3.5.1/fullcalendar.css' rel='stylesheet' />
         <link href="assets/css/calendar.css" rel="stylesheet" type="text/css"/>

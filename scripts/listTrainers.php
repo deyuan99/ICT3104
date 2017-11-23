@@ -1,6 +1,5 @@
 <?php
 
-session_start();
 include_once 'database/dbconfig.php';
 $id = $_SESSION['email'];
 
