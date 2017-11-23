@@ -8,8 +8,12 @@ if (isset($_SESSION['email']) && !empty($_SESSION['email'])) {
 
     if ($Srole == 'trainee') {
         header("Location: trainee_dashboard.php");
-    } else {
+    } else if ($Srole == 'trainer') {
         header("Location: trainer_dashboard.php");
+    }else if($Srole == 'admin'){
+        header("Location: administrator/user-management.php");
+    }else{
+        header("Location: index.php");
     }
 }
 ?>
