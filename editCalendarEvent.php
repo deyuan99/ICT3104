@@ -82,7 +82,7 @@ if (isset($_POST['delete']) && isset($_POST['id'])){
               . "</script>";    
              }
             
-        }else{
+        }else if ($category == '1-1 Training' ){
             if ($hourdiff<48){
             echo "<script> cancel(); </script>";
             }
@@ -96,6 +96,7 @@ if (isset($_POST['delete']) && isset($_POST['id'])){
                  die ('Error prepare');
                 }
                 $res = $query->execute();
+                
                 if ($res == false) {
                  print_r($query->errorInfo());
                  die ('Error execute');
@@ -110,7 +111,37 @@ if (isset($_POST['delete']) && isset($_POST['id'])){
                      . "window.location.href='trainee_dashboard.php';"
                       . "</script>";    
                      }
+                }
+        }else{
+        if ($hourdiff<48){
+            echo "<script> cancel(); </script>";
             }
+            else
+                {
+                
+                   $sql = "DELETE FROM groupsessionapplicant WHERE groupsessionID = '$id' and traineeEmail='$Semail'  ";
+                $query = $conn->prepare( $sql );
+                if ($query == false) {
+                 print_r($conn->errorInfo());
+                 die ('Error prepare');
+                }
+                $res = $query->execute();
+                
+                if ($res == false) {
+                 print_r($query->errorInfo());
+                 die ('Error execute');
+                }
+                 if( $query ){ 
+                     echo "<script type='text/javascript'>alert('Delete successfully!');"
+                     . "window.location.href='trainee_dashboard.php';"
+                     . "</script>";
+                   }
+                     else{
+                 echo "<script type='text/javascript'>alert('failed');"
+                     . "window.location.href='trainee_dashboard.php';"
+                      . "</script>";    
+                     }
+                }
         }
         }
 	
