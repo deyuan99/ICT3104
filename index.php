@@ -6,6 +6,7 @@ and open the template in the editor.
 -->
 <?php
 session_start();
+require_once('database/dbconfig.php');
 $Srole = '';
 
 if (isset($_SESSION['email']) && !empty($_SESSION['email'])) {
@@ -50,8 +51,12 @@ if (isset($_SESSION['email']) && !empty($_SESSION['email'])) {
                         </header>
                     </div>
                     <div class="6u 12u(medium)">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Non ea mollitia corporis id, distinctio sunt veritatis officiis dolore reprehenderit deleniti voluptatibus harum magna, doloremque alias quisquam minus, eaque. Feugiat quod, nesciunt! Iste quos ipsam, iusto sit esse.</p>
+                        <!--<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Non ea mollitia corporis id, distinctio sunt veritatis officiis dolore reprehenderit deleniti voluptatibus harum magna, doloremque alias quisquam minus, eaque. Feugiat quod, nesciunt! Iste quos ipsam, iusto sit esse.</p>
                         <p>Dolorum aspernatur maxime libero ratione quidem distinctio, placeat fugiat laborum voluptatum enim neque soluta vel sunt id ex veritatis. Labore rerum, odit sapiente, alias mollitia magnam exercitationem modi amet earum quia atque ipsum voluptas asperiores quas laboriosam.</p>
+                    -->
+                    <p>Working with a personal trainer is the first step to improving your health and fitness. People of all shapes and sizes, people with all types of goals have been proven to have better success when working with a personal trainer. 
+                    At STPS Fitness we have over 20 trainers that have all different backgrounds so that our clients can get the results they want.</p>
+                    <p>We want to help make fitness a part of your life, STPS's clients can enjoy new found or improved levels of energy and fitness. Life is better when we are healthy.</p>
                     </div>
                 </div>
             </div>
@@ -61,8 +66,8 @@ if (isset($_SESSION['email']) && !empty($_SESSION['email'])) {
         <section id="two" class="wrapper style2 special">
             <div class="container">
                 <header class="major">
-                    <h2>Fusce ultrices fringilla</h2>
-                    <p>Maecenas vitae tellus feugiat eleifend</p>
+                    <h2>Promotions (upcoming events)</h2>
+                    <!--<p>Maecenas vitae tellus feugiat eleifend</p>-->
                 </header>
                 <div class="row 150%">
                     <div class="6u 12u(xsmall)">
@@ -70,27 +75,44 @@ if (isset($_SESSION['email']) && !empty($_SESSION['email'])) {
                             <img src="images/pic02.png" alt="" />
                             <h3>
                                 <div class="content">
+                                    <?php
+                                    $sqlpromo = "SELECT * FROM promotions WHERE featuredStatus = 1 and id = 1 ";
+                                    $reqpromo = $conn->prepare($sqlpromo);
+                                    $reqpromo->execute();
+                                    $value2 = $reqpromo->fetch(PDO::FETCH_ASSOC);
+                                    $title = $value2['title'];
+                                    $description =$value2['description'];
+                                    $startDate=$value2['startDate'];
+                                    $endDate=$value2['endDate'];?>
                                     <header class="align-center">
-                                        <p>mattis elementum sapien pretium tellus</p>
-                                        <h2>Vestibulum sit amet</h2>
+                                        <p><?php echo $startDate . " to " . $endDate;?></p>
+                                        <h2><?php echo $title;?></h2>
                                     </header>
-                                    <h6> Cras aliquet urna ut sapien tincidunt, quis malesuada elit facilisis. Vestibulum sit amet tortor velit. Nam elementum nibh a libero pharetra elementum. Maecenas feugiat ex purus, quis volutpat lacus placerat malesuada.</h6>
+                                    <h6><?php echo $description;?></h6>
                                     
                                 </div>
                             </h3>
-                        </div
- >
+                        </div>
                     </div>
                     <div class="6u 12u(xsmall)">
                         <div class="image fit captioned">
                             <img src="images/pic03.png" alt="" />
                             <h3>
                                 <div class="content">
+                                    <?php
+                                    $sqlpromo1 = "SELECT * FROM promotions WHERE featuredStatus = 1 and id = 2 ";
+                                    $reqpromo1 = $conn->prepare($sqlpromo1);
+                                    $reqpromo1->execute();
+                                    $value3 = $reqpromo1->fetch(PDO::FETCH_ASSOC);
+                                    $title1 = $value3['title'];
+                                    $description1 =$value3['description'];
+                                    $startDate1=$value3['startDate'];
+                                    $endDate1=$value3['endDate'];?>
                                     <header class="align-center">
-                                        <p>mattis elementum sapien pretium tellus</p>
-                                        <h2>Vestibulum sit amet</h2>
+                                        <p><?php echo $startDate1 . " to " . $endDate1;?></p>
+                                        <h2><?php echo $title1;?></h2>
                                     </header>
-                                    <h6> Cras aliquet urna ut sapien tincidunt, quis malesuada elit facilisis. Vestibulum sit amet tortor velit. Nam elementum nibh a libero pharetra elementum. Maecenas feugiat ex purus, quis volutpat lacus placerat malesuada.</h6>
+                                    <h6><?php echo $description1;?></h6>
                                     
                                 </div>
                             </h3>
@@ -105,47 +127,79 @@ if (isset($_SESSION['email']) && !empty($_SESSION['email'])) {
             <div class="container">
                 <header class="major special">
                     <h2>Featured Trainers</h2>
-                    <p>Feugiat sed lorem ipsum magna</p>
+                    <p>Our List of well trained Trainers</p>
                 </header>
                 <div class="feature-grid">
                     <div class="feature">
                         <div class="image rounded"><img src="images/pic04.png" alt="" /></div>
                         <div class="content">
                             <header>
-                                <h4>Lorem ipsum</h4>
-                                <p>Lorem ipsum dolor sit</p>
+                                <?php
+                                $sql = "SELECT * FROM users WHERE role = 'trainer' and status = 1 and email='trainer1@gmail.com'";
+                                $req = $conn->prepare($sql);
+                                $req->execute();
+                                $value = $req->fetch(PDO::FETCH_ASSOC);
+                                $firstName = $value['firstName'];
+                                $profileBio=$value['profileBio'];
+                                $registerDate=$value['registerDate'];?>
+                                <h4><?php echo $firstName; ?></h4>
+                                <p><?php echo $registerDate;?></p>
                             </header>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Labore esse tenetur accusantium porro omnis, unde mollitia totam sit nesciunt consectetur.</p>
+                            <p><?php echo $profileBio;?></p>
                         </div>
                     </div>
                     <div class="feature">
                         <div class="image rounded"><img src="images/pic05.png" alt="" /></div>
                         <div class="content">
                             <header>
-                                <h4>Recusandae nemo</h4>
-                                <p>Ratione maiores a, commodi</p>
+                                <?php
+                                $sql1 = "SELECT * FROM users WHERE role = 'trainer' and status = 1 and email='trainer2@gmail.com'";
+                                $req1 = $conn->prepare($sql1);
+                                $req1->execute();
+                                $value1 = $req1->fetch(PDO::FETCH_ASSOC);
+                                $firstName1 = $value1['firstName'];
+                                $profileBio1=$value1['profileBio'];
+                                $registerDate1=$value1['registerDate'];?>
+                                <h4><?php echo $firstName1; ?></h4>
+                                <p><?php echo $registerDate1;?></p>
                             </header>
-                            <p>Animi mollitia optio culpa expedita. Dolorem alias minima culpa repellat. Dolores, fuga maiores ut obcaecati blanditiis, at aperiam doloremque.</p>
+                            <p><?php echo $profileBio1;?></p>
                         </div>
                     </div>
-                    <div class="feature">
+                   <div class="feature">
                         <div class="image rounded"><img src="images/pic06.png" alt="" /></div>
                         <div class="content">
                             <header>
-                                <h4>Laudantium fugit</h4>
-                                <p>Possimus ex reprehenderit eaque</p>
+                                <?php
+                                $sql2 = "SELECT * FROM users WHERE role = 'trainer' and status = 1 and email='trainer3@gmail.com'";
+                                $req2 = $conn->prepare($sql2);
+                                $req2->execute();
+                                $value2 = $req2->fetch(PDO::FETCH_ASSOC);
+                                $firstName2 = $value2['firstName'];
+                                $profileBio2 =$value2['profileBio'];
+                                $registerDate2=$value2['registerDate'];?>
+                                <h4><?php echo $firstName2; ?></h4>
+                                <p><?php echo $registerDate2;?></p>
                             </header>
-                            <p>Maiores iusto inventore fugit architecto est iste expedita commodi sed, quasi feugiat nam neque mollitia vitae omnis, ea natus facere.</p>
+                            <p><?php echo $profileBio2;?></p>
                         </div>
                     </div>
                     <div class="feature">
                         <div class="image rounded"><img src="images/pic07.png" alt="" /></div>
                         <div class="content">
                             <header>
-                                <h4>Porro aliquam</h4>
-                                <p>Quaerat, excepturi eveniet laboriosam</p>
+                                <?php
+                                $sql3 = "SELECT * FROM users WHERE role = 'trainer' and status = 1 and email='trainer4@gmail.com'";
+                                $req3 = $conn->prepare($sql3);
+                                $req3->execute();
+                                $value3 = $req3->fetch(PDO::FETCH_ASSOC);
+                                $firstName3 = $value3['firstName'];
+                                $profileBio3 =$value3['profileBio'];
+                                $registerDate3=$value3['registerDate'];?>
+                                <h4><?php echo $firstName3; ?></h4>
+                                <p><?php echo $registerDate3;?></p>
                             </header>
-                            <p>Vitae earum unde, autem labore voluptas ex, iste dolorum inventore natus consequatur iure similique obcaecati aut corporis hic in! Porro sed.</p>
+                            <p><?php echo $profileBio3;?></p>
                         </div>
                     </div>
                 </div>
@@ -155,8 +209,14 @@ if (isset($_SESSION['email']) && !empty($_SESSION['email'])) {
         <section id="four" class="wrapper style3 special">
             <div class="container">
                 <header class="major">
-                    <h2>Aenean elementum ligula</h2>
-                    <p>Feugiat sed lorem ipsum magna</p>
+                    <h2>Contact Us</h2>
+                    <p>STPS FITNESS @Jurong</p>
+                    <p> 21 Jurong East Street 31, Singapore 609517 </p> 
+                    <p> Number: 60987654 </p>
+                    <br><br>
+                    <p>STPS FITNESS Bishan</p>
+                    <p>5 Bishan Street 14, Singapore 579783</p>
+                    <p>   Number: 60981234 </p>
                 </header>
                 <ul class="actions">
                     <li><a href="#" class="button special big">Get in touch</a></li>
