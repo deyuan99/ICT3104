@@ -131,17 +131,36 @@ if (isset($_SESSION['email']) && !empty($_SESSION['email'])) {
                 </header>
                 <div class="feature-grid">
                     <div class="feature">
-                        <div class="image rounded"><img src="images/pic04.png" alt="" /></div>
+                        <?php
+                            $sql = "SELECT * FROM users WHERE role = 'trainer' and status = 1 and email='trainer1@gmail.com'";
+                            //$req = $conn->prepare($sql);
+                            //$req->execute();
+                            //$value = $req->fetch(PDO::FETCH_ASSOC);
+                            //$firstName = $value['firstName'];
+                            //$profileBio=$value['profileBio'];
+                            //$registerDate=$value['registerDate'];
+                            
+                            $req5 = $conn->prepare($sql);
+                            $req5->execute();
+                            $count = $req5->rowCount();
+                            if ($count > 0) {
+                                while ($row = $req5->fetch(PDO::FETCH_ASSOC)) {
+                                    $sqlImg = $row['profilePicture'];
+                                    $firstName = $row['firstName'];
+                                    $profileBio=$row['profileBio'];
+                                    $registerDate=$row['registerDate'];
+                                    echo "<div class='image rounded'>";
+                                    if (strlen($sqlImg) > 0) {
+                                        echo "<img src='$sqlImg'>";
+                                    } else {
+                                        echo "<img src='images/uploads/profiledefault.jpg'>";
+                                    }
+                                    echo "</div>";
+                                }
+                            } ?>
+                        <!--<div class="image rounded"><img src="images/pic04.png" alt="" /></div>-->
                         <div class="content">
                             <header>
-                                <?php
-                                $sql = "SELECT * FROM users WHERE role = 'trainer' and status = 1 and email='trainer1@gmail.com'";
-                                $req = $conn->prepare($sql);
-                                $req->execute();
-                                $value = $req->fetch(PDO::FETCH_ASSOC);
-                                $firstName = $value['firstName'];
-                                $profileBio=$value['profileBio'];
-                                $registerDate=$value['registerDate'];?>
                                 <h4><?php echo $firstName; ?></h4>
                                 <p><?php echo $registerDate;?></p>
                             </header>
@@ -149,17 +168,37 @@ if (isset($_SESSION['email']) && !empty($_SESSION['email'])) {
                         </div>
                     </div>
                     <div class="feature">
-                        <div class="image rounded"><img src="images/pic05.png" alt="" /></div>
+                        <?php
+                            $sql1 = "SELECT * FROM users WHERE role = 'trainer' and status = 1 and email='trainer2@gmail.com'";
+                            $req1 = $conn->prepare($sql1);
+                            $req1->execute();
+                            $count = $req1->rowCount();
+                            if ($count > 0) {
+                                while ($row = $req1->fetch(PDO::FETCH_ASSOC)) {
+                                    $sqlImg = $row['profilePicture'];
+                                    $firstName1 = $row['firstName'];
+                                $profileBio1=$row['profileBio'];
+                                $registerDate1=$row['registerDate'];
+                                    echo "<div class='image rounded'>";
+                                    if (strlen($sqlImg) > 0) {
+                                        echo "<img src='$sqlImg'>";
+                                    } else {
+                                        echo "<img src='images/uploads/profiledefault.jpg'>";
+                                    }
+                                    echo "</div>";
+                                }
+                            } ?>
+                        <!--<div class="image rounded"><img src="images/pic05.png" alt="" /></div>-->
                         <div class="content">
                             <header>
                                 <?php
-                                $sql1 = "SELECT * FROM users WHERE role = 'trainer' and status = 1 and email='trainer2@gmail.com'";
+                                /*$sql1 = "SELECT * FROM users WHERE role = 'trainer' and status = 1 and email='trainer2@gmail.com'";
                                 $req1 = $conn->prepare($sql1);
                                 $req1->execute();
                                 $value1 = $req1->fetch(PDO::FETCH_ASSOC);
                                 $firstName1 = $value1['firstName'];
                                 $profileBio1=$value1['profileBio'];
-                                $registerDate1=$value1['registerDate'];?>
+                                $registerDate1=$value1['registerDate'];*/?>
                                 <h4><?php echo $firstName1; ?></h4>
                                 <p><?php echo $registerDate1;?></p>
                             </header>
@@ -167,17 +206,37 @@ if (isset($_SESSION['email']) && !empty($_SESSION['email'])) {
                         </div>
                     </div>
                    <div class="feature">
-                        <div class="image rounded"><img src="images/pic06.png" alt="" /></div>
+                       <?php
+                            $sql2 = "SELECT * FROM users WHERE role = 'trainer' and status = 1 and email='trainer3@gmail.com'";
+                            $req2 = $conn->prepare($sql2);
+                            $req2->execute();
+                            $count = $req2->rowCount();
+                            if ($count > 0) {
+                                while ($row = $req2->fetch(PDO::FETCH_ASSOC)) {
+                                    $sqlImg = $row['profilePicture'];
+                                    $firstName2 = $row['firstName'];
+                                    $profileBio2=$row['profileBio'];
+                                    $registerDate2=$row['registerDate'];
+                                    echo "<div class='image rounded'>";
+                                    if (strlen($sqlImg) > 0) {
+                                        echo "<img src='$sqlImg'>";
+                                    } else {
+                                        echo "<img src='images/uploads/profiledefault.jpg'>";
+                                    }
+                                    echo "</div>";
+                                }
+                            } ?>
+                        <!--<div class="image rounded"><img src="images/pic06.png" alt="" /></div>-->
                         <div class="content">
                             <header>
                                 <?php
-                                $sql2 = "SELECT * FROM users WHERE role = 'trainer' and status = 1 and email='trainer3@gmail.com'";
+                                /*$sql2 = "SELECT * FROM users WHERE role = 'trainer' and status = 1 and email='trainer3@gmail.com'";
                                 $req2 = $conn->prepare($sql2);
                                 $req2->execute();
                                 $value2 = $req2->fetch(PDO::FETCH_ASSOC);
                                 $firstName2 = $value2['firstName'];
                                 $profileBio2 =$value2['profileBio'];
-                                $registerDate2=$value2['registerDate'];?>
+                                $registerDate2=$value2['registerDate'];*/?>
                                 <h4><?php echo $firstName2; ?></h4>
                                 <p><?php echo $registerDate2;?></p>
                             </header>
@@ -185,17 +244,37 @@ if (isset($_SESSION['email']) && !empty($_SESSION['email'])) {
                         </div>
                     </div>
                     <div class="feature">
-                        <div class="image rounded"><img src="images/pic07.png" alt="" /></div>
+                        <?php
+                            $sql3 = "SELECT * FROM users WHERE role = 'trainer' and status = 1 and email='trainer4@gmail.com'";
+                            $req3 = $conn->prepare($sql3);
+                            $req3->execute();
+                            $count = $req3->rowCount();
+                            if ($count > 0) {
+                                while ($row = $req3->fetch(PDO::FETCH_ASSOC)) {
+                                    $sqlImg = $row['profilePicture'];
+                                    $firstName3 = $row['firstName'];
+                                    $profileBio3=$row['profileBio'];
+                                    $registerDate3=$row['registerDate'];
+                                    echo "<div class='image rounded'>";
+                                    if (strlen($sqlImg) > 0) {
+                                        echo "<img src='$sqlImg'>";
+                                    } else {
+                                        echo "<img src='images/uploads/profiledefault.jpg'>";
+                                    }
+                                    echo "</div>";
+                                }
+                            } ?>
+                        <!--<div class="image rounded"><img src="images/pic07.png" alt="" /></div>-->
                         <div class="content">
                             <header>
                                 <?php
-                                $sql3 = "SELECT * FROM users WHERE role = 'trainer' and status = 1 and email='trainer4@gmail.com'";
+                                /*$sql3 = "SELECT * FROM users WHERE role = 'trainer' and status = 1 and email='trainer4@gmail.com'";
                                 $req3 = $conn->prepare($sql3);
                                 $req3->execute();
                                 $value3 = $req3->fetch(PDO::FETCH_ASSOC);
                                 $firstName3 = $value3['firstName'];
                                 $profileBio3 =$value3['profileBio'];
-                                $registerDate3=$value3['registerDate'];?>
+                                $registerDate3=$value3['registerDate'];*/?>
                                 <h4><?php echo $firstName3; ?></h4>
                                 <p><?php echo $registerDate3;?></p>
                             </header>
