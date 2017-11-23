@@ -1,14 +1,15 @@
+<?php session_start(); ?>
 <html>
     <head>
         <meta charset="UTF-8">
         <title>STPS</title>
-        <!-- Bootstrap Core CSS -->
-        <link href="bootstrap-3.3.5-dist/css/bootstrap.min.css" rel="stylesheet">
 
-        <!-- FullCalendar -->
-        <link href='fullcalendar-3.5.1/fullcalendar.css' rel='stylesheet' />
-        <link href="assets/css/calendar.css" rel="stylesheet" type="text/css"/>
-
+        
+        <script src="assets/js/jquery.min.js" rel="stylesheet"></script>
+        <script src=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js\"></script>;
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+        
+        
         <!-- Main CSS -->
         <link rel="stylesheet" href="assets/css/main.css" />
     </head>
@@ -36,9 +37,9 @@
                                     <th class="col-md-2">Action</th>
                                 </tr>
                             </thead>
-                                <?php
-                                include "scripts/listTrainers.php";
-                                ?>
+                            <?php
+                            include "scripts/listTrainers.php";
+                            ?>
                             <tfoot>
                                 <tr>
                                     <!- pagination -->
@@ -56,9 +57,6 @@
         ?>
 
         <!-- Scripts -->
-        <script src="assets/js/jquery.min.js"></script>
-        <script src="assets/js/skel.min.js"></script>
-        <script src="assets/js/util.js"></script>
-        <script src="assets/js/main.js"></script>
+
     </body>
 </html>
