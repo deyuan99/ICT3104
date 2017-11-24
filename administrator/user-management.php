@@ -183,7 +183,9 @@ session_start();
                             <div class="form-group row">
                                 <label class="form-control-label col-md-offset-2 col-md-3 col-xs-offset-0 col-xs-5 label-margin">Billing Address:</label>
                                 <div class="col-sm-5">
-                                    <input type="text" class="form-control" id="address" name="address">
+                                    <!--<input type="textarea" class="form-control" id="address" name="address" rows="3">-->
+                                    <textarea style="resize: none; width: 100%; overflow: hidden;" name="address" id="address" rows="3"></textarea>
+
                                 </div>
                             </div>
 
