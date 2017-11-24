@@ -107,7 +107,7 @@ if (isset($_SESSION['email']) && !empty($_SESSION['email'])) {
                                 </div>
                                 <div class="12u"> <h4>Membership type</h4>
                                     <input type="radio" name="category" id="category" value="trainer" required> Trainer
-                                    <input type="radio" name="category" id="category" value="trainee"> Trainee
+                                    <input type="radio" name="category" id="category" value="trainee" required> Trainee
 
                                     <select class="dropdown" name="subscription" id="member_type">
                                         <option value="" disabled selected>Select membership type</option>
@@ -143,13 +143,13 @@ if (isset($_SESSION['email']) && !empty($_SESSION['email'])) {
         <script type="text/javascript">
             $("input[type='radio'][name='category']").change(function () {
                 var selected = $("input[type='radio'][name='category']:checked").val();
-                if (selected === "trainer")
+                if (selected === "trainer") {
                     var opts = [
                         {name: "Not Applicable", val: ""}
                     ];
-					document.getElementById("member_type").required = false;
+                    document.getElementById("member_type").required = false;
 
-                else
+                } else {
                     var opts = [
                         {name: "Choose Trainee Subscription", val: ""},
                         {name: "3 months- $27", val: "3"},
@@ -158,6 +158,8 @@ if (isset($_SESSION['email']) && !empty($_SESSION['email'])) {
                     ];
                 
                     document.getElementById("member_type").required = true;
+                }    
+            
                 $("#member_type").empty();
 
                 $.each(opts, function (k, v) {
