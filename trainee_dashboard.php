@@ -65,11 +65,7 @@ $venues = $req2->fetchAll();
         <section id="one" class="wrapper style2 special">
 
             <div class="container">
-
-                <header class="major special">
-                    <h3>Hello, <?php echo $Sname; ?> </h3>
-                </header>
-
+                
                 <?php
                 $sqlProfile = "SELECT * FROM users where email='$Semail' ";
                 $result = $conn->prepare($sqlProfile);
@@ -89,6 +85,9 @@ $venues = $req2->fetchAll();
                     echo "There are no users yet!";
                 }
                 ?>
+                <header class="major special">
+                    <h3>Hello, <?php echo $lastName." ".$firstName; ?> </h3>
+                </header>
 
                 <!-- profile picture -->
                 <?php
@@ -112,9 +111,6 @@ $venues = $req2->fetchAll();
                     echo "There are no users yet!";
                 }
                 if (isset($_SESSION['email'])) {
-                    if ($_SESSION['email'] == "trainee1@gmail.com") {
-                        //echo "You are logged in as user ";
-                    }
                     echo "<form action='scripts/uploadProfileImg.php' method='POST' enctype='multipart/form-data'>
 			<div align='center'>
                             <input type='file' name='file'><br>
