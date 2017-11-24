@@ -193,7 +193,14 @@ foreach ($events as $event):
     $end = $event['endTime'];
     $combinedstart = date('Y-m-d H:i:s', strtotime("$eventdate $start"));
     $combinedend = date('Y-m-d H:i:s', strtotime("$eventdate $end"));
-
+    
+    $gid = $event['id'];
+   
+    $sql00 = "SELECT * FROM groupsessionapplicant WHERE groupSessionID = $gid";
+    $req00 = $conn->prepare($sql00);
+    $req00->execute();
+    $count = $req00->rowCount();
+    
     if (strtotime($todaydateis) > strtotime($eventdate)) {
         $color = '#DC143C';
     } else {
@@ -214,7 +221,8 @@ foreach ($events as $event):
                                 type: '<?php echo $event['trainingName']; ?>',
                                 cost: '<?php echo '$ ' . $event['cost']; ?>',
                                 color: '<?php echo $color; ?>',
-                                capacity: '<?php echo $event['groupCapacity']; ?>'
+                                capacity: '<?php echo $event['groupCapacity']; ?>',
+                                applied: '<?php echo $count; ?>'
                             },
 <?php endforeach; ?>
                     ]
@@ -230,10 +238,10 @@ foreach ($events as $event):
                             $('#ModalView #venue').val(event.venue);
                             $('#ModalView #trainingname').val(event.type);
                             $('#ModalView #cost').val(event.cost);
-                            $('#ModalView #capacity').val(event.capacity);
+                            $('#ModalView #capacity').val(event.applied + " / " + event.capacity);
                             $('#ModalView').modal('show');
                             // compare date for javascript
-                            if (new Date(datetoday).getTime() > new Date(event.date).getTime()) {
+                            if (new Date(datetoday).getTime() > new Date(event.date).getTime() || event.applied >= event.capacity ) {
                                 $('#join').hide();
                             } else {
                                 $('#join').show();
