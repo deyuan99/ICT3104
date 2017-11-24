@@ -3,6 +3,7 @@
 session_start();
 include_once '../database/dbconfig.php';
 $id = $_SESSION['email'];
+$role = $_SESSION['role'];
 
 if (isset($_POST['submit'])) {
     $file = $_FILES['file'];
@@ -27,7 +28,14 @@ if (isset($_POST['submit'])) {
                 $sql = "UPDATE users SET profilePicture='images/uploads/$fileNameNew' WHERE email='$id';";
                 $result = $conn->prepare($sql);
                 $result->execute();
-                header("Location: ../trainee_dashboard.php?uploadsuccess");
+                if($role == 'trainee'){
+                     header("Location: ../trainee_dashboard.php?uploadsuccess");
+                }
+                elseif ($role == 'trainer')
+                {
+                    header("Location: ../trainer_dashboard.php?uploadsuccess");
+                }
+               
             } else {
                 echo "Your file is too big!";
             }
