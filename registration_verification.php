@@ -82,7 +82,7 @@ if (isset($_POST['firstname']) && isset($_POST['lastname']) && isset($_POST['reg
         $query = $conn->prepare($insertsql);
 
         // send a notification to the admin
-        $msg = "A new $role has registered and is waiting for approval.";
+        $msg = $regemail . " has registered for a $role account";
         $sql2 = "INSERT into notificationlog (message, userEmail, readStatus) VALUES ('$msg', 'admin1@gmail.com', '0')";
         $query2 = $conn->prepare($sql2);
         $stmt2 = $query2->execute();
