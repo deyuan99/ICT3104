@@ -33,12 +33,13 @@ if (count($output_array) == 1) {
     $row22 = $req22->fetch(PDO::FETCH_ASSOC);
     $dateformat = $row22['date'];
     $starttime = $row22['startTime'];
+    $endtime = $row22['endTime'];
     $roomtypeid = $row22['roomTypeID'];
     $trainerEmail = $row22['trainerEmail'];
 
 
-
-    // (1)get the number from personal training on this date, roomtype and venue and startime
+/*
+    //(1)get the number from personal training on this date, roomtype and venue and startime
     $sql6 = "SELECT COUNT(*) as total_rows FROM personalsession p,roomtype r where p.roomTypeID=r.id and p.date ='$dateformat' and p.startTime = '$starttime' and r.id = '$roomtypeid'";
     $req1 = $conn->prepare($sql6);
     $req1->execute();
@@ -58,19 +59,19 @@ if (count($output_array) == 1) {
         }
     }
 
-    //(3)get the number limit base on  roomtype and venue
-    $sql12 = "SELECT capacity FROM roomtype r where r.id = '$roomtypeid' ";
-    $req3 = $conn->prepare($sql12);
-    $req3->execute();
-    $row3 = $req3->fetch(PDO::FETCH_ASSOC);
-    $capacity = $row3['capacity'];
+  (3)get the number limit base on  roomtype and venue
+   $sql12 = "SELECT capacity FROM roomtype r where r.id = '$roomtypeid' ";
+   $req3 = $conn->prepare($sql12);
+   $req3->execute();
+   $row3 = $req3->fetch(PDO::FETCH_ASSOC);
+   $capacity = $row3['capacity'];
 
-    $currenttotalevent = $totalgroupcap + $total_rows;
-  //  echo "current total event : ";
-   // echo $currenttotalevent;
-   // echo "</br>";
-   // echo "total capacity :";
-    //echo $capacity;
+  $currenttotalevent = $totalgroupcap + $total_rows;
+  echo "current total event : ";
+   echo $currenttotalevent;
+   echo "</br>";
+   echo "total capacity :";
+   echo $capacity;
 
 
     //(4) get the group cap
@@ -79,13 +80,20 @@ if (count($output_array) == 1) {
     $req33->execute();
     $row33 = $req33->fetch(PDO::FETCH_ASSOC);
     $capacityapp = $row33['groupCapacity'];
- //   echo "</br>";
- //   echo "total cap for approve event :";
-//    echo $capacityapp;
-    //comparing
-    if ($currenttotalevent >= $capacity || $currenttotalevent + $capacityapp >= $capacity) {
-        echo "<script type='text/javascript'>alert('Unable to book due to capacity reached');"
-        . "window.location.href='user-approval.php';"
+    echo "</br>";
+    echo "total cap for approve event :";
+    echo $capacityapp;
+    comparing
+  if ($currenttotalevent >= $capacity || $currenttotalevent + $capacityapp >= $capacity) {
+   */ 
+    
+    $sql9 = "SELECT * FROM groupsession where date= '$dateformat' and status = 'Approved' and roomTypeID = '$roomtypeid' and ((startTime > '$starttime' AND startTime < '$endtime') OR (endTime > '$starttime' AND endTime < '$endtime'))  ";
+    $req2 = $conn->prepare($sql9);
+    $req2->execute();
+    $resultexist = $req2->rowCount();
+    if ($resultexist > 0) {
+       echo "<script type='text/javascript'>alert('Facility being use on this timeslot');"
+       . "window.location.href='user-approval.php';"
         . "</script>";
     } else {
 
