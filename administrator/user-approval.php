@@ -73,8 +73,8 @@ require_once('../database/dbconfig.php');
                             </div>
                         </div>
                        <div style="text-align:center;">
-                            <button type="button" name="btn_approveUser" id="btn_approveUser" class="btn btn-success"><span class="glyphicon glyphicon-ok"></span>ApproveSelected</button>
-                            <button type="button" name="btn_rejectUser" id="btn_rejectUser" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span>RejectSelected</button>
+                            <button type="button" name="btn_approveUser" id="btn_approveUser" class="btn btn-success"><span class="glyphicon glyphicon-ok icon-space"></span>ApproveSelected</button>
+                            <button type="button" name="btn_rejectUser" id="btn_rejectUser" class="btn btn-danger"><span class="glyphicon glyphicon-remove icon-space"></span>RejectSelected</button>
                        </div>
                     </div>
                     <div class="tab-pane add--15-margin" id="trainer_tab">
@@ -104,8 +104,8 @@ require_once('../database/dbconfig.php');
                             </div>
                         </div>
                         <div style="text-align:center;">
-                            <button type="button" name="btn_approve" id="btn_approve" class="btn btn-success"><span class="glyphicon glyphicon-ok"></span>ApproveSelected</button>
-                            <button type="button" name="btn_reject" id="btn_reject" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span>RejectSelected</button>
+                            <button type="button" name="btn_approve" id="btn_approve" class="btn btn-success"><span class="glyphicon glyphicon-ok icon-space"></span>ApproveSelected</button>
+                            <button type="button" name="btn_reject" id="btn_reject" class="btn btn-danger"><span class="glyphicon glyphicon-remove icon-space"></span>RejectSelected</button>
                         </div>
                     </div>
                     
