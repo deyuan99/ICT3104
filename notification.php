@@ -59,12 +59,13 @@ if ($count > 0) {
                 <div class="modal-body">
              
                         <?php
+                        if ($count > 0) {
                         foreach ($notifications as $notification):
                             $message = $notification['message'];
                             echo "<div class=\"panel panel-default\">
                              <div class=\"panel-body\">
                              <span class=\"glyphicon glyphicon-pushpin\" style=\"color: maroon; margin-right:20px;\"></span>$message</div></div>";
-                        endforeach;
+                        endforeach;}
                         ?>
                     <form method="post" id="msgfrm" action="<?php echo $url; ?>">
                         <input type="submit" value="OK" class="btn btn-info btn-md col-xs-8 col-xs-offset-2" style="background: #5bc0de !important;">
