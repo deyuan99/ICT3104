@@ -67,8 +67,10 @@ $bondStatus = $userInfo['bondTo'];
                         <?php 
                         if ($bondStatus == $traineremail) {
                             echo '<button type="submit" class="btn btn-danger btn-lg" value="unbound" id="option" name="option">Unbound from Trainer</button>';
-                        } else {
+                        }  else if (empty($bondStatus)) {
                             echo '<button type="submit" class="btn btn-primary btn-lg" value="bond" id="option" name="option" onclick="return confirm(\'Are you sure? This will remove ALL your 1-1 trainings!\')">Bond to Trainer</button>';
+                        } else {
+                            echo '<button type="submit" class="btn btn-info btn-lg" value="bond" id="option" name="option" disabled>Unable to bond</button>';
                         }
                         ?>
                     </form>
@@ -158,7 +160,7 @@ $bondStatus = $userInfo['bondTo'];
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                             <?php 
-                            if (empty($bondStatus)) {
+                            if (empty($bondStatus) || $bondStatus == $traineremail) {
                                 echo '<input type="submit" id="joinBtn" class="btn btn-primary" value="Join Training"/>';
                             } else {
                                 echo '<input type="submit" id="joinBtn" class="btn" value="Join Training" disabled/>';
