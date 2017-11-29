@@ -494,7 +494,7 @@ $venues = $req2->fetchAll();
                             $('#hidden_div').show();
                         }
 
-                        var venue = $(this).find(":selected").val();
+                        var venue = $(this).find(":selected").val();                        
 //                alert(id);
                         $.ajax
                                 ({
@@ -510,10 +510,12 @@ $venues = $req2->fetchAll();
                                         //$('#roomtype').html("");
                                         $('#roomtype').html("<option value=''>- Select Room -</option>");
                                         result.forEach(function (item) {
+                                            if(item ==="OpenSpace"){
                                             $('#roomtype').append($("<option></option>")
                                                     .attr("value", item)
                                                     .text(item));
-                                        });
+                                        }
+                                    });
 
                                     }
                                 });

@@ -550,16 +550,24 @@ include "footer.php";
                     document.getElementById("typeofTraining").required = false;
                     $('#hidden_div_size').hide();
                     document.getElementById("groupsize").required = false;
+                     $("#venue").val($("#venue").data("default-value"));
+                     $("#roomtype").val($("#roomtype").data("default-value"));
+
             } else if ($('#Pcategory').val() === "1-1 Training") {
             $('#hidden_div_1v1grp').show();
                     document.getElementById("typeofTraining").required = true;
                     $('#hidden_div_size').hide();
                     document.getElementById("groupsize").required = false;
+                     $("#venue").val($("#venue").data("default-value"));
+                     $("#roomtype").val($("#roomtype").data("default-value"));
             } else {
             $('#hidden_div_1v1grp').show();
+            
                     document.getElementById("typeofTraining").required = true;
                     $('#hidden_div_size').show();
                     document.getElementById("groupsize").required = true;
+                    $("#venue").val($("#venue").data("default-value"));
+                     $("#roomtype").val($("#roomtype").data("default-value"));
             }
             });
             });
@@ -587,9 +595,18 @@ include "footer.php";
 //                            alert(result);
                             $('#roomtype').html("<option value=''>- Select Room -</option>");
                             result.forEach(function(item) {
+                           if(($('#Pcategory').val() === "1-1 Training")||$('#Pcategory').val() === "Personal Training"){
+                             if(item ==="OpenSpace"){
                             $('#roomtype').append($("<option></option>")
                                     .attr("value", item)
                                     .text(item));
+                        }
+                        }else{
+                                $('#roomtype').append($("<option></option>")
+                                    .attr("value", item)
+                                    .text(item)); 
+                        }
+                        
                             });
                     }
             });
