@@ -156,7 +156,7 @@ session_start();
                         <h4 style="color: black; text-align:center; margin-top: 12px;">EDIT USER PARTICULARS</h4>
                     </div>
                     <div class="modal-body">
-                        <form method="post" role="form" action="editUserInfo.php">
+                        <form method="post" role="form" action="editUserInfo.php" onsubmit="return validateForm()">
                             <input type="hidden" name="edit_email" id="edit_email" value="">
                             <div class="form-group row" style="margin-top: 20px;">
                                 <label class="form-control-label col-md-offset-2 col-md-3 col-xs-offset-0 col-xs-5" for="email">Email Address:</label>
@@ -275,3 +275,13 @@ session_start();
             </section>
     </body>
 </html>
+<script type="text/javascript">
+function validateForm(){
+                var regpass = document.getElementById("pass");
+
+                if(regpass.value.length < 7){
+                    alert("make sure the password is at least 8 characters long")
+                    return false;
+                }
+            }    
+</script>

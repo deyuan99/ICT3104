@@ -82,7 +82,7 @@ if (isset($_SESSION['email']) && !empty($_SESSION['email'])) {
                             <p>New account? Join now!</p>
                         </header>
                         <!--TODO validate number + pass matches-->
-                        <form method="POST" action="registration_verification.php">
+                        <form method="POST" action="registration_verification.php" onsubmit="return validate()">
                             <div class="row uniform 50%">
                                 <div class="6u 12u(xsmall)">
                                     <input type="text" name="firstname" id="firstname" value="" placeholder="First Name"  required/>
@@ -103,7 +103,7 @@ if (isset($_SESSION['email']) && !empty($_SESSION['email'])) {
                                     <input type="password" name="regpass" id="regpass" value="" placeholder="Password" required/>
                                 </div>
                                 <div class="12u">
-                                    <input type="password" name="regconfpass" id="regconfpass" value="" placeholder="Confirm Password" required/>
+                                    <input type="password" name="regconfpass" id="regconfpass" value="" placeholder="Confirm Password" required/><span id='message'></span>
                                 </div>
                                 <div class="12u"> <h4>Membership type</h4>
                                     <input type="radio" name="category" id="category" value="trainer" required> Trainer
@@ -141,7 +141,26 @@ if (isset($_SESSION['email']) && !empty($_SESSION['email'])) {
         <script src="assets/js/main.js"></script>
 
         <script type="text/javascript">
-            $("input[type='radio'][name='category']").change(function () {
+         function validate(){
+                var regpass = document.getElementById("regpass");
+                var regconfpass = document.getElementById("regconfpass");
+                var phone = document.getElementById("phone");
+
+                if(regpass.value.length < 7){
+                    alert("make sure the password is at least 8 characters long")
+                    return false;
+                }
+                if(regpass.value !== regconfpass.value){
+                    alert("password and confirm password are not the same")
+                    return false;
+                }
+                if(phone.value.length < 7){
+                    alert("phone number need to be 8 characters long")
+                    return false;
+                }
+            }      
+    
+    $("input[type='radio'][name='category']").change(function () {
                 var selected = $("input[type='radio'][name='category']:checked").val();
                 if (selected === "trainer") {
                     var opts = [
@@ -167,6 +186,16 @@ if (isset($_SESSION['email']) && !empty($_SESSION['email'])) {
 
                 });
             });
+            
+            $('#regpass, #regconfpass').on('keyup', function () {
+                if ($('#regpass').val() == $('#regconfpass').val()) {
+                    $('#message').html('Matching').css('color', 'green');
+                } else 
+                    $('#message').html('Not Matching').css('color', 'red');
+            });
+            
+            
+       
         </script>
 
     </body>

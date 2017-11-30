@@ -92,4 +92,19 @@ $('#password, #cfmpassword').on('keyup', function () {
     } else 
         $('#message').html('Not Matching').css('color', 'red');
 });
+
+
+         function validateForm(){
+                var regpass = document.getElementById("password");
+                var regconfpass = document.getElementById("cfmpassword");
+
+                if(regpass.value.length < 7){
+                    alert("make sure the password is at least 8 characters long")
+                    return false;
+                }
+                if(regpass.value !== regconfpass.value){
+                    alert("password and confirm password are not the same")
+                    return false;
+                }
+            }    
 </script>
