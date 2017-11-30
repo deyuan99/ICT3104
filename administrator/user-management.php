@@ -47,16 +47,25 @@ session_start();
                 document.getElementById("edit_pass").value = "";
                 document.getElementById("edit_pass").value = password;
             }
-            function setViewInfo(email, firstName, lastName, address, mobile, registerDate,profileBio,profilePicture )
-            {
-                document.getElementById("email").innerHTML = email;
-                document.getElementById("firstName").innerHTML = firstName;
-                document.getElementById("lastName").innerHTML = lastName;
-                document.getElementById("address").innerHTML = address;
-                document.getElementById("mobile").innerHTML = mobile;
-                document.getElementById("registerDate").innerHTML = registerDate;
-                document.getElementById("profileBio").innerHTML = profileBio;
-                document.getElementById("profilePicture").innerHTML = profilePicture;
+            function setViewInfo(email, firstName, lastName, address, mobile, registerDate,profileBio,profilePicture,role)
+            {   
+                if(profilePicture===""){
+                    profilePicture = "images/uploads/profiledefault.jpg";
+                }
+                if(role==="trainee"){
+                    $('#bio').hide();
+                }
+                else{
+                    $('#bio').show();
+                }
+                document.getElementById("email5").innerHTML = email;
+                document.getElementById("firstName5").innerHTML = firstName;
+                document.getElementById("lastName5").innerHTML = lastName;
+                document.getElementById("address5").innerHTML = address;
+                document.getElementById("mobile5").innerHTML = mobile;
+                document.getElementById("registerDate5").innerHTML = registerDate;
+                document.getElementById("profileBio5").innerHTML = profileBio;
+                document.getElementById("profilePicture5").src = "../"+profilePicture;
                 
             }
         </script>
@@ -115,7 +124,7 @@ session_start();
                                                 <th class="col-md-1">Last Name</th>
                                                 <th class="col-md-1">Billing Address</th>
                                                 <th class="col-md-1">Mobile</th>
-                                                <th class="col-md-2">Bio</th>
+                                                <!--<th class="col-md-2">Bio</th>-->
                                                 <th class="col-md-1">Featured</th>
                                                 <th class="col-md-3">Action</th>
                                             </tr>
@@ -157,7 +166,7 @@ session_start();
                 </div>
             </div>
           <div class="modal fade" id="viewUserModal" tabindex="-1" role="dialog" style="padding-top: 70px;">
-            <div class="modal-dialog">
+            <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal">
@@ -168,60 +177,58 @@ session_start();
                     </div>
                     <div class="modal-body">
                         <form method="post" role="form" action="viewUserInfo.php" >
-                            
-                            <div class="form-group row" style="margin-top: 20px;">
-                                <div style="width:50px; height:50px;" id="profilePicture">
-                                <img src="images/pic04.png" alt="" value="<?php echo $profilePicture; ?>" readonly/> 
+                            <div class="form-group row">
+                                <div class="col-md-2 col-md-offset-5">
+                                    <img src="" alt="" value="" id="profilePicture5" style="width:100%;"/> 
                                 </div>
                             </div>
                             
-                            <!--<input type="hidden" name="edit_email" id="edit_email" value="">-->
                             <div class="form-group row" >
                                 <label class="form-control-label col-md-offset-2 col-md-3 col-xs-offset-0 col-xs-5" for="email">Email Address:</label>
-                                <div class="col-sm-5" id="email">
-                                    <input type="text" class="form-control" id="edit_email" name="edit_email" value="<?php echo $email; ?>" readonly/>
+                                <div class="col-sm-5" id="email5">
+                                    <input type="text" class="form-control" id="edit_email5" name="edit_email" value="<?php echo $email; ?>" readonly/>
                                 </div> 
                             </div>
                             
                             <div class="form-group row">
                                 <label class="form-control-label col-md-offset-2 col-md-3 col-xs-offset-0 col-xs-5" >First Name:</label>
-                                <div class="col-sm-5" id="firstName">
-                                    <input type="text" class="form-control" id="firstName" name="firstName" value="<?php echo $firstName; ?>" readonly/>
+                                <div class="col-sm-5" id="firstName5">
+                                    <input type="text" class="form-control" id="firstName5" name="firstName" value="<?php echo $firstName; ?>" readonly/>
                                 </div>
                             </div>
                             
                             <div class="form-group row">
                                 <label class="form-control-label col-md-offset-2 col-md-3 col-xs-offset-0 col-xs-5 label-margin">Last Name:</label>
-                                <div class="col-sm-5" id="lastName">
-                                    <input type="text" class="form-control" id="lastName" name="lastName" value="<?php echo $lastName; ?>" readonly/>
+                                <div class="col-sm-5" id="lastName5">
+                                    <input type="text" class="form-control" id="lastName5" name="lastName" value="<?php echo $lastName; ?>" readonly/>
                                 </div>
                             </div>
                             
                             <div class="form-group row">
                                 <label class="form-control-label col-md-offset-2 col-md-3 col-xs-offset-0 col-xs-5 label-margin">Join Since:</label>
-                                <div class="col-sm-5" id="registerDate">
-                                    <input type="text" class="form-control" id="registerDate" name="registerDate" value="<?php echo $registerDate; ?>" readonly/>
+                                <div class="col-sm-5" id="registerDate5">
+                                    <input type="text" class="form-control" id="registerDate5" name="registerDate" value="<?php echo $registerDate; ?>" readonly/>
                                 </div>
                             </div>
                             
-                            <div class="form-group row">
+                            <div class="form-group row" id="bio">
                                 <label class="form-control-label col-md-offset-2 col-md-3 col-xs-offset-0 col-xs-5 label-margin">ProfileBio:</label>
-                                <div class="col-sm-5" id="profileBio">
-                                    <input type="text" class="form-control" id="profileBio" name="profileBio" value="<?php echo $profileBio; ?>" readonly/>
+                                <div class="col-sm-5" id="profileBio5">
+                                    <input type="text" class="form-control" id="profileBio5" name="profileBio" value="<?php echo $profileBio; ?>" readonly/>
                                 </div>
                             </div>
                             
                             <div class="form-group row">
                                 <label class="form-control-label col-md-offset-2 col-md-3 col-xs-offset-0 col-xs-5 label-margin">Address:</label>
-                                <div class="col-sm-5" id="address">
-                                    <input type="text" class="form-control" id="address" name="address" value="<?php echo $address; ?>" readonly/>
+                                <div class="col-sm-5" id="address5">
+                                    <input type="text" class="form-control" id="address5" name="address" value="<?php echo $address; ?>" readonly/>
                                 </div>
                             </div>
                             
                             <div class="form-group row">
                                 <label class="form-control-label col-md-offset-2 col-md-3 col-xs-offset-0 col-xs-5 label-margin">Phone Number:</label>
-                                <div class="col-sm-5" id="mobile">
-                                    <input type="text" class="form-control" id="mobile" name="mobile" value="<?php echo $mobile; ?>" readonly/>
+                                <div class="col-sm-5" id="mobile5">
+                                    <input type="text" class="form-control" id="mobile5" name="mobile" value="<?php echo $mobile; ?>" readonly/>
                                 </div>
                             </div>
                             
