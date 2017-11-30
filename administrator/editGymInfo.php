@@ -26,7 +26,7 @@ if ($table == 'venue') {
     $contact = empty($_POST['fourth']) ? $venueID : $_POST['fourth'];
 
 
-    $sql = "UPDATE venue SET location = '$location', address = '$address', contactNo = '$contact' WHERE id = '$id'";
+    $sql = "UPDATE venue SET location = '$location', address = '$address', contact = '$contact' WHERE id = '$id'";
     $req = $conn->prepare($sql);
     $req->execute();
 
