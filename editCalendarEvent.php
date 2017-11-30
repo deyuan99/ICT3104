@@ -81,6 +81,21 @@ if (isset($_POST['delete']) && isset($_POST['id'])) {
             if ($hourdiff < 48) {
                 echo "<script> cancel(); </script>";
             } else {
+                // Notification to trainer
+                $sql22 = "SELECT * FROM personalsession where id = '$id' ";
+                $req22 = $conn->prepare($sql22);
+                $req22->execute();
+                $row22 = $req22->fetch(PDO::FETCH_ASSOC);
+                $dateformat = $row22['date'];
+                $starttime = $row22['startTime'];
+                $endtime = $row22['endTime'];
+                $trainerEmail = $row22['trainerEmail'];
+
+                // send a notification to the trainer
+                $msg5 = "Trainee $Semail has left your 1-1 training on $dateformat at $starttimes";
+                $sql5 = "INSERT into notificationlog (message, userEmail, readStatus) VALUES ('$msg5', '$trainerEmail', '0')";
+                $query5 = $conn->prepare($sql5);
+                $query5->execute();
                 
                 $sql   = "UPDATE personalsession SET traineeEmail = '' WHERE id = '$id' ";
                 $query = $conn->prepare($sql);

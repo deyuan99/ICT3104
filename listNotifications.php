@@ -11,7 +11,7 @@ else
     $url = "readNotification.php";
     require_once('database/dbconfig.php');
 }
-$sql = "SELECT * FROM notificationlog WHERE userEmail = '$user' AND readStatus = 0";
+$sql = "SELECT * FROM notificationlog WHERE userEmail = '$user' AND readStatus = 0 ORDER BY id DESC";
 $req = $conn->prepare($sql);
 $req->execute();
 $notificationsUnread = $req->fetchAll();

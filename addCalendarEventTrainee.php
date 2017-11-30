@@ -54,7 +54,7 @@ if ($req->rowCount() >= 1) {
     }
     
     // send a notification to the trainer
-    $msg    = "A Trainee - $useremail, has decided to join your 1-1 training on $date at $starttime.";
+    $msg    = "Trainee $email has joined your 1-1 training on $date at $starttime";
     $sql3   = "INSERT into notificationlog (message, userEmail, readStatus) VALUES ('$msg', '$trainerEmail', '0')";
     $query3 = $conn->prepare($sql3);
     $stmt3  = $query3->execute();
