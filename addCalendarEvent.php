@@ -23,7 +23,6 @@ if (isset($_POST['category']) && isset($_POST['starttime']) && isset($_POST['end
        // $sql1 = "select * from personalsession where date = '$dateformat' AND startTime = '$starttime' AND endTime = '$endtime' AND traineeEmail = '$Semail'";
         // 1) check if already book at starttime 2)its booked at the end time and the last one 3) check is already book in between
         $sql1 = "select * from personalsession where date = '$dateformat' AND ((startTime <= '$starttime' AND '$starttime' < endTime) OR (startTime < '$endtime' AND '$endtime' < endTime) OR ('$starttime' < startTime AND startTime < '$endtime')) AND traineeEmail = '$Semail'";
-        echo $sql1;
         $req  = $conn->prepare($sql1);
         $req->execute();
         

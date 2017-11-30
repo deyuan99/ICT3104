@@ -89,7 +89,7 @@ if(isset($_POST["id"]))
  {
   
     // copy from userapproval to users table
-    $sql = "INSERT INTO users (email, firstName, lastName, phoneNumber, profilePicture, role, password, address, subscription, registerDate, expiryDate) SELECT * FROM userapproval WHERE email = '$email'";
+    $sql = "INSERT INTO users (email, firstName, lastName, phoneNumber, profilePicture, role, password, address, subscription, expiryDate, registerDate) SELECT * FROM userapproval WHERE email = '$email'";
     $query = $conn->prepare($sql);
     $stmt = $query->execute();
 

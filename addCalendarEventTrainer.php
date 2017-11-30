@@ -88,9 +88,9 @@ if (isset($_POST['Pcategory']) && isset($_POST['starttime']) && isset($_POST['en
                         }
                         
                         if ($query) {
-                            //   echo "<script type='text/javascript'>alert('submitted successfully!');"
-                            //     . "window.location.href='trainer_dashboard.php';"
-                            //     . "</script>";
+                               echo "<script type='text/javascript'>alert('submitted successfully!');"
+                                 . "window.location.href='trainer_dashboard.php';"
+                                 . "</script>";
                         } else {
                             echo "<script type='text/javascript'>alert('failed');" . "window.location.href='trainer_dashboard.php';" . "</script>";
                         }
