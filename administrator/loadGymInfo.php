@@ -11,12 +11,14 @@ function getVenue() {
             $id = $row['id'];
             $location = $row['location'];
             $address = $row['address'];
+            $contact = $row['contact'];
             echo "<tr>";
             echo "<td class=\"col-md-1\">$id</td>";
-            echo "<td class=\"col-md-3\">$location</td>";
+            echo "<td class=\"col-md-2\">$location</td>";
             echo "<td class=\"col-md-5\">$address</td>";
+            echo "<td class=\"col-md-1\">$contact</td>";
             echo "<td class=\"col-md-3 padding-l15-r15\" >";
-            echo "<a data-toggle=\"modal\" data-target=\"#editGymModal\" onclick=\"setEditInfo('venue', '$id','$location', '$address')\" class=\"btn btn-info btn-sm col-md-5\"><span class=\"glyphicon glyphicon-pencil icon-space\"></span>EDIT</a>";
+            echo "<a data-toggle=\"modal\" data-target=\"#editGymModal\" onclick=\"setEditInfo('venue', '$id','$location', '$address', '$contact')\" class=\"btn btn-info btn-sm col-md-5\"><span class=\"glyphicon glyphicon-pencil icon-space\"></span>EDIT</a>";
             echo "<a data-toggle=\"modal\" data-target=\"#deleteModal\" onclick=\"setDeleteInfo('venue', '$id','$location')\" class=\"btn btn-danger btn-sm col-md-offset-1 col-md-6\"><span class=\"glyphicon glyphicon-remove icon-space\"></span>DELETE</a>";
             echo "</td></tr>";
         endforeach;

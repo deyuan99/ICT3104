@@ -14,6 +14,7 @@ if ($table == 'venue') {
         foreach ($rows as $row):
             $location = $row['location'];
             $address = $row['address'];
+            $contact = $row['contact'];
         endforeach;
     }
     else {
@@ -22,9 +23,10 @@ if ($table == 'venue') {
 
     $location = empty($_POST['name']) ? $location : $_POST['name'];
     $address = empty($_POST['third']) ? $address : $_POST['third'];
+    $contact = empty($_POST['fourth']) ? $venueID : $_POST['fourth'];
 
 
-    $sql = "UPDATE venue SET location = '$location', address ='$address' WHERE id = '$id'";
+    $sql = "UPDATE venue SET location = '$location', address = '$address', contactNo = '$contact' WHERE id = '$id'";
     $req = $conn->prepare($sql);
     $req->execute();
 

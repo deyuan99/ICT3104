@@ -45,13 +45,23 @@ session_start();
                 }
 
                 if (fourth) {
-                    document.getElementById("fourthdiv").innerHTML =
+                    if (table == "venue") {
+                        document.getElementById("fourthdiv").innerHTML =
+                            "<input type='hidden' name='edit_forth' id='edit_forth' value='" + fourth + "'>" +
+                            "<div class='form-group row'>" +
+                            "<label class='form-control-label col-md-offset-2 col-md-3 col-xs-offset-0 col-xs-5 label-margin'>Contact:</label>" +
+                            "<div class='col-sm-5'>" +
+                            "<input type='text' class='form-control' id='fourth' name='fourth' value='' placeholder='" + fourth + "'>" +
+                            "</div>";
+                    } else if (table == "room") {
+                        document.getElementById("fourthdiv").innerHTML =
                             "<input type='hidden' name='edit_forth' id='edit_forth' value='" + fourth + "'>" +
                             "<div class='form-group row'>" +
                             "<label class='form-control-label col-md-offset-2 col-md-3 col-xs-offset-0 col-xs-5 label-margin'>VenueID:</label>" +
                             "<div class='col-sm-5'>" +
                             "<input type='text' class='form-control' id='fourth' name='fourth' value='' placeholder='" + fourth + "'>" +
                             "</div>";
+                    }
                 } else {
                     document.getElementById("fourthdiv").innerHTML = "";
                 }
@@ -83,8 +93,9 @@ session_start();
                                         <thead>
                                             <tr>
                                                 <th class="col-md-1">ID</th>
-                                                <th class="col-md-3">Location</th>
+                                                <th class="col-md-2">Location</th>
                                                 <th class="col-md-5">Address</th>
+                                                <th class="col-md-1">Contact No</th>
                                                 <th class="col-md-3">Action</th>
                                             </tr>
                                         </thead>
