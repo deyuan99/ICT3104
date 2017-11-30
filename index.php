@@ -52,9 +52,7 @@ if (isset($_SESSION['email']) && !empty($_SESSION['email'])) {
                         </header>
                     </div>
                     <div class="6u 12u(medium)">
-                        <!--<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Non ea mollitia corporis id, distinctio sunt veritatis officiis dolore reprehenderit deleniti voluptatibus harum magna, doloremque alias quisquam minus, eaque. Feugiat quod, nesciunt! Iste quos ipsam, iusto sit esse.</p>
-                        <p>Dolorum aspernatur maxime libero ratione quidem distinctio, placeat fugiat laborum voluptatum enim neque soluta vel sunt id ex veritatis. Labore rerum, odit sapiente, alias mollitia magnam exercitationem modi amet earum quia atque ipsum voluptas asperiores quas laboriosam.</p>
-                    -->
+                        
                     <p>Working with a personal trainer is the first step to improving your health and fitness. People of all shapes and sizes, people with all types of goals have been proven to have better success when working with a personal trainer. 
                     At STPS Fitness we have over 20 trainers that have all different backgrounds so that our clients can get the results they want.</p>
                     <p>We want to help make fitness a part of your life, STPS's clients can enjoy new found or improved levels of energy and fitness. Life is better when we are healthy.</p>
@@ -72,18 +70,11 @@ if (isset($_SESSION['email']) && !empty($_SESSION['email'])) {
                 </header>
                 <div class="row 150%">
                    
-                    <div id="carouselExampleControls" class="carousel slide" data-ride="carousel" style="text-align:center; width:1000px;">
+                    <div id="carouselExampleControls" class="carousel slide" data-ride="carousel" style="text-align:center; width:100%; height:300px;">
                         <div class="carousel-inner" role="listbox">
-                            <?php
-                            $sql11 = "SELECT * FROM promotions WHERE featuredStatus = 1";
-                            $stmt1 = $conn->prepare($sql11);
-                            $stmt1->execute();
-                            $value2 = $stmt1->fetch(PDO::FETCH_ASSOC);
-                            $sqlImg = $value2['imagePath'];
                             
-                            ?>
                             <div class="carousel-item active">
-                              <img class="d-block img-fluid" src="<?php echo $sqlImg; ?>" width="100%" height="200" alt="First slide">
+                                <img class="d-block img-fluid" src="images/pic01.jpg" width="100%" height="300" alt="First slide">
                             </div>
                         <?php
                             $sqlpromo = "SELECT * FROM promotions WHERE featuredStatus = 1";
@@ -101,7 +92,7 @@ if (isset($_SESSION['email']) && !empty($_SESSION['email'])) {
 
                               ?>
                             <div class="carousel-item ">
-                                <img src="<?php echo $sqlImg; ?>"  width="100%" height="200">
+                                <img src="<?php echo $sqlImg; ?>"  width="100%" height="300">
                                
                                <div class="carousel-caption d-none d-md-block">
                                   <h2><?php echo $title; ?></h2>
@@ -207,13 +198,7 @@ if (isset($_SESSION['email']) && !empty($_SESSION['email'])) {
                     <div class="feature">
                         <?php
                             $sql = "SELECT * FROM users WHERE role = 'trainer' and status = 1 and email='trainer1@gmail.com'";
-                            //$req = $conn->prepare($sql);
-                            //$req->execute();
-                            //$value = $req->fetch(PDO::FETCH_ASSOC);
-                            //$firstName = $value['firstName'];
-                            //$profileBio=$value['profileBio'];
-                            //$registerDate=$value['registerDate'];
-                            
+                          
                             $req5 = $conn->prepare($sql);
                             $req5->execute();
                             $count = $req5->rowCount();
@@ -232,7 +217,6 @@ if (isset($_SESSION['email']) && !empty($_SESSION['email'])) {
                                     echo "</div>";
                                 }
                             } ?>
-                        <!--<div class="image rounded"><img src="images/pic04.png" alt="" /></div>-->
                         <div class="content">
                             <header>
                                 <h4><?php echo $firstName; ?></h4>
@@ -246,8 +230,8 @@ if (isset($_SESSION['email']) && !empty($_SESSION['email'])) {
                             $sql1 = "SELECT * FROM users WHERE role = 'trainer' and status = 1 and email='trainer2@gmail.com'";
                             $req1 = $conn->prepare($sql1);
                             $req1->execute();
-                            $count = $req1->rowCount();
-                            if ($count > 0) {
+                            $count2 = $req1->rowCount();
+                            if ($count2 > 0) {
                                 while ($row = $req1->fetch(PDO::FETCH_ASSOC)) {
                                     $sqlImg = $row['profilePicture'];
                                     $firstName1 = $row['firstName'];
@@ -262,17 +246,8 @@ if (isset($_SESSION['email']) && !empty($_SESSION['email'])) {
                                     echo "</div>";
                                 }
                             } ?>
-                        <!--<div class="image rounded"><img src="images/pic05.png" alt="" /></div>-->
                         <div class="content">
                             <header>
-                                <?php
-                                /*$sql1 = "SELECT * FROM users WHERE role = 'trainer' and status = 1 and email='trainer2@gmail.com'";
-                                $req1 = $conn->prepare($sql1);
-                                $req1->execute();
-                                $value1 = $req1->fetch(PDO::FETCH_ASSOC);
-                                $firstName1 = $value1['firstName'];
-                                $profileBio1=$value1['profileBio'];
-                                $registerDate1=$value1['registerDate'];*/?>
                                 <h4><?php echo $firstName1; ?></h4>
                                 <p><?php echo $registerDate1;?></p>
                             </header>
@@ -284,8 +259,8 @@ if (isset($_SESSION['email']) && !empty($_SESSION['email'])) {
                             $sql2 = "SELECT * FROM users WHERE role = 'trainer' and status = 1 and email='trainer3@gmail.com'";
                             $req2 = $conn->prepare($sql2);
                             $req2->execute();
-                            $count = $req2->rowCount();
-                            if ($count > 0) {
+                            $count3 = $req2->rowCount();
+                            if ($count3 > 0) {
                                 while ($row = $req2->fetch(PDO::FETCH_ASSOC)) {
                                     $sqlImg = $row['profilePicture'];
                                     $firstName2 = $row['firstName'];
@@ -300,17 +275,8 @@ if (isset($_SESSION['email']) && !empty($_SESSION['email'])) {
                                     echo "</div>";
                                 }
                             } ?>
-                        <!--<div class="image rounded"><img src="images/pic06.png" alt="" /></div>-->
                         <div class="content">
                             <header>
-                                <?php
-                                /*$sql2 = "SELECT * FROM users WHERE role = 'trainer' and status = 1 and email='trainer3@gmail.com'";
-                                $req2 = $conn->prepare($sql2);
-                                $req2->execute();
-                                $value2 = $req2->fetch(PDO::FETCH_ASSOC);
-                                $firstName2 = $value2['firstName'];
-                                $profileBio2 =$value2['profileBio'];
-                                $registerDate2=$value2['registerDate'];*/?>
                                 <h4><?php echo $firstName2; ?></h4>
                                 <p><?php echo $registerDate2;?></p>
                             </header>
@@ -322,8 +288,8 @@ if (isset($_SESSION['email']) && !empty($_SESSION['email'])) {
                             $sql3 = "SELECT * FROM users WHERE role = 'trainer' and status = 1 and email='trainer4@gmail.com'";
                             $req3 = $conn->prepare($sql3);
                             $req3->execute();
-                            $count = $req3->rowCount();
-                            if ($count > 0) {
+                            $count4 = $req3->rowCount();
+                            if ($count4 > 0) {
                                 while ($row = $req3->fetch(PDO::FETCH_ASSOC)) {
                                     $sqlImg = $row['profilePicture'];
                                     $firstName3 = $row['firstName'];
@@ -338,17 +304,8 @@ if (isset($_SESSION['email']) && !empty($_SESSION['email'])) {
                                     echo "</div>";
                                 }
                             } ?>
-                        <!--<div class="image rounded"><img src="images/pic07.png" alt="" /></div>-->
                         <div class="content">
                             <header>
-                                <?php
-                                /*$sql3 = "SELECT * FROM users WHERE role = 'trainer' and status = 1 and email='trainer4@gmail.com'";
-                                $req3 = $conn->prepare($sql3);
-                                $req3->execute();
-                                $value3 = $req3->fetch(PDO::FETCH_ASSOC);
-                                $firstName3 = $value3['firstName'];
-                                $profileBio3 =$value3['profileBio'];
-                                $registerDate3=$value3['registerDate'];*/?>
                                 <h4><?php echo $firstName3; ?></h4>
                                 <p><?php echo $registerDate3;?></p>
                             </header>
@@ -363,17 +320,30 @@ if (isset($_SESSION['email']) && !empty($_SESSION['email'])) {
             <div class="container">
                 <header class="major">
                     <h2>Contact Us</h2>
-                    <p>STPS FITNESS @Jurong</p>
-                    <p> 21 Jurong East Street 31, Singapore 609517 </p> 
-                    <p> Number: 60987654 </p>
-                    <br><br>
-                    <p>STPS FITNESS Bishan</p>
-                    <p>5 Bishan Street 14, Singapore 579783</p>
-                    <p>   Number: 60981234 </p>
+                    <?php
+                        $sqlu = "SELECT * FROM venue";
+                        $rq3 = $conn->prepare($sqlu);
+                        $rq3->execute();
+                        $result3 = $rq3->fetchAll();
+                        if(count($result3) > 0) {
+                            foreach ($result3 as $row):
+                                $location = $row['location'];
+                                $address =$row['address'];
+                                $contact=$row['contact'];
+                                echo "<p>$location</p>";
+                                echo "<p>$address</p>";
+                                echo "<p>$contact</p>";
+                                echo "<br><br>";
+                            endforeach;
+                        }
+                        else {
+                            echo "No Rejected events record found";
+                        }
+                        ?>
                 </header>
-                <ul class="actions">
+                <!--<ul class="actions">
                     <li><a href="#" class="button special big">Get in touch</a></li>
-                </ul>
+                </ul>-->
             </div>
         </section>
 
