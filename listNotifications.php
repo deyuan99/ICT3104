@@ -16,7 +16,7 @@ $req = $conn->prepare($sql);
 $req->execute();
 $notificationsUnread = $req->fetchAll();
 
-$sql2 = "SELECT * FROM notificationlog WHERE userEmail = '$user' AND readStatus = 1";
+$sql2 = "SELECT * FROM notificationlog WHERE userEmail = '$user' AND readStatus = 1 ORDER BY id DESC";
 $req2 = $conn->prepare($sql2);
 $req2->execute();
 $notificationsRead = $req2->fetchAll();

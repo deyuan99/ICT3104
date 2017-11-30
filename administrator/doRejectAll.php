@@ -12,6 +12,20 @@ if(isset($_POST["id"]))
 {
  foreach($_POST["id"] as $id)
  {
+    $sql5 = "SELECT * FROM groupsession WHERE id = '$id'";
+    $query5 = $conn->prepare($sql5);
+    $stmt5 = $query5->execute();
+    $row22 = $query5->fetch(PDO::FETCH_ASSOC);
+    $dateformat = $row22['date'];
+    $starttime = $row22['startTime'];
+    $roomtypeid = $row22['roomTypeID'];
+    $trainerEmail = $row22['trainerEmail'];
+
+    // send a notification to the trainer
+    $msg = "Your group session on $dateformat at $starttime has been rejected.";
+    $sql2 = "INSERT into notificationlog (message, userEmail, readStatus) VALUES ('$msg', '$trainerEmail', '0')";
+    $query2 = $conn->prepare($sql2);
+    $stmt2 = $query2->execute();
   
     $sql4 = "UPDATE groupsession SET status = 'Rejected' WHERE id = '$id'";
     $query5 = $conn->prepare($sql4);

@@ -47,6 +47,18 @@ session_start();
                 document.getElementById("edit_pass").value = "";
                 document.getElementById("edit_pass").value = password;
             }
+            function setViewInfo(email, firstName, lastName, address, mobile, registerDate,profileBio,profilePicture )
+            {
+                document.getElementById("email").innerHTML = email;
+                document.getElementById("firstName").innerHTML = firstName;
+                document.getElementById("lastName").innerHTML = lastName;
+                document.getElementById("address").innerHTML = address;
+                document.getElementById("mobile").innerHTML = mobile;
+                document.getElementById("registerDate").innerHTML = registerDate;
+                document.getElementById("profileBio").innerHTML = profileBio;
+                document.getElementById("profilePicture").innerHTML = profilePicture;
+                
+            }
         </script>
     </head>
     <body>
@@ -144,7 +156,85 @@ session_start();
                     </div>
                 </div>
             </div>
-             
+          <div class="modal fade" id="viewUserModal" tabindex="-1" role="dialog" style="padding-top: 70px;">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">
+                            <span aria-hidden="true">&times;</span>
+                            <span class="sr-only">Close</span>
+                        </button>
+                        <h4 style="color: black; text-align:center; margin-top: 12px;">View User Profile</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form method="post" role="form" action="viewUserInfo.php" >
+                            
+                            <div class="form-group row" style="margin-top: 20px;">
+                                <div style="width:50px; height:50px;" id="profilePicture">
+                                <img src="images/pic04.png" alt="" value="<?php echo $profilePicture; ?>" readonly/> 
+                                </div>
+                            </div>
+                            
+                            <!--<input type="hidden" name="edit_email" id="edit_email" value="">-->
+                            <div class="form-group row" >
+                                <label class="form-control-label col-md-offset-2 col-md-3 col-xs-offset-0 col-xs-5" for="email">Email Address:</label>
+                                <div class="col-sm-5" id="email">
+                                    <input type="text" class="form-control" id="edit_email" name="edit_email" value="<?php echo $email; ?>" readonly/>
+                                </div> 
+                            </div>
+                            
+                            <div class="form-group row">
+                                <label class="form-control-label col-md-offset-2 col-md-3 col-xs-offset-0 col-xs-5" >First Name:</label>
+                                <div class="col-sm-5" id="firstName">
+                                    <input type="text" class="form-control" id="firstName" name="firstName" value="<?php echo $firstName; ?>" readonly/>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group row">
+                                <label class="form-control-label col-md-offset-2 col-md-3 col-xs-offset-0 col-xs-5 label-margin">Last Name:</label>
+                                <div class="col-sm-5" id="lastName">
+                                    <input type="text" class="form-control" id="lastName" name="lastName" value="<?php echo $lastName; ?>" readonly/>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group row">
+                                <label class="form-control-label col-md-offset-2 col-md-3 col-xs-offset-0 col-xs-5 label-margin">Join Since:</label>
+                                <div class="col-sm-5" id="registerDate">
+                                    <input type="text" class="form-control" id="registerDate" name="registerDate" value="<?php echo $registerDate; ?>" readonly/>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group row">
+                                <label class="form-control-label col-md-offset-2 col-md-3 col-xs-offset-0 col-xs-5 label-margin">ProfileBio:</label>
+                                <div class="col-sm-5" id="profileBio">
+                                    <input type="text" class="form-control" id="profileBio" name="profileBio" value="<?php echo $profileBio; ?>" readonly/>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group row">
+                                <label class="form-control-label col-md-offset-2 col-md-3 col-xs-offset-0 col-xs-5 label-margin">Address:</label>
+                                <div class="col-sm-5" id="address">
+                                    <input type="text" class="form-control" id="address" name="address" value="<?php echo $address; ?>" readonly/>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group row">
+                                <label class="form-control-label col-md-offset-2 col-md-3 col-xs-offset-0 col-xs-5 label-margin">Phone Number:</label>
+                                <div class="col-sm-5" id="mobile">
+                                    <input type="text" class="form-control" id="mobile" name="mobile" value="<?php echo $mobile; ?>" readonly/>
+                                </div>
+                            </div>
+                            
+                        </form>
+                    </div>
+                    
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">CLOSE</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+            
         <div class="modal fade" id="editUserModal" tabindex="-1" role="dialog" style="padding-top: 70px;">
             <div class="modal-dialog">
                 <div class="modal-content">

@@ -73,8 +73,8 @@ require_once('../database/dbconfig.php');
                             </div>
                         </div>
                        <div style="text-align:center;">
-                            <button type="button" name="btn_approveUser" id="btn_approveUser" class="btn btn-success"><span class="glyphicon glyphicon-ok icon-space"></span>ApproveSelected</button>
-                            <button type="button" name="btn_rejectUser" id="btn_rejectUser" class="btn btn-danger"><span class="glyphicon glyphicon-remove icon-space"></span>RejectSelected</button>
+                            <button type="button" name="btn_approveUser" id="btn_approveUser" class="btn btn-success"><span class="glyphicon glyphicon-ok icon-space"></span>Approve Selected</button>
+                            <button type="button" name="btn_rejectUser" id="btn_rejectUser" class="btn btn-danger"><span class="glyphicon glyphicon-remove icon-space"></span>Reject Selected</button>
                        </div>
                     </div>
                     <div class="tab-pane add-15-margin" id="trainer_tab">
@@ -104,81 +104,10 @@ require_once('../database/dbconfig.php');
                             </div>
                         </div>
                         <div style="text-align:center;">
-                            <button type="button" name="btn_approve" id="btn_approve" class="btn btn-success"><span class="glyphicon glyphicon-ok icon-space"></span>ApproveSelected</button>
-                            <button type="button" name="btn_reject" id="btn_reject" class="btn btn-danger"><span class="glyphicon glyphicon-remove icon-space"></span>RejectSelected</button>
+                            <button type="button" name="btn_approve" id="btn_approve" class="btn btn-success"><span class="glyphicon glyphicon-ok icon-space"></span>Approve Selected</button>
+                            <button type="button" name="btn_reject" id="btn_reject" class="btn btn-danger"><span class="glyphicon glyphicon-remove icon-space"></span>Reject Selected</button>
                         </div>
                     </div>
-                    
-<!--                    <div class="tab-pane add--15-margin" id="approvel_reject_tab">
-                        <div class="panel panel-default margin-l0-r0">
-                            <div class="panel-heading">
-                                <div class="panel-title">Approved Group-Training</div>
-                            </div>
-                            <div class="table-responsive my-table-style">
-                                <table id="esa-table" class="table table-striped table-bordered" cellspacing="0" width="100%" >
-                                    <thead>
-                                        <tr>
-                                            <th class="col-md-2">Email Address</th>
-                                            <th class="col-md-1">Venue</th>
-                                            <th class="col-md-1">Type of Training</th>
-                                            <th class="col-md-2">Room Type</th>
-                                            <th class="col-md-1">Group Capacity</th>
-                                            <th class="col-md-1">Date</th>
-                                            <th class="col-md-1">Status</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <?php // getApprovedGrouptraining(); ?>
-                                    </tbody>
-                                </table>
-                            </div><br><br>
-
-                            <div class="panel-heading">
-                                <div class="panel-title">Rejected Group-Training</div>
-                            </div>
-                            <div class="table-responsive my-table-style">
-                                <table id="esa-table" class="table table-striped table-bordered" cellspacing="0" width="100%">
-                                    <thead>
-                                        <tr>
-                                            <th class="col-md-2">Email Address</th>
-                                            <th class="col-md-1">Venue</th>
-                                            <th class="col-md-1">Type of Training</th>
-                                            <th class="col-md-2">Room Type</th>
-                                            <th class="col-md-1">Group Capacity</th>
-                                            <th class="col-md-1">Date</th>
-                                            <th class="col-md-1">Status</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <?php // getRejectedGrouptraining(); ?>
-                                    </tbody>
-                                </table>
-                            </div><br><br>
-
-                            <div class="panel-heading">
-                                <div class="panel-title">Deleted Group-Training</div>
-                            </div>
-                            <div class="table-responsive my-table-style">
-                                <table id="esa-table" class="table table-striped table-bordered" cellspacing="0" width="100%">
-                                    <thead>
-                                        <tr>
-                                            <th class="col-md-2">Email Address</th>
-                                            <th class="col-md-1">Venue</th>
-                                            <th class="col-md-1">Type of Training</th>
-                                            <th class="col-md-2">Room Type</th>
-                                            <th class="col-md-1">Group Capacity</th>
-                                            <th class="col-md-1">Date</th>
-                                            <th class="col-md-1">Status</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <?php // getDeletedGrouptraining(); ?>
-                                    </tbody>
-                                </table>
-                            </div>
-
-                        </div>
-                    </div>-->
                 </div>
             </div>
         </div>
