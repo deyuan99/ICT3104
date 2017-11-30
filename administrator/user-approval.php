@@ -54,7 +54,7 @@ require_once('../database/dbconfig.php');
                                 <table id="esa-table" class="table table-striped table-bordered" cellspacing="0" width="100%">
                                     <thead>
                                         <tr>
-                                            <th class="col-md-1"></th>
+                                            <th class="col-md-1"><input id="checkAlluser" type="checkbox" ></th>
                                             <th class="col-md-2">Email Address</th>
                                             <th class="col-md-1">First Name</th>
                                             <th class="col-md-1">Last Name</th>
@@ -77,7 +77,7 @@ require_once('../database/dbconfig.php');
                             <button type="button" name="btn_rejectUser" id="btn_rejectUser" class="btn btn-danger"><span class="glyphicon glyphicon-remove icon-space"></span>RejectSelected</button>
                        </div>
                     </div>
-                    <div class="tab-pane add--15-margin" id="trainer_tab">
+                    <div class="tab-pane add-15-margin" id="trainer_tab">
                         <div class="panel panel-default margin-l0-r0">
                             <div class="panel-heading">
                                 <div class="panel-title">GROUP TRAININGS</div>
@@ -86,15 +86,15 @@ require_once('../database/dbconfig.php');
                                 <table id="esa-table" class="table table-striped table-bordered" cellspacing="0" width="100%">
                                     <thead>
                                         <tr>   
-                                            <th class="col-md-1"></th>
+                                            <th class="col-md-1"><input id="checkAll" type="checkbox" ></th>
                                             <th class="col-md-2">Email Address</th>
                                             <th class="col-md-1">Venue</th>
-                                            <th class="col-md-1">Type of Training</th>
                                             <th class="col-md-1">Room Type</th>
                                             <th class="col-md-1">Group Capacity</th>
+                                            <th class="col-md-1">Cost</th>
                                             <th class="col-md-1">Date</th>
-                                            <th class="col-md-1">Status</th>
-                                            <th class="col-md-3">Action</th>
+                                            <th class="col-md-1">Times</th>
+                                            <th class="col-md-2">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -239,7 +239,14 @@ require_once('../database/dbconfig.php');
         
         <script>
     $(document).ready(function () {
-
+        $("#checkAll").click(function () {
+             $('input:checkbox').not(this).prop('checked', this.checked);
+         });
+         
+         $("#checkAlluser").click(function () {
+             $('input:checkbox').not(this).prop('checked', this.checked);
+         });
+         
         //approve all selected checkbox for group training
         $('#btn_approve').click(function () {
 

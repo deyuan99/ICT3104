@@ -18,7 +18,7 @@ if (count($output_array) == 1) {
     $sql5 = "SELECT * FROM groupsession WHERE id = '$id'";
     $query5 = $conn->prepare($sql5);
     $stmt5 = $query5->execute();
-    $row22 = $req22->fetch(PDO::FETCH_ASSOC);
+    $row22 = $query5->fetch(PDO::FETCH_ASSOC);
     $dateformat = $row22['date'];
     $starttime = $row22['startTime'];
     $roomtypeid = $row22['roomTypeID'];

@@ -42,7 +42,7 @@ function getApprovalGrouptraining() {
     //$sql1 = "SELECT id, venue, startTime, endTime, date, description, trainerEmail, groupCapacity, status FROM groupsession where status = 'pending'";
     //$sql1 = "SELECT gs.id, gs.trainerEmail, tt.trainingName, rt.name, gs.groupCapacity, gs.date, gs.status FROM((groupsession gs INNER JOIN roomtype rt ON gs.roomTypeID = rt.id ) INNER JOIN typeoftraining tt ON gs.typeofTrainingID = tt.id) where gs.status = ‘Pending'";
     //$sql1 ="select gs.id, gs.trainerEmail, v.location, t.trainingName, r.name, gs.groupCapacity, gs.date, gs.status from groupSession gs, venue v, roomtype r, typeoftraining t where v.id = r.venueID and r.id = gs.roomTypeID and t.id = gs.typeofTrainingID and gs.status = ‘Pending'";
-    $sql1 = "SELECT id, trainerEmail, date, groupCapacity, status, (SELECT name FROM roomtype WHERE id=roomTypeID) AS name, (SELECT venueID FROM roomtype WHERE id=roomTypeID) AS venueID, (SELECT location FROM venue WHERE id=venueID) AS location, (SELECT trainingName FROM typeoftraining where id=typeofTrainingID) AS trainingName FROM groupsession WHERE status = 'Pending'";
+    $sql1 = "SELECT id, trainerEmail, startTime, endTime, date, groupCapacity, status, (SELECT name FROM roomtype WHERE id=roomTypeID) AS name, (SELECT venueID FROM roomtype WHERE id=roomTypeID) AS venueID, (SELECT location FROM venue WHERE id=venueID) AS location, (SELECT trainingName FROM typeoftraining where id=typeofTrainingID) AS trainingName , (SELECT cost FROM typeoftraining where id=typeofTrainingID ) AS cost FROM groupsession WHERE status = 'Pending'";
     $query1 = $conn->prepare($sql1);
     $stmt1 = $query1->execute();
     $result1 = $query1->fetchAll();
@@ -56,19 +56,23 @@ function getApprovalGrouptraining() {
             $groupCapacity = $row['groupCapacity'];
             $date = $row['date'];
             $status = $row['status'];
+            $startTime = $row['startTime'];
+            $endTime = $row['endTime'];
+            $cost = $row['cost'];
+
+            
             echo "<tr>";
             //echo "<td class=\"col-md-1\">$id</td>";
             echo "<td class=\"col-md-1\"><input name=\"id[]\" type=\"checkbox\" value=\"$id\" ></td>";
             echo "<td class=\"col-md-2\">$trainerEmail</td>";
             echo "<td class=\"col-md-1\">$venue</td>";
-            echo "<td class=\"col-md-1\">$typeoftraining</td>";
             echo "<td class=\"col-md-1\">$roomtype</td>";
             echo "<td class=\"col-md-1\">$groupCapacity</td>";
+            echo "<td class=\"col-md-1\">$cost</td>";
             echo "<td class=\"col-md-1\">$date</td>";
-            //echo "<td class=\"col-md-2\">$description</td>";
-            echo "<td class=\"col-md-1\">$status</td>";
+            echo "<td class=\"col-md-1\">$startTime to $endTime</td>";
             echo "<td class=\"col-md-3 padding-l15-r15\" >";
-            echo "<a data-toggle=\"modal\" data-target=\"#approveUserModal\" onclick=\"setApproveInfo('$id')\" class=\"btn btn-info btn-sm col-md-6\"><span class=\"glyphicon glyphicon-ok icon-space\"></span>APPROVE</a>";
+            echo "<a data-toggle=\"modal\" data-target=\"#approveUserModal\" onclick=\"setApproveInfo('$id')\" class=\"btn btn-info btn-sm col-md-5\"><span class=\"glyphicon glyphicon-ok icon-space\"></span>APPROVE</a>";
             echo "<a data-toggle=\"modal\" data-target=\"#rejectUserModal\" onclick=\"setRejectInfo('$id')\" class=\"btn btn-danger btn-sm col-md-offset-1 col-md-5\"><span class=\"glyphicon glyphicon-remove icon-space\"></span>REJECT</a>";
             echo "</td></tr>";
         endforeach;

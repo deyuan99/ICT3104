@@ -28,6 +28,7 @@ if (isset($_SESSION['email']) && !empty($_SESSION['email'])) {
         <meta charset="UTF-8">
         <title>STPS</title>
         <link rel="stylesheet" href="assets/css/main.css" />
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
     </head>
     <body class="landing">
 
@@ -70,54 +71,127 @@ if (isset($_SESSION['email']) && !empty($_SESSION['email'])) {
                     <!--<p>Maecenas vitae tellus feugiat eleifend</p>-->
                 </header>
                 <div class="row 150%">
-                    <div class="6u 12u(xsmall)">
+                   
+                    <div id="carouselExampleControls" class="carousel slide" data-ride="carousel" style="text-align:center; width:1000px;">
+                        <div class="carousel-inner" role="listbox">
+                            <?php
+                            $sql11 = "SELECT * FROM promotions WHERE featuredStatus = 1";
+                            $stmt1 = $conn->prepare($sql11);
+                            $stmt1->execute();
+                            $value2 = $stmt1->fetch(PDO::FETCH_ASSOC);
+                            $sqlImg = $value2['imagePath'];
+                            
+                            ?>
+                            <div class="carousel-item active">
+                              <img class="d-block img-fluid" src="<?php echo $sqlImg; ?>" width="100%" height="200" alt="First slide">
+                            </div>
+                        <?php
+                            $sqlpromo = "SELECT * FROM promotions WHERE featuredStatus = 1";
+                            $stmt = $conn->prepare($sqlpromo);
+                            $stmt->execute();
+
+                            while($row=$stmt->fetch(PDO::FETCH_ASSOC))
+                            {
+                              $sqlImg = $row['imagePath'];
+                              $title = $row['title'];
+                              $description =$row['description'];
+                              $startDate=$row['startDate'];
+                              $endDate=$row['endDate'];
+                              extract($row);
+
+                              ?>
+                            <div class="carousel-item ">
+                                <img src="<?php echo $sqlImg; ?>"  width="100%" height="200">
+                               
+                               <div class="carousel-caption d-none d-md-block">
+                                  <h2><?php echo $title; ?></h2>
+                                  <p><?php echo $startDate . " to " . $endDate;?></p>
+                                  <p><?php echo $description; ?></p>
+                               </div>
+                            </div>
+                              <?php
+                              }
+                              ?>
+                          </div>
+                         <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Previous</span>
+                          </a>
+                          <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Next</span>
+                          </a>
+                        </div>
+                    
+                    <!--<div class="6u 12u(xsmall)">
                         <div class="image fit captioned">
-                            <img src="images/pic02.png" alt="" />
-                            <h3>
+                            <?php
+                            /*$sqlpromo = "SELECT * FROM promotions WHERE featuredStatus = 1 and id = 1 ";
+                            $reqpromo = $conn->prepare($sqlpromo);
+                            $reqpromo->execute();
+                            $reqcount = $reqpromo->rowCount();
+                            if ($reqcount > 0) {
+                                while ($row = $reqpromo->fetch(PDO::FETCH_ASSOC)) {
+                                    $sqlImg = $row['imagePath'];
+                                    $title = $row['title'];
+                                    $description =$row['description'];
+                                    $startDate=$row['startDate'];
+                                    $endDate=$row['endDate'];
+                                    echo "<div class='image rounded'>";
+                                    if (strlen($sqlImg) > 0) {
+                                        echo "<img src='$sqlImg'>";
+                                    } else {
+                                        echo "<img src='images/uploads/profiledefault.jpg'>";
+                                    }
+                                    echo "</div>";
+                                }
+                            } */?>
+                            <!--<img src="images/pic02.png" alt="" />-->
+                            <!--<h3>
                                 <div class="content">
                                     <?php
-                                    $sqlpromo = "SELECT * FROM promotions WHERE featuredStatus = 1 and id = 1 ";
+                                    /*$sqlpromo = "SELECT * FROM promotions WHERE featuredStatus = 1 and id = 1 ";
                                     $reqpromo = $conn->prepare($sqlpromo);
                                     $reqpromo->execute();
                                     $value2 = $reqpromo->fetch(PDO::FETCH_ASSOC);
                                     $title = $value2['title'];
                                     $description =$value2['description'];
                                     $startDate=$value2['startDate'];
-                                    $endDate=$value2['endDate'];?>
+                                    $endDate=$value2['endDate'];*/?>
                                     <header class="align-center">
-                                        <p><?php echo $startDate . " to " . $endDate;?></p>
-                                        <h2><?php echo $title;?></h2>
+                                        <p><?php //echo $startDate . " to " . $endDate;?></p>
+                                        <h2><?php //echo $title;?></h2>
                                     </header>
-                                    <h6><?php echo $description;?></h6>
+                                    <h6><?php //echo $description;?></h6>
                                     
                                 </div>
                             </h3>
                         </div>
-                    </div>
-                    <div class="6u 12u(xsmall)">
+                    </div>-->
+                    <!--<div class="6u 12u(xsmall)">
                         <div class="image fit captioned">
                             <img src="images/pic03.png" alt="" />
                             <h3>
                                 <div class="content">
                                     <?php
-                                    $sqlpromo1 = "SELECT * FROM promotions WHERE featuredStatus = 1 and id = 2 ";
+                                    /*$sqlpromo1 = "SELECT * FROM promotions WHERE featuredStatus = 1 and id = 2 ";
                                     $reqpromo1 = $conn->prepare($sqlpromo1);
                                     $reqpromo1->execute();
                                     $value3 = $reqpromo1->fetch(PDO::FETCH_ASSOC);
                                     $title1 = $value3['title'];
                                     $description1 =$value3['description'];
                                     $startDate1=$value3['startDate'];
-                                    $endDate1=$value3['endDate'];?>
+                                    $endDate1=$value3['endDate'];*/?>
                                     <header class="align-center">
-                                        <p><?php echo $startDate1 . " to " . $endDate1;?></p>
-                                        <h2><?php echo $title1;?></h2>
+                                        <p><?php //echo $startDate1 . " to " . $endDate1;?></p>
+                                        <h2><?php// echo $title1;?></h2>
                                     </header>
-                                    <h6><?php echo $description1;?></h6>
+                                    <h6><?php //echo $description1;?></h6>
                                     
                                 </div>
                             </h3>
                         </div>
-                    </div>
+                    </div>-->
                 </div>
             </div>
         </section>
@@ -313,5 +387,9 @@ if (isset($_SESSION['email']) && !empty($_SESSION['email'])) {
         <script src="assets/js/skel.min.js"></script>
         <script src="assets/js/util.js"></script>
         <script src="assets/js/main.js"></script>
+        
+        <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
     </body>
 </html>
