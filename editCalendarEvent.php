@@ -45,7 +45,6 @@ require_once('database/dbconfig.php');
 session_start();
 
 if (isset($_POST['delete']) && isset($_POST['id'])) {
-    session_start();
     
     $Semail = $_SESSION['email'];
     
