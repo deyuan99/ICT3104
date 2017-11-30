@@ -15,6 +15,9 @@ function getTrainee() {
             $mobile = $row['phoneNumber'];
             $password = $row['password'];
             $expiryDate = $row['expiryDate'];
+            $registerDate=$row['registerDate'];
+            $profileBio=$row['profileBio'];
+            $profilePicture = $row['profilePicture'];
             echo "<tr>";
             echo "<td class=\"col-md-2\">$email</td>";
             echo "<td class=\"col-md-1\">$firstName</td>";
@@ -26,6 +29,7 @@ function getTrainee() {
             echo "<td class=\"col-md-3 padding-l15-r15\" >";
             echo "<a data-toggle=\"modal\" data-target=\"#editUserModal\" onclick=\"setEditInfo('$email','$firstName', '$lastName', '$address', '$mobile', '$password')\" class=\"btn btn-info btn-sm col-md-5\"><span class=\"glyphicon glyphicon-pencil icon-space\"></span>EDIT</a>";
             echo "<a data-toggle=\"modal\" data-target=\"#deactivateUserModal\" onclick=\"setDeactivateInfo('$email')\" class=\"btn btn-danger btn-sm col-md-offset-1 col-md-6\"><span class=\"glyphicon glyphicon-remove icon-space\"></span>DEACTIVATE</a>";
+            echo "<a data-toggle=\"modal\" data-target=\"#viewUserModal\" onclick=\"setViewInfo('$email','$firstName', '$lastName', '$address', '$mobile','$registerDate','$profileBio','$profilePicture')\" class=\"btn btn-danger btn-sm col-md-offset-1 col-md-4\">VIEW</a>";
             echo "</td></tr>";
         endforeach;
     }
@@ -50,8 +54,10 @@ function getTrainer() {
             $address = $row['address'];
             $mobile = $row['phoneNumber'];
             $password = $row['password'];
-            $bio = $row['profileBio'];
+            $profileBio = $row['profileBio'];
             $featured = $row['featuredStatus'];
+            $registerDate=$row['registerDate'];
+            $profilePicture = $row['profilePicture'];
             if ($featured == 1) {
                 $featured = "Yes";
             } else {
@@ -64,12 +70,13 @@ function getTrainer() {
             echo "<td class=\"col-md-1\">$lastName</td>";
             echo "<td class=\"col-md-1\">$address</td>";
             echo "<td class=\"col-md-1\">$mobile</td>";
-            echo "<td class=\"col-md-2\">$bio</td>";
+            echo "<td class=\"col-md-2\">$profileBio</td>";
             echo "<td class=\"col-md-1\">$featured</td>";
             echo "<td class=\"col-md-3 padding-l15-r15\" >";
             // TODO add edit bio
             echo "<a data-toggle=\"modal\" data-target=\"#editUserModal\" onclick=\"setEditInfo('$email','$firstName', '$lastName', '$address', '$mobile', '$password')\" class=\"btn btn-info btn-sm col-md-5\"><span class=\"glyphicon glyphicon-pencil icon-space\"></span>EDIT</a>";
             echo "<a data-toggle=\"modal\" data-target=\"#deactivateUserModal\" onclick=\"setDeactivateInfo('$email')\" class=\"btn btn-danger btn-sm col-md-offset-1 col-md-6\"><span class=\"glyphicon glyphicon-remove icon-space\"></span>DEACTIVATE</a>";
+            echo "<a data-toggle=\"modal\" data-target=\"#viewUserModal\" onclick=\"setViewInfo('$email','$firstName', '$lastName', '$address', '$mobile','$registerDate','$profileBio','$profilePicture')\" class=\"btn btn-danger btn-sm col-md-offset-1 col-md-4\">VIEW</a>";
             echo "</td></tr>";
         endforeach;
     }
