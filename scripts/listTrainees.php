@@ -7,7 +7,7 @@ $id = $_SESSION['email'];
 $sqlTraineeName = "SELECT * FROM personalsession ps 
 JOIN users u ON ps.traineeEmail = u.email 
 JOIN typeoftraining t ON ps.typeofTrainingID = t.id 
-WHERE ps.trainerEmail='trainer1@gmail.com' 
+WHERE ps.trainerEmail='$id' 
 AND ps.category='1-1 training'";
 $result = $conn->prepare($sqlTraineeName);
 $result->execute();
@@ -31,5 +31,5 @@ if ($count > 0) {
         echo "</tbody>";
     }
 } else {
-    echo "There are no Trainers yet!";
+    echo "";
 }

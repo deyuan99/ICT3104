@@ -329,7 +329,7 @@ foreach ($grpevents as $grpevent):
     endforeach;
 
     if ($trainees == "") {
-        $trainees = "No Applicants yet";
+        $trainees = "No Applicants Found";
     }
 
     $grpsize = $grpevent['groupCapacity'];
