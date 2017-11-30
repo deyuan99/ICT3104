@@ -22,6 +22,16 @@ $req3->execute();
 $userInfo = $req3->fetch(PDO::FETCH_ASSOC);
 $bondStatus = $userInfo['bondTo'];
 
+$sql4 = "SELECT * FROM bondapproval where traineeEmail = '$email'";
+$req4 = $conn->prepare($sql4);
+$req4->execute();
+$bondInfo = $req4->fetch(PDO::FETCH_ASSOC);
+$bondrequestTrainer = $bondInfo['trainerEmail'];
+if(count($bondInfo) == 1) {
+    $bondrequest = "allow";
+} else {
+    $bondrequest = "pending";
+}
 ?>
 <html>
     <head>
@@ -64,13 +74,21 @@ $bondStatus = $userInfo['bondTo'];
                     <p><?php echo $trainerInfo['profileBio']; ?></p><br/>
                     <form class="form-inline" role="form" action="scripts/doBond.php" method="POST">
                         <input type="hidden" name="traineremail" id="traineremail" value="<?php echo $traineremail;?>">
-                        <?php 
-                        if ($bondStatus == $traineremail) {
-                            echo '<button type="submit" class="btn btn-danger btn-lg" value="unbound" id="option" name="option">Unbound from Trainer</button>';
-                        }  else if (empty($bondStatus)) {
-                            echo '<button type="submit" class="btn btn-primary btn-lg" value="bond" id="option" name="option" onclick="return confirm(\'Are you sure? This will remove ALL your 1-1 trainings!\')">Bond to Trainer</button>';
+                        <?php
+                        if (!empty($bondStatus)) {
+                            if ($bondStatus == $traineremail) {
+                                echo '<button type="submit" class="btn btn-danger btn-lg" value="unbound" id="option" name="option">Unbond from Trainer</button>';
+                            } else {
+                                echo '<button type="submit" class="btn btn-info btn-lg" value="" id="" name="" disabled>Unable to bond</button>';
+                            }
                         } else {
-                            echo '<button type="submit" class="btn btn-info btn-lg" value="bond" id="option" name="option" disabled>Unable to bond</button>';
+                            if ($bondrequest == "pending" && $bondrequestTrainer == $traineremail) {
+                                echo '<button type="submit" class="btn btn-warning btn-lg" value="" id="" name="" disabled>Bond approval pending</button>';
+                            } else if ($bondrequest == "pending" && $bondrequestTrainer != $traineremail) {
+                                echo '<button type="submit" class="btn btn-info btn-lg" value="" id="" name="" disabled>Unable to bond</button>';
+                            } else {
+                                echo '<button type="submit" class="btn btn-primary btn-lg" value="bond" id="option" name="option" onclick="return confirm(\'Are you sure? This will remove ALL your 1-1 trainings!\')">Bond to Trainer</button>';
+                            }
                         }
                         ?>
                     </form>

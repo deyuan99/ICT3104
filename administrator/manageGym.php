@@ -274,6 +274,13 @@ session_start();
                                     </div>
                                 </div>
 
+                                <div class="form-group row">
+                                    <label class="form-control-label col-md-offset-2 col-md-3 col-xs-offset-0 col-xs-5 label-margin">Contact:</label>
+                                    <div class="col-sm-5">
+                                        <input type="text" class="form-control" id="contact" name="contact" value="">
+                                    </div>
+                                </div>
+                                
                                 <div class="form-group row" style="margin-top: 30px;">
                                     <div class="row">
                                         <div class="col-sm-6 col-sm-offset-3 col-xs-8 col-xs-offset-2">

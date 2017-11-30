@@ -9,7 +9,6 @@ $Srole = $_SESSION['role'];
 $sql = "SELECT * FROM personalsession where trainerEmail= '$Semail'";
 $sql6 = "SELECT * FROM groupsession where trainerEmail= '$Semail' and status != 'Rejected' ";
 
-
 $req = $conn->prepare($sql);
 $req->execute();
 $events = $req->fetchAll();
@@ -17,7 +16,6 @@ $events = $req->fetchAll();
 $req6 = $conn->prepare($sql6);
 $req6->execute();
 $grpevents = $req6->fetchAll();
-
 
 // For selecting all venue
 $sql2 = "SELECT location FROM venue";
@@ -40,6 +38,8 @@ $typeofTrainings = $req3->fetchAll();
         <script src="bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 
+        <?php include 'scripts/loadBondApproval.php'; ?>
+        
         <!-- FullCalendar -->
         <link href='fullcalendar-3.5.1/fullcalendar.css' rel='stylesheet' />
         <link href="assets/css/calendar.css" rel="stylesheet" type="text/css"/>
@@ -49,6 +49,29 @@ $typeofTrainings = $req3->fetchAll();
 
         <!-- Editable profile -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+        
+        <script>
+            function setApproveInfo(email)
+            {
+                document.getElementById("approve_userid").value = "";
+                document.getElementById("approve_userid").value = email;
+                document.getElementById("approveMsg").innerHTML = "Are you sure you want to Approve " + "<strong>" + email + "</strong>" + "  ?";
+            }
+            function setRejectInfo(email)
+            {
+                document.getElementById("reject_userid").value = "";
+                document.getElementById("reject_userid").value = email;
+                document.getElementById("rejectMsg").innerHTML = "Are you sure you want to Reject " + "<strong>" + email + "</strong>" + "  ?";
+            }
+            function setUnbondInfo(email, id)
+            {
+                document.getElementById("unbond_userid").value = "";
+                document.getElementById("unbond_userid").value = email;
+                document.getElementById("trainer_userid").value = "";
+                document.getElementById("trainer_userid").value = id;
+                document.getElementById("unbondMsg").innerHTML = "Are you sure you want to Unbond " + "<strong>" + email + "</strong>" + "  ?";
+            }
+        </script>
     </head>
     <body>
         <!-- Header -->
@@ -59,7 +82,69 @@ $typeofTrainings = $req3->fetchAll();
         <!-- One: Trainee List -->
         <section id="main" class="wrapper">
             <div class="container">
-                <div class="row">
+                <div class="row" style="margin-bottom: 10px;">
+                    <ul class="nav nav-pills col-md-10 padding-l0-r0">
+                        <li class="active data-tabs col-md-3 col-sm-6 col-xs-12"><a href="#traineelist_tab" data-toggle="pill"><span class="glyphicon glyphicon-map-marker icon-space"></span> Trainee List</a></li>
+                        <li class="data-tabs col-md-3 col-xs-12 col-sm-6"><a href="#approvebond_tab" data-toggle="pill"><span class="glyphicon glyphicon-modal-window icon-space"></span> Approve Bonds</a></li>
+                    </ul>
+                </div>
+                
+                <div class="tab-content">
+                    <div class="tab-pane active add--15-margin" id="traineelist_tab">
+                        <div class="margin-l0-r0">
+                            <div class="panel-heading">
+                                <div class="panel-title">
+                                    <h3>Trainee List</h3>
+                                    <h5>Your 1-1 training trainees.</h5>
+                                </div>
+                            </div>
+                            <div class="table-responsive my-table-style">
+                                <table class="table table-striped table-bordered" cellspacing="0" width="100%">
+                                    <thead>
+                                        <tr>
+                                            <th class="col-md-2">Trainee's Name</th>
+                                            <th class="col-md-2">Trainee's Email</th>
+                                            <th class="col-md-2">Type of Training</th>
+                                            <th class="col-md-4">Description</th>
+                                            <th class="col-md-1">Bonded</th>
+                                            <th class="col-md-1">Actions</th> 
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php include "scripts/listTrainees.php"; ?>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="tab-pane add--15-margin" id="approvebond_tab">
+                        <div class="margin-l0-r0">
+                            <div class="panel-heading">
+                                <div class="panel-title">
+                                    <h3>Approve/Reject Trainee Bonds</h3>
+                                </div>
+                            </div>
+                            <div class="table-responsive my-table-style">
+                                <table class="table table-striped table-bordered" cellspacing="0" width="100%">
+                                    <thead>
+                                        <tr>
+                                            <th class="col-md-3">Trainee's Name</th>
+                                            <th class="col-md-3">Trainee's Email</th>
+                                            <th class="col-md-3">Trainee's Mobile</th>
+                                            <th class="col-md-3">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php getBondApprovalUsers($Semail, $conn); ?>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+<!--                <div class="row">
                     <header class="major special">
                         <h3>Trainee List</h3>
                         <p>Your 1-1 training trainees.</p>
@@ -75,16 +160,98 @@ $typeofTrainings = $req3->fetchAll();
                                 </tr>
                             </thead>
                             <?php
-                            include "scripts/listTrainees.php";
+                            //include "scripts/listTrainees.php";
                             ?>
                             <tfoot>
                                 <tr>
-                                    <!- pagination -->
+                                     pagination 
                                 </tr>
                             </tfoot>
                         </table>
                     </div>
+                </div>-->
+            </div>
+            
+            <div class="modal fade" id="approveUserModal" tabindex="-1" role="dialog" style="padding-top: 70px;">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title" id="remove-title">APPROVE USER</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div id="approveMsg"></div>
+                        <div class="widget-body" id="manualForm">
+                            <form name="form" id="form" class="form-horizontal" role="form" action="scripts/doApproveBond.php" enctype="multipart/form-data" method="POST">
+                                <input type="hidden" name="approve_userid" id="approve_userid" value="">
+                                <div class="form-actions">
+                                    <div class="row">
+                                        <div class="col-sm-offset-7 col-sm-5 col-xs-offset-0 col-xs-12">
+                                            <button class="btn btn-success col-sm-offset-3 col-sm-4 col-xs-offset-0 col-xs-5" type="submit" name="approveBtn">YES</button>
+                                            <button type="button" class="btn btn-danger col-sm-4 col-sm-offset-1 col-xs-5 col-xs-offset-2" data-dismiss="modal">NO</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
                 </div>
+            </div>
+        </div>
+        <div class="modal fade" id="rejectUserModal" tabindex="-1" role="dialog" style="padding-top: 70px;">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title" id="remove-title">REJECT USER</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div id="rejectMsg"></div>
+                        <div class="widget-body" id="manualForm">
+                            <form name="form" id="form" class="form-horizontal" role="form" action="scripts/doRejectBond.php" enctype="multipart/form-data" method="POST">
+                                <input type="hidden" name="reject_userid" id="reject_userid" value="">
+                                <div class="form-actions">
+                                    <div class="row">
+                                        <div class="col-sm-offset-7 col-sm-5 col-xs-offset-0 col-xs-12">
+                                            <button class="btn btn-success col-sm-offset-3 col-sm-4 col-xs-offset-0 col-xs-5" type="submit" name="rejectBtn">YES</button>
+                                            <button type="button" class="btn btn-danger col-sm-4 col-sm-offset-1 col-xs-5 col-xs-offset-2" data-dismiss="modal">NO</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> 
+        
+        <div class="modal fade" id="unbondUserModal" tabindex="-1" role="dialog" style="padding-top: 70px;">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title" id="remove-title">UNBOND USER</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div id="unbondMsg"></div>
+                        <div class="widget-body" id="manualForm">
+                            <form name="form" id="form" class="form-horizontal" role="form" action="scripts/doUnbond.php" enctype="multipart/form-data" method="POST">
+                                <input type="hidden" name="unbond_userid" id="unbond_userid" value="">
+                                <input type="hidden" name="trainer_userid" id="trainer_userid" value="">
+                                <div class="form-actions">
+                                    <div class="row">
+                                        <div class="col-sm-offset-7 col-sm-5 col-xs-offset-0 col-xs-12">
+                                            <button class="btn btn-success col-sm-offset-3 col-sm-4 col-xs-offset-0 col-xs-5" type="submit" name="unbondBtn">YES</button>
+                                            <button type="button" class="btn btn-danger col-sm-4 col-sm-offset-1 col-xs-5 col-xs-offset-2" data-dismiss="modal">NO</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> 
         </section>
 
 

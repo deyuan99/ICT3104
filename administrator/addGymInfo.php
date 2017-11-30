@@ -6,8 +6,9 @@ $table = $_POST['table'];
 if ($table == 'venue') {
     $location = $_POST['location'];
     $address = $_POST['address'];
+    $contact = $_POST['contact'];
 
-    $sql = "INSERT into venue (location, address) VALUES ('$location', '$address')";
+    $sql = "INSERT into venue (location, address, contact) VALUES ('$location', '$address', '$contact')";
     $req = $conn->prepare($sql);
     $req->execute();
 
