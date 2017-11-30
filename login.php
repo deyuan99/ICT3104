@@ -23,6 +23,7 @@ foreach ($rows as $row):
     $lastname = $row['lastName'];
     $status = $row['status'];
     $subscription = $row['subscription'];
+    $expiredDate = $row['expiryDate'];
 endforeach;
 
 if ($req->rowCount() == 1) {
@@ -45,7 +46,7 @@ if ($req->rowCount() == 1) {
         if ($role == "trainee") {
             //Arifah: to change based on expiry date!
             //get date compare date
-            if ($subscription == 0) {
+            if ($expiredDate < date("Y-m-d")) {
                 header("location: trainee_expiredSubscription.php");
             
             } else {
