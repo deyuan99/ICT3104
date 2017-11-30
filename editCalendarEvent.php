@@ -1,6 +1,6 @@
 <?php
 $id = $_POST['id'];
-
+$category      = $_POST['category'];
 ?>
 
 
@@ -10,14 +10,14 @@ $id = $_POST['id'];
 </head>   
 <script>
     function cancel() {
-                var id = "<?php
-echo $id;
-?>";
+                var id = "<?php echo $id;?>";
+                var category = "<?php echo $category;?>";
+                
     if (confirm("you are about to cancel an event which start less than 48hours,fees will not be refund") === true) {
             $.ajax({
                 url: "DeleteEvent.php",
                 type: "POST",
-                data: {'id' : id},
+                data: {'id' : id,'category' : category},
                 success: function() {
                     alert("Succesfully deleted!");
                     window.location.href='trainee_dashboard.php'         
