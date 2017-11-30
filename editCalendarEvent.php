@@ -1,5 +1,5 @@
 <?php
-	$id = $_POST['id'];
+$id = $_POST['id'];
 
 ?>
 
@@ -10,7 +10,9 @@
 </head>   
 <script>
     function cancel() {
-                var id = "<?php echo $id; ?>";
+                var id = "<?php
+echo $id;
+?>";
     if (confirm("you are about to cancel an event which start less than 48hours,fees will not be refund") === true) {
             $.ajax({
                 url: "DeleteEvent.php",
@@ -40,153 +42,138 @@
 // connect to database
 
 require_once('database/dbconfig.php');
+session_start();
 
-if (isset($_POST['delete']) && isset($_POST['id'])){
-	session_start();
-
-        $Semail = $_SESSION['email'];
+if (isset($_POST['delete']) && isset($_POST['id'])) {
+    session_start();
     
-        $eventdate = $_POST['date'];
-        $category = $_POST['category'];
-        $start= $_POST['starttime'];
-        $combinedstart = date('Y-m-d H:i:s', strtotime("$eventdate $start"));
-        
-        $todaydate = date('Y-m-d H:i:s');
-        
-        $hourdiff = round((strtotime($combinedstart) - strtotime($todaydate))/3600, 1);
-        if($hourdiff  < 0){
-           echo "<script type='text/javascript'>alert('Cant delete past event!');"
-             . "window.location.href='trainee_dashboard.php';"
-              . "</script>";    
-        }else{
-        if ($category == 'Personal Training' ){
-        $sql = "DELETE FROM personalsession WHERE id = '$id'";
-	$query = $conn->prepare( $sql );
-	if ($query == false) {
-	 print_r($conn->errorInfo());
-	 die ('Error prepare');
-	}
-	$res = $query->execute();
-	if ($res == false) {
-	 print_r($query->errorInfo());
-	 die ('Error execute');
-	}
-         if( $query ){ 
-             echo "<script type='text/javascript'>alert('submitted successfully!');"
-             . "window.location.href='trainee_dashboard.php';"
-             . "</script>";
-           }
-             else{
-         echo "<script type='text/javascript'>alert('failed');"
-             . "window.location.href='trainee_dashboard.php';"
-              . "</script>";    
-             }
+    $Semail = $_SESSION['email'];
+    
+    $eventdate     = $_POST['date'];
+    $category      = $_POST['category'];
+    $start         = $_POST['starttime'];
+    $combinedstart = date('Y-m-d H:i:s', strtotime("$eventdate $start"));
+    
+    $todaydate = date('Y-m-d H:i:s');
+    
+    $hourdiff = round((strtotime($combinedstart) - strtotime($todaydate)) / 3600, 1);
+    if ($hourdiff < 0) {
+        echo "<script type='text/javascript'>alert('Cant delete past event!');" . "window.location.href='trainee_dashboard.php';" . "</script>";
+    } else {
+        if ($category == 'Personal Training') {
+            $sql   = "DELETE FROM personalsession WHERE id = '$id'";
+            $query = $conn->prepare($sql);
+            if ($query == false) {
+                print_r($conn->errorInfo());
+                die('Error prepare');
+            }
+            $res = $query->execute();
+            if ($res == false) {
+                print_r($query->errorInfo());
+                die('Error execute');
+            }
+            if ($query) {
+                echo "<script type='text/javascript'>alert('submitted successfully!');" . "window.location.href='trainee_dashboard.php';" . "</script>";
+            } else {
+                echo "<script type='text/javascript'>alert('failed');" . "window.location.href='trainee_dashboard.php';" . "</script>";
+            }
             
-        }else if ($category == '1-1 Training' ){
-            if ($hourdiff<48){
-            echo "<script> cancel(); </script>";
-            }
-            else
-                {
+        } else if ($category == '1-1 Training') {
+            if ($hourdiff < 48) {
+                echo "<script> cancel(); </script>";
+            } else {
                 
-                   $sql = "UPDATE personalsession SET traineeEmail = '' WHERE id = '$id' ";
-                $query = $conn->prepare( $sql );
+                $sql   = "UPDATE personalsession SET traineeEmail = '' WHERE id = '$id' ";
+                $query = $conn->prepare($sql);
                 if ($query == false) {
-                 print_r($conn->errorInfo());
-                 die ('Error prepare');
+                    print_r($conn->errorInfo());
+                    die('Error prepare');
                 }
                 $res = $query->execute();
                 
                 if ($res == false) {
-                 print_r($query->errorInfo());
-                 die ('Error execute');
+                    print_r($query->errorInfo());
+                    die('Error execute');
                 }
-                 if( $query ){ 
-                     echo "<script type='text/javascript'>alert('Delete successfully!');"
-                     . "window.location.href='trainee_dashboard.php';"
-                     . "</script>";
-                   }
-                     else{
-                 echo "<script type='text/javascript'>alert('failed');"
-                     . "window.location.href='trainee_dashboard.php';"
-                      . "</script>";    
-                     }
+                if ($query) {
+                    echo "<script type='text/javascript'>alert('Delete successfully!');" . "window.location.href='trainee_dashboard.php';" . "</script>";
+                } else {
+                    echo "<script type='text/javascript'>alert('failed');" . "window.location.href='trainee_dashboard.php';" . "</script>";
                 }
-        }else{
-        if ($hourdiff<48){
-            echo "<script> cancel(); </script>";
             }
-            else
-                {
+        } else {
+            if ($hourdiff < 48) {
+                echo "<script> cancel(); </script>";
+            } else {
                 
-                   $sql = "DELETE FROM groupsessionapplicant WHERE groupsessionID = '$id' and traineeEmail='$Semail'  ";
-                $query = $conn->prepare( $sql );
+                $sql   = "DELETE FROM groupsessionapplicant WHERE groupsessionID = '$id' and traineeEmail='$Semail'  ";
+                $query = $conn->prepare($sql);
                 if ($query == false) {
-                 print_r($conn->errorInfo());
-                 die ('Error prepare');
+                    print_r($conn->errorInfo());
+                    die('Error prepare');
                 }
                 $res = $query->execute();
                 
                 if ($res == false) {
-                 print_r($query->errorInfo());
-                 die ('Error execute');
+                    print_r($query->errorInfo());
+                    die('Error execute');
                 }
-                 if( $query ){ 
-                     echo "<script type='text/javascript'>alert('Delete successfully!');"
-                     . "window.location.href='trainee_dashboard.php';"
-                     . "</script>";
-                   }
-                     else{
-                 echo "<script type='text/javascript'>alert('failed');"
-                     . "window.location.href='trainee_dashboard.php';"
-                      . "</script>";    
-                     }
+                if ($query) {
+                    echo "<script type='text/javascript'>alert('Delete successfully!');" . "window.location.href='trainee_dashboard.php';" . "</script>";
+                } else {
+                    echo "<script type='text/javascript'>alert('failed');" . "window.location.href='trainee_dashboard.php';" . "</script>";
                 }
+            }
         }
+    }
+    
+} elseif (isset($_POST['category']) && isset($_POST['description']) && isset($_POST['starttime']) && isset($_POST['endtime']) && isset($_POST['id']) && isset($_POST['save'])) {
+    $Semail      = $_SESSION['email'];
+    $id          = $_POST['id'];
+    $category    = $_POST['category'];
+    $description = $_POST['description'];
+    $startTime   = $_POST['starttime'];
+    $endTime     = $_POST['endtime'];
+    $todaydate   = date('Y-m-d H:i:s');
+    $eventdate   = $_POST['date'];
+    $dateformat  = date('Y-m-d', strtotime($eventdate));
+    
+    if ($startTime == $endTime || $endTime < $startTime) {
+        echo "<script type='text/javascript'>alert('select appropriate timing');" . "window.location.href='trainee_dashboard.php';" . "</script>";
+    } else {
+        
+        // 1) check if already book at starttime 2)its booked at the end time and the last one 3) check is already book in between
+        $sql1 = "select * from personalsession where date = '$dateformat' AND ((startTime <= '$startTime' AND '$startTime' < endTime) OR (startTime < '$endTime' AND '$endTime' < endTime) OR ('$startTime' < startTime AND startTime < '$endTime')) AND traineeEmail = '$Semail'";
+        //echo $sql1;
+        $req = $conn->prepare($sql1);
+        $req->execute();
+        
+        if ($req->rowCount() >= 1) {
+            echo "<script type='text/javascript'>alert('exist event');" . "window.location.href='trainee_dashboard.php';" . "</script>";
+            
+        } else {
+            
+            $sql = "UPDATE personalsession SET category = '$category', startTime = '$startTime', endTime = '$endTime', description = '$description' WHERE id = '$id' ";
+            
+            
+            $query = $conn->prepare($sql);
+            if ($query == false) {
+                print_r($conn->errorInfo());
+                die('Error prepare');
+            }
+            $sth = $query->execute();
+            if ($sth == false) {
+                print_r($query->errorInfo());
+                die('Error execute');
+            }
+            if ($query) {
+                echo "<script type='text/javascript'>alert('submitted successfully!');" . "window.location.href='trainee_dashboard.php';" . "</script>";
+            } else {
+                echo "<script type='text/javascript'>alert('failed');" . "window.location.href='trainee_dashboard.php';" . "</script>";
+            }
         }
-	
-}elseif (isset($_POST['category']) && isset($_POST['description']) && isset($_POST['starttime']) && isset($_POST['endtime']) && isset($_POST['id']) && isset($_POST['save'])){
-	
-	$id = $_POST['id'];
-	$category = $_POST['category'];
-	$description = $_POST['description'];
-        $startTime = $_POST['starttime'];
-        $endTime = $_POST['endtime'];
-        $todaydate = date('Y-m-d H:i:s');
-        $eventdate = $_POST['date'];
-        $combinedstart = date('Y-m-d H:i:s', strtotime("$eventdate $startTime"));
-         $hourdiff = round((strtotime($combinedstart) - strtotime($todaydate))/3600, 1);
-        if($hourdiff  < 0){
-         //  echo "<script type='text/javascript'>alert('Cant edit past event!');"
-         //    . "window.location.href='trainee_dashboard.php';"
-         //     . "</script>";    
-        }else{
-         
-	$sql = "UPDATE personalsession SET category = '$category', startTime = '$startTime', endTime = '$endTime', description = '$description' WHERE id = '$id' ";
-
-	
-	$query = $conn->prepare( $sql );
-	if ($query == false) {
-	 print_r($conn->errorInfo());
-	 die ('Error prepare');
-	}
-	$sth = $query->execute();
-	if ($sth == false) {
-	 print_r($query->errorInfo());
-	 die ('Error execute');
-	}
-        if( $query ){ 
-             echo "<script type='text/javascript'>alert('submitted successfully!');"
-             . "window.location.href='trainee_dashboard.php';"
-             . "</script>";
-           }
-             else{
-         echo "<script type='text/javascript'>alert('failed');"
-             . "window.location.href='trainee_dashboard.php';"
-              . "</script>";    
-             }
-        }
+    }
+    
 }
+
 ?>
-
-
