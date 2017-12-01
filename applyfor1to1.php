@@ -34,6 +34,16 @@ if (isset($_POST['description']) && isset($_POST['starttime']) && isset($_POST['
                 echo "<script type='text/javascript'>alert('There is an event a this timeslot');" . "window.location.href='trainer_dashboard.php';" . "</script>";
                 
             } else {
+            $sql111 = "select * from groupsession where date = '$dateformat' AND ((startTime <= '$startTime' AND '$startTime' < endTime) OR (startTime < '$endTime' AND '$endTime' < endTime) OR ('$startTime' < startTime AND startTime < '$endTime')) AND trainerEmail = '$Semail'";
+            //echo $sql1;
+            $req23 = $conn->prepare($sql111);
+            $req23->execute();
+            
+            if ($req23->rowCount() >= 1) {
+                echo "<script type='text/javascript'>alert('There is an event a this timeslot');" . "window.location.href='trainer_dashboard.php';" . "</script>";
+                
+            } else {
+                
                 //category = '$category'
                 $sql = "UPDATE personalsession SET startTime = '$startTime', endTime = '$endTime' WHERE id = '$id' ";
                 
@@ -55,6 +65,7 @@ if (isset($_POST['description']) && isset($_POST['starttime']) && isset($_POST['
                 } else {
                     echo "<script type='text/javascript'>alert('failed');" . "window.location.href='trainer_dashboard.php';" . "</script>";
                 }
+            }
             }
         }
     }
