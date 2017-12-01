@@ -92,7 +92,7 @@ if (isset($_POST['delete']) && isset($_POST['id'])) {
                 $trainerEmail = $row22['trainerEmail'];
 
                 // send a notification to the trainer
-                $msg5 = "Trainee $Semail has left your 1-1 training on $dateformat at $starttimes";
+                $msg5 = "Trainee $Semail has left your 1-1 training on $dateformat at $start";
                 $sql5 = "INSERT into notificationlog (message, userEmail, readStatus) VALUES ('$msg5', '$trainerEmail', '0')";
                 $query5 = $conn->prepare($sql5);
                 $query5->execute();
