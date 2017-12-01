@@ -2,7 +2,7 @@
 
 session_start();
 include_once '../database/dbconfig.php';
-$id = $_SESSION['email'];
+$id = $_POST['id'];
 
 if (isset($_POST['submit'])) {
     $file = $_FILES['file'];
@@ -21,10 +21,10 @@ if (isset($_POST['submit'])) {
     if (in_array($fileActualExt, $allowed)) {
         if ($fileError === 0) {
             if ($fileSize < 1000000) {
-                $fileNameNew = "profile" . $id . "." . $fileActualExt;
-                $fileDestination = '../images/uploads/' . $fileNameNew;
+                $fileNameNew = "promo" . $id . "." . $fileActualExt;
+                $fileDestination = '../images/promoUploads/' . $fileNameNew;
                 move_uploaded_file($fileTmpName, $fileDestination);
-                $sql = "UPDATE users SET profilePicture='images/uploads/$fileNameNew' WHERE email='$id';";
+                $sql = "UPDATE promotions SET imagePath='images/promoUploads/$fileNameNew' WHERE id='$id';";
                 $result = $conn->prepare($sql);
                 $result->execute();
                 header("Location: ../trainee_dashboard.php?uploadsuccess");

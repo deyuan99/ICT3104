@@ -37,7 +37,7 @@ $title = empty($_POST['title']) ? $title : $_POST['title'];
 $description = empty($_POST['description']) ? $description : $_POST['description'];
 $startDate = empty($_POST['startDate']) ? $startDate : $_POST['startDate'];
 $endDate = empty($_POST['endDate']) ? $endDate : $_POST['endDate'];
-$imagePath = empty($_POST['imagePath']) ? $imagePath : $_POST['imagePath'];
+$imagePath = empty($_POST['imagePath']) ? $imagePath : "images/promoUploads/" . $_POST['imagePath'];
 $featuredStatus = empty($_POST['featuredStatus']) ? $featuredStatus : $_POST['featuredStatus'];
 
 //upload image
