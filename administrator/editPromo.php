@@ -40,6 +40,12 @@ $endDate = empty($_POST['endDate']) ? $endDate : $_POST['endDate'];
 $imagePath = empty($_POST['imagePath']) ? $imagePath : "images/promoUploads/" . $_POST['imagePath'];
 $featuredStatus = empty($_POST['featuredStatus']) ? $featuredStatus : $_POST['featuredStatus'];
 
+ if ($_POST['featuredStatus'] == 0){
+    $featuredStatus = 0;
+}
+else {
+    $featuredStatus = $_POST['featuredStatus'];
+}
 //upload image
 /*$file = $_FILES['file'];
 

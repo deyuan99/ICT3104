@@ -26,7 +26,7 @@ session_start();
             function setEditPromo(id, title, description, startDate, endDate, imagePath, featuredStatus)
             {
                 document.getElementById("id").innerHTML = id;
-
+                
                 document.getElementById("id").placeholder = id;
                 document.getElementById("title").placeholder = title;
                 document.getElementById("description").placeholder = description;
@@ -147,15 +147,15 @@ session_start();
                                 <div class="form-group row">
                                     <label class="form-control-label col-md-offset-2 col-md-3 col-xs-offset-0 col-xs-5 label-margin">Description:</label>
                                     <div class="col-sm-5">
-                                        <input type="text" class="form-control" id="description" name="description" value="">
+                                        <textarea style="resize:none" type="text" class="form-control" id="description" rows="3" name="description" value=""></textarea>
                                     </div>
                                 </div>
 
                                 <input type="hidden" name="edit_startDate" id="edit_startDate" value="">
                                 <div class="form-group row">
-                                    <label class="form-control-label col-md-offset-2 col-md-3 col-xs-offset-0 col-xs-5 label-margin" for="date">Start Date:</label>
+                                    <label class="form-control-label col-md-offset-2 col-md-3 col-xs-offset-0 col-xs-5 label-margin" for="date" >Start Date:</label>
                                     <div class="col-sm-5">
-                                        <input type="date" class="form-control" id="startDate" name="startDate" value="">
+                                        <input type="date" class="form-control" id="startDate" name="startDate" min="2017-12-01" value="">
                                     </div>
                                 </div>
 
@@ -163,7 +163,7 @@ session_start();
                                 <div class="form-group row">
                                     <label class="form-control-label col-md-offset-2 col-md-3 col-xs-offset-0 col-xs-5 label-margin">End Date:</label>
                                     <div class="col-sm-5">
-                                        <input type="date" class="form-control" id="endDate" name="endDate" value="">
+                                        <input type="date" class="form-control" id="endDate" name="endDate" min="2017-12-03" value="">
                                     </div>
                                 </div>
 
@@ -179,7 +179,7 @@ session_start();
                                 <div class="form-group row">
                                     <label class="form-control-label col-md-offset-2 col-md-3 col-xs-offset-0 col-xs-5 label-margin">Featured Status:</label>
                                     <div class="col-sm-5">
-                                        <input type="text" class="form-control" id="featuredStatus" name="featuredStatus" value="">
+                                        <input type="number" class="form-control" id="featuredStatus" name="featuredStatus" min="0" max="1" value="">
                                     </div>
                                 </div>
 
@@ -216,7 +216,7 @@ session_start();
                                 <div class="form-group row">
                                     <label class="form-control-label col-md-offset-2 col-md-3 col-xs-offset-0 col-xs-5 label-margin">Title:</label>
                                     <div class="col-sm-5">
-                                        <input type="text" class="form-control" id="title" name="title" value="">
+                                        <input type="text" class="form-control" id="title" name="title" value="" required>
                                     </div>
                                 </div>
 
@@ -224,7 +224,7 @@ session_start();
                                 <div class="form-group row">
                                     <label class="form-control-label col-md-offset-2 col-md-3 col-xs-offset-0 col-xs-5 label-margin">Description:</label>
                                     <div class="col-sm-5">
-                                        <input type="text" class="form-control" id="description" name="description" value="">
+                                        <textarea style="resize:none" type="text" class="form-control" id="description" rows="3" name="description" value="" required></textarea>
                                     </div>
                                 </div>
 
@@ -232,7 +232,7 @@ session_start();
                                 <div class="form-group row">
                                     <label class="form-control-label col-md-offset-2 col-md-3 col-xs-offset-0 col-xs-5 label-margin">Start Date:</label>
                                     <div class="col-sm-5">
-                                        <input type="date" class="form-control" id="startDate" name="startDate">
+                                        <input type="date" class="form-control" id="startDate" min="2017-12-01" name="startDate" required>
                                     </div>
                                 </div>
 
@@ -240,7 +240,7 @@ session_start();
                                 <div class="form-group row">
                                     <label class="form-control-label col-md-offset-2 col-md-3 col-xs-offset-0 col-xs-5 label-margin">End Date:</label>
                                     <div class="col-sm-5">
-                                        <input type="date" class="form-control" id="endDate" name="endDate">
+                                        <input type="date" class="form-control" id="endDate"  min="2017-12-03" name="endDate" required>
                                     </div>
                                 </div>
 
@@ -248,7 +248,7 @@ session_start();
                                 <div class="form-group row">
                                     <label class="form-control-label col-md-offset-2 col-md-3 col-xs-offset-0 col-xs-5 label-margin">Image Path:</label>
                                     <div class="col-sm-5">
-                                        <input type="file" class="form-control" id="imagePath" name="imagePath" value="">
+                                        <input type="file" class="form-control" id="imagePath"  name="imagePath">
                                     </div>
                                 </div>
 
@@ -256,7 +256,7 @@ session_start();
                                 <div class="form-group row">
                                     <label class="form-control-label col-md-offset-2 col-md-3 col-xs-offset-0 col-xs-5 label-margin">Featured Status:</label>
                                     <div class="col-sm-5">
-                                        <input type="text" class="form-control" id="featuredStatus" name="featuredStatus">
+                                        <input type="number" class="form-control" id="featuredStatus" min="0" max="1" name="featuredStatus">
                                     </div>
                                 </div>
 
