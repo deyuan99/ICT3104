@@ -53,9 +53,16 @@ if (isset($_SESSION['email']) && !empty($_SESSION['email'])) {
                     </div>
                     <div class="6u 12u(medium)">
                         
-                    <p>Working with a personal trainer is the first step to improving your health and fitness. People of all shapes and sizes, people with all types of goals have been proven to have better success when working with a personal trainer. 
-                    At STPS Fitness we have over 20 trainers that have all different backgrounds so that our clients can get the results they want.</p>
-                    <p>We want to help make fitness a part of your life, STPS's clients can enjoy new found or improved levels of energy and fitness. Life is better when we are healthy.</p>
+                    <p><?php 
+                    $sql5 = "SELECT * FROM aboutus";
+                    $req = $conn->prepare($sql5);
+                    $req->execute();
+                    $row = $req->fetch(PDO::FETCH_ASSOC); 
+                    
+                    $about = $row['content'];
+                    echo "$about";
+                    
+                    ?></p>
                     </div>
                 </div>
             </div>

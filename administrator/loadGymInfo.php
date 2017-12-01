@@ -89,3 +89,13 @@ function getTrainingType() {
         echo "</td></tr>";
     }
 }
+
+function getAboutus() {
+    require('../database/dbconfig.php');
+    $sql = "SELECT * FROM aboutus";
+    $req = $conn->prepare($sql);
+    $req->execute();
+    $row = $req->fetch(PDO::FETCH_ASSOC);
+    $about = $row['content'];
+    echo "<textarea class=\"form-control\" rows=\"8\" id=\"aboutus\" name=\"aboutus\">$about</textarea>";
+}

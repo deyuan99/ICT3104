@@ -80,6 +80,7 @@ session_start();
                             <li class="active data-tabs col-md-3 col-sm-6 col-xs-12"><a href="#venue_tab" data-toggle="pill"><span class="glyphicon glyphicon-map-marker icon-space"></span>Venue</a></li>
                             <li class="data-tabs col-md-3 col-xs-12 col-sm-6"><a href="#room_tab" data-toggle="pill"><span class="glyphicon glyphicon-modal-window icon-space"></span>Room Type</a></li>
                             <li class="data-tabs col-md-3 col-xs-12 col-sm-6"><a href="#training_tab" data-toggle="pill"><span class="glyphicon glyphicon-th icon-space"></span>Training Type</a></li>
+                            <li class="data-tabs col-md-3 col-xs-12 col-sm-6"><a href="#about_tab" data-toggle="pill"><span class="glyphicon glyphicon-question-sign icon-space"></span>About Us</a></li>
                         </ul>
                     </div>
                     <div class="tab-content">
@@ -161,6 +162,22 @@ session_start();
                             <div style="text-align:center;">
                                 <a data-toggle="modal" data-target="#addtrainingModal" class="btn btn-success"><span class="glyphicon glyphicon-plus icon-space"></span>Add Training Type</a>
                             </div>
+                        </div>
+                        
+                        <div class="tab-pane add--15-margin" id="about_tab">
+                            <form method="post" role="form" action="editAboutus.php">
+                                <div class="panel panel-default panel-archive">
+                                    <div class="panel-heading">
+                                        <div class="panel-title">ABOUT US</div>
+                                    </div>
+                                    <div class="form-group">
+                                        <?php getAboutus(); ?>
+                                    </div>
+                                    <div style="text-align:center;">
+                                        <input type="submit" name="updateAbout" class="form-control btn btn-primary" value="UPDATE">
+                                    </div>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>
